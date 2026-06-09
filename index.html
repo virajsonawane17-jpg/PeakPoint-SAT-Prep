@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#05050F" />
+<meta name="description" content="PeakPoint SAT Prep. A comprehensive SAT preparation platform helping students achieve their target scores." />
+<title>PeakPoint SAT Prep. Reach Your Peak Score</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 90 L10 15 L30 15 L50 60 L70 15 L90 15 Z' fill='%236C63FF'/%3E%3C/svg%3E" />
+</head>
+<body>
+
+<canvas id="space-canvas" aria-hidden="true"></canvas>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M50 90 L10 15 L30 15 L50 60 L70 15 L90 15 Z" fill="#6C63FF"/>
+        <circle cx="50" cy="20" r="2.5" fill="#A78BFF"/>
+        <circle cx="20" cy="25" r="1.5" fill="#A78BFF"/>
+        <circle cx="80" cy="25" r="1.5" fill="#A78BFF"/>
+      </svg>
+      <span>PEAKPOINT SAT PREP</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="join.html" class="btn btn-primary nav-cta">Join Now</a></li>
+    </ul>
+    <button class="mobile-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="cosmic-orb"></div>
+  <div class="cosmic-orb cosmic-orb-2"></div>
+
+  <div class="hero-content">
+    <span class="eyebrow">A free SAT tutoring platform</span>
+    <h1>
+      <span class="word">Aim</span>
+      <span class="word">for</span>
+      <span class="word">the</span>
+      <span class="word accent-text">Stars.</span>
+      <br/>
+      <span class="word">Start</span>
+      <span class="word">Studying</span>
+      <span class="word">Now.</span>
+    </h1>
+    <p class="hero-subtitle">
+      PeakPoint SAT Prep helps students worldwide achieve their dream SAT scores. Expert guidance. Proven results.
+    </p>
+    <div class="hero-cta">
+      <a href="join.html" class="btn btn-primary btn-large">Join the Mission</a>
+      <a href="about.html" class="btn btn-secondary btn-large">Learn More →</a>
+    </div>
+  </div>
+</header>
+
+<!-- Universities -->
+<section class="universities">
+  <p class="universities-label">A Simple Gateway Into</p>
+  <div class="marquee">
+    <div class="marquee-track" id="uni-marquee">
+      <!-- Logos are rendered by JS for resilient fallbacks -->
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="stats container">
+  <div class="section-header reveal">
+    <span class="eyebrow">Crunch the Numbers</span>
+    <h2>A growing constellation of <span class="accent-text">curious minds</span></h2>
+    <p>PeakPoint SAT Prep is becoming the leading SAT preparation platform for high school students worldwide.</p>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-item reveal">
+      <div class="stat-number" data-count="1000" data-suffix="+">0</div>
+      <div class="stat-label">Students</div>
+    </div>
+    <div class="stat-item reveal" data-delay="120">
+      <div class="stat-number" data-count="50" data-suffix="+">0</div>
+      <div class="stat-label">Countries</div>
+    </div>
+    <div class="stat-item reveal" data-delay="240">
+      <div class="stat-number" data-count="100" data-suffix="+">0</div>
+      <div class="stat-label">Opportunities</div>
+    </div>
+    <div class="stat-item reveal" data-delay="360">
+      <div class="stat-number">Free</div>
+      <div class="stat-label">Forever</div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="how-it-works container">
+  <div class="section-header reveal">
+    <span class="eyebrow">How it works</span>
+    <h2>Four steps to the <span class="accent-text">research universe</span></h2>
+    <p>Every PeakPoint SAT Prep resource is crafted by experts and available to our members. Joining is the first step to success.</p>
+  </div>
+
+  <div class="steps">
+    <div class="step reveal reveal-left">
+      <div class="step-number">01</div>
+      <div class="step-content">
+        <h3>Join the community</h3>
+        <p>This is the gateway. Every strategy, every practice test, every expert tip lives inside the PeakPoint SAT Prep community, and only there.</p>
+      </div>
+      <div class="step-line"></div>
+    </div>
+
+    <div class="step reveal reveal-right">
+      <div class="step-number">02</div>
+      <div class="step-content">
+        <h3>Get exclusive access</h3>
+        <p>Browse curated research opportunities from MIT, Harvard, Stanford, Johns Hopkins, NIH, NASA, NSF and more. Vetted, fresh, and updated weekly.</p>
+      </div>
+      <div class="step-line"></div>
+    </div>
+
+    <div class="step reveal reveal-left">
+      <div class="step-number">03</div>
+      <div class="step-content">
+        <h3>Grind Practice Tests</h3>
+        <p>Browse through our extensive library of practice tests and improve your SAT score.</p>
+      </div>
+      <div class="step-line"></div>
+    </div>
+
+    <div class="step reveal reveal-right">
+      <div class="step-number">04</div>
+      <div class="step-content">
+        <h3>Watch the Numbers Rise</h3>
+        <p>See your SAT score improve as you practice and track your progress.</p>
+      </div>
+      <div class="step-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Comparison -->
+<section class="comparison container">
+  <div class="section-header reveal">
+    <span class="eyebrow">Why PeakPoint SAT Prep</span>
+    <h2>Real access. <span class="accent-text">Zero gatekeeping.</span></h2>
+    <p>Most SAT prep programs are expensive, generic, and offer little personalized attention. PeakPoint SAT Prep was built to flip that model entirely.</p>
+  </div>
+
+  <div class="compare-grid">
+    <div class="compare-card bad reveal reveal-left">
+      <span class="compare-tag">Other Programs</span>
+      <h3>Pay-to-play research theater</h3>
+      <ul class="compare-list">
+        <li><span class="icon">✕</span> Costs thousands of dollars per program</li>
+        <li><span class="icon">✕</span> Selective and exclusive admissions</li>
+        <li><span class="icon">✕</span> Generic, prepackaged "research" content</li>
+        <li><span class="icon">✕</span> No real publication or recognition</li>
+        <li><span class="icon">✕</span> Closed network. You leave with nothing</li>
+      </ul>
+    </div>
+
+    <div class="compare-card good reveal reveal-right">
+      <span class="compare-tag">PeakPoint SAT Prep</span>
+      <h3>The free, global research network</h3>
+      <ul class="compare-list">
+        <li><span class="icon">✓</span> Zero cost. Free forever, no upsells.</li>
+        <li><span class="icon">✓</span> Open to every high school student worldwide</li>
+        <li><span class="icon">✓</span> Real opportunities from real institutions</li>
+        <li><span class="icon">✓</span> Mentors who actually answer your questions</li>
+        <li><span class="icon">✓</span> Lifelong community of researchers and peers</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Community CTA -->
+<section class="discord-cta container">
+  <div class="discord-cta-inner reveal">
+    <div class="discord-cta-content">
+      <span class="eyebrow">Exclusive Access</span>
+      <h2>The real opportunities live <span class="accent-text">inside the community.</span></h2>
+      <p>This isn't a content site. SAT prep resources, practice tests, and expert strategies are shared exclusively with active PeakPoint SAT Prep members. Never posted publicly.</p>
+      <a href="join.html" class="btn btn-primary btn-large">Join Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq container">
+  <div class="section-header reveal">
+    <span class="eyebrow">FAQ</span>
+    <h2>Questions, <span class="accent-text">answered.</span></h2>
+    <p>Everything you need to know before stepping into the PeakPoint SAT Prep community.</p>
+  </div>
+
+  <div class="faq-list">
+    <div class="faq-item reveal">
+      <button class="faq-question">
+        What is PeakPoint SAT Prep?
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          PeakPoint SAT Prep is a comprehensive platform that provides expert SAT preparation with personalized study plans, practice tests, and proven strategies. We make top-tier SAT prep accessible to every high school student in the world. Everything happens inside our member community.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-question">
+        How much does it cost?
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Nothing. Zero. PeakPoint SAT Prep is and always will be 100% free. We're a nonprofit, run by educators, for students. There are no premium tiers, no upsells, no hidden fees.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-question">
+        How do I join?
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Click <strong>Join Now</strong> in the top right of any page. Membership is free, takes about 30 seconds, and unlocks the full community. Every opportunity, mentor, and event.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-question">
+        What does it cost?
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Nothing. PeakPoint SAT Prep is free for every student, everywhere. No subscriptions, no upsells, no premium tier. Just join and start preparing.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid footer-grid-simple">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <path d="M50 90 L10 15 L30 15 L50 60 L70 15 L90 15 Z" fill="#6C63FF"/>
+          </svg>
+          <span>PEAKPOINT SAT PREP</span>
+        </a>
+        <p>The comprehensive SAT preparation platform. Built for every student, designed for success.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="join.html">Join Now</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:peakpointprep@gmail.com">peakpointprep@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 PeakPoint SAT Prep. All rights reserved.</p>
+      <div class="social">
+        <a href="peakpointprep@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M19 0h-14C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5V8h3v11zM6.5 6.7c-.97 0-1.75-.78-1.75-1.75S5.53 3.2 6.5 3.2s1.75.78 1.75 1.75S7.47 6.7 6.5 6.7zM20 19h-3v-5.6c0-3.37-4-3.12-4 0V19h-3V8h3v1.77c1.4-2.59 7-2.78 7 2.48V19z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.71 3.71 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07c-1.28.06-2.15.26-2.91.55-.79.31-1.46.72-2.13 1.39A5.9 5.9 0 0 0 .62 4.14c-.3.76-.5 1.63-.55 2.91C0 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.28.26 2.15.55 2.91.31.79.72 1.46 1.39 2.13a5.9 5.9 0 0 0 2.13 1.39c.76.3 1.63.5 2.91.55C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.28-.06 2.15-.26 2.91-.55a5.9 5.9 0 0 0 2.13-1.39 5.9 5.9 0 0 0 1.39-2.13c.3-.76.5-1.63.55-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.28-.26-2.15-.55-2.91a5.9 5.9 0 0 0-1.39-2.13A5.9 5.9 0 0 0 19.86.62c-.76-.3-1.63-.5-2.91-.55C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 4-4 4 4 0 0 1-4 4zm6.4-11.85a1.44 1.44 0 1 0 1.44 1.44 1.44 1.44 0 0 0-1.44-1.44z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
