@@ -262,6 +262,18 @@
     }
   }
 
+  /* ---------- Logged-in nav swap ---------- */
+  // On marketing pages, point the CTA at the dashboard when a session exists.
+  if (window.PP && PP.auth && PP.auth.currentUser()) {
+    const cta = document.querySelector('.nav-links .nav-cta');
+    if (cta && cta.getAttribute('href') && cta.getAttribute('href').startsWith('login.html')) {
+      cta.textContent = 'Dashboard';
+      cta.setAttribute('href', 'dashboard.html');
+      const loginLink = document.querySelector('.nav-links a[href="login.html"]');
+      if (loginLink) loginLink.parentElement.remove();
+    }
+  }
+
   /* ---------- Navbar scroll ---------- */
   const navbar = document.querySelector('.navbar');
   if (navbar) {

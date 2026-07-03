@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#05050F" />
+<meta name="description" content="Log in or create your free PeakPoint SAT Prep account." />
+<title>Log In — PeakPoint SAT Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="app.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 90 L10 15 L30 15 L50 60 L70 15 L90 15 Z' fill='%236C63FF'/%3E%3C/svg%3E" />
+</head>
+<body>
+
+<canvas id="space-canvas" aria-hidden="true"></canvas>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M50 90 L10 15 L30 15 L50 60 L70 15 L90 15 Z" fill="#6C63FF"/>
+        <circle cx="50" cy="20" r="2.5" fill="#A78BFF"/>
+        <circle cx="20" cy="25" r="1.5" fill="#A78BFF"/>
+        <circle cx="80" cy="25" r="1.5" fill="#A78BFF"/>
+      </svg>
+      <span>PEAKPOINT SAT PREP</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="login.html" class="btn btn-primary nav-cta active">Log In</a></li>
+    </ul>
+    <button class="mobile-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main class="auth-wrap">
+  <div class="auth-card">
+    <h1 id="auth-title">Welcome back, cadet.</h1>
+    <p class="auth-sub" id="auth-sub">Log in to continue your mission to a peak score.</p>
+
+    <div class="auth-tabs" role="tablist">
+      <button class="auth-tab active" id="tab-login" role="tab">Log In</button>
+      <button class="auth-tab" id="tab-signup" role="tab">Sign Up</button>
+    </div>
+
+    <div class="form-error" id="auth-error" role="alert"></div>
+
+    <form id="auth-form" novalidate>
+      <div class="field" id="field-name" style="display:none;">
+        <label for="in-name">Full Name</label>
+        <input type="text" id="in-name" autocomplete="name" placeholder="Jane Doe" />
+      </div>
+      <div class="field">
+        <label for="in-email">Email</label>
+        <input type="email" id="in-email" autocomplete="email" placeholder="you@example.com" />
+      </div>
+      <div class="field">
+        <label for="in-password">Password</label>
+        <input type="password" id="in-password" autocomplete="current-password" placeholder="••••••••" />
+      </div>
+      <button type="submit" class="btn btn-primary btn-large btn-block" id="auth-submit">Log In</button>
+    </form>
+
+    <p class="auth-foot" id="auth-foot">New here? <a href="login.html?mode=signup">Create a free account</a> — it takes 30 seconds.</p>
+  </div>
+</main>
+
+<script src="auth.js"></script>
+<script src="script.js"></script>
+<script>
+(() => {
+  // Already logged in? Straight to the dashboard.
+  if (PP.auth.currentUser()) {
+    window.location.href = 'dashboard.html';
+    return;
+  }
+
+  const tabLogin = document.getElementById('tab-login');
+  const tabSignup = document.getElementById('tab-signup');
+  const fieldName = document.getElementById('field-name');
+  const title = document.getElementById('auth-title');
+  const sub = document.getElementById('auth-sub');
+  const foot = document.getElementById('auth-foot');
+  const submit = document.getElementById('auth-submit');
+  const errBox = document.getElementById('auth-error');
+  const form = document.getElementById('auth-form');
+
+  let mode = 'login';
+
+  function setMode(next) {
+    mode = next;
+    const signup = mode === 'signup';
+    tabLogin.classList.toggle('active', !signup);
+    tabSignup.classList.toggle('active', signup);
+    fieldName.style.display = signup ? '' : 'none';
+    title.textContent = signup ? 'Begin your ascent.' : 'Welcome back, cadet.';
+    sub.textContent = signup
+      ? 'Create your free account and get a personalized SAT study plan in minutes.'
+      : 'Log in to continue your mission to a peak score.';
+    submit.textContent = signup ? 'Create Free Account' : 'Log In';
+    foot.innerHTML = signup
+      ? 'Already a member? <a href="login.html">Log in instead</a>.'
+      : 'New here? <a href="login.html?mode=signup">Create a free account</a> — it takes 30 seconds.';
+    errBox.classList.remove('show');
+  }
+
+  tabLogin.addEventListener('click', () => setMode('login'));
+  tabSignup.addEventListener('click', () => setMode('signup'));
+
+  if (new URLSearchParams(window.location.search).get('mode') === 'signup') {
+    setMode('signup');
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('in-name').value;
+    const email = document.getElementById('in-email').value;
+    const password = document.getElementById('in-password').value;
+
+    const result = mode === 'signup'
+      ? PP.auth.signup(name, email, password)
+      : PP.auth.login(email, password);
+
+    if (!result.ok) {
+      errBox.textContent = result.error;
+      errBox.classList.add('show');
+      return;
+    }
+    window.location.href = 'dashboard.html';
+  });
+})();
+</script>
+</body>
+</html>
