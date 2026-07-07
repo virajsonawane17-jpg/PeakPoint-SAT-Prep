@@ -60,7 +60,7 @@
   align-items: center;
   justify-content: center;
   padding: 130px 24px 60px;
-  background: linear-gradient(180deg, #ecdfff 0%, var(--bg-primary) 40%);
+  background: linear-gradient(180deg, #dcf1ff 0%, var(--bg-primary) 40%);
 }
 
 .auth-card {
@@ -70,7 +70,7 @@
   border: 1px solid var(--border-soft);
   border-radius: 28px;
   padding: 40px 36px;
-  box-shadow: 0 24px 60px -22px rgba(70, 0, 168, 0.28), var(--card-shadow);
+  box-shadow: 0 24px 60px -22px rgba(3, 105, 161, 0.28), var(--card-shadow);
 }
 
 .auth-card h1 {
@@ -260,7 +260,7 @@
 .xp-bar-fill {
   height: 100%;
   border-radius: 99px;
-  background: linear-gradient(90deg, var(--accent) 0%, #b57ffd 100%);
+  background: linear-gradient(90deg, var(--accent) 0%, #7ccdfc 100%);
   transition: width 0.8s var(--easing);
 }
 
@@ -316,7 +316,7 @@
 
 .mode-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 14px 32px -14px rgba(70, 0, 168, 0.28);
+  box-shadow: 0 14px 32px -14px rgba(3, 105, 161, 0.28);
 }
 
 .mode-card .mode-icon {
@@ -407,7 +407,7 @@
 
 .fill-low { background: linear-gradient(90deg, #ef4444, #f59e0b); }
 .fill-mid { background: linear-gradient(90deg, #f59e0b, #facc15); }
-.fill-high { background: linear-gradient(90deg, var(--accent), #b57ffd); }
+.fill-high { background: linear-gradient(90deg, var(--accent), #7ccdfc); }
 .fill-top { background: linear-gradient(90deg, #16a34a, #4ade80); }
 
 /* ---------- Badges ---------- */
@@ -602,7 +602,7 @@
   padding: 18px 20px;
   border-radius: 16px;
   border-left: 4px solid var(--accent);
-  background: linear-gradient(180deg, rgba(243, 234, 255, 0.55), rgba(250, 245, 255, 0.35));
+  background: linear-gradient(180deg, rgba(224, 242, 254, 0.55), rgba(240, 249, 255, 0.35));
   font-size: 0.92rem;
   color: var(--text-secondary);
   line-height: 1.65;
@@ -630,7 +630,7 @@
   font-weight: 700;
   padding: 12px 22px;
   border-radius: 999px;
-  border: 1.5px solid rgba(70, 0, 168, 0.3);
+  border: 1.5px solid rgba(3, 105, 161, 0.3);
   box-shadow: inset 0 -3px 0 var(--accent-deep), 0 12px 32px -8px var(--glow);
   opacity: 0;
   transform: translateY(-12px);
