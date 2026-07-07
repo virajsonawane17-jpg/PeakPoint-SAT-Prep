@@ -12,7 +12,7 @@
   const user = await PP.auth.requireAuth();
   if (!user) return;
 
-  const data = PP.auth.getData(user.id);
+  const data = await PP.auth.loadData(user.id);
   const params = new URLSearchParams(window.location.search);
   const mode = params.get('mode') || 'adaptive';
   const section = params.get('section') || null;

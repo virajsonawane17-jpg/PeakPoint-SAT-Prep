@@ -8,7 +8,7 @@
   const user = await PP.auth.requireAuth();
   if (!user) return;
 
-  const data = PP.auth.getData(user.id);
+  const data = await PP.auth.loadData(user.id);
 
   /* ---------- Greeting & rank ---------- */
   document.getElementById('dash-name').textContent = user.name.split(' ')[0];
