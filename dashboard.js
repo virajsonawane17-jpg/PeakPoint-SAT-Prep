@@ -4,11 +4,11 @@
    user's stored study data.
    ============================================ */
 
-(() => {
-  const user = PP.auth.requireAuth();
+(async () => {
+  const user = await PP.auth.requireAuth();
   if (!user) return;
 
-  const data = PP.auth.getData(user.email);
+  const data = PP.auth.getData(user.id);
 
   /* ---------- Greeting & rank ---------- */
   document.getElementById('dash-name').textContent = user.name.split(' ')[0];
@@ -188,7 +188,7 @@
   function saveProfile() {
     data.profile.targetScore = targetSel.value ? parseInt(targetSel.value, 10) : null;
     data.profile.testDate = dateInput.value || null;
-    PP.auth.saveData(user.email, data);
+    PP.auth.saveData(user.id, data);
     updateTargetSummary();
   }
 
@@ -197,8 +197,8 @@
   updateTargetSummary();
 
   /* ---------- Logout ---------- */
-  document.getElementById('logout-btn').addEventListener('click', () => {
-    PP.auth.logout();
+  document.getElementById('logout-btn').addEventListener('click', async () => {
+    await PP.auth.logout();
     window.location.href = 'index.html';
   });
 })();

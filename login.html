@@ -67,12 +67,14 @@
   </div>
 </main>
 
+<script src="vendor/supabase.js"></script>
+<script src="supabase-config.js"></script>
 <script src="auth.js"></script>
 <script src="script.js"></script>
 <script>
-(() => {
+(async () => {
   // Already logged in? Straight to the dashboard.
-  if (PP.auth.currentUser()) {
+  if (await PP.auth.currentUser()) {
     window.location.href = 'dashboard.html';
     return;
   }
@@ -113,19 +115,25 @@
     setMode('signup');
   }
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const name = document.getElementById('in-name').value;
     const email = document.getElementById('in-email').value;
     const password = document.getElementById('in-password').value;
 
+    submit.disabled = true;
+    const prevLabel = submit.textContent;
+    submit.textContent = mode === 'signup' ? 'Creating account…' : 'Logging in…';
+
     const result = mode === 'signup'
-      ? PP.auth.signup(name, email, password)
-      : PP.auth.login(email, password);
+      ? await PP.auth.signup(name, email, password)
+      : await PP.auth.login(email, password);
 
     if (!result.ok) {
       errBox.textContent = result.error;
       errBox.classList.add('show');
+      submit.disabled = false;
+      submit.textContent = prevLabel;
       return;
     }
     window.location.href = 'dashboard.html';

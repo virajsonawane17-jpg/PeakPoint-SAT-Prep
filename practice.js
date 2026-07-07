@@ -8,11 +8,11 @@
      ?mode=sprint              — 10 questions against a 10-minute clock
    ============================================ */
 
-(() => {
-  const user = PP.auth.requireAuth();
+(async () => {
+  const user = await PP.auth.requireAuth();
   if (!user) return;
 
-  const data = PP.auth.getData(user.email);
+  const data = PP.auth.getData(user.id);
   const params = new URLSearchParams(window.location.search);
   const mode = params.get('mode') || 'adaptive';
   const section = params.get('section') || null;
@@ -132,7 +132,7 @@
     // Persist: attempt log, mastery, XP, streak day.
     const earned = PP.game.recordAttempt(data, current, correct, combo);
     sessionXp += earned;
-    PP.auth.saveData(user.email, data);
+    PP.auth.saveData(user.id, data);
 
     if (earned > 0) showToast(`+${earned} XP${combo >= 3 ? ` · ⚡×${combo}` : ''}`);
 
@@ -182,7 +182,7 @@
       }
     }
     const freshBadges = PP.game.checkBadges(data);
-    PP.auth.saveData(user.email, data);
+    PP.auth.saveData(user.id, data);
 
     el('question-card').style.display = 'none';
     const summary = el('summary-card');

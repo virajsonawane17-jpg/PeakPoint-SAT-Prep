@@ -3,19 +3,19 @@
    Search, filter, and render for resources.html
    ============================================ */
 
-(() => {
+(async () => {
   // Members-only: the resource library requires a signed-in account.
   // requireAuth() redirects to login.html when there is no active session.
   if (window.PP && PP.auth) {
-    const user = PP.auth.requireAuth();
+    const user = await PP.auth.requireAuth();
     if (!user) return;
   }
 
   // Wire the nav Log Out button (app-style nav on this page).
   const logoutBtn = document.getElementById('logout-btn');
   if (logoutBtn) {
-    logoutBtn.addEventListener('click', () => {
-      PP.auth.logout();
+    logoutBtn.addEventListener('click', async () => {
+      await PP.auth.logout();
       window.location.href = 'index.html';
     });
   }

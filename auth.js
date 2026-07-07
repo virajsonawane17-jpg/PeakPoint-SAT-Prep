@@ -1,80 +1,77 @@
 /* ============================================
-   PEAKPOINT SAT PREP — Client-side auth + storage
-   NOTE: This is a front-end prototype. Accounts live in
-   this browser's localStorage. Before a public launch,
-   swap this layer for a real backend (see README.md).
+   PEAKPOINT SAT PREP — Auth (Supabase)
+   Identity is handled by Supabase Auth. Per-user study data
+   is still kept in this browser for now (keyed by the Supabase
+   user id); a later step moves it into the database tables.
+
+   All PP.auth identity methods are ASYNC — callers must await.
    ============================================ */
 
 window.PP = window.PP || {};
 
 PP.auth = (() => {
-  const USERS_KEY = 'pp_users';
-  const SESSION_KEY = 'pp_session';
-
-  // djb2 — obfuscation only, not real security (prototype)
-  function hash(str) {
-    let h = 5381;
-    for (let i = 0; i < str.length; i++) {
-      h = ((h << 5) + h + str.charCodeAt(i)) >>> 0;
-    }
-    return 'h' + h.toString(36);
-  }
-
-  function getUsers() {
-    try { return JSON.parse(localStorage.getItem(USERS_KEY)) || {}; }
-    catch { return {}; }
-  }
-
-  function saveUsers(users) {
-    localStorage.setItem(USERS_KEY, JSON.stringify(users));
-  }
+  const sb = () => PP.sb;
 
   function normalizeEmail(email) {
     return String(email || '').trim().toLowerCase();
   }
 
-  function signup(name, email, password) {
-    email = normalizeEmail(email);
+  async function signup(name, email, password) {
     name = String(name || '').trim();
+    email = normalizeEmail(email);
     if (!name) return { ok: false, error: 'Please enter your name.' };
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { ok: false, error: 'Please enter a valid email address.' };
     if (!password || password.length < 6) return { ok: false, error: 'Password must be at least 6 characters.' };
 
-    const users = getUsers();
-    if (users[email]) return { ok: false, error: 'An account with this email already exists. Try logging in.' };
-
-    users[email] = { name, pw: hash(password), created: Date.now() };
-    saveUsers(users);
-    localStorage.setItem(SESSION_KEY, email);
-    return { ok: true };
-  }
-
-  function login(email, password) {
-    email = normalizeEmail(email);
-    const users = getUsers();
-    const user = users[email];
-    if (!user || user.pw !== hash(password)) {
-      return { ok: false, error: 'Incorrect email or password.' };
+    const { data, error } = await sb().auth.signUp({
+      email,
+      password,
+      options: { data: { name } }
+    });
+    if (error) {
+      const msg = /already registered|already exists/i.test(error.message)
+        ? 'An account with this email already exists. Try logging in.'
+        : error.message;
+      return { ok: false, error: msg };
     }
-    localStorage.setItem(SESSION_KEY, email);
+    // If email confirmation is enabled, there is no session yet.
+    if (!data.session) {
+      return { ok: false, error: 'Almost there — check your email to confirm your account, then log in.', needsConfirm: true };
+    }
     return { ok: true };
   }
 
-  function logout() {
-    localStorage.removeItem(SESSION_KEY);
+  async function login(email, password) {
+    email = normalizeEmail(email);
+    const { error } = await sb().auth.signInWithPassword({ email, password });
+    if (error) {
+      const msg = /email not confirmed/i.test(error.message)
+        ? 'Please confirm your email first — check your inbox.'
+        : 'Incorrect email or password.';
+      return { ok: false, error: msg };
+    }
+    return { ok: true };
   }
 
-  function currentUser() {
-    const email = localStorage.getItem(SESSION_KEY);
-    if (!email) return null;
-    const user = getUsers()[email];
-    if (!user) return null;
-    return { email, name: user.name, created: user.created };
+  async function logout() {
+    await sb().auth.signOut();
   }
 
-  // Redirects to login if there is no active session.
-  function requireAuth() {
-    const user = currentUser();
+  // Resolves to { id, email, name } or null.
+  async function currentUser() {
+    const { data: { session } } = await sb().auth.getSession();
+    if (!session || !session.user) return null;
+    const u = session.user;
+    return {
+      id: u.id,
+      email: u.email,
+      name: (u.user_metadata && u.user_metadata.name) || (u.email ? u.email.split('@')[0] : '')
+    };
+  }
+
+  // Redirects to login if there is no active session; otherwise resolves to the user.
+  async function requireAuth() {
+    const user = await currentUser();
     if (!user) {
       window.location.href = 'login.html';
       return null;
@@ -82,42 +79,42 @@ PP.auth = (() => {
     return user;
   }
 
-  /* ---------- Per-user study data ---------- */
+  /* ---------- Per-user study data (local for now, keyed by user id) ---------- */
 
-  function dataKey(email) {
-    return 'pp_data_' + email;
+  function dataKey(id) {
+    return 'pp_data_' + id;
   }
 
   function defaultData() {
     return {
       profile: { targetScore: null, testDate: null },
-      attempts: [],        // { qid, skill, section, difficulty, correct, t }
-      sessions: [],        // { type: 'diagnostic'|'adaptive'|'skill'|'sprint', skill, total, correct, t }
-      snapshots: [],       // { t, math, rw }
-      days: [],            // 'YYYY-MM-DD' strings with any activity
+      attempts: [],
+      sessions: [],
+      snapshots: [],
+      days: [],
       diagnosticDone: false,
-      xp: 0,               // lifetime experience points
-      bestCombo: 0,        // longest correct-answer streak in a session
-      mastery: {},         // { skillId: 0-100 }
-      badges: []           // earned badge ids
+      xp: 0,
+      bestCombo: 0,
+      mastery: {},
+      badges: []
     };
   }
 
-  function getData(email) {
+  function getData(id) {
     try {
-      const raw = JSON.parse(localStorage.getItem(dataKey(email)));
+      const raw = JSON.parse(localStorage.getItem(dataKey(id)));
       return Object.assign(defaultData(), raw || {});
     } catch {
       return defaultData();
     }
   }
 
-  function saveData(email, data) {
-    localStorage.setItem(dataKey(email), JSON.stringify(data));
+  function saveData(id, data) {
+    localStorage.setItem(dataKey(id), JSON.stringify(data));
   }
 
-  function resetData(email) {
-    localStorage.removeItem(dataKey(email));
+  function resetData(id) {
+    localStorage.removeItem(dataKey(id));
   }
 
   return { signup, login, logout, currentUser, requireAuth, getData, saveData, resetData };
