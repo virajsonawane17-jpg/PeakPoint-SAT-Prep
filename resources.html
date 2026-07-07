@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#05050F" />
+<meta name="description" content="The PeakPoint SAT Resource Library. Browse, view, and download 100+ free SAT practice tests, question banks, formula sheets, and strategy guides for Math, Reading, and Writing." />
+<title>SAT Resource Library — PeakPoint SAT Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="resources.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 90 L10 15 L30 15 L50 60 L70 15 L90 15 Z' fill='%236C63FF'/%3E%3C/svg%3E" />
+</head>
+<body>
+
+<canvas id="space-canvas" aria-hidden="true"></canvas>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M50 90 L10 15 L30 15 L50 60 L70 15 L90 15 Z" fill="#6C63FF"/>
+        <circle cx="50" cy="20" r="2.5" fill="#A78BFF"/>
+        <circle cx="20" cy="25" r="1.5" fill="#A78BFF"/>
+        <circle cx="80" cy="25" r="1.5" fill="#A78BFF"/>
+      </svg>
+      <span>PEAKPOINT SAT PREP</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="resources.html" class="active">Resources</a></li>
+      <li><a href="login.html">Log In</a></li>
+      <li><a href="login.html?mode=signup" class="btn btn-primary nav-cta">Join Now</a></li>
+    </ul>
+    <button class="mobile-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Sub Hero -->
+<header class="sub-hero">
+  <div class="cosmic-orb"></div>
+  <div class="hero-content">
+    <span class="eyebrow">SAT Resource Library</span>
+    <h1>
+      <span class="word">Every</span>
+      <span class="word">resource,</span>
+      <span class="word accent-text">one library.</span>
+    </h1>
+    <p class="hero-subtitle">
+      Browse our full collection of SAT practice tests, targeted question banks, formula sheets, grammar rules, and strategy guides. Filter by section, type, or topic — then view or download instantly. Free forever.
+    </p>
+  </div>
+</header>
+
+<!-- Library -->
+<section class="library container">
+
+  <!-- Quick category pills -->
+  <div class="lib-pills" id="lib-pills">
+    <button class="lib-pill active" data-pill="all">All Materials</button>
+    <button class="lib-pill" data-pill="Mini Practice Test">Practice Tests</button>
+    <button class="lib-pill" data-pill="section:Math">Math</button>
+    <button class="lib-pill" data-pill="section:Reading">Reading</button>
+    <button class="lib-pill" data-pill="section:Writing">Writing</button>
+    <button class="lib-pill" data-pill="Formula Sheet">Formula Sheets</button>
+    <button class="lib-pill" data-pill="Cheat Sheet">Cheat Sheets</button>
+    <button class="lib-pill" data-pill="Answer Key">Answer Keys</button>
+    <button class="lib-pill" data-pill="Explanation Guide">Explanations</button>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="lib-toolbar">
+    <div class="lib-search" id="lib-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="search-input" placeholder="Search by title, topic, or keyword…" aria-label="Search resources" autocomplete="off" />
+      <button class="lib-clear" id="search-clear" aria-label="Clear search">✕</button>
+    </div>
+    <div class="lib-filters">
+      <div class="lib-field">
+        <label for="filter-section">SAT Section</label>
+        <select id="filter-section"><option value="">All sections</option></select>
+      </div>
+      <div class="lib-field">
+        <label for="filter-type">Material Type</label>
+        <select id="filter-type"><option value="">All types</option></select>
+      </div>
+      <div class="lib-field">
+        <label for="filter-topic">Topic</label>
+        <select id="filter-topic"><option value="">All topics</option></select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Result meta -->
+  <div class="lib-meta">
+    <div class="lib-count" id="lib-count">Loading resources…</div>
+    <button class="lib-reset" id="lib-reset">Reset filters</button>
+  </div>
+
+  <!-- Grid -->
+  <div class="lib-grid" id="lib-grid"></div>
+
+  <!-- Empty state -->
+  <div class="lib-empty" id="lib-empty">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <h3>No resources found</h3>
+    <p>Try a different keyword or reset your filters to see the full library.</p>
+  </div>
+
+</section>
+
+<!-- CTA -->
+<section class="discord-cta container">
+  <div class="discord-cta-inner reveal">
+    <div class="discord-cta-content">
+      <span class="eyebrow">Go further</span>
+      <h2>Practice sheets are just <span class="accent-text">the start.</span></h2>
+      <p>Create a free PeakPoint account for unlimited adaptive practice, a live score estimate, and skill mastery tracking — all built on top of these materials.</p>
+      <a href="login.html?mode=signup" class="btn btn-primary btn-large">Create Your Free Account</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid footer-grid-simple">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <path d="M50 90 L10 15 L30 15 L50 60 L70 15 L90 15 Z" fill="#6C63FF"/>
+          </svg>
+          <span>PEAKPOINT SAT PREP</span>
+        </a>
+        <p>The comprehensive SAT preparation platform. Built for every student, designed for success.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="join.html">Join Now</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:peakpointprep@gmail.com">peakpointprep@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 PeakPoint SAT Prep. All rights reserved.</p>
+      <div class="social">
+        <a href="mailto:peakpointprep@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="auth.js"></script>
+<script src="script.js"></script>
+<script src="resources-data.js"></script>
+<script src="resources.js"></script>
+</body>
+</html>
