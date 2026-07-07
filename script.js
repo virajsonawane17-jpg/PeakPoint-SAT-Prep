@@ -401,6 +401,72 @@
     updateTimeline();
   }
 
+  /* ---------- Testimonials carousel ---------- */
+  const tstTrack = document.getElementById('tst-track');
+  const tstDots = document.getElementById('tst-dots');
+  if (tstTrack && tstDots) {
+    const cards = Array.from(tstTrack.children);
+
+    const baseOffset = () => cards[0].offsetLeft;
+
+    const currentIndex = () => {
+      const base = baseOffset();
+      let best = 0, bestDist = Infinity;
+      cards.forEach((c, i) => {
+        const d = Math.abs((c.offsetLeft - base) - tstTrack.scrollLeft);
+        if (d < bestDist) { bestDist = d; best = i; }
+      });
+      return best;
+    };
+
+    const goTo = (i) => {
+      const idx = Math.max(0, Math.min(cards.length - 1, i));
+      tstTrack.scrollTo({ left: cards[idx].offsetLeft - baseOffset(), behavior: 'smooth' });
+    };
+
+    // Build dots
+    cards.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'tst-dot' + (i === 0 ? ' active' : '');
+      dot.type = 'button';
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
+      dot.addEventListener('click', () => { stopAuto(); goTo(i); });
+      tstDots.appendChild(dot);
+    });
+    const dots = Array.from(tstDots.children);
+
+    const setActive = (i) => dots.forEach((d, j) => d.classList.toggle('active', j === i));
+
+    let scrollRaf;
+    tstTrack.addEventListener('scroll', () => {
+      if (scrollRaf) return;
+      scrollRaf = requestAnimationFrame(() => {
+        setActive(currentIndex());
+        scrollRaf = null;
+      });
+    }, { passive: true });
+
+    // Autoplay (skipped when the user prefers reduced motion)
+    let autoTimer = null;
+    const startAuto = () => {
+      if (prefersReducedMotion || autoTimer) return;
+      autoTimer = setInterval(() => {
+        const next = (currentIndex() + 1) % cards.length;
+        goTo(next);
+      }, 4500);
+    };
+    const stopAuto = () => { clearInterval(autoTimer); autoTimer = null; };
+
+    const carousel = document.getElementById('tst-carousel');
+    carousel.addEventListener('mouseenter', stopAuto);
+    carousel.addEventListener('mouseleave', startAuto);
+    carousel.addEventListener('touchstart', stopAuto, { passive: true });
+    carousel.addEventListener('focusin', stopAuto);
+
+    startAuto();
+  }
+
   /* ---------- Hero parallax ---------- */
   const heroContent = document.querySelector('.hero-content');
   const orbs = document.querySelectorAll('.cosmic-orb');

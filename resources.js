@@ -4,6 +4,22 @@
    ============================================ */
 
 (() => {
+  // Members-only: the resource library requires a signed-in account.
+  // requireAuth() redirects to login.html when there is no active session.
+  if (window.PP && PP.auth) {
+    const user = PP.auth.requireAuth();
+    if (!user) return;
+  }
+
+  // Wire the nav Log Out button (app-style nav on this page).
+  const logoutBtn = document.getElementById('logout-btn');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', () => {
+      PP.auth.logout();
+      window.location.href = 'index.html';
+    });
+  }
+
   const DATA = window.PP_RESOURCES || [];
 
   // ---------- DOM ----------
