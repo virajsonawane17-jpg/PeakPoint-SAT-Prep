@@ -300,7 +300,8 @@ p {
   animation: logo-glow 3s ease-in-out infinite;
 }
 
-.logo svg {
+.logo svg,
+.logo .logo-mark {
   width: 28px;
   height: 28px;
   filter: drop-shadow(0 0 8px var(--glow));

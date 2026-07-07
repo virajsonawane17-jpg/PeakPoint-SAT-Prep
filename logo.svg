@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="PeakPoint">
+  <defs>
+    <linearGradient id="pp-peak" x1="0" y1="1" x2="0.35" y2="0">
+      <stop offset="0" stop-color="#0d2b57"/>
+      <stop offset="0.55" stop-color="#1e5aa8"/>
+      <stop offset="1" stop-color="#3b82f6"/>
+    </linearGradient>
+    <linearGradient id="pp-ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3b82f6"/>
+      <stop offset="1" stop-color="#1e4e8c"/>
+    </linearGradient>
+    <clipPath id="pp-clip"><circle cx="50" cy="50" r="40"/></clipPath>
+  </defs>
+
+  <!-- outer ring -->
+  <circle cx="50" cy="50" r="40" fill="none" stroke="url(#pp-ring)" stroke-width="6.5"/>
+
+  <!-- mountains, clipped to the ring -->
+  <g clip-path="url(#pp-clip)">
+    <path d="M6 86 L37 38 L51 58 L60 45 L94 86 Z" fill="url(#pp-peak)"/>
+    <!-- snow caps -->
+    <path d="M37 38 L29.5 50 L34 50 L38 44.5 L42 51 L45.5 46 Z" fill="#eaf2ff" opacity="0.92"/>
+    <path d="M60 45 L54.5 53 L57.5 53 L60.5 49.5 L63.5 54 L66 51.5 Z" fill="#eaf2ff" opacity="0.85"/>
+  </g>
+
+  <!-- summit dot -->
+  <circle cx="50" cy="10.5" r="5" fill="#3b82f6"/>
+  <circle cx="50" cy="10.5" r="5" fill="none" stroke="#bcd6ff" stroke-width="0.6"/>
+</svg>
