@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0ea5e9" />
+<title>Mistake Review — PeakPoint SAT Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="app.css" />
+<link rel="icon" href="logo.svg" />
+</head>
+<body>
+<canvas id="space-canvas" aria-hidden="true"></canvas>
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="dashboard.html" class="logo"><img src="logo.svg" alt="PeakPoint" class="logo-mark" width="28" height="28" /><span>PEAKPOINT SAT</span></a>
+    <ul class="nav-links">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="study-plan.html">Plan</a></li>
+      <li><a href="practice.html?mode=adaptive">Practice</a></li>
+      <li><a href="question-bank.html">Bank</a></li>
+      <li><a href="mistakes.html" class="active">Review</a></li>
+      <li><a href="resources.html">Resources</a></li>
+    </ul>
+    <button class="mobile-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<main class="app-main">
+  <div class="dash-greeting">
+    <div>
+      <span class="eyebrow">Mistake loop</span>
+      <h1>Mistake Review</h1>
+      <p class="card-sub">Every missed or skipped question stays here until you understand and later master it.</p>
+    </div>
+  </div>
+
+  <section class="app-section">
+    <div class="card filter-card">
+      <div class="filter-grid">
+        <div class="field"><label>Subject</label><select id="m-subject"><option value="">All</option><option>Math</option><option>Reading and Writing</option></select></div>
+        <div class="field"><label>Domain</label><select id="m-domain"><option value="">All</option></select></div>
+        <div class="field"><label>Skill</label><select id="m-skill"><option value="">All</option></select></div>
+        <div class="field"><label>Difficulty</label><select id="m-difficulty"><option value="">All</option><option value="1">Easy</option><option value="2">Medium</option><option value="3">Hard</option></select></div>
+        <div class="field"><label>Status</label><select id="m-status"><option value="">All</option><option value="needs_review">Needs review</option><option value="reviewing">Reviewing</option><option value="mastered">Mastered</option></select></div>
+        <div class="field"><label>Repeated</label><select id="m-repeated"><option value="">All</option><option value="yes">Repeated only</option></select></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bank-layout">
+    <aside class="card bank-list">
+      <div class="list-head"><h2>Misses</h2><span class="muted mono" id="mistake-count">0</span></div>
+      <div id="mistake-list"></div>
+    </aside>
+    <section class="question-card bank-question" id="mistake-detail">
+      <div class="q-meta">
+        <span class="q-tag q-section" id="mistake-section"></span>
+        <span class="q-tag" id="mistake-domain"></span>
+        <span class="q-tag" id="mistake-skill"></span>
+        <span class="q-tag" id="mistake-repeat"></span>
+      </div>
+      <p class="q-text" id="mistake-text"></p>
+      <div class="choices" id="mistake-choices"></div>
+      <div class="explanation show" id="mistake-explanation"></div>
+      <div class="field notes-field">
+        <label for="mistake-notes">Your notes</label>
+        <textarea id="mistake-notes" rows="4" placeholder="What caused this miss? What is the takeaway?"></textarea>
+      </div>
+      <div class="question-tools">
+        <button class="tool-btn" id="mistake-retry" type="button">Retry</button>
+        <button class="tool-btn" id="mistake-understood" type="button">Mark Understood</button>
+        <button class="tool-btn" id="mistake-mastered" type="button">Mark Mastered</button>
+      </div>
+      <div id="mistake-ai-tutor"></div>
+    </section>
+  </section>
+</main>
+
+<script src="vendor/supabase.js"></script>
+<script src="supabase-config.js"></script>
+<script src="auth.js"></script>
+<script src="questions.js"></script>
+<script src="game.js"></script>
+<script src="api-client.js"></script>
+<script src="learning.js"></script>
+<script src="ai-tutor.js"></script>
+<script src="script.js"></script>
+<script src="mistakes.js"></script>
+</body>
+</html>

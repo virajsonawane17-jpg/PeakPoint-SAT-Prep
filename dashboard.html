@@ -25,7 +25,10 @@
     </a>
     <ul class="nav-links">
       <li><a href="dashboard.html" class="active">Dashboard</a></li>
+      <li><a href="study-plan.html">Plan</a></li>
       <li><a href="practice.html?mode=adaptive">Practice</a></li>
+      <li><a href="question-bank.html">Bank</a></li>
+      <li><a href="mistakes.html">Review</a></li>
       <li><a href="resources.html">Resources</a></li>
       <li><button class="btn btn-secondary nav-cta" id="logout-btn">Log Out</button></li>
     </ul>
@@ -54,6 +57,15 @@
       <p class="card-sub">15 questions, one per skill, about 15 minutes. It calibrates your score estimate and builds your personalized study plan.</p>
     </div>
     <a href="practice.html?mode=diagnostic" class="btn btn-primary btn-large">Take the Diagnostic</a>
+  </div>
+
+  <div class="card next-action-card" id="next-action-card">
+    <div>
+      <span class="eyebrow">Recommended now</span>
+      <h2 id="next-action-title">Loading your next move...</h2>
+      <p class="card-sub" id="next-action-detail">PeakPoint is checking your recent practice.</p>
+    </div>
+    <a class="btn btn-primary btn-large" id="next-action-link" href="practice.html?mode=diagnostic">Start</a>
   </div>
 
   <!-- Top stats -->
@@ -126,6 +138,42 @@
         <p class="card-sub">Adaptive practice limited to Reading &amp; Writing: grammar, transitions, vocabulary, and style.</p>
         <span class="mode-go">Drill R&amp;W →</span>
       </a>
+      <a class="card mode-card" href="study-plan.html">
+        <span class="mode-icon">🗓️</span>
+        <h3>Study Plan</h3>
+        <p class="card-sub">Daily activities that adjust around your target score, test date, weak skills, and missed work.</p>
+        <span class="mode-go">Open plan →</span>
+      </a>
+      <a class="card mode-card" href="question-bank.html">
+        <span class="mode-icon">🧩</span>
+        <h3>Question Bank</h3>
+        <p class="card-sub">Filter SAT-style practice by subject, domain, skill, difficulty, status, and history.</p>
+        <span class="mode-go">Browse bank →</span>
+      </a>
+      <a class="card mode-card" href="rush.html">
+        <span class="mode-icon">⚡</span>
+        <h3>Question Rush</h3>
+        <p class="card-sub">Timed speed practice with streaks, accuracy, pacing, and weak-skills modes.</p>
+        <span class="mode-go">Start rush →</span>
+      </a>
+      <a class="card mode-card" href="vocab.html">
+        <span class="mode-icon">🔤</span>
+        <h3>Vocabulary</h3>
+        <p class="card-sub">Review words in context with definitions, traps, roots, memory aids, and spaced repetition.</p>
+        <span class="mode-go">Review words →</span>
+      </a>
+      <a class="card mode-card" href="mistakes.html">
+        <span class="mode-icon">🔁</span>
+        <h3>Mistake Review</h3>
+        <p class="card-sub">Retry missed questions, add notes, ask the tutor, and mark work as understood or mastered.</p>
+        <span class="mode-go">Fix mistakes →</span>
+      </a>
+      <a class="card mode-card" href="analytics.html">
+        <span class="mode-icon">📊</span>
+        <h3>Progress Analytics</h3>
+        <p class="card-sub">See score trends, skill mastery, pacing, study-plan completion, and vocabulary progress.</p>
+        <span class="mode-go">View analytics →</span>
+      </a>
     </div>
   </section>
 
@@ -190,6 +238,8 @@
 <script src="auth.js"></script>
 <script src="questions.js"></script>
 <script src="game.js"></script>
+<script src="api-client.js"></script>
+<script src="learning.js"></script>
 <script src="script.js"></script>
 <script src="dashboard.js"></script>
 </body>

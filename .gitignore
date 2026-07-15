@@ -7,3 +7,8 @@
 # Node (in case a backend is added later)
 node_modules/
 npm-debug.log*
+
+# Server secrets and generated local data
+.env
+.env.local
+.data/

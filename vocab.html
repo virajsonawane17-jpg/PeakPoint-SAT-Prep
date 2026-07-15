@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0ea5e9" />
+<title>Vocabulary — PeakPoint SAT Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="app.css" />
+<link rel="icon" href="logo.svg" />
+</head>
+<body>
+<canvas id="space-canvas" aria-hidden="true"></canvas>
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="dashboard.html" class="logo"><img src="logo.svg" alt="PeakPoint" class="logo-mark" width="28" height="28" /><span>PEAKPOINT SAT</span></a>
+    <ul class="nav-links">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="study-plan.html">Plan</a></li>
+      <li><a href="practice.html?mode=adaptive">Practice</a></li>
+      <li><a href="question-bank.html">Bank</a></li>
+      <li><a href="mistakes.html">Review</a></li>
+      <li><a href="resources.html">Resources</a></li>
+    </ul>
+    <button class="mobile-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<main class="app-main">
+  <div class="dash-greeting">
+    <div>
+      <span class="eyebrow">Words in context</span>
+      <h1>Vocabulary Practice</h1>
+      <p class="card-sub">Original word list with definitions, examples, synonyms, antonyms, traps, roots, and spaced repetition.</p>
+    </div>
+  </div>
+
+  <section class="app-section">
+    <div class="stat-cards" id="vocab-stats"></div>
+  </section>
+
+  <section class="bank-layout">
+    <aside class="card bank-list">
+      <div class="list-head"><h2>Words</h2><span class="muted mono" id="vocab-due">0 due</span></div>
+      <div id="vocab-list"></div>
+    </aside>
+    <section class="question-card bank-question">
+      <div class="q-meta">
+        <span class="q-tag q-section">Vocabulary</span>
+        <span class="q-tag" id="vocab-status">New</span>
+      </div>
+      <h2 id="vocab-word"></h2>
+      <p class="q-text" id="vocab-example"></p>
+      <div class="choices" id="vocab-choices"></div>
+      <div class="explanation" id="vocab-detail"></div>
+      <div class="question-tools">
+        <button class="tool-btn" id="vocab-known" type="button">Mark Known</button>
+        <button class="tool-btn" id="vocab-missed" type="button">Mark Missed</button>
+        <button class="tool-btn" id="vocab-ai" type="button">AI Memory Aid</button>
+        <button class="tool-btn" id="vocab-next" type="button">Next Due Word</button>
+      </div>
+      <div id="vocab-ai-box" class="ai-summary"></div>
+    </section>
+  </section>
+</main>
+
+<script src="vendor/supabase.js"></script>
+<script src="supabase-config.js"></script>
+<script src="auth.js"></script>
+<script src="questions.js"></script>
+<script src="game.js"></script>
+<script src="api-client.js"></script>
+<script src="learning.js"></script>
+<script src="script.js"></script>
+<script src="vocab.js"></script>
+</body>
+</html>

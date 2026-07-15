@@ -85,7 +85,10 @@ PP.auth = (() => {
      code mutate it, then persist changes back (saveData):
        - profile aggregates (xp, mastery, badges, target…) -> profiles row
        - attempts / sessions / snapshots -> append-only rows
-     `days` is derived from attempt timestamps, so it isn't stored. */
+       - advanced OnePrep-style learning state -> learning_state row
+     `days` is derived from attempt timestamps, so it isn't stored.
+     Advanced state also has a local fallback so the app remains usable
+     while the Supabase schema is being applied. */
 
   function todayKey(d) {
     const dt = d || new Date();
@@ -98,19 +101,41 @@ PP.auth = (() => {
     return {
       profile: { targetScore: null, testDate: null },
       attempts: [], sessions: [], snapshots: [], days: [],
-      diagnosticDone: false, xp: 0, bestCombo: 0, mastery: {}, badges: []
+      diagnosticDone: false, xp: 0, bestCombo: 0, mastery: {}, badges: [],
+      learning: PP.learning ? PP.learning.blankState() : {}
     };
+  }
+
+  function learningLocalKey(userId) {
+    return `peakpoint-learning:${userId}`;
+  }
+
+  function loadLocalLearning(userId) {
+    try {
+      return JSON.parse(localStorage.getItem(learningLocalKey(userId)) || 'null') || null;
+    } catch {
+      return null;
+    }
+  }
+
+  function saveLocalLearning(userId, state) {
+    try {
+      localStorage.setItem(learningLocalKey(userId), JSON.stringify(state || {}));
+    } catch {
+      // Local persistence is best-effort only.
+    }
   }
 
   async function loadData(userId) {
     const sb = PP.sb;
     const ms = (ts) => (ts ? new Date(ts).getTime() : Date.now());
 
-    const [prof, att, ses, snap] = await Promise.all([
+    const [prof, att, ses, snap, learn] = await Promise.all([
       sb.from('profiles').select('*').eq('id', userId).maybeSingle(),
       sb.from('attempts').select('*').eq('user_id', userId).order('created_at', { ascending: true }),
       sb.from('sessions').select('*').eq('user_id', userId).order('created_at', { ascending: true }),
-      sb.from('snapshots').select('*').eq('user_id', userId).order('created_at', { ascending: true })
+      sb.from('snapshots').select('*').eq('user_id', userId).order('created_at', { ascending: true }),
+      sb.from('learning_state').select('*').eq('user_id', userId).maybeSingle()
     ]);
 
     const data = emptyData();
@@ -126,13 +151,15 @@ PP.auth = (() => {
     }
     data.attempts = (att.data || []).map((r) => ({
       qid: r.qid, skill: r.skill, section: r.section,
-      difficulty: r.difficulty, correct: r.correct, t: ms(r.created_at)
+      difficulty: Number(r.difficulty), correct: r.correct, t: ms(r.created_at)
     }));
     data.sessions = (ses.data || []).map((r) => ({
       type: r.type, skill: r.skill, total: r.total, correct: r.correct, t: ms(r.created_at)
     }));
     data.snapshots = (snap.data || []).map((r) => ({ t: ms(r.created_at), math: r.math, rw: r.rw }));
     data.days = Array.from(new Set(data.attempts.map((a) => todayKey(new Date(a.t)))));
+    data.learning = (learn && learn.data && learn.data.state) || loadLocalLearning(userId) || data.learning || {};
+    if (PP.learning) PP.learning.normalize(data);
 
     // Bookkeeping for append-only persistence + save serialization.
     data._persisted = { attempts: data.attempts.length, sessions: data.sessions.length, snapshots: data.snapshots.length };
@@ -142,6 +169,8 @@ PP.auth = (() => {
 
   async function persist(userId, data) {
     const sb = PP.sb;
+    if (PP.learning) PP.learning.normalize(data);
+    saveLocalLearning(userId, data.learning);
 
     // 1. Profile aggregates (insert if missing, update otherwise).
     await sb.from('profiles').upsert({
@@ -154,6 +183,13 @@ PP.auth = (() => {
       mastery: data.mastery ?? {},
       badges: data.badges ?? []
     }, { onConflict: 'id' });
+
+    // Advanced learning state is deliberately stored as one user-owned JSON
+    // document to keep the current static app fast while preserving history.
+    await sb.from('learning_state').upsert({
+      user_id: userId,
+      state: data.learning || {}
+    }, { onConflict: 'user_id' });
 
     // 2. New event rows only (append-only; advance counters on success).
     const p = data._persisted || { attempts: 0, sessions: 0, snapshots: 0 };

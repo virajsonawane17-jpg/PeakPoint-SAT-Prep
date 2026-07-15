@@ -9,6 +9,8 @@
   if (!user) return;
 
   const data = await PP.auth.loadData(user.id);
+  PP.learning.normalize(data);
+  if (!data.learning.recommendations.length) PP.learning.refreshRecommendations(data);
 
   /* ---------- Greeting & rank ---------- */
   document.getElementById('dash-name').textContent = user.name.split(' ')[0];
@@ -21,6 +23,15 @@
   /* ---------- Diagnostic banner ---------- */
   if (!data.diagnosticDone) {
     document.getElementById('diagnostic-banner').style.display = '';
+  }
+
+  /* ---------- Next best action ---------- */
+  const next = data.learning.recommendations[0];
+  if (next) {
+    document.getElementById('next-action-title').textContent = next.title;
+    document.getElementById('next-action-detail').textContent = next.detail;
+    document.getElementById('next-action-link').href = next.href;
+    document.getElementById('next-action-link').textContent = next.title.includes('Continue') ? 'Continue' : 'Start';
   }
 
   /* ---------- Score estimate ---------- */
@@ -188,6 +199,13 @@
   function saveProfile() {
     data.profile.targetScore = targetSel.value ? parseInt(targetSel.value, 10) : null;
     data.profile.testDate = dateInput.value || null;
+    if (data.learning.studyPreferences) {
+      PP.learning.generateStudyPlan(data, {
+        ...data.learning.studyPreferences,
+        targetScore: data.profile.targetScore,
+        testDate: data.profile.testDate
+      });
+    }
     PP.auth.saveData(user.id, data);
     updateTargetSummary();
   }

@@ -55,7 +55,13 @@
     </div>
     <p class="q-text" id="q-text"></p>
     <div class="choices" id="choices"></div>
+    <div class="question-tools">
+      <button class="tool-btn" id="save-question-btn" type="button">Save</button>
+      <button class="tool-btn" id="skip-question-btn" type="button">Skip</button>
+      <button class="tool-btn" id="report-question-btn" type="button">Report</button>
+    </div>
     <div class="explanation" id="explanation"></div>
+    <div id="practice-ai-tutor"></div>
     <div class="practice-actions">
       <span class="muted" id="session-stats" style="font-size:0.85rem;"></span>
       <button class="btn btn-primary" id="next-btn" style="display:none;">Next Question →</button>
@@ -74,6 +80,8 @@
       <div><div class="s-num" id="sum-combo">0</div><div class="s-label">Best Combo</div></div>
     </div>
     <div class="summary-badges" id="summary-badges"></div>
+    <div class="diagnostic-insights" id="diagnostic-insights"></div>
+    <div class="ai-summary" id="ai-summary"></div>
     <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
       <button class="btn btn-primary btn-large" id="again-btn">Practice Again</button>
       <a class="btn btn-secondary btn-large" href="dashboard.html">Back to Dashboard</a>
@@ -89,6 +97,9 @@
 <script src="auth.js"></script>
 <script src="questions.js"></script>
 <script src="game.js"></script>
+<script src="api-client.js"></script>
+<script src="learning.js"></script>
+<script src="ai-tutor.js"></script>
 <script src="script.js"></script>
 <script src="practice.js"></script>
 </body>
