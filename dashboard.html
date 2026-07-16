@@ -15,7 +15,11 @@
 </head>
 <body class="dashboard-screen">
 
-<aside class="prep-sidebar" aria-label="PeakPoint sidebar">
+<button class="sidebar-toggle" id="sidebar-toggle" type="button" aria-controls="app-sidebar" aria-expanded="true" aria-label="Hide sidebar">
+  <span data-sidebar-toggle-icon aria-hidden="true">‹</span>
+</button>
+
+<aside class="prep-sidebar" id="app-sidebar" aria-label="PeakPoint sidebar">
   <div>
     <div class="side-brand" aria-label="PeakPoint SAT">
       <img src="logo.svg" alt="" width="36" height="36" />
@@ -179,6 +183,7 @@
 <script src="vendor/supabase.js"></script>
 <script src="supabase-config.js"></script>
 <script src="auth.js"></script>
+<script src="sidebar.js"></script>
 <script src="dashboard.js"></script>
 </body>
 </html>

@@ -10,30 +10,72 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="app.css" />
 <link rel="stylesheet" href="resources.css" />
 <link rel="icon" href="logo.svg" />
 </head>
-<body>
+<body class="dashboard-screen resources-screen">
 
 <canvas id="space-canvas" aria-hidden="true"></canvas>
 
-<!-- Navbar -->
-<nav class="navbar">
-  <div class="nav-inner">
-    <a href="dashboard.html" class="logo">
-      <img src="logo.svg" alt="PeakPoint" class="logo-mark" width="28" height="28" />
-      <span>PEAKPOINT SAT</span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="dashboard.html">Dashboard</a></li>
-      <li><a href="resources.html" class="active">Resources</a></li>
-      <li><button class="btn btn-secondary nav-cta" id="logout-btn">Log Out</button></li>
-    </ul>
-    <button class="mobile-toggle" aria-label="Menu">
-      <span></span><span></span><span></span>
+<button class="sidebar-toggle" id="sidebar-toggle" type="button" aria-controls="app-sidebar" aria-expanded="true" aria-label="Hide sidebar">
+  <span data-sidebar-toggle-icon aria-hidden="true">‹</span>
+</button>
+
+<aside class="prep-sidebar" id="app-sidebar" aria-label="PeakPoint sidebar">
+  <div>
+    <div class="side-brand" aria-label="PeakPoint SAT">
+      <img src="logo.svg" alt="" width="36" height="36" />
+      <span>PeakPoint</span>
+    </div>
+
+    <button class="course-select" type="button">
+      <span>SAT</span>
+      <span aria-hidden="true">⌄</span>
     </button>
+
+    <nav class="side-nav" aria-label="Dashboard navigation">
+      <a class="side-item" href="dashboard.html"><span class="side-icon home-icon"></span><span>Home</span></a>
+      <a class="side-item active" href="resources.html" aria-current="page"><span class="side-icon resources-icon"></span><span>Resources</span></a>
+      <button class="side-item" type="button"><span class="side-icon tutor-icon"></span><span>Apply As A Tutor</span><span class="new-pill">New</span></button>
+      <button class="side-item" type="button"><span class="side-icon ai-icon"></span><span>Ask PeakPoint AI</span></button>
+      <button class="side-item" type="button"><span class="side-icon planner-icon"></span><span>Study Planner</span></button>
+      <button class="side-item" type="button"><span class="side-icon play-icon"></span><span>SAT Masterclass</span><span class="new-pill">New</span></button>
+      <button class="side-item" type="button"><span class="side-icon bars-icon"></span><span>Analytics</span></button>
+
+      <span class="side-heading">Practice</span>
+      <button class="side-item" type="button"><span class="side-icon bank-icon"></span><span>Question Bank</span></button>
+      <button class="side-item" type="button"><span class="side-icon rush-icon"></span><span>Question Rush</span></button>
+      <button class="side-item" type="button"><span class="side-icon challenge-icon"></span><span>Challenge Questions</span></button>
+      <button class="side-item" type="button"><span class="side-icon tests-icon"></span><span>Predicted Tests</span></button>
+      <button class="side-item" type="button"><span class="side-icon vocab-icon"></span><span>Vocab</span></button>
+
+      <span class="side-heading">Progress</span>
+      <button class="side-item" type="button"><span class="side-icon saved-icon"></span><span>Saved</span></button>
+      <button class="side-item" type="button"><span class="side-icon error-icon"></span><span>Mistakes Log</span></button>
+
+      <span class="side-heading">Classrooms</span>
+      <button class="side-item" type="button"><span class="side-icon class-icon"></span><span>My Classes</span></button>
+
+      <span class="side-heading">College App</span>
+      <button class="side-item" type="button"><span class="side-icon college-icon"></span><span>Browse Colleges</span></button>
+    </nav>
   </div>
-</nav>
+
+  <div class="side-footer">
+    <button class="side-item upgrade-item" type="button"><span class="side-icon up-icon"></span><span>Upgrade</span><span class="discount-pill">25% Off</span></button>
+    <button class="side-item" type="button"><span class="side-icon phone-icon"></span><span>Get The App</span></button>
+    <button class="side-item" type="button"><span class="side-icon sell-icon"></span><span>Sell Uni Application</span></button>
+    <button class="side-item" type="button"><span class="side-icon more-icon"></span><span>More</span><span class="side-chevron">›</span></button>
+    <div class="user-row">
+      <div class="user-avatar" aria-hidden="true"></div>
+      <strong id="side-user-name">Student</strong>
+      <button class="gear-button" type="button" aria-label="Settings"></button>
+    </div>
+  </div>
+</aside>
+
+<main class="prep-main resource-main">
 
 <!-- Sub Hero -->
 <header class="sub-hero">
@@ -107,61 +149,12 @@
   </div>
 
 </section>
-
-<!-- CTA -->
-<section class="discord-cta container">
-  <div class="discord-cta-inner reveal">
-    <div class="discord-cta-content">
-      <span class="eyebrow">Go further</span>
-      <h2>Practice sheets are just <span class="accent-text">the start.</span></h2>
-      <p>Create a free PeakPoint account for unlimited adaptive practice, a live score estimate, and skill mastery tracking — all built on top of these materials.</p>
-      <a href="login.html?mode=signup" class="btn btn-primary btn-large">Create Your Free Account</a>
-    </div>
-  </div>
-</section>
-
-<!-- Footer -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid footer-grid-simple">
-      <div class="footer-brand">
-        <a href="index.html" class="logo">
-          <img src="logo.svg" alt="PeakPoint" class="logo-mark" width="28" height="28" />
-          <span>PEAKPOINT SAT</span>
-        </a>
-        <p>The comprehensive SAT preparation platform. Built for every student, designed for success.</p>
-      </div>
-      <div>
-        <h4>Explore</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="resources.html">Resources</a></li>
-          <li><a href="join.html">Join Now</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="mailto:peakpointprep@gmail.com">peakpointprep@gmail.com</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer-wordmark" aria-hidden="true">peakpoint</div>
-
-    <div class="footer-bottom">
-      <p>© 2026 PeakPoint SAT Prep. All rights reserved.</p>
-      <div class="social">
-        <a href="mailto:peakpointprep@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
-      </div>
-    </div>
-  </div>
-</footer>
+</main>
 
 <script src="vendor/supabase.js"></script>
 <script src="supabase-config.js"></script>
 <script src="auth.js"></script>
+<script src="sidebar.js"></script>
 <script src="script.js"></script>
 <script src="resources-data.js"></script>
 <script src="resources.js"></script>

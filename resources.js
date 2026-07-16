@@ -6,12 +6,18 @@
 (async () => {
   // Members-only: the resource library requires a signed-in account.
   // requireAuth() redirects to login.html when there is no active session.
+  let user = null;
   if (window.PP && PP.auth) {
-    const user = await PP.auth.requireAuth();
+    user = await PP.auth.requireAuth();
     if (!user) return;
   }
 
-  // Wire the nav Log Out button (app-style nav on this page).
+  const sideName = document.getElementById('side-user-name');
+  if (sideName && user) {
+    sideName.textContent = user.name || (user.email ? user.email.split('@')[0] : 'Student');
+  }
+
+  // Wire an optional Log Out button if one exists on a future app shell.
   const logoutBtn = document.getElementById('logout-btn');
   if (logoutBtn) {
     logoutBtn.addEventListener('click', async () => {

@@ -162,7 +162,8 @@
   overflow-x: hidden;
 }
 
-.dashboard-screen button {
+.dashboard-screen:not(.resources-screen) .prep-main button,
+.dashboard-screen .prep-sidebar button {
   cursor: default;
 }
 
@@ -187,6 +188,55 @@
   justify-content: space-between;
   padding: 18px 9px 15px;
   color: var(--dash-muted);
+  transition: transform 0.28s var(--easing);
+  will-change: transform;
+}
+
+.sidebar-toggle {
+  position: fixed;
+  z-index: 50;
+  top: 22px;
+  left: 272px;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid var(--border-default);
+  background: #fff;
+  color: var(--accent-deep);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 14px 34px -18px rgba(3, 105, 161, 0.42), var(--card-shadow);
+  cursor: pointer;
+  transition: left 0.28s var(--easing), transform 0.2s var(--easing), box-shadow 0.2s var(--easing);
+}
+
+.sidebar-toggle:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 38px -18px rgba(3, 105, 161, 0.52), var(--card-shadow);
+}
+
+.sidebar-toggle:focus-visible,
+.side-item:focus-visible,
+.course-select:focus-visible {
+  outline: 3px solid var(--glow);
+  outline-offset: 2px;
+}
+
+.dashboard-screen.sidebar-collapsed .prep-sidebar {
+  transform: translateX(calc(-100% - 1px));
+}
+
+.dashboard-screen.sidebar-collapsed .prep-main {
+  margin-left: 0;
+}
+
+.dashboard-screen.sidebar-collapsed .sidebar-toggle {
+  left: 18px;
 }
 
 .side-brand {
@@ -606,6 +656,7 @@
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.82) 0, rgba(255, 255, 255, 0) 220px),
     var(--dash-bg);
+  transition: margin-left 0.28s var(--easing);
 }
 
 .main-inner {
@@ -1321,6 +1372,12 @@
     padding-bottom: 12px;
   }
 
+  .sidebar-toggle {
+    top: 14px;
+    right: 14px;
+    left: auto;
+  }
+
   .side-nav {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1332,6 +1389,15 @@
 
   .prep-main {
     margin-left: 0;
+  }
+
+  .dashboard-screen.sidebar-collapsed .prep-sidebar {
+    display: none;
+  }
+
+  .dashboard-screen.sidebar-collapsed .sidebar-toggle {
+    right: 14px;
+    left: auto;
   }
 
   .top-tools {
