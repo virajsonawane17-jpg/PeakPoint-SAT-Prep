@@ -193,10 +193,10 @@
 }
 
 .sidebar-toggle {
-  position: fixed;
+  position: absolute;
   z-index: 50;
-  top: 22px;
-  left: 272px;
+  top: 25px;
+  right: 12px;
   width: 42px;
   height: 42px;
   border-radius: 999px;
@@ -212,7 +212,7 @@
   line-height: 1;
   box-shadow: 0 14px 34px -18px rgba(3, 105, 161, 0.42), var(--card-shadow);
   cursor: pointer;
-  transition: left 0.28s var(--easing), transform 0.2s var(--easing), box-shadow 0.2s var(--easing);
+  transition: right 0.28s var(--easing), transform 0.2s var(--easing), box-shadow 0.2s var(--easing);
 }
 
 .sidebar-toggle:hover {
@@ -229,7 +229,7 @@
 }
 
 .dashboard-screen.sidebar-collapsed .prep-sidebar {
-  transform: translateX(calc(-100% - 1px));
+  transform: translateX(calc(-100% + 18px));
 }
 
 .dashboard-screen.sidebar-collapsed .prep-main {
@@ -237,7 +237,7 @@
 }
 
 .dashboard-screen.sidebar-collapsed .sidebar-toggle {
-  left: 18px;
+  right: -21px;
 }
 
 .side-brand {
@@ -1383,7 +1383,6 @@
   .sidebar-toggle {
     top: 14px;
     right: 14px;
-    left: auto;
   }
 
   .side-nav {
@@ -1400,12 +1399,15 @@
   }
 
   .dashboard-screen.sidebar-collapsed .prep-sidebar {
-    display: none;
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 258px;
+    min-height: 100vh;
+    transform: translateX(calc(-100% + 18px));
   }
 
   .dashboard-screen.sidebar-collapsed .sidebar-toggle {
-    right: 14px;
-    left: auto;
+    right: -21px;
   }
 
   .top-tools {

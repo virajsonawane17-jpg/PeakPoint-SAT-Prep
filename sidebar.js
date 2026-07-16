@@ -10,7 +10,8 @@
   if (!toggle || !sidebar) return;
 
   const icon = toggle.querySelector('[data-sidebar-toggle-icon]');
-  const sidebarFocusables = Array.from(sidebar.querySelectorAll('a, button'));
+  const sidebarFocusables = Array.from(sidebar.querySelectorAll('a, button'))
+    .filter((el) => el !== toggle);
 
   const setToggleState = () => {
     const collapsed = document.body.classList.contains('sidebar-collapsed');
@@ -18,7 +19,7 @@
     toggle.setAttribute('aria-label', collapsed ? 'Show sidebar' : 'Hide sidebar');
     toggle.title = collapsed ? 'Show sidebar' : 'Hide sidebar';
     if (icon) icon.textContent = collapsed ? '›' : '‹';
-    sidebar.setAttribute('aria-hidden', String(collapsed));
+    sidebar.setAttribute('aria-label', collapsed ? 'Collapsed PeakPoint sidebar' : 'PeakPoint sidebar');
     sidebarFocusables.forEach((el) => {
       if (collapsed) el.setAttribute('tabindex', '-1');
       else el.removeAttribute('tabindex');
