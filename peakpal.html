@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0ea5e9" />
+<meta name="description" content="PeakPal, your PeakPoint SAT prep assistant." />
+<title>PeakPal — PeakPoint SAT Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="app.css" />
+<link rel="stylesheet" href="peakpal.css" />
+<link rel="icon" href="logo.svg" />
+</head>
+<body class="dashboard-screen peakpal-screen">
+
+<button class="sidebar-toggle" id="sidebar-toggle" type="button" aria-controls="app-sidebar" aria-expanded="true" aria-label="Hide sidebar">
+  <span data-sidebar-toggle-icon aria-hidden="true">‹</span>
+</button>
+
+<aside class="prep-sidebar" id="app-sidebar" aria-label="PeakPoint sidebar">
+  <div>
+    <a class="side-brand" href="dashboard.html" aria-label="PeakPoint home">
+      <img src="logo.svg" alt="" width="36" height="36" />
+      <span>PeakPoint</span>
+    </a>
+
+    <nav class="side-nav" aria-label="Dashboard navigation">
+      <a class="side-item" href="dashboard.html"><span class="side-icon home-icon"></span><span>Home</span></a>
+      <a class="side-item" href="resources.html"><span class="side-icon resources-icon"></span><span>Resources</span></a>
+      <a class="side-item active" href="peakpal.html" aria-current="page"><span class="side-icon ai-icon"></span><span>PeakPal</span></a>
+      <button class="side-item" type="button"><span class="side-icon planner-icon"></span><span>Study Planner</span></button>
+      <button class="side-item" type="button"><span class="side-icon bars-icon"></span><span>Analytics</span></button>
+
+      <span class="side-heading">Practice</span>
+      <button class="side-item" type="button"><span class="side-icon bank-icon"></span><span>Question Bank</span></button>
+      <button class="side-item" type="button"><span class="side-icon rush-icon"></span><span>Question Rush</span></button>
+      <button class="side-item" type="button"><span class="side-icon challenge-icon"></span><span>Challenge Questions</span></button>
+      <button class="side-item" type="button"><span class="side-icon tests-icon"></span><span>Predicted Tests</span></button>
+      <button class="side-item" type="button"><span class="side-icon vocab-icon"></span><span>Vocab</span></button>
+
+      <span class="side-heading">Progress</span>
+      <button class="side-item" type="button"><span class="side-icon saved-icon"></span><span>Saved</span></button>
+      <button class="side-item" type="button"><span class="side-icon error-icon"></span><span>Mistakes Log</span></button>
+    </nav>
+  </div>
+
+  <div class="side-footer">
+    <div class="user-row">
+      <div class="user-avatar" aria-hidden="true"></div>
+      <strong id="side-user-name">Student</strong>
+      <button class="gear-button" type="button" aria-label="Settings"></button>
+    </div>
+  </div>
+</aside>
+
+<main class="prep-main peakpal-main">
+  <div class="peakpal-shell">
+    <aside class="peakpal-chat-rail" aria-label="PeakPal chats">
+      <div class="peakpal-mark">
+        <img src="logo.svg" alt="" width="34" height="34" />
+        <strong>PeakPal</strong>
+      </div>
+      <button class="new-chat-button" type="button" id="new-chat-button">
+        <span class="chat-bubble-icon" aria-hidden="true">?</span>
+        Start a new chat
+      </button>
+      <div class="chat-list-block">
+        <h2>Your chats</h2>
+        <p id="chat-empty-copy">No chats yet.</p>
+      </div>
+    </aside>
+
+    <section class="peakpal-workspace" aria-label="PeakPal assistant">
+      <div class="peakpal-content">
+        <header class="peakpal-hero">
+          <p class="eyebrow">PeakPoint AI assistant</p>
+          <h1>What can PeakPal help you with?</h1>
+        </header>
+
+        <section class="peakpal-section" aria-labelledby="trending-title">
+          <h2 id="trending-title">Trending questions</h2>
+          <div class="prompt-grid">
+            <article class="prompt-card prompt-blue">
+              <span class="prompt-icon" aria-hidden="true">?</span>
+              <h3>How do I build a smarter SAT study plan?</h3>
+              <button type="button" data-prompt="How do I build a smarter SAT study plan?">Ask PeakPal <span aria-hidden="true">›</span></button>
+            </article>
+            <article class="prompt-card prompt-cyan">
+              <span class="prompt-icon" aria-hidden="true">?</span>
+              <h3>What are the fastest ways to improve algebra?</h3>
+              <button type="button" data-prompt="What are the fastest ways to improve algebra?">Ask PeakPal <span aria-hidden="true">›</span></button>
+            </article>
+            <article class="prompt-card prompt-green">
+              <span class="prompt-icon" aria-hidden="true">?</span>
+              <h3>How can I improve reading comprehension?</h3>
+              <button type="button" data-prompt="How can I improve reading comprehension?">Ask PeakPal <span aria-hidden="true">›</span></button>
+            </article>
+            <article class="prompt-card prompt-sky">
+              <span class="prompt-icon" aria-hidden="true">?</span>
+              <h3>What should I review before a practice test?</h3>
+              <button type="button" data-prompt="What should I review before a practice test?">Ask PeakPal <span aria-hidden="true">›</span></button>
+            </article>
+          </div>
+        </section>
+
+        <section class="peakpal-section" aria-labelledby="topics-title">
+          <h2 id="topics-title">Common topics</h2>
+          <div class="topic-cloud">
+            <button type="button" data-prompt="Give me a quick SAT overview.">SAT Overview</button>
+            <button type="button" data-prompt="Help me practice quadratic equations.">Quadratic Equations</button>
+            <button type="button" data-prompt="Give me a focused math practice plan.">Math Practice</button>
+            <button type="button" data-prompt="Explain the most important grammar rules.">Grammar Rules</button>
+            <button type="button" data-prompt="Give me reading strategies for the digital SAT.">Reading Strategies</button>
+            <button type="button" data-prompt="Give me writing tips for SAT questions.">Writing Tips</button>
+            <button type="button" data-prompt="Help me build SAT vocabulary.">Vocabulary Building</button>
+            <button type="button" data-prompt="Help me prepare for my next SAT.">Exam Preparation</button>
+            <button type="button" data-prompt="Give me study tips for this week.">Study Tips</button>
+            <button type="button" data-prompt="Give me test-taking strategies.">Test-Taking Strategies</button>
+            <button type="button" data-prompt="Help me manage timing on the SAT.">Time Management</button>
+            <button type="button" data-prompt="Help me use the resource library effectively.">Resource Library</button>
+          </div>
+        </section>
+
+        <section class="conversation-panel" id="conversation-panel" aria-live="polite" aria-label="PeakPal conversation"></section>
+      </div>
+
+      <form class="peakpal-composer" id="peakpal-form">
+        <div class="composer-note">
+          <span class="chat-bubble-icon" aria-hidden="true">?</span>
+          <strong>PeakPal is ready for study planning, SAT concepts, and resource guidance.</strong>
+        </div>
+        <label class="composer-box" for="peakpal-input">
+          <span class="sr-only">Message PeakPal</span>
+          <textarea id="peakpal-input" rows="1" placeholder="Type your message here..."></textarea>
+          <button type="submit" aria-label="Send message">↑</button>
+        </label>
+        <p>PeakPal can make mistakes. Check important answers and explanations.</p>
+      </form>
+    </section>
+  </div>
+</main>
+
+<script src="vendor/supabase.js"></script>
+<script src="supabase-config.js"></script>
+<script src="auth.js"></script>
+<script src="sidebar.js"></script>
+<script src="peakpal.js"></script>
+</body>
+</html>
