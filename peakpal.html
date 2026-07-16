@@ -17,10 +17,6 @@
 <body class="dashboard-screen peakpal-screen">
 
 <aside class="prep-sidebar" id="app-sidebar" aria-label="PeakPoint sidebar">
-  <button class="sidebar-toggle" id="sidebar-toggle" type="button" aria-controls="app-sidebar" aria-expanded="true" aria-label="Hide sidebar">
-    <span data-sidebar-toggle-icon aria-hidden="true">‹</span>
-  </button>
-
   <div>
     <a class="side-brand" href="dashboard.html" aria-label="PeakPoint home">
       <img src="logo.svg" alt="" width="36" height="36" />
@@ -28,6 +24,11 @@
     </a>
 
     <nav class="side-nav" aria-label="Dashboard navigation">
+      <button class="side-item sidebar-toggle" id="sidebar-toggle" type="button" aria-controls="app-sidebar" aria-expanded="true" aria-label="Hide sidebar">
+        <span class="side-icon toggle-sidebar-icon" aria-hidden="true"></span>
+        <span data-sidebar-toggle-label>Hide sidebar</span>
+        <span class="toggle-arrow" data-sidebar-toggle-icon aria-hidden="true">‹</span>
+      </button>
       <a class="side-item" href="dashboard.html"><span class="side-icon home-icon"></span><span>Home</span></a>
       <a class="side-item" href="resources.html"><span class="side-icon resources-icon"></span><span>Resources</span></a>
       <a class="side-item active" href="peakpal.html" aria-current="page"><span class="side-icon ai-icon"></span><span>PeakPal</span></a>
