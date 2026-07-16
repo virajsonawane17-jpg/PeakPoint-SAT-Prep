@@ -25,6 +25,10 @@
     linear-gradient(180deg, #fff 0%, var(--bg-primary) 42%);
 }
 
+.peakpal-screen.sidebar-collapsed .peakpal-main {
+  margin-left: 58px;
+}
+
 .peakpal-shell {
   min-height: 100vh;
   display: grid;
