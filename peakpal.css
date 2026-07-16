@@ -28,29 +28,29 @@
 .peakpal-shell {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 286px minmax(0, 1fr);
+  grid-template-columns: 246px minmax(0, 1fr);
 }
 
 .peakpal-chat-rail {
   border-right: 1px solid var(--border-default);
   background: rgba(255, 255, 255, 0.74);
-  padding: 34px 22px;
+  padding: 28px 18px;
 }
 
 .peakpal-mark {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
   color: var(--text-heading);
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: 1.12rem;
   font-weight: 800;
 }
 
 .peakpal-mark img {
-  width: 38px;
-  height: 38px;
+  width: 34px;
+  height: 34px;
   border-radius: 14px;
   background: var(--surface-2);
   padding: 6px;
@@ -58,7 +58,7 @@
 
 .new-chat-button {
   width: 100%;
-  min-height: 54px;
+  min-height: 46px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -68,14 +68,14 @@
   border: 1.5px solid var(--accent-soft);
   color: var(--accent-deep);
   font-family: var(--font-display);
-  font-size: 0.96rem;
+  font-size: 0.86rem;
   font-weight: 700;
   box-shadow: inset 0 -3px 0 var(--surface-2), var(--card-shadow);
 }
 
 .chat-bubble-icon {
-  width: 26px;
-  height: 26px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
@@ -85,15 +85,15 @@
   border: 1.5px solid var(--accent-soft);
   font-family: var(--font-display);
   font-weight: 800;
-  flex: 0 0 26px;
+  flex: 0 0 22px;
 }
 
 .chat-list-block {
-  margin-top: 38px;
+  margin-top: 30px;
 }
 
 .chat-list-block h2 {
-  font-size: 1.18rem;
+  font-size: 1.05rem;
   margin-bottom: 12px;
 }
 
@@ -113,47 +113,50 @@
 .peakpal-content {
   flex: 1;
   overflow-y: auto;
-  padding: 44px clamp(28px, 5vw, 70px) 260px;
+  padding: 32px 48px 210px;
 }
 
 .peakpal-hero {
-  max-width: 920px;
-  margin-bottom: 34px;
+  max-width: 760px;
+  margin-bottom: 26px;
 }
 
 .peakpal-hero .eyebrow {
   color: var(--accent);
-  margin-bottom: 12px;
+  font-size: 0.78rem;
+  margin-bottom: 10px;
 }
 
 .peakpal-hero h1 {
-  font-size: clamp(2.25rem, 5vw, 4rem);
+  font-size: 2.65rem;
+  line-height: 1.12;
   letter-spacing: 0;
   color: var(--text-heading);
 }
 
 .peakpal-section {
-  max-width: 1180px;
-  margin-bottom: 34px;
+  max-width: 980px;
+  margin-bottom: 28px;
 }
 
 .peakpal-section h2 {
-  font-size: 1.55rem;
-  margin-bottom: 18px;
+  font-size: 1.34rem;
+  margin-bottom: 14px;
 }
 
 .prompt-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 18px;
+  gap: 14px;
+  max-width: 960px;
 }
 
 .prompt-card {
   position: relative;
-  min-height: 268px;
-  border-radius: 20px;
+  min-height: 214px;
+  border-radius: 18px;
   border: 1px solid var(--border-soft);
-  padding: 26px 24px 22px;
+  padding: 20px 18px 18px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -165,10 +168,10 @@
   content: "";
   position: absolute;
   inset: -48px -38px auto auto;
-  width: 210px;
-  height: 210px;
+  width: 170px;
+  height: 170px;
   border-radius: 48%;
-  border: 28px solid rgba(255, 255, 255, 0.42);
+  border: 22px solid rgba(255, 255, 255, 0.42);
   transform: rotate(16deg);
 }
 
@@ -176,10 +179,10 @@
   content: "";
   position: absolute;
   inset: auto auto -58px -42px;
-  width: 180px;
-  height: 180px;
+  width: 145px;
+  height: 145px;
   border-radius: 42%;
-  border: 20px solid rgba(255, 255, 255, 0.32);
+  border: 16px solid rgba(255, 255, 255, 0.32);
   transform: rotate(-24deg);
 }
 
@@ -191,8 +194,8 @@
 .prompt-icon {
   position: relative;
   z-index: 1;
-  width: 58px;
-  height: 58px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
@@ -201,56 +204,57 @@
   color: var(--accent-deep);
   border: 1px solid var(--border-soft);
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: 1.05rem;
   font-weight: 800;
 }
 
 .prompt-card h3 {
   position: relative;
   z-index: 1;
-  font-size: 1.22rem;
-  line-height: 1.42;
+  font-size: 1.02rem;
+  line-height: 1.36;
   color: var(--text-heading);
 }
 
 .prompt-card button {
   position: relative;
   z-index: 1;
-  min-height: 48px;
+  min-height: 42px;
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 0 16px 0 20px;
+  padding: 0 14px 0 16px;
   background: var(--accent);
   color: #fff;
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  font-size: 0.86rem;
   font-weight: 700;
   box-shadow: inset 0 -4px 0 var(--accent-deep);
 }
 
 .prompt-card button span {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   line-height: 1;
 }
 
 .topic-cloud {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px 14px;
+  gap: 10px 12px;
+  max-width: 960px;
 }
 
 .topic-cloud button {
-  min-height: 46px;
+  min-height: 38px;
   border-radius: 999px;
-  padding: 0 22px;
+  padding: 0 17px;
   background: #fff;
   border: 1.5px solid var(--accent-soft);
   color: var(--text-heading);
   font-family: var(--font-display);
-  font-size: 0.92rem;
+  font-size: 0.82rem;
   font-weight: 700;
   box-shadow: inset 0 -3px 0 var(--surface-2), var(--card-shadow);
 }
@@ -264,7 +268,7 @@
 }
 
 .conversation-panel {
-  max-width: 940px;
+  max-width: 840px;
   display: grid;
   gap: 14px;
 }
@@ -298,12 +302,12 @@
   bottom: 0;
   border-top: 1px solid var(--border-default);
   background: rgba(240, 249, 255, 0.94);
-  padding: 0 clamp(28px, 5vw, 70px) 28px;
+  padding: 0 48px 22px;
   backdrop-filter: blur(14px);
 }
 
 .composer-note {
-  min-height: 58px;
+  min-height: 48px;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -312,16 +316,16 @@
 }
 
 .composer-box {
-  min-height: 76px;
+  min-height: 62px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 54px;
-  gap: 14px;
+  grid-template-columns: minmax(0, 1fr) 46px;
+  gap: 10px;
   align-items: center;
-  border-radius: 22px;
+  border-radius: 18px;
   background: #fff;
   border: 1.5px solid var(--accent-soft);
   box-shadow: var(--card-shadow);
-  padding: 12px 12px 12px 18px;
+  padding: 8px 8px 8px 16px;
 }
 
 .composer-box textarea {
@@ -332,7 +336,7 @@
   outline: 0;
   color: var(--text-primary);
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: 0.94rem;
   line-height: 1.45;
 }
 
@@ -341,25 +345,25 @@
 }
 
 .composer-box button {
-  width: 54px;
-  height: 54px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   background: var(--accent);
   color: #fff;
-  font-size: 1.6rem;
+  font-size: 1.35rem;
   font-weight: 800;
   box-shadow: inset 0 -4px 0 var(--accent-deep);
 }
 
 .peakpal-composer p {
-  margin-top: 10px;
+  margin-top: 8px;
   color: var(--text-secondary);
   font-size: 0.84rem;
 }
 
 @media (max-width: 1180px) {
   .peakpal-shell {
-    grid-template-columns: 240px minmax(0, 1fr);
+    grid-template-columns: 220px minmax(0, 1fr);
   }
 
   .prompt-grid {
@@ -381,11 +385,11 @@
   }
 
   .peakpal-content {
-    padding: 34px 20px 230px;
+    padding: 30px 20px 200px;
   }
 
   .peakpal-composer {
-    padding: 0 20px 22px;
+    padding: 0 20px 20px;
   }
 }
 
@@ -395,7 +399,11 @@
   }
 
   .prompt-card {
-    min-height: 236px;
+    min-height: 198px;
+  }
+
+  .peakpal-hero h1 {
+    font-size: 2.1rem;
   }
 
   .composer-note {
