@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0ea5e9" />
+<meta name="description" content="PeakPoint SAT vocabulary practice." />
+<title>Vocabulary Practice — PeakPoint SAT Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="app.css" />
+<link rel="stylesheet" href="vocab.css" />
+<link rel="icon" href="logo.svg" />
+</head>
+<body class="dashboard-screen vocab-screen">
+
+<aside class="prep-sidebar" id="app-sidebar" aria-label="PeakPoint sidebar">
+  <div>
+    <a class="side-brand" href="dashboard.html" aria-label="PeakPoint home">
+      <img src="logo.svg" alt="" width="36" height="36" />
+      <span>PeakPoint</span>
+    </a>
+
+    <nav class="side-nav" aria-label="Dashboard navigation">
+      <button class="side-item sidebar-toggle" id="sidebar-toggle" type="button" aria-controls="app-sidebar" aria-expanded="true" aria-label="Hide sidebar">
+        <span class="side-icon toggle-sidebar-icon" aria-hidden="true"></span>
+        <span data-sidebar-toggle-label>Hide sidebar</span>
+        <span class="toggle-arrow" data-sidebar-toggle-icon aria-hidden="true">‹</span>
+      </button>
+      <a class="side-item" href="dashboard.html"><span class="side-icon home-icon"></span><span>Home</span></a>
+      <a class="side-item" href="resources.html"><span class="side-icon resources-icon"></span><span>Resources</span></a>
+      <a class="side-item" href="peakpal.html"><span class="side-icon ai-icon"></span><span>PeakPal</span></a>
+      <button class="side-item" type="button"><span class="side-icon planner-icon"></span><span>Study Planner</span></button>
+      <button class="side-item" type="button"><span class="side-icon bars-icon"></span><span>Analytics</span></button>
+
+      <span class="side-heading">Practice</span>
+      <button class="side-item" type="button"><span class="side-icon bank-icon"></span><span>Question Bank</span></button>
+      <button class="side-item" type="button"><span class="side-icon rush-icon"></span><span>Question Rush</span></button>
+      <button class="side-item" type="button"><span class="side-icon challenge-icon"></span><span>Challenge Questions</span></button>
+      <button class="side-item" type="button"><span class="side-icon tests-icon"></span><span>Predicted Tests</span></button>
+      <a class="side-item active" href="vocab.html" aria-current="page"><span class="side-icon vocab-icon"></span><span>Vocab</span></a>
+
+      <span class="side-heading">Progress</span>
+      <button class="side-item" type="button"><span class="side-icon saved-icon"></span><span>Saved</span></button>
+      <button class="side-item" type="button"><span class="side-icon error-icon"></span><span>Mistakes Log</span></button>
+    </nav>
+  </div>
+
+  <div class="side-footer">
+    <div class="user-row">
+      <div class="user-avatar" aria-hidden="true"></div>
+      <strong id="side-user-name">Student</strong>
+      <button class="gear-button" type="button" aria-label="Settings"></button>
+    </div>
+  </div>
+</aside>
+
+<main class="prep-main vocab-main">
+  <div class="vocab-inner">
+    <header class="vocab-header">
+      <div>
+        <p class="eyebrow">SAT word mastery</p>
+        <h1><span class="vocab-title-icon" aria-hidden="true"></span> Vocabulary Practice</h1>
+      </div>
+      <button class="vocab-options" type="button">Options</button>
+    </header>
+
+    <div class="vocab-tabs" role="tablist" aria-label="Vocabulary views">
+      <button class="vocab-tab active" type="button" role="tab" aria-selected="true" data-vocab-tab="explore">
+        Explore <span>New</span>
+      </button>
+      <button class="vocab-tab" type="button" role="tab" aria-selected="false" data-vocab-tab="library">Library</button>
+    </div>
+
+    <section class="vocab-panel active" id="vocab-explore" data-vocab-panel="explore">
+      <div class="vocab-mode-grid">
+        <article class="vocab-mode-card">
+          <div>
+            <h2>Learn Mode</h2>
+            <p>Work through 10 SAT-style vocab questions with words you have not mastered yet.</p>
+          </div>
+          <button type="button">Start <span aria-hidden="true">›</span></button>
+          <span class="mode-art learn-art" aria-hidden="true"></span>
+        </article>
+
+        <article class="vocab-mode-card">
+          <div>
+            <h2>Match</h2>
+            <p>Play a quick matching game. Pair words with definitions against the clock.</p>
+          </div>
+          <button type="button">Start <span aria-hidden="true">›</span></button>
+          <span class="mode-art match-art" aria-hidden="true"></span>
+        </article>
+
+        <article class="vocab-mode-card">
+          <div>
+            <h2>Flashcards</h2>
+            <p>Review definitions, sentence context, roots, and common traps for SAT vocabulary.</p>
+          </div>
+          <button type="button">Start <span aria-hidden="true">›</span></button>
+          <span class="mode-art card-art" aria-hidden="true"></span>
+        </article>
+      </div>
+
+      <article class="vocab-bank-card">
+        <div>
+          <h2>Create your own vocab bank</h2>
+          <p>Build a custom list of tricky words to practice and track. Add class words, reading words, or missed SAT terms.</p>
+        </div>
+        <button type="button">Create <span aria-hidden="true">›</span></button>
+      </article>
+    </section>
+
+    <section class="vocab-panel" id="vocab-library" data-vocab-panel="library">
+      <div class="vocab-toolbar">
+        <label class="vocab-search">
+          <span class="sr-only">Search vocabulary words</span>
+          <input id="vocab-search" type="search" placeholder="Search words..." autocomplete="off" />
+        </label>
+        <button class="vocab-filter" type="button"><span class="filter-bars" aria-hidden="true"></span> Difficulty <span aria-hidden="true">⌄</span></button>
+        <button class="vocab-filter" type="button"><span class="filter-progress" aria-hidden="true"></span> Progress <span aria-hidden="true">⌄</span></button>
+        <button class="vocab-filter" type="button"><span class="filter-grid" aria-hidden="true"></span> View <span aria-hidden="true">⌄</span></button>
+        <button class="start-practice" type="button"><span aria-hidden="true">▶</span> Start Practice</button>
+      </div>
+
+      <div class="word-grid" id="word-grid" aria-live="polite"></div>
+      <p class="word-empty" id="word-empty">No words match that search.</p>
+    </section>
+  </div>
+</main>
+
+<script src="vendor/supabase.js"></script>
+<script src="supabase-config.js"></script>
+<script src="auth.js"></script>
+<script src="sidebar.js"></script>
+<script src="vocab.js"></script>
+</body>
+</html>
