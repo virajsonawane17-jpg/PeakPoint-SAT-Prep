@@ -162,7 +162,7 @@
   overflow-x: hidden;
 }
 
-.dashboard-screen:not(.resources-screen):not(.peakpal-screen):not(.vocab-screen):not(.analytics-screen):not(.study-planner-screen) .prep-main button,
+.dashboard-screen:not(.resources-screen):not(.peakpal-screen):not(.vocab-screen):not(.analytics-screen):not(.study-planner-screen):not(.peakpoint-style-screen) .prep-main button,
 .dashboard-screen .prep-sidebar button {
   cursor: default;
 }

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0ea5e9" />
+<meta name="description" content="PeakPoint Style hard SAT-style question bank." />
+<title>PeakPoint Style - PeakPoint SAT Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="app.css" />
+<link rel="stylesheet" href="peakpoint-style.css" />
+<link rel="icon" href="logo.svg" />
+</head>
+<body class="dashboard-screen peakpoint-style-screen">
+
+<aside class="prep-sidebar" id="app-sidebar" aria-label="PeakPoint sidebar">
+  <div>
+    <a class="side-brand" href="dashboard.html" aria-label="PeakPoint home">
+      <img src="logo.svg" alt="" width="36" height="36" />
+      <span>PeakPoint</span>
+    </a>
+
+    <nav class="side-nav" aria-label="Dashboard navigation">
+      <button class="side-item sidebar-toggle" id="sidebar-toggle" type="button" aria-controls="app-sidebar" aria-expanded="true" aria-label="Hide sidebar">
+        <span class="side-icon toggle-sidebar-icon" aria-hidden="true"></span>
+        <span data-sidebar-toggle-label>Hide sidebar</span>
+        <span class="toggle-arrow" data-sidebar-toggle-icon aria-hidden="true">&lsaquo;</span>
+      </button>
+      <a class="side-item" href="dashboard.html"><span class="side-icon home-icon"></span><span>Home</span></a>
+      <a class="side-item" href="resources.html"><span class="side-icon resources-icon"></span><span>Resources</span></a>
+      <a class="side-item" href="peakpal.html"><span class="side-icon ai-icon"></span><span>PeakPal</span></a>
+      <a class="side-item" href="study-planner.html"><span class="side-icon planner-icon"></span><span>Study Planner</span></a>
+      <a class="side-item" href="analytics.html"><span class="side-icon bars-icon"></span><span>Analytics</span></a>
+
+      <span class="side-heading">Practice</span>
+      <button class="side-item" type="button"><span class="side-icon bank-icon"></span><span>Question Bank</span></button>
+      <button class="side-item" type="button"><span class="side-icon rush-icon"></span><span>Question Rush</span></button>
+      <a class="side-item active" href="peakpoint-style.html" aria-current="page"><span class="side-icon challenge-icon"></span><span>PeakPoint Style</span></a>
+      <button class="side-item" type="button"><span class="side-icon tests-icon"></span><span>Predicted Tests</span></button>
+      <a class="side-item" href="vocab.html"><span class="side-icon vocab-icon"></span><span>Vocab</span></a>
+
+      <span class="side-heading">Progress</span>
+      <button class="side-item" type="button"><span class="side-icon saved-icon"></span><span>Saved</span></button>
+      <button class="side-item" type="button"><span class="side-icon error-icon"></span><span>Mistakes Log</span></button>
+    </nav>
+  </div>
+
+  <div class="side-footer">
+    <div class="user-row">
+      <div class="user-avatar" aria-hidden="true"></div>
+      <strong id="side-user-name">Student</strong>
+      <button class="gear-button" type="button" aria-label="Settings"></button>
+    </div>
+  </div>
+</aside>
+
+<main class="prep-main peak-style-main">
+  <div class="peak-style-inner">
+    <header class="peak-style-hero">
+      <div>
+        <p class="eyebrow">Hard SAT-style practice</p>
+        <h1>PeakPoint Style</h1>
+        <p>Work through hard-level PeakPoint questions by SAT domain. Every topic below is filtered from the hard question bank only.</p>
+      </div>
+      <article class="peak-style-summary" aria-label="Hard question bank summary">
+        <span>Question bank filter</span>
+        <strong>Hard only</strong>
+        <p><span id="hard-question-count">0</span> original SAT-style prompts across Reading &amp; Writing and Math.</p>
+      </article>
+    </header>
+
+    <section class="peak-style-toolbar" aria-label="PeakPoint Style filters">
+      <div class="subject-tabs" role="tablist" aria-label="Question subjects">
+        <button class="active" type="button" data-subject-filter="all" aria-pressed="true">All</button>
+        <button type="button" data-subject-filter="Reading & Writing" aria-pressed="false">Reading &amp; Writing</button>
+        <button type="button" data-subject-filter="Math" aria-pressed="false">Math</button>
+      </div>
+      <label class="peak-style-search">
+        <span class="sr-only">Search hard question topics</span>
+        <input id="topic-search" type="search" placeholder="Search topic or domain..." autocomplete="off" />
+      </label>
+    </section>
+
+    <div class="hard-only-note" role="status">
+      <span aria-hidden="true">!</span>
+      <p>Only questions marked <strong>Hard</strong> are rendered here. Easy and medium bank items stay hidden from this page.</p>
+    </div>
+
+    <section class="topic-section" data-subject-section="Reading & Writing" aria-labelledby="rw-topic-title">
+      <div class="topic-heading">
+        <div>
+          <span class="card-kicker">Reading &amp; Writing</span>
+          <h2 id="rw-topic-title">Hard Reading &amp; Writing topics</h2>
+        </div>
+        <span class="topic-count" data-section-count="Reading & Writing">0 topics</span>
+      </div>
+      <div class="topic-grid" id="rw-topic-grid"></div>
+    </section>
+
+    <section class="topic-section" data-subject-section="Math" aria-labelledby="math-topic-title">
+      <div class="topic-heading">
+        <div>
+          <span class="card-kicker">Math</span>
+          <h2 id="math-topic-title">Hard Math topics</h2>
+        </div>
+        <span class="topic-count" data-section-count="Math">0 topics</span>
+      </div>
+      <div class="topic-grid" id="math-topic-grid"></div>
+    </section>
+
+    <section class="hard-bank-panel" aria-labelledby="hard-bank-title">
+      <div class="hard-bank-head">
+        <div>
+          <span class="card-kicker">Hard question bank</span>
+          <h2 id="hard-bank-title">All hard questions</h2>
+        </div>
+        <span class="selected-topic-pill" id="selected-topic-pill">Hard only</span>
+      </div>
+      <div class="hard-question-list" id="hard-question-list"></div>
+      <p class="empty-bank" id="empty-bank">No hard questions match that filter.</p>
+    </section>
+  </div>
+</main>
+
+<script src="vendor/supabase.js"></script>
+<script src="supabase-config.js"></script>
+<script src="auth.js"></script>
+<script src="sidebar.js"></script>
+<script src="peakpoint-style.js"></script>
+</body>
+</html>
