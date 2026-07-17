@@ -40,38 +40,10 @@
     { id: 'math-circles', subject: 'Math', skill: 'Circles', domain: 'Geometry and Trigonometry', progress: 0, total: 5 }
   ];
 
-  const questionBank = topics.map((topic, index) => ({
-    id: `${topic.id}-hard-${index + 1}`,
-    topicId: topic.id,
-    subject: topic.subject,
-    domain: topic.domain,
-    skill: topic.skill,
-    difficulty: 'Hard',
-    type: topic.subject === 'Math' ? 'Student-produced response or multiple choice' : 'Reading & Writing multiple choice',
-    estimatedTime: topic.subject === 'Math' ? '2:10' : '1:35',
-    prompt: makePrompt(topic)
-  }));
-
   let selectedSubject = 'all';
   let selectedTopic = null;
 
-  const hardQuestions = questionBank.filter((question) => question.difficulty === 'Hard');
-  const hardQuestionCount = document.getElementById('hard-question-count');
   const topicSearch = document.getElementById('topic-search');
-  const questionList = document.getElementById('hard-question-list');
-  const emptyBank = document.getElementById('empty-bank');
-  const selectedTopicPill = document.getElementById('selected-topic-pill');
-  const bankTitle = document.getElementById('hard-bank-title');
-
-  if (hardQuestionCount) hardQuestionCount.textContent = String(hardQuestions.length);
-
-  function makePrompt(topic) {
-    const templates = {
-      'Reading & Writing': `Hard SAT-style drill: analyze a dense passage and choose the answer that best targets ${topic.skill.toLowerCase()} without relying on surface wording.`,
-      Math: `Hard SAT-style drill: solve a multi-step ${topic.skill.toLowerCase()} problem using structure, accuracy, and efficient setup.`
-    };
-    return templates[topic.subject];
-  }
 
   function topicMatches(topic, searchValue) {
     const haystack = `${topic.subject} ${topic.domain} ${topic.skill}`.toLowerCase();
@@ -86,10 +58,6 @@
     });
   }
 
-  function topicQuestionCount(topicId) {
-    return hardQuestions.filter((question) => question.topicId === topicId).length;
-  }
-
   function renderTopicCard(topic) {
     const percent = topic.total ? Math.round((topic.progress / topic.total) * 100) : 0;
     const active = selectedTopic === topic.id ? ' is-active' : '';
@@ -100,7 +68,7 @@
           <p>${topic.domain}</p>
           <div class="topic-meta">
             <span>${topic.progress}/${topic.total} complete</span>
-            <span>${topicQuestionCount(topic.id)} hard question</span>
+            <span>Hard only</span>
           </div>
           <button type="button" data-open-topic="${topic.id}">Open <span aria-hidden="true">&gt;</span></button>
         </div>
@@ -137,42 +105,8 @@
       button.addEventListener('click', () => {
         selectedTopic = button.dataset.openTopic;
         renderTopics();
-        renderQuestions();
-        document.querySelector('.hard-bank-panel')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
-  }
-
-  function filteredQuestions() {
-    return hardQuestions.filter((question) => {
-      const subjectMatch = selectedSubject === 'all' || question.subject === selectedSubject;
-      const topicMatch = !selectedTopic || question.topicId === selectedTopic;
-      return subjectMatch && topicMatch;
-    });
-  }
-
-  function renderQuestions() {
-    const questions = filteredQuestions();
-    const topic = topics.find((item) => item.id === selectedTopic);
-
-    if (bankTitle) bankTitle.textContent = topic ? topic.skill : 'All hard questions';
-    if (selectedTopicPill) selectedTopicPill.textContent = topic ? `${topic.domain} - Hard` : 'Hard only';
-    if (emptyBank) emptyBank.classList.toggle('show', questions.length === 0);
-    if (!questionList) return;
-
-    questionList.innerHTML = questions.map((question) => `
-      <article class="question-card">
-        <span class="card-kicker">${question.subject}</span>
-        <h3>${question.skill}</h3>
-        <p>${question.prompt}</p>
-        <footer>
-          <span class="question-chip hard">${question.difficulty}</span>
-          <span class="question-chip">${question.domain}</span>
-          <span class="question-chip">${question.estimatedTime}</span>
-          <span class="question-chip">${question.type}</span>
-        </footer>
-      </article>
-    `).join('');
   }
 
   document.querySelectorAll('[data-subject-filter]').forEach((button) => {
@@ -185,7 +119,6 @@
         item.setAttribute('aria-pressed', String(active));
       });
       renderTopics();
-      renderQuestions();
     });
   });
 
@@ -193,10 +126,8 @@
     topicSearch.addEventListener('input', () => {
       selectedTopic = null;
       renderTopics();
-      renderQuestions();
     });
   }
 
   renderTopics();
-  renderQuestions();
 })();
