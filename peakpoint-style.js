@@ -1,5 +1,5 @@
 /* ============================================
-   PEAKPOINT SAT PREP - PeakPoint Style
+   PEAKPOINT SAT PREP - PeakPoint Max
    Hard-only SAT-style question bank preview.
    ============================================ */
 
