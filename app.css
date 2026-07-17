@@ -162,7 +162,7 @@
   overflow-x: hidden;
 }
 
-.dashboard-screen:not(.resources-screen):not(.peakpal-screen):not(.vocab-screen) .prep-main button,
+.dashboard-screen:not(.resources-screen):not(.peakpal-screen):not(.vocab-screen):not(.analytics-screen) .prep-main button,
 .dashboard-screen .prep-sidebar button {
   cursor: default;
 }
@@ -814,6 +814,7 @@
 .cyan-button,
 .promo-card button,
 .section-title-row button,
+.section-title-row a,
 .countdown-card button,
 .metric-card button,
 .score-card button {
@@ -1001,8 +1002,11 @@
   gap: 10px;
 }
 
-.section-title-row button {
+.section-title-row button,
+.section-title-row a {
   min-height: 38px;
+  display: inline-flex;
+  align-items: center;
   border-radius: 13px;
   border: 1px solid var(--dash-border);
   background: #fff;

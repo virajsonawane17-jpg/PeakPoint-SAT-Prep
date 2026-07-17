@@ -1,0 +1,446 @@
+/* ============================================
+   PEAKPOINT SAT PREP — Analytics
+   ============================================ */
+
+.analytics-screen {
+  background:
+    radial-gradient(circle at 86% 8%, rgba(14, 165, 233, 0.12), transparent 32%),
+    linear-gradient(180deg, #ffffff 0, var(--bg-primary) 340px);
+}
+
+.analytics-main {
+  background: transparent;
+}
+
+.analytics-screen.sidebar-collapsed .analytics-main {
+  margin-left: 58px;
+}
+
+.analytics-inner {
+  width: min(1160px, calc(100% - 56px));
+  margin: 0 auto;
+  padding: 48px 0 84px;
+}
+
+.analytics-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 310px;
+  gap: 28px;
+  align-items: end;
+  margin-bottom: 32px;
+}
+
+.analytics-hero .eyebrow {
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.analytics-hero h1 {
+  font-size: clamp(2.1rem, 5vw, 3.8rem);
+  letter-spacing: 0;
+}
+
+.analytics-hero p {
+  max-width: 680px;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.65;
+  margin-top: 12px;
+}
+
+.analytics-update-card,
+.analytics-card {
+  border: 1px solid var(--border-soft);
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: var(--card-shadow);
+}
+
+.analytics-update-card {
+  padding: 24px;
+  min-height: 150px;
+}
+
+.analytics-update-card span,
+.card-kicker {
+  display: block;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.analytics-update-card strong {
+  display: block;
+  color: var(--text-heading);
+  font-size: 1.55rem;
+  margin-top: 7px;
+}
+
+.analytics-update-card p {
+  margin-top: 14px;
+  color: var(--accent-deep);
+  font-weight: 700;
+}
+
+.analytics-overview .analytics-grid {
+  margin-bottom: 28px;
+}
+
+.analytics-layout,
+.analytics-bottom-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(340px, 0.85fr);
+  gap: 22px;
+  margin-bottom: 28px;
+}
+
+.analytics-layout-wide {
+  grid-template-columns: minmax(0, 1fr) 420px;
+}
+
+.analytics-card {
+  padding: 26px;
+  overflow: hidden;
+}
+
+.analytics-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.analytics-card h2 {
+  margin-top: 6px;
+  font-size: 1.35rem;
+}
+
+.score-snapshot {
+  min-height: 330px;
+}
+
+.score-snapshot .analytics-card-head h2 {
+  font-size: clamp(2.7rem, 6vw, 4.4rem);
+  line-height: 0.95;
+  font-weight: 700;
+}
+
+.trend-pill {
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--accent-deep);
+  padding: 0 12px;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.score-split {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.score-split div {
+  border-radius: 16px;
+  background: var(--surface-2);
+  padding: 15px;
+  min-width: 0;
+}
+
+.score-split span,
+.bar-row span,
+.review-list span,
+.practice-mix li {
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.score-split strong {
+  display: block;
+  color: var(--text-heading);
+  font-size: 1.55rem;
+  line-height: 1;
+  margin-top: 8px;
+}
+
+.score-path {
+  position: relative;
+  height: 86px;
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, transparent 0 24%, rgba(3, 105, 161, 0.08) 24% 25%, transparent 25% 49%, rgba(3, 105, 161, 0.08) 49% 50%, transparent 50% 74%, rgba(3, 105, 161, 0.08) 74% 75%, transparent 75%),
+    var(--bg-primary);
+}
+
+.score-path::before {
+  content: "";
+  position: absolute;
+  left: 9%;
+  right: 9%;
+  top: 55%;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent-soft), var(--accent));
+  transform: rotate(-8deg);
+}
+
+.score-path span {
+  position: absolute;
+  top: var(--point-y);
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid #fff;
+  box-shadow: 0 8px 18px -8px var(--glow);
+}
+
+.score-path span:nth-child(1) { left: 9%; }
+.score-path span:nth-child(2) { left: 29%; }
+.score-path span:nth-child(3) { left: 49%; }
+.score-path span:nth-child(4) { left: 69%; }
+.score-path span:nth-child(5) { left: 89%; }
+
+.bar-list {
+  display: grid;
+  gap: 18px;
+}
+
+.bar-row div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.bar-row strong {
+  color: var(--text-heading);
+}
+
+.bar-row i {
+  display: block;
+  height: 13px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.bar-row i::before {
+  content: "";
+  display: block;
+  width: var(--bar-width);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent), var(--accent-deep));
+}
+
+.analytics-study-time {
+  margin-bottom: 28px;
+}
+
+.analytics-study-time .study-time-heading h2 {
+  font-size: 1.65rem;
+}
+
+.analytics-study-plot .study-bar {
+  right: 5%;
+}
+
+.analytics-study-plot .study-bar[data-index] {
+  right: auto;
+  left: var(--bar-left);
+}
+
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.skill-tile {
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  background: var(--bg-primary);
+  padding: 18px;
+}
+
+.skill-tile span {
+  display: block;
+  color: var(--text-secondary);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.skill-tile strong {
+  color: var(--text-heading);
+  font-size: 1.75rem;
+}
+
+.skill-tile i {
+  display: block;
+  height: 8px;
+  margin-top: 14px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-deep));
+  width: var(--skill-width, 86%);
+}
+
+.skill-tile.focus i {
+  background: linear-gradient(90deg, #f59e0b, var(--accent));
+}
+
+.skill-tile.strong i { --skill-width: 95%; }
+.skill-tile.steady i { --skill-width: 84%; }
+.skill-tile.focus i { --skill-width: 72%; }
+
+.practice-mix {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 22px;
+  align-items: center;
+}
+
+.mix-ring {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background:
+    conic-gradient(var(--accent) 0 42%, #22c55e 42% 80%, #f59e0b 80% 100%);
+  position: relative;
+}
+
+.mix-ring::after {
+  content: "";
+  position: absolute;
+  inset: 23px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--border-soft);
+}
+
+.practice-mix ul {
+  list-style: none;
+  display: grid;
+  gap: 14px;
+}
+
+.practice-mix li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.practice-mix li strong {
+  margin-left: auto;
+  color: var(--text-heading);
+}
+
+.mix-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.mix-dot.rw { background: #22c55e; }
+.mix-dot.vocab { background: #f59e0b; }
+
+.review-list,
+.action-stack {
+  display: grid;
+  gap: 12px;
+}
+
+.review-list div {
+  border-radius: 16px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-primary);
+  padding: 15px 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.review-list strong {
+  color: var(--text-heading);
+}
+
+.action-stack button {
+  min-height: 48px;
+  border-radius: 15px;
+  background: var(--surface-2);
+  color: var(--accent-deep);
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-align: left;
+  padding: 0 16px;
+  border: 1px solid var(--border-default);
+}
+
+.action-stack button:first-child {
+  background: var(--accent);
+  color: #fff;
+  border-color: rgba(3, 105, 161, 0.22);
+  box-shadow: inset 0 -4px 0 var(--accent-deep);
+}
+
+@media (max-width: 1180px) {
+  .analytics-layout,
+  .analytics-layout-wide,
+  .analytics-bottom-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 860px) {
+  .analytics-screen.sidebar-collapsed .analytics-main {
+    margin-left: 58px;
+  }
+
+  .analytics-inner {
+    width: calc(100% - 32px);
+    padding-top: 34px;
+  }
+
+  .analytics-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .analytics-update-card {
+    min-height: auto;
+  }
+
+  .score-split,
+  .skill-grid,
+  .practice-mix {
+    grid-template-columns: 1fr;
+  }
+
+  .practice-mix {
+    justify-items: start;
+  }
+}
+
+@media (max-width: 620px) {
+  .analytics-card {
+    padding: 22px;
+  }
+
+  .analytics-hero h1 {
+    font-size: 2.1rem;
+  }
+
+  .analytics-card-head,
+  .review-list div {
+    flex-direction: column;
+  }
+}
