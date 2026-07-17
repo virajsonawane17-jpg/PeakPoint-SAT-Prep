@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0ea5e9" />
+<meta name="description" content="PeakPoint SAT study planner preview." />
+<title>Study Planner — PeakPoint SAT Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="app.css" />
+<link rel="stylesheet" href="study-planner.css" />
+<link rel="icon" href="logo.svg" />
+</head>
+<body class="dashboard-screen study-planner-screen">
+
+<aside class="prep-sidebar" id="app-sidebar" aria-label="PeakPoint sidebar">
+  <div>
+    <a class="side-brand" href="dashboard.html" aria-label="PeakPoint home">
+      <img src="logo.svg" alt="" width="36" height="36" />
+      <span>PeakPoint</span>
+    </a>
+
+    <nav class="side-nav" aria-label="Dashboard navigation">
+      <button class="side-item sidebar-toggle" id="sidebar-toggle" type="button" aria-controls="app-sidebar" aria-expanded="true" aria-label="Hide sidebar">
+        <span class="side-icon toggle-sidebar-icon" aria-hidden="true"></span>
+        <span data-sidebar-toggle-label>Hide sidebar</span>
+        <span class="toggle-arrow" data-sidebar-toggle-icon aria-hidden="true">‹</span>
+      </button>
+      <a class="side-item" href="dashboard.html"><span class="side-icon home-icon"></span><span>Home</span></a>
+      <a class="side-item" href="resources.html"><span class="side-icon resources-icon"></span><span>Resources</span></a>
+      <a class="side-item" href="peakpal.html"><span class="side-icon ai-icon"></span><span>PeakPal</span></a>
+      <a class="side-item active" href="study-planner.html" aria-current="page"><span class="side-icon planner-icon"></span><span>Study Planner</span></a>
+      <a class="side-item" href="analytics.html"><span class="side-icon bars-icon"></span><span>Analytics</span></a>
+
+      <span class="side-heading">Practice</span>
+      <button class="side-item" type="button"><span class="side-icon bank-icon"></span><span>Question Bank</span></button>
+      <button class="side-item" type="button"><span class="side-icon rush-icon"></span><span>Question Rush</span></button>
+      <button class="side-item" type="button"><span class="side-icon challenge-icon"></span><span>Challenge Questions</span></button>
+      <button class="side-item" type="button"><span class="side-icon tests-icon"></span><span>Predicted Tests</span></button>
+      <a class="side-item" href="vocab.html"><span class="side-icon vocab-icon"></span><span>Vocab</span></a>
+
+      <span class="side-heading">Progress</span>
+      <button class="side-item" type="button"><span class="side-icon saved-icon"></span><span>Saved</span></button>
+      <button class="side-item" type="button"><span class="side-icon error-icon"></span><span>Mistakes Log</span></button>
+    </nav>
+  </div>
+
+  <div class="side-footer">
+    <div class="user-row">
+      <div class="user-avatar" aria-hidden="true"></div>
+      <strong id="side-user-name">Student</strong>
+      <button class="gear-button" type="button" aria-label="Settings"></button>
+    </div>
+  </div>
+</aside>
+
+<main class="prep-main planner-main">
+  <div class="planner-inner">
+    <header class="planner-hero">
+      <div>
+        <p class="eyebrow">SAT study rhythm</p>
+        <h1>Study Planner</h1>
+        <p>Build a week-by-week prep preview around your test date, goal score, score split, available time, and focus areas.</p>
+      </div>
+      <article class="planner-hero-card">
+        <span>Next milestone</span>
+        <strong id="planner-days">36 days</strong>
+        <p>Targeted prep before your SAT</p>
+      </article>
+    </header>
+
+    <section class="planner-setup-grid" aria-label="Study planner setup">
+      <article class="planner-card planner-form-card">
+        <div class="planner-card-head">
+          <div>
+            <span class="card-kicker">Plan inputs</span>
+            <h2>Your SAT profile</h2>
+          </div>
+          <span class="preview-pill">Preview only</span>
+        </div>
+
+        <form class="planner-form" id="planner-form">
+          <label>
+            <span>Test date</span>
+            <input id="test-date" type="date" value="2026-08-22" />
+          </label>
+          <label>
+            <span>Target score</span>
+            <input id="target-score" type="number" min="400" max="1600" step="10" value="1540" />
+          </label>
+          <label>
+            <span>Current score</span>
+            <input id="current-score" type="number" min="400" max="1600" step="10" value="1340" />
+          </label>
+          <label>
+            <span>Reading &amp; Writing</span>
+            <input id="rw-score" type="number" min="200" max="800" step="10" value="660" />
+          </label>
+          <label>
+            <span>Math</span>
+            <input id="math-score" type="number" min="200" max="800" step="10" value="680" />
+          </label>
+          <label>
+            <span>Daily study time</span>
+            <select id="daily-time">
+              <option value="30">30 minutes</option>
+              <option value="45" selected>45 minutes</option>
+              <option value="60">60 minutes</option>
+              <option value="90">90 minutes</option>
+            </select>
+          </label>
+
+          <fieldset class="planner-days">
+            <legend>Preferred days</legend>
+            <label><input type="checkbox" value="Mon" checked /> Mon</label>
+            <label><input type="checkbox" value="Tue" checked /> Tue</label>
+            <label><input type="checkbox" value="Wed" /> Wed</label>
+            <label><input type="checkbox" value="Thu" checked /> Thu</label>
+            <label><input type="checkbox" value="Fri" /> Fri</label>
+            <label><input type="checkbox" value="Sat" checked /> Sat</label>
+            <label><input type="checkbox" value="Sun" /> Sun</label>
+          </fieldset>
+
+          <fieldset class="focus-chips">
+            <legend>Priority focus</legend>
+            <label><input type="checkbox" checked /> Math gaps</label>
+            <label><input type="checkbox" checked /> Reading pace</label>
+            <label><input type="checkbox" /> Grammar rules</label>
+            <label><input type="checkbox" checked /> Mistake review</label>
+            <label><input type="checkbox" /> Vocabulary</label>
+          </fieldset>
+
+          <button class="cyan-button" type="button" id="refresh-plan">Refresh preview</button>
+        </form>
+      </article>
+
+      <aside class="planner-side-stack">
+        <article class="planner-card plan-snapshot-card">
+          <div class="planner-card-head">
+            <div>
+              <span class="card-kicker">Plan snapshot</span>
+              <h2>Current target</h2>
+            </div>
+          </div>
+          <div class="snapshot-grid">
+            <div><span>Score gap</span><strong id="score-gap">+200</strong></div>
+            <div><span>Weekly time</span><strong id="weekly-time">3.0h</strong></div>
+            <div><span>RW / Math</span><strong id="score-split">660 / 680</strong></div>
+            <div><span>Practice test</span><strong>Every 2 weeks</strong></div>
+          </div>
+        </article>
+
+        <article class="planner-card logic-card">
+          <div class="planner-card-head">
+            <div>
+              <span class="card-kicker">Planning factors</span>
+              <h2>What the plan should use</h2>
+            </div>
+          </div>
+          <ul class="logic-list">
+            <li><span class="logic-dot"></span> Baseline score and section split</li>
+            <li><span class="logic-dot"></span> Target score and days until test</li>
+            <li><span class="logic-dot"></span> Weekly availability and preferred days</li>
+            <li><span class="logic-dot"></span> Missed-question patterns and weak skills</li>
+            <li><span class="logic-dot"></span> Full practice test checkpoints</li>
+          </ul>
+        </article>
+      </aside>
+    </section>
+
+    <section class="planner-card planner-preview-card" aria-label="Study plan preview">
+      <div class="planner-preview-head">
+        <div>
+          <span class="card-kicker">Plan preview</span>
+          <h2>This week at a glance</h2>
+        </div>
+        <div class="planner-tabs" role="tablist" aria-label="Study planner views">
+          <button class="active" type="button" role="tab" aria-selected="true" data-plan-view="list">List view</button>
+          <button type="button" role="tab" aria-selected="false" data-plan-view="calendar">Calendar view</button>
+        </div>
+      </div>
+
+      <section class="plan-panel active" id="plan-list" data-plan-panel="list">
+        <div class="plan-list">
+          <article class="plan-day-card today">
+            <div class="plan-day-date"><span>Today</span><strong>Jul 17</strong></div>
+            <div class="plan-day-work">
+              <h3>Algebra repair set</h3>
+              <p>Timed linear equations, then quick notes on missed patterns.</p>
+              <div class="plan-tags"><span>45 min</span><span>Math</span><span>Mistakes</span></div>
+            </div>
+            <button type="button">Start</button>
+          </article>
+
+          <article class="plan-day-card">
+            <div class="plan-day-date"><span>Sat</span><strong>Jul 18</strong></div>
+            <div class="plan-day-work">
+              <h3>Reading pace block</h3>
+              <p>Two short passage sets with evidence and transition review.</p>
+              <div class="plan-tags"><span>45 min</span><span>RW</span><span>Pacing</span></div>
+            </div>
+            <button type="button">Preview</button>
+          </article>
+
+          <article class="plan-day-card">
+            <div class="plan-day-date"><span>Mon</span><strong>Jul 20</strong></div>
+            <div class="plan-day-work">
+              <h3>Vocabulary in context</h3>
+              <p>Review shaky words, then answer context-clue questions.</p>
+              <div class="plan-tags"><span>30 min</span><span>Vocab</span><span>Review</span></div>
+            </div>
+            <button type="button">Preview</button>
+          </article>
+
+          <article class="plan-day-card">
+            <div class="plan-day-date"><span>Thu</span><strong>Jul 23</strong></div>
+            <div class="plan-day-work">
+              <h3>Mixed timed practice</h3>
+              <p>Short adaptive set across current weakest skills.</p>
+              <div class="plan-tags"><span>60 min</span><span>Mixed</span><span>Timed</span></div>
+            </div>
+            <button type="button">Preview</button>
+          </article>
+        </div>
+      </section>
+
+      <section class="plan-panel" id="plan-calendar" data-plan-panel="calendar">
+        <div class="calendar-head">
+          <button type="button" aria-label="Previous month">‹</button>
+          <strong>July 2026</strong>
+          <button type="button" aria-label="Next month">›</button>
+        </div>
+        <div class="calendar-grid" aria-label="July 2026 study plan calendar">
+          <span class="calendar-label">Mon</span>
+          <span class="calendar-label">Tue</span>
+          <span class="calendar-label">Wed</span>
+          <span class="calendar-label">Thu</span>
+          <span class="calendar-label">Fri</span>
+          <span class="calendar-label">Sat</span>
+          <span class="calendar-label">Sun</span>
+
+          <div class="calendar-cell muted"><strong>13</strong></div>
+          <div class="calendar-cell muted"><strong>14</strong></div>
+          <div class="calendar-cell muted"><strong>15</strong></div>
+          <div class="calendar-cell muted"><strong>16</strong></div>
+          <div class="calendar-cell active"><strong>17</strong><span>Algebra repair</span></div>
+          <div class="calendar-cell active"><strong>18</strong><span>Reading pace</span></div>
+          <div class="calendar-cell"><strong>19</strong></div>
+          <div class="calendar-cell active"><strong>20</strong><span>Vocab context</span></div>
+          <div class="calendar-cell active"><strong>21</strong><span>Grammar rules</span></div>
+          <div class="calendar-cell"><strong>22</strong></div>
+          <div class="calendar-cell active"><strong>23</strong><span>Mixed timed</span></div>
+          <div class="calendar-cell"><strong>24</strong></div>
+          <div class="calendar-cell checkpoint"><strong>25</strong><span>Practice test</span></div>
+          <div class="calendar-cell"><strong>26</strong></div>
+        </div>
+      </section>
+    </section>
+  </div>
+</main>
+
+<script src="vendor/supabase.js"></script>
+<script src="supabase-config.js"></script>
+<script src="auth.js"></script>
+<script src="sidebar.js"></script>
+<script src="study-planner.js"></script>
+</body>
+</html>

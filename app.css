@@ -162,7 +162,7 @@
   overflow-x: hidden;
 }
 
-.dashboard-screen:not(.resources-screen):not(.peakpal-screen):not(.vocab-screen):not(.analytics-screen) .prep-main button,
+.dashboard-screen:not(.resources-screen):not(.peakpal-screen):not(.vocab-screen):not(.analytics-screen):not(.study-planner-screen) .prep-main button,
 .dashboard-screen .prep-sidebar button {
   cursor: default;
 }
@@ -825,6 +825,9 @@
 
 .cyan-button {
   min-height: 43px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 13px;
   background: var(--dash-cyan);
   color: #fff;

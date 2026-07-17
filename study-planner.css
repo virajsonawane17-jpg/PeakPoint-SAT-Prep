@@ -1,0 +1,548 @@
+/* ============================================
+   PEAKPOINT SAT PREP — Study Planner
+   ============================================ */
+
+.study-planner-screen {
+  background:
+    radial-gradient(circle at 82% 6%, rgba(14, 165, 233, 0.13), transparent 32%),
+    linear-gradient(180deg, #ffffff 0, var(--bg-primary) 340px);
+}
+
+.planner-main {
+  background: transparent;
+}
+
+.study-planner-screen.sidebar-collapsed .planner-main {
+  margin-left: 58px;
+}
+
+.planner-inner {
+  width: min(1160px, calc(100% - 56px));
+  margin: 0 auto;
+  padding: 48px 0 84px;
+}
+
+.planner-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 310px;
+  gap: 28px;
+  align-items: end;
+  margin-bottom: 32px;
+}
+
+.planner-hero .eyebrow {
+  margin-bottom: 10px;
+}
+
+.planner-hero h1 {
+  font-size: clamp(2.25rem, 5vw, 3.8rem);
+  letter-spacing: 0;
+}
+
+.planner-hero p {
+  max-width: 700px;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.65;
+  margin-top: 12px;
+}
+
+.planner-card,
+.planner-hero-card {
+  border: 1px solid var(--border-soft);
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: var(--card-shadow);
+}
+
+.planner-hero-card {
+  min-height: 150px;
+  padding: 24px;
+}
+
+.planner-hero-card span,
+.planner-form label span,
+.card-kicker {
+  display: block;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.planner-hero-card strong {
+  display: block;
+  color: var(--text-heading);
+  font-size: 1.65rem;
+  margin-top: 7px;
+}
+
+.planner-hero-card p {
+  color: var(--accent-deep);
+  font-weight: 700;
+  margin-top: 14px;
+}
+
+.planner-setup-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(330px, 0.75fr);
+  gap: 22px;
+  margin-bottom: 28px;
+}
+
+.planner-card {
+  padding: 26px;
+  overflow: hidden;
+}
+
+.planner-card-head,
+.planner-preview-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.planner-card h2,
+.planner-preview-head h2 {
+  margin-top: 6px;
+  font-size: 1.35rem;
+}
+
+.preview-pill {
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--accent-deep);
+  padding: 0 12px;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.planner-form {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.planner-form label,
+.planner-days,
+.focus-chips {
+  min-width: 0;
+}
+
+.planner-form input,
+.planner-form select {
+  width: 100%;
+  min-height: 46px;
+  margin-top: 7px;
+  border: 1.5px solid var(--border-default);
+  border-radius: 15px;
+  background: var(--bg-primary);
+  color: var(--text-heading);
+  font-family: var(--font-display);
+  font-weight: 700;
+  padding: 0 14px;
+}
+
+.planner-form input:focus,
+.planner-form select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--glow-soft);
+  background: #fff;
+}
+
+.planner-days,
+.focus-chips {
+  grid-column: 1 / -1;
+  border: 0;
+}
+
+.planner-days legend,
+.focus-chips legend {
+  flex: 0 0 100%;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.planner-days,
+.focus-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.planner-days label,
+.focus-chips label {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text-heading);
+  border: 1px solid var(--border-default);
+  padding: 0 13px;
+  font-family: var(--font-display);
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.planner-days input,
+.focus-chips input {
+  width: 15px;
+  min-height: 0;
+  height: 15px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  accent-color: var(--accent);
+}
+
+.planner-form .cyan-button {
+  width: fit-content;
+  grid-column: 1 / -1;
+  margin-top: 2px;
+}
+
+.planner-side-stack {
+  display: grid;
+  gap: 22px;
+  align-content: start;
+}
+
+.snapshot-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.snapshot-grid div {
+  border-radius: 16px;
+  background: var(--surface-2);
+  padding: 15px;
+}
+
+.snapshot-grid span {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.snapshot-grid strong {
+  display: block;
+  margin-top: 7px;
+  color: var(--text-heading);
+  font-size: 1.3rem;
+  line-height: 1.1;
+}
+
+.logic-list {
+  list-style: none;
+  display: grid;
+  gap: 13px;
+}
+
+.logic-list li {
+  display: flex;
+  gap: 10px;
+  color: var(--text-secondary);
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.logic-dot {
+  width: 11px;
+  height: 11px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 5px var(--surface-2);
+  flex: 0 0 11px;
+}
+
+.planner-preview-card {
+  padding: 26px;
+}
+
+.planner-tabs {
+  min-width: 260px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 6px;
+  border-radius: 18px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+}
+
+.planner-tabs button {
+  min-height: 38px;
+  border-radius: 13px;
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+
+.planner-tabs button.active {
+  background: #fff;
+  color: var(--text-heading);
+  box-shadow: var(--card-shadow);
+}
+
+.plan-panel {
+  display: none;
+}
+
+.plan-panel.active {
+  display: block;
+}
+
+.plan-list {
+  display: grid;
+  gap: 14px;
+}
+
+.plan-day-card {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr) max-content;
+  gap: 18px;
+  align-items: center;
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  background: var(--bg-primary);
+  padding: 18px;
+}
+
+.plan-day-card.today {
+  background: linear-gradient(135deg, var(--surface-2), #ffffff);
+  border-color: var(--accent-soft);
+}
+
+.plan-day-date {
+  min-height: 82px;
+  border-radius: 16px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 14px;
+  border: 1px solid var(--border-soft);
+}
+
+.plan-day-date span {
+  color: var(--accent-deep);
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.plan-day-date strong {
+  color: var(--text-heading);
+  font-size: 1.25rem;
+}
+
+.plan-day-work h3 {
+  font-size: 1.12rem;
+  margin-bottom: 6px;
+}
+
+.plan-day-work p {
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.plan-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 11px;
+}
+
+.plan-tags span {
+  min-height: 26px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--accent-deep);
+  border: 1px solid var(--border-default);
+  padding: 0 9px;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.plan-day-card button,
+.calendar-head button {
+  min-height: 40px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  padding: 0 15px;
+  box-shadow: inset 0 -4px 0 var(--accent-deep);
+}
+
+.calendar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 16px;
+}
+
+.calendar-head strong {
+  color: var(--text-heading);
+  font-size: 1.25rem;
+}
+
+.calendar-head button {
+  width: 42px;
+  padding: 0;
+  font-size: 1.35rem;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.calendar-label {
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.calendar-cell {
+  min-height: 118px;
+  border-radius: 17px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-soft);
+  padding: 13px;
+}
+
+.calendar-cell strong {
+  color: var(--text-heading);
+}
+
+.calendar-cell span {
+  display: block;
+  margin-top: 18px;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--accent-deep);
+  border: 1px solid var(--border-default);
+  padding: 8px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.calendar-cell.active {
+  background: var(--surface-2);
+}
+
+.calendar-cell.checkpoint {
+  background: #ecfdf5;
+  border-color: #bbf7d0;
+}
+
+.calendar-cell.checkpoint span {
+  color: #047857;
+  border-color: #bbf7d0;
+}
+
+.calendar-cell.muted {
+  opacity: 0.55;
+}
+
+@media (max-width: 1180px) {
+  .planner-setup-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .planner-side-stack {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .study-planner-screen.sidebar-collapsed .planner-main {
+    margin-left: 58px;
+  }
+
+  .planner-inner {
+    width: calc(100% - 32px);
+    padding-top: 34px;
+  }
+
+  .planner-hero,
+  .planner-side-stack {
+    grid-template-columns: 1fr;
+  }
+
+  .planner-form,
+  .snapshot-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .planner-preview-head {
+    flex-direction: column;
+  }
+
+  .planner-tabs {
+    width: 100%;
+  }
+
+  .plan-day-card {
+    grid-template-columns: 1fr;
+  }
+
+  .plan-day-card button {
+    width: fit-content;
+  }
+
+  .calendar-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .calendar-label {
+    display: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .planner-card,
+  .planner-preview-card {
+    padding: 22px;
+  }
+
+  .planner-form,
+  .snapshot-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .planner-hero h1 {
+    font-size: 2.1rem;
+  }
+
+  .planner-card-head {
+    flex-direction: column;
+  }
+}
