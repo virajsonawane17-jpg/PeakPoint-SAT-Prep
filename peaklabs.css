@@ -44,9 +44,7 @@
   margin-top: 10px;
 }
 
-.labs-status-pill,
-.correctness-badge,
-.difficulty-badge {
+.correctness-badge {
   display: inline-flex;
   align-items: center;
   border-radius: 999px;
@@ -54,30 +52,8 @@
   font-weight: 800;
 }
 
-.labs-status-pill {
-  min-height: 42px;
-  gap: 9px;
-  padding: 0 16px;
-  border: 1px solid var(--border-default);
-  background: #fff;
-  color: var(--accent-deep);
-  box-shadow: var(--card-shadow);
-  white-space: nowrap;
-}
-
-.labs-status-pill span {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 6px rgba(14, 165, 233, 0.13);
-}
-
 .labs-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 330px;
-  gap: 24px;
-  align-items: start;
+  display: block;
 }
 
 .labs-workspace {
@@ -86,10 +62,7 @@
 }
 
 .source-question-card,
-.generator-section,
-.labs-filter-card,
-.practice-set-section,
-.insight-card {
+.generator-section {
   background: #fff;
   border: 1px solid var(--border-soft);
   border-radius: 24px;
@@ -188,8 +161,7 @@
   margin-top: 7px;
 }
 
-.generator-section,
-.practice-set-section {
+.generator-section {
   padding: 24px;
 }
 
@@ -344,8 +316,7 @@
   color: var(--accent-deep);
 }
 
-.generator-card button,
-.set-card-side button {
+.generator-card button {
   min-height: 42px;
   border-radius: 999px;
   border: 0;
@@ -363,240 +334,8 @@
 }
 
 .generator-card button:hover,
-.set-card-side button:hover {
+.generator-card button:focus-visible {
   transform: translateY(-1px);
-}
-
-.labs-filter-card {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  padding: 18px;
-}
-
-.filter-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-}
-
-.filter-group > span {
-  width: 100%;
-  color: var(--text-muted);
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 0.78rem;
-}
-
-.filter-group button {
-  min-height: 36px;
-  border-radius: 999px;
-  border: 1px solid var(--border-default);
-  background: var(--surface-2);
-  color: var(--text-heading);
-  font-family: var(--font-display);
-  font-weight: 800;
-  padding: 0 13px;
-}
-
-.filter-group button.active {
-  background: var(--accent-deep);
-  border-color: var(--accent-deep);
-  color: #fff;
-}
-
-.practice-set-list {
-  display: grid;
-  max-height: 430px;
-  overflow: auto;
-  gap: 14px;
-  margin-top: 20px;
-  padding-right: 4px;
-}
-
-.practice-set-card {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 154px;
-  gap: 18px;
-  align-items: center;
-  border-radius: 20px;
-  border: 1px solid var(--border-soft);
-  background: linear-gradient(135deg, #ffffff, var(--surface-2));
-  padding: 18px;
-  animation: setEnter 0.42s var(--easing) both;
-}
-
-.difficulty-badge {
-  min-height: 28px;
-  padding: 0 10px;
-  font-size: 0.76rem;
-}
-
-.difficulty-badge.medium {
-  background: #e0f2fe;
-  color: var(--accent-deep);
-}
-
-.difficulty-badge.hard {
-  background: #fef3c7;
-  color: #a16207;
-}
-
-.difficulty-badge.easy {
-  background: #dcfce7;
-  color: #047857;
-}
-
-.practice-set-card h3 {
-  font-size: 1.12rem;
-  margin-top: 9px;
-}
-
-.practice-set-card p {
-  color: var(--text-secondary);
-  line-height: 1.5;
-  margin-top: 5px;
-}
-
-.set-progress,
-.insight-meter {
-  height: 10px;
-  border-radius: 999px;
-  background: rgba(186, 230, 253, 0.55);
-  overflow: hidden;
-  margin-top: 14px;
-}
-
-.set-progress span,
-.insight-meter span {
-  display: block;
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, var(--accent), var(--accent-deep));
-}
-
-.set-progress span {
-  width: var(--progress);
-}
-
-.set-card-side {
-  display: grid;
-  gap: 12px;
-  justify-items: stretch;
-}
-
-.set-card-side span {
-  color: var(--text-secondary);
-  font-family: var(--font-display);
-  font-weight: 800;
-  text-align: center;
-}
-
-.labs-insights {
-  position: sticky;
-  top: 22px;
-  display: grid;
-  gap: 16px;
-}
-
-.insight-card {
-  padding: 22px;
-}
-
-.mastery-card {
-  text-align: center;
-  background:
-    radial-gradient(circle at 50% 10%, rgba(14, 165, 233, 0.18), transparent 40%),
-    #fff;
-}
-
-.mastery-card h2 {
-  margin-top: 6px;
-}
-
-.mastery-ring {
-  width: 154px;
-  height: 154px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  margin: 22px auto;
-  background: conic-gradient(var(--accent) calc(var(--mastery) * 1%), rgba(186, 230, 253, 0.65) 0);
-  position: relative;
-}
-
-.mastery-ring::after {
-  content: "";
-  position: absolute;
-  inset: 15px;
-  border-radius: inherit;
-  background: #fff;
-  box-shadow: inset 0 0 0 1px var(--border-soft);
-}
-
-.mastery-ring span {
-  position: relative;
-  z-index: 1;
-  color: var(--text-heading);
-  font-family: var(--font-display);
-  font-size: 2rem;
-  font-weight: 800;
-}
-
-.mastery-card p,
-.insight-card p {
-  color: var(--text-secondary);
-  line-height: 1.55;
-}
-
-.history-list {
-  display: grid;
-  gap: 12px;
-  margin-top: 16px;
-}
-
-.history-list li {
-  display: grid;
-  grid-template-columns: 12px minmax(0, 1fr) auto;
-  gap: 10px;
-  align-items: center;
-  color: var(--text-heading);
-  font-family: var(--font-display);
-  font-weight: 800;
-}
-
-.history-list span {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 6px rgba(14, 165, 233, 0.12);
-}
-
-.history-list em {
-  color: var(--text-muted);
-  font-style: normal;
-}
-
-.insight-card h3 {
-  margin: 8px 0 2px;
-  font-size: 1.25rem;
-}
-
-.insight-meter span {
-  width: 72%;
-}
-
-@keyframes setEnter {
-  from {
-    opacity: 0;
-    transform: translateY(12px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
 }
 
 @keyframes pulseCraft {
@@ -609,20 +348,13 @@
 }
 
 @media (max-width: 1180px) {
-  .labs-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .labs-insights {
-    position: static;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .peaklabs-inner {
+    width: min(1080px, calc(100% - 44px));
   }
 }
 
 @media (max-width: 940px) {
-  .generator-grid,
-  .labs-filter-card,
-  .labs-insights {
+  .generator-grid {
     grid-template-columns: 1fr;
   }
 
@@ -647,24 +379,18 @@
     flex-direction: column;
   }
 
-  .practice-set-card {
-    grid-template-columns: 1fr;
-  }
-
   .answer-row {
     grid-template-columns: 1fr;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .practice-set-card,
   .crafting-indicator.is-crafting {
     animation: none;
   }
 
   .generator-card,
-  .generator-card button,
-  .set-card-side button {
+  .generator-card button {
     transition: none;
   }
 }

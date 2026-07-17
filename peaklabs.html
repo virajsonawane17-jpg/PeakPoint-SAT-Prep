@@ -65,10 +65,6 @@
         <h1>PeakLabs</h1>
         <p>Turn any completed question into a fresh practice path with similar, harder, or easier SAT-style sets.</p>
       </div>
-      <div class="labs-status-pill" aria-label="Frontend prototype status">
-        <span aria-hidden="true"></span>
-        UI prototype
-      </div>
     </header>
 
     <section class="labs-layout" aria-label="PeakLabs workspace">
@@ -132,95 +128,7 @@
           </div>
         </section>
 
-        <section class="labs-filter-card" aria-label="Practice set filters">
-          <div class="filter-group">
-            <span>Subject</span>
-            <button class="active" type="button" aria-pressed="true">Math</button>
-            <button type="button" aria-pressed="false">Reading</button>
-            <button type="button" aria-pressed="false">Mixed</button>
-          </div>
-          <div class="filter-group">
-            <span>Topic</span>
-            <button class="active" type="button" aria-pressed="true">Algebra</button>
-            <button type="button" aria-pressed="false">Craft</button>
-            <button type="button" aria-pressed="false">Data</button>
-          </div>
-          <div class="filter-group">
-            <span>Count</span>
-            <button type="button" aria-pressed="false">5</button>
-            <button class="active" type="button" aria-pressed="true">10</button>
-            <button type="button" aria-pressed="false">15</button>
-          </div>
-        </section>
-
-        <section class="practice-set-section" aria-labelledby="sets-title">
-          <div class="labs-section-head">
-            <div>
-              <span class="card-kicker">Crafted practice</span>
-              <h2 id="sets-title">New practice sets</h2>
-            </div>
-          </div>
-
-          <div class="practice-set-list" id="practice-set-list">
-            <article class="practice-set-card">
-              <div class="set-card-main">
-                <span class="difficulty-badge medium">Medium</span>
-                <h3>Equation Isolation Sprint</h3>
-                <p>10 questions modeled around one-variable equations with clean traps.</p>
-                <div class="set-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40">
-                  <span style="--progress: 40%;"></span>
-                </div>
-              </div>
-              <div class="set-card-side">
-                <span>8 min</span>
-                <button type="button">Start Practice</button>
-              </div>
-            </article>
-
-            <article class="practice-set-card">
-              <div class="set-card-main">
-                <span class="difficulty-badge hard">Hard</span>
-                <h3>Multi-Step Algebra Builder</h3>
-                <p>Harder equation setups with coefficients, fractions, and answer-choice traps.</p>
-                <div class="set-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20">
-                  <span style="--progress: 20%;"></span>
-                </div>
-              </div>
-              <div class="set-card-side">
-                <span>12 min</span>
-                <button type="button">Start Practice</button>
-              </div>
-            </article>
-          </div>
-        </section>
       </div>
-
-      <aside class="labs-insights" aria-label="PeakLabs insights">
-        <article class="insight-card mastery-card">
-          <span class="card-kicker">Mastery</span>
-          <h2>Algebra</h2>
-          <div class="mastery-ring" style="--mastery: 72;">
-            <span>72%</span>
-          </div>
-          <p>Recommended next difficulty: <strong>Hard</strong></p>
-        </article>
-
-        <article class="insight-card">
-          <span class="card-kicker">Recent practice</span>
-          <ul class="history-list">
-            <li><span></span><strong>Linear equations</strong><em>92%</em></li>
-            <li><span></span><strong>Systems</strong><em>78%</em></li>
-            <li><span></span><strong>Inequalities</strong><em>84%</em></li>
-          </ul>
-        </article>
-
-        <article class="insight-card">
-          <span class="card-kicker">Toward mastery</span>
-          <h3>28 questions remaining</h3>
-          <div class="insight-meter"><span></span></div>
-          <p>Keep practicing harder algebra until your recent accuracy stays above 85%.</p>
-        </article>
-      </aside>
     </section>
   </div>
 </main>
