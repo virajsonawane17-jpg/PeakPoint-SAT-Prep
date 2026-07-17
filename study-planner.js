@@ -22,7 +22,7 @@
   const mathScore = $('math-score');
   const dailyTime = $('daily-time');
   const domainMeters = Array.from(document.querySelectorAll('[data-domain-score]'));
-  const toggleInputs = Array.from(document.querySelectorAll('.planner-days input, .focus-chips input'));
+  const toggleInputs = Array.from(document.querySelectorAll('.planner-days input'));
 
   function showPanel(view) {
     tabs.forEach((tab) => {
