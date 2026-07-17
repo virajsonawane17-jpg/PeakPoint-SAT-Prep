@@ -22,6 +22,7 @@
   const mathScore = $('math-score');
   const dailyTime = $('daily-time');
   const domainInputs = Array.from(document.querySelectorAll('[data-domain-score]'));
+  const toggleInputs = Array.from(document.querySelectorAll('.planner-days input, .focus-chips input'));
 
   function showPanel(view) {
     tabs.forEach((tab) => {
@@ -36,6 +37,13 @@
 
   function selectedDayCount() {
     return Array.from(document.querySelectorAll('.planner-days input:checked')).length || 1;
+  }
+
+  function syncTogglePills() {
+    toggleInputs.forEach((input) => {
+      const label = input.closest('label');
+      if (label) label.classList.toggle('is-selected', input.checked);
+    });
   }
 
   function updateSnapshot() {
@@ -81,8 +89,13 @@
     input.addEventListener('change', updateSnapshot);
   });
 
+  toggleInputs.forEach((input) => {
+    input.addEventListener('change', syncTogglePills);
+  });
+
   const refresh = $('refresh-plan');
   if (refresh) refresh.addEventListener('click', updateSnapshot);
 
+  syncTogglePills();
   updateSnapshot();
 })();
