@@ -159,7 +159,7 @@
 .mistake-tabs button,
 .mistakes-section-head button,
 .mistake-actions button,
-.pattern-card button {
+.pattern-card a {
   font-family: var(--font-display);
   font-weight: 800;
   transition: transform 0.18s var(--easing), background 0.18s var(--easing), color 0.18s var(--easing), box-shadow 0.18s var(--easing);
@@ -344,8 +344,11 @@
 }
 
 .mistake-actions button,
-.pattern-card button {
+.pattern-card a {
   min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 999px;
   border: 0;
   background: var(--accent);
@@ -364,7 +367,7 @@
 .mistake-tabs button:hover,
 .mistakes-section-head button:hover,
 .mistake-actions button:hover,
-.pattern-card button:hover {
+.pattern-card a:hover {
   transform: translateY(-1px);
 }
 
