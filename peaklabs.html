@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0ea5e9" />
+<meta name="description" content="PeakLabs personalized SAT practice workspace." />
+<title>PeakLabs - PeakPoint SAT Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&amp;family=Instrument+Sans:wght@400;500;600;700&amp;family=Open+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="app.css" />
+<link rel="stylesheet" href="peaklabs.css" />
+<link rel="icon" href="logo.svg" />
+</head>
+<body class="dashboard-screen peaklabs-screen">
+
+<aside class="prep-sidebar" id="app-sidebar" aria-label="PeakPoint sidebar">
+  <div>
+    <a class="side-brand" href="dashboard.html" aria-label="PeakPoint home">
+      <img src="logo.svg" alt="" width="36" height="36" />
+      <span>PeakPoint</span>
+    </a>
+
+    <nav class="side-nav" aria-label="Dashboard navigation">
+      <button class="side-item sidebar-toggle" id="sidebar-toggle" type="button" aria-controls="app-sidebar" aria-expanded="true" aria-label="Hide sidebar">
+        <span class="side-icon toggle-sidebar-icon" aria-hidden="true"></span>
+        <span data-sidebar-toggle-label>Hide sidebar</span>
+        <span class="toggle-arrow" data-sidebar-toggle-icon aria-hidden="true">&lsaquo;</span>
+      </button>
+      <a class="side-item" href="dashboard.html"><span class="side-icon home-icon"></span><span>Home</span></a>
+      <a class="side-item" href="resources.html"><span class="side-icon resources-icon"></span><span>Resources</span></a>
+      <a class="side-item" href="peakpal.html"><span class="side-icon ai-icon"></span><span>PeakPal</span></a>
+      <a class="side-item" href="study-planner.html"><span class="side-icon planner-icon"></span><span>Study Planner</span></a>
+      <a class="side-item" href="analytics.html"><span class="side-icon bars-icon"></span><span>Analytics</span></a>
+
+      <span class="side-heading">Practice</span>
+      <a class="side-item" href="question-bank.html"><span class="side-icon bank-icon"></span><span>Question Bank</span></a>
+      <a class="side-item" href="peakpoint-climb.html"><span class="side-icon climb-icon"></span><span>PeakPoint Climb</span></a>
+      <a class="side-item" href="peakpoint-style.html"><span class="side-icon challenge-icon"></span><span>PeakPoint Max</span></a>
+      <a class="side-item active" href="peaklabs.html" aria-current="page"><span class="side-icon tests-icon"></span><span>PeakLabs</span></a>
+      <a class="side-item" href="vocab.html"><span class="side-icon vocab-icon"></span><span>Vocab</span></a>
+
+      <span class="side-heading">Progress</span>
+      <button class="side-item" type="button"><span class="side-icon saved-icon"></span><span>Saved</span></button>
+      <button class="side-item" type="button"><span class="side-icon error-icon"></span><span>Mistakes Log</span></button>
+    </nav>
+  </div>
+
+  <div class="side-footer">
+    <div class="user-row">
+      <div class="user-avatar" aria-hidden="true"></div>
+      <strong id="side-user-name">Student</strong>
+      <button class="gear-button" type="button" aria-label="Settings"></button>
+    </div>
+  </div>
+</aside>
+
+<main class="prep-main peaklabs-main">
+  <div class="peaklabs-inner">
+    <header class="peaklabs-hero">
+      <div>
+        <p class="eyebrow">Personalized practice studio</p>
+        <h1>PeakLabs</h1>
+        <p>Turn any completed question into a fresh practice path with similar, harder, or easier SAT-style sets.</p>
+      </div>
+      <div class="labs-status-pill" aria-label="Frontend prototype status">
+        <span aria-hidden="true"></span>
+        UI prototype
+      </div>
+    </header>
+
+    <section class="labs-layout" aria-label="PeakLabs workspace">
+      <div class="labs-workspace">
+        <article class="source-question-card">
+          <div class="source-card-head">
+            <div>
+              <span class="card-kicker">Original completed question</span>
+              <h2>Linear Equations in One Variable</h2>
+            </div>
+            <span class="correctness-badge">Correct</span>
+          </div>
+          <div class="question-prompt">
+            <p>If <strong>3x + 7 = 28</strong>, what is the value of <strong>x</strong>?</p>
+            <div class="answer-row">
+              <span>A. 5</span>
+              <span class="selected-answer">B. 7</span>
+              <span>C. 9</span>
+              <span>D. 11</span>
+            </div>
+          </div>
+          <div class="explanation-box">
+            <span>Explanation</span>
+            <p>Subtract 7 from both sides to get 3x = 21, then divide by 3. The fastest path is to isolate x before checking answer choices.</p>
+          </div>
+        </article>
+
+        <section class="generator-section" aria-labelledby="generator-title">
+          <div class="labs-section-head">
+            <div>
+              <span class="card-kicker">Generate from this question</span>
+              <h2 id="generator-title">Choose your next practice set</h2>
+            </div>
+            <span class="crafting-indicator" id="crafting-indicator" aria-live="polite">Ready</span>
+          </div>
+
+          <div class="generator-grid">
+            <article class="generator-card" data-generator-card="Similar">
+              <span class="generator-icon similar-icon" aria-hidden="true"></span>
+              <h3>Similar Questions</h3>
+              <p>Same skill and structure, new numbers and wording for clean repetition.</p>
+              <div class="generator-meta"><span>Difficulty match</span><strong>Medium</strong></div>
+              <button type="button" data-generate="Similar">Generate</button>
+            </article>
+
+            <article class="generator-card featured" data-generator-card="Harder">
+              <span class="generator-icon harder-icon" aria-hidden="true"></span>
+              <h3>Harder Questions</h3>
+              <p>Add multi-step reasoning and stronger traps once the foundation feels solid.</p>
+              <div class="generator-meta"><span>Estimated level</span><strong>Hard</strong></div>
+              <button type="button" data-generate="Harder">Generate</button>
+            </article>
+
+            <article class="generator-card" data-generator-card="Easier">
+              <span class="generator-icon easier-icon" aria-hidden="true"></span>
+              <h3>Easier Questions</h3>
+              <p>Break the concept down with simpler steps before climbing back up.</p>
+              <div class="generator-meta"><span>Confidence build</span><strong>Easy</strong></div>
+              <button type="button" data-generate="Easier">Generate</button>
+            </article>
+          </div>
+        </section>
+
+        <section class="labs-filter-card" aria-label="Practice set filters">
+          <div class="filter-group">
+            <span>Subject</span>
+            <button class="active" type="button" aria-pressed="true">Math</button>
+            <button type="button" aria-pressed="false">Reading</button>
+            <button type="button" aria-pressed="false">Mixed</button>
+          </div>
+          <div class="filter-group">
+            <span>Topic</span>
+            <button class="active" type="button" aria-pressed="true">Algebra</button>
+            <button type="button" aria-pressed="false">Craft</button>
+            <button type="button" aria-pressed="false">Data</button>
+          </div>
+          <div class="filter-group">
+            <span>Count</span>
+            <button type="button" aria-pressed="false">5</button>
+            <button class="active" type="button" aria-pressed="true">10</button>
+            <button type="button" aria-pressed="false">15</button>
+          </div>
+        </section>
+
+        <section class="practice-set-section" aria-labelledby="sets-title">
+          <div class="labs-section-head">
+            <div>
+              <span class="card-kicker">Crafted practice</span>
+              <h2 id="sets-title">New practice sets</h2>
+            </div>
+          </div>
+
+          <div class="practice-set-list" id="practice-set-list">
+            <article class="practice-set-card">
+              <div class="set-card-main">
+                <span class="difficulty-badge medium">Medium</span>
+                <h3>Equation Isolation Sprint</h3>
+                <p>10 questions modeled around one-variable equations with clean traps.</p>
+                <div class="set-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40">
+                  <span style="--progress: 40%;"></span>
+                </div>
+              </div>
+              <div class="set-card-side">
+                <span>8 min</span>
+                <button type="button">Start Practice</button>
+              </div>
+            </article>
+
+            <article class="practice-set-card">
+              <div class="set-card-main">
+                <span class="difficulty-badge hard">Hard</span>
+                <h3>Multi-Step Algebra Builder</h3>
+                <p>Harder equation setups with coefficients, fractions, and answer-choice traps.</p>
+                <div class="set-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20">
+                  <span style="--progress: 20%;"></span>
+                </div>
+              </div>
+              <div class="set-card-side">
+                <span>12 min</span>
+                <button type="button">Start Practice</button>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <aside class="labs-insights" aria-label="PeakLabs insights">
+        <article class="insight-card mastery-card">
+          <span class="card-kicker">Mastery</span>
+          <h2>Algebra</h2>
+          <div class="mastery-ring" style="--mastery: 72;">
+            <span>72%</span>
+          </div>
+          <p>Recommended next difficulty: <strong>Hard</strong></p>
+        </article>
+
+        <article class="insight-card">
+          <span class="card-kicker">Recent practice</span>
+          <ul class="history-list">
+            <li><span></span><strong>Linear equations</strong><em>92%</em></li>
+            <li><span></span><strong>Systems</strong><em>78%</em></li>
+            <li><span></span><strong>Inequalities</strong><em>84%</em></li>
+          </ul>
+        </article>
+
+        <article class="insight-card">
+          <span class="card-kicker">Toward mastery</span>
+          <h3>28 questions remaining</h3>
+          <div class="insight-meter"><span></span></div>
+          <p>Keep practicing harder algebra until your recent accuracy stays above 85%.</p>
+        </article>
+      </aside>
+    </section>
+  </div>
+</main>
+
+<script src="vendor/supabase.js"></script>
+<script src="supabase-config.js"></script>
+<script src="auth.js"></script>
+<script src="sidebar.js"></script>
+<script src="peaklabs.js"></script>
+</body>
+</html>
