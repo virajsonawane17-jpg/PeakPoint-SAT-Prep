@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0ea5e9" />
+<meta name="description" content="Your saved PeakPoint SAT practice questions and collections." />
+<title>Saved - PeakPoint SAT Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&amp;family=Instrument+Sans:wght@400;500;600;700&amp;family=Open+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="app.css" />
+<link rel="stylesheet" href="saved.css" />
+<link rel="icon" href="logo.svg" />
+</head>
+<body class="dashboard-screen saved-screen">
+
+<aside class="prep-sidebar" id="app-sidebar" aria-label="PeakPoint sidebar">
+  <div>
+    <a class="side-brand" href="dashboard.html" aria-label="PeakPoint home">
+      <img src="logo.svg" alt="" width="36" height="36" />
+      <span>PeakPoint</span>
+    </a>
+
+    <nav class="side-nav" aria-label="Dashboard navigation">
+      <button class="side-item sidebar-toggle" id="sidebar-toggle" type="button" aria-controls="app-sidebar" aria-expanded="true" aria-label="Hide sidebar">
+        <span class="side-icon toggle-sidebar-icon" aria-hidden="true"></span>
+        <span data-sidebar-toggle-label>Hide sidebar</span>
+        <span class="toggle-arrow" data-sidebar-toggle-icon aria-hidden="true">&lsaquo;</span>
+      </button>
+      <a class="side-item" href="dashboard.html"><span class="side-icon home-icon"></span><span>Home</span></a>
+      <a class="side-item" href="resources.html"><span class="side-icon resources-icon"></span><span>Resources</span></a>
+      <a class="side-item" href="peakpal.html"><span class="side-icon ai-icon"></span><span>PeakPal</span></a>
+      <a class="side-item" href="study-planner.html"><span class="side-icon planner-icon"></span><span>Study Planner</span></a>
+      <a class="side-item" href="analytics.html"><span class="side-icon bars-icon"></span><span>Analytics</span></a>
+
+      <span class="side-heading">Practice</span>
+      <a class="side-item" href="question-bank.html"><span class="side-icon bank-icon"></span><span>Question Bank</span></a>
+      <a class="side-item" href="peakpoint-climb.html"><span class="side-icon climb-icon"></span><span>PeakPoint Climb</span></a>
+      <a class="side-item" href="peakpoint-style.html"><span class="side-icon challenge-icon"></span><span>PeakPoint Max</span></a>
+      <a class="side-item" href="peaklabs.html"><span class="side-icon tests-icon"></span><span>PeakLabs</span></a>
+      <a class="side-item" href="vocab.html"><span class="side-icon vocab-icon"></span><span>Vocab</span></a>
+
+      <span class="side-heading">Progress</span>
+      <a class="side-item active" href="saved.html" aria-current="page"><span class="side-icon saved-icon"></span><span>Saved</span></a>
+      <button class="side-item" type="button"><span class="side-icon error-icon"></span><span>Mistakes Log</span></button>
+    </nav>
+  </div>
+
+  <div class="side-footer">
+    <div class="user-row">
+      <div class="user-avatar" aria-hidden="true"></div>
+      <strong id="side-user-name">Student</strong>
+      <button class="gear-button" type="button" aria-label="Settings"></button>
+    </div>
+  </div>
+</aside>
+
+<main class="prep-main saved-main">
+  <div class="saved-inner">
+    <header class="saved-hero">
+      <div>
+        <p class="eyebrow">Review shelf</p>
+        <h1>Saved Questions</h1>
+        <p>Keep your best questions, tricky examples, and future review sets organized in one place.</p>
+      </div>
+      <article class="saved-focus-card">
+        <span>Next review</span>
+        <strong>Algebra traps</strong>
+        <p>4 saved questions are ready for a quick warmup.</p>
+      </article>
+    </header>
+
+    <section class="saved-stats" aria-label="Saved summary">
+      <article>
+        <span class="saved-stat-icon bookmark-mark" aria-hidden="true"></span>
+        <div><span>Total saved</span><strong>14</strong></div>
+      </article>
+      <article>
+        <span class="saved-stat-icon clock-mark" aria-hidden="true"></span>
+        <div><span>Due today</span><strong>4</strong></div>
+      </article>
+      <article>
+        <span class="saved-stat-icon folder-mark" aria-hidden="true"></span>
+        <div><span>Collections</span><strong>3</strong></div>
+      </article>
+    </section>
+
+    <section class="saved-toolbar" aria-label="Saved question filters">
+      <div class="saved-tabs" role="tablist" aria-label="Saved filters">
+        <button class="active" type="button" data-saved-filter="all" aria-pressed="true">All</button>
+        <button type="button" data-saved-filter="Math" aria-pressed="false">Math</button>
+        <button type="button" data-saved-filter="Reading & Writing" aria-pressed="false">Reading &amp; Writing</button>
+        <button type="button" data-saved-filter="Due" aria-pressed="false">Due Today</button>
+      </div>
+      <label class="saved-search">
+        <span class="sr-only">Search saved questions</span>
+        <input id="saved-search" type="search" placeholder="Search saved questions..." autocomplete="off" />
+      </label>
+    </section>
+
+    <section class="saved-layout" aria-label="Saved content">
+      <div class="saved-list-panel">
+        <div class="saved-section-head">
+          <div>
+            <span class="card-kicker">Pinned review</span>
+            <h2>Questions to revisit</h2>
+          </div>
+          <button type="button" data-clear-search>Clear filters</button>
+        </div>
+
+        <div class="saved-list" id="saved-list">
+          <article class="saved-question-card" data-subject="Math" data-tags="algebra linear equations due">
+            <div class="saved-card-top">
+              <span class="subject-pill math">Math</span>
+              <span class="due-pill">Due today</span>
+            </div>
+            <h3>Linear equations in one variable</h3>
+            <p>A coefficient trap where subtracting before dividing keeps the work clean.</p>
+            <div class="saved-meta-row">
+              <span>Algebra</span>
+              <span>Medium</span>
+              <span>1:30</span>
+            </div>
+            <div class="saved-card-actions">
+              <button type="button">Review</button>
+              <button class="ghost-action" type="button" data-unsave>Unsave</button>
+            </div>
+          </article>
+
+          <article class="saved-question-card" data-subject="Reading & Writing" data-tags="craft structure words context">
+            <div class="saved-card-top">
+              <span class="subject-pill rw">Reading &amp; Writing</span>
+              <span class="saved-date">Saved Jul 15</span>
+            </div>
+            <h3>Words in Context</h3>
+            <p>A vocabulary-in-context prompt where the best answer depends on tone, not dictionary meaning.</p>
+            <div class="saved-meta-row">
+              <span>Craft &amp; Structure</span>
+              <span>Hard</span>
+              <span>1:20</span>
+            </div>
+            <div class="saved-card-actions">
+              <button type="button">Review</button>
+              <button class="ghost-action" type="button" data-unsave>Unsave</button>
+            </div>
+          </article>
+
+          <article class="saved-question-card" data-subject="Math" data-tags="geometry right triangles trig due">
+            <div class="saved-card-top">
+              <span class="subject-pill math">Math</span>
+              <span class="due-pill">Due today</span>
+            </div>
+            <h3>Right triangles and trigonometry</h3>
+            <p>A diagram-based problem that is easiest after identifying the opposite and adjacent sides.</p>
+            <div class="saved-meta-row">
+              <span>Geometry</span>
+              <span>Hard</span>
+              <span>2:10</span>
+            </div>
+            <div class="saved-card-actions">
+              <button type="button">Review</button>
+              <button class="ghost-action" type="button" data-unsave>Unsave</button>
+            </div>
+          </article>
+
+          <article class="saved-question-card" data-subject="Reading & Writing" data-tags="boundaries grammar punctuation">
+            <div class="saved-card-top">
+              <span class="subject-pill rw">Reading &amp; Writing</span>
+              <span class="saved-date">Saved Jul 12</span>
+            </div>
+            <h3>Boundaries</h3>
+            <p>A punctuation question where the cleanest answer joins two related independent clauses.</p>
+            <div class="saved-meta-row">
+              <span>Standard English</span>
+              <span>Medium</span>
+              <span>1:05</span>
+            </div>
+            <div class="saved-card-actions">
+              <button type="button">Review</button>
+              <button class="ghost-action" type="button" data-unsave>Unsave</button>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <aside class="saved-collections" aria-label="Saved collections">
+        <article class="collection-card featured">
+          <span class="collection-icon" aria-hidden="true"></span>
+          <h2>Algebra traps</h2>
+          <p>4 questions</p>
+          <button type="button">Open</button>
+        </article>
+        <article class="collection-card">
+          <span class="collection-icon rw-collection" aria-hidden="true"></span>
+          <h2>Grammar rules</h2>
+          <p>5 questions</p>
+          <button type="button">Open</button>
+        </article>
+        <article class="collection-card">
+          <span class="collection-icon mixed-collection" aria-hidden="true"></span>
+          <h2>Before test day</h2>
+          <p>5 questions</p>
+          <button type="button">Open</button>
+        </article>
+      </aside>
+    </section>
+  </div>
+</main>
+
+<script src="vendor/supabase.js"></script>
+<script src="supabase-config.js"></script>
+<script src="auth.js"></script>
+<script src="sidebar.js"></script>
+<script src="saved.js"></script>
+</body>
+</html>
