@@ -120,6 +120,7 @@
             </div>
             <div class="mistake-actions">
               <button type="button">Retry</button>
+              <button class="notebook-action" type="button" data-notebook>Mistake notebook</button>
               <button class="ghost-action" type="button" data-understood>Mark understood</button>
             </div>
           </article>
@@ -138,6 +139,7 @@
             </div>
             <div class="mistake-actions">
               <button type="button">Retry</button>
+              <button class="notebook-action" type="button" data-notebook>Mistake notebook</button>
               <button class="ghost-action" type="button" data-understood>Mark understood</button>
             </div>
           </article>
@@ -156,6 +158,7 @@
             </div>
             <div class="mistake-actions">
               <button type="button">Retry</button>
+              <button class="notebook-action" type="button" data-notebook>Mistake notebook</button>
               <button class="ghost-action" type="button" data-understood>Mark understood</button>
             </div>
           </article>
@@ -174,6 +177,7 @@
             </div>
             <div class="mistake-actions">
               <button type="button">Retry</button>
+              <button class="notebook-action" type="button" data-notebook>Mistake notebook</button>
               <button class="ghost-action" type="button" data-understood>Mark understood</button>
             </div>
           </article>
@@ -197,6 +201,23 @@
     </section>
   </div>
 </main>
+
+<div class="notebook-modal" id="notebook-modal" role="dialog" aria-modal="true" aria-labelledby="notebook-title" hidden>
+  <div class="notebook-panel">
+    <button class="notebook-close" type="button" aria-label="Close mistake notebook" data-close-notebook>&times;</button>
+    <span class="card-kicker">Mistake notebook</span>
+    <h2 id="notebook-title">Write down the lesson</h2>
+    <p id="notebook-question">Capture why this mistake happened and what you will check next time.</p>
+    <label class="notebook-field">
+      <span>What went wrong?</span>
+      <textarea id="notebook-text" rows="7" placeholder="Example: I solved only one inequality and forgot to check the overlap region. Next time I will test the point in both conditions."></textarea>
+    </label>
+    <div class="notebook-actions">
+      <button type="button" data-save-notebook>Save note</button>
+      <button class="ghost-action" type="button" data-close-notebook>Cancel</button>
+    </div>
+  </div>
+</div>
 
 <script src="vendor/supabase.js"></script>
 <script src="supabase-config.js"></script>

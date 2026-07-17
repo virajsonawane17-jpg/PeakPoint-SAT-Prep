@@ -364,11 +364,127 @@
   box-shadow: none;
 }
 
+.mistake-actions .notebook-action {
+  background: var(--surface-2);
+  color: var(--accent-deep);
+  border: 1px solid var(--border-default);
+  box-shadow: none;
+}
+
 .mistake-tabs button:hover,
 .mistakes-section-head button:hover,
 .mistake-actions button:hover,
 .pattern-card a:hover {
   transform: translateY(-1px);
+}
+
+.notebook-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(3, 105, 161, 0.18);
+  backdrop-filter: blur(10px);
+}
+
+.notebook-modal[hidden] {
+  display: none;
+}
+
+.notebook-panel {
+  width: min(560px, 100%);
+  position: relative;
+  border-radius: 24px;
+  border: 1px solid var(--border-default);
+  background: #fff;
+  padding: 28px;
+  box-shadow: 0 30px 70px -28px rgba(3, 105, 161, 0.48), var(--card-shadow);
+}
+
+.notebook-panel h2 {
+  font-size: 1.55rem;
+  margin-top: 8px;
+}
+
+.notebook-panel p {
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-top: 8px;
+}
+
+.notebook-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border-default);
+  background: var(--surface-2);
+  color: var(--text-heading);
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.notebook-field {
+  display: grid;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.notebook-field span {
+  color: var(--text-heading);
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+
+.notebook-field textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 154px;
+  border-radius: 18px;
+  border: 1.5px solid var(--border-default);
+  background: var(--bg-primary);
+  color: var(--text-heading);
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  line-height: 1.55;
+  padding: 14px 16px;
+}
+
+.notebook-field textarea:focus {
+  outline: none;
+  background: #fff;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--glow-soft);
+}
+
+.notebook-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.notebook-actions button {
+  min-height: 42px;
+  border-radius: 999px;
+  border: 0;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  padding: 0 16px;
+  box-shadow: inset 0 -4px 0 var(--accent-deep), 0 12px 24px -20px rgba(3, 105, 161, 0.72);
+}
+
+.notebook-actions .ghost-action {
+  background: #fff;
+  color: var(--accent-deep);
+  border: 1px solid var(--border-default);
+  box-shadow: none;
 }
 
 .mistake-patterns {
