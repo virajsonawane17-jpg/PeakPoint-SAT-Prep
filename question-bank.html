@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0ea5e9" />
+<meta name="description" content="Browse PeakPoint SAT-style questions by subject, domain, and skill." />
+<title>Question Bank - PeakPoint SAT Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&amp;family=Instrument+Sans:wght@400;500;600;700&amp;family=Open+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="app.css" />
+<link rel="stylesheet" href="question-bank.css" />
+<link rel="icon" href="logo.svg" />
+</head>
+<body class="dashboard-screen question-bank-screen">
+
+<aside class="prep-sidebar" id="app-sidebar" aria-label="PeakPoint sidebar">
+  <div>
+    <a class="side-brand" href="dashboard.html" aria-label="PeakPoint home">
+      <img src="logo.svg" alt="" width="36" height="36" />
+      <span>PeakPoint</span>
+    </a>
+
+    <nav class="side-nav" aria-label="Dashboard navigation">
+      <button class="side-item sidebar-toggle" id="sidebar-toggle" type="button" aria-controls="app-sidebar" aria-expanded="true" aria-label="Hide sidebar">
+        <span class="side-icon toggle-sidebar-icon" aria-hidden="true"></span>
+        <span data-sidebar-toggle-label>Hide sidebar</span>
+        <span class="toggle-arrow" data-sidebar-toggle-icon aria-hidden="true">&lsaquo;</span>
+      </button>
+      <a class="side-item" href="dashboard.html"><span class="side-icon home-icon"></span><span>Home</span></a>
+      <a class="side-item" href="resources.html"><span class="side-icon resources-icon"></span><span>Resources</span></a>
+      <a class="side-item" href="peakpal.html"><span class="side-icon ai-icon"></span><span>PeakPal</span></a>
+      <a class="side-item" href="study-planner.html"><span class="side-icon planner-icon"></span><span>Study Planner</span></a>
+      <a class="side-item" href="analytics.html"><span class="side-icon bars-icon"></span><span>Analytics</span></a>
+
+      <span class="side-heading">Practice</span>
+      <a class="side-item active" href="question-bank.html" aria-current="page"><span class="side-icon bank-icon"></span><span>Question Bank</span></a>
+      <a class="side-item" href="peakpoint-climb.html"><span class="side-icon climb-icon"></span><span>PeakPoint Climb</span></a>
+      <a class="side-item" href="peakpoint-style.html"><span class="side-icon challenge-icon"></span><span>PeakPoint Max</span></a>
+      <button class="side-item" type="button"><span class="side-icon tests-icon"></span><span>Predicted Tests</span></button>
+      <a class="side-item" href="vocab.html"><span class="side-icon vocab-icon"></span><span>Vocab</span></a>
+
+      <span class="side-heading">Progress</span>
+      <button class="side-item" type="button"><span class="side-icon saved-icon"></span><span>Saved</span></button>
+      <button class="side-item" type="button"><span class="side-icon error-icon"></span><span>Mistakes Log</span></button>
+    </nav>
+  </div>
+
+  <div class="side-footer">
+    <div class="user-row">
+      <div class="user-avatar" aria-hidden="true"></div>
+      <strong id="side-user-name">Student</strong>
+      <button class="gear-button" type="button" aria-label="Settings"></button>
+    </div>
+  </div>
+</aside>
+
+<main class="prep-main question-bank-main">
+  <div class="question-bank-inner">
+    <header class="question-bank-hero">
+      <div>
+        <p class="eyebrow">SAT-style practice library</p>
+        <h1>Question Bank</h1>
+        <p>Choose a subject, drill a domain, or jump into a focused set of PeakPoint practice questions.</p>
+      </div>
+      <article class="bank-streak-card" aria-label="Question bank progress summary">
+        <span>Bank progress</span>
+        <strong>782 / 4,000</strong>
+        <p>92% accuracy across recent practice</p>
+      </article>
+    </header>
+
+    <section class="bank-toolbar" aria-label="Question bank filters">
+      <div class="bank-tabs" role="tablist" aria-label="Question bank subject">
+        <button class="active" type="button" data-bank-filter="all" aria-pressed="true">All</button>
+        <button type="button" data-bank-filter="Reading & Writing" aria-pressed="false">Reading &amp; Writing</button>
+        <button type="button" data-bank-filter="Math" aria-pressed="false">Math</button>
+      </div>
+      <label class="bank-search">
+        <span class="sr-only">Search domains and skills</span>
+        <input id="bank-search" type="search" placeholder="Search domains or skills..." autocomplete="off" />
+      </label>
+    </section>
+
+    <section class="bank-overview" aria-label="Question bank overview">
+      <article>
+        <span class="overview-icon rw-mark" aria-hidden="true"></span>
+        <div>
+          <span>Reading &amp; Writing</span>
+          <strong>2,000 questions</strong>
+        </div>
+      </article>
+      <article>
+        <span class="overview-icon math-mark" aria-hidden="true"></span>
+        <div>
+          <span>Math</span>
+          <strong>2,000 questions</strong>
+        </div>
+      </article>
+      <article>
+        <span class="overview-icon target-mark" aria-hidden="true"></span>
+        <div>
+          <span>Recommended next</span>
+          <strong>Words in Context</strong>
+        </div>
+      </article>
+    </section>
+
+    <section class="subject-grid" aria-label="Question subjects">
+      <article class="subject-bank-card" data-subject-card="Reading & Writing">
+        <div class="subject-card-head">
+          <div>
+            <span class="card-kicker">Reading &amp; Writing</span>
+            <h2>Reading &amp; Writing</h2>
+            <p>2,000 questions</p>
+          </div>
+          <button class="start-pill" type="button" data-start-subject="Reading & Writing"><span class="play-dot" aria-hidden="true"></span>Start</button>
+        </div>
+
+        <div class="domain-list">
+          <section class="domain-group is-open" data-domain-group>
+            <button class="domain-toggle" type="button" aria-expanded="true">
+              <span>Information &amp; Ideas</span>
+              <strong>500</strong>
+            </button>
+            <div class="skill-list">
+              <button type="button" data-skill="Central Ideas & Details"><span>Central Ideas &amp; Details</span><strong>167</strong></button>
+              <button type="button" data-skill="Inferences"><span>Inferences</span><strong>167</strong></button>
+              <button type="button" data-skill="Command of Evidence"><span>Command of Evidence</span><strong>166</strong></button>
+            </div>
+          </section>
+
+          <section class="domain-group is-open" data-domain-group>
+            <button class="domain-toggle" type="button" aria-expanded="true">
+              <span>Craft &amp; Structure</span>
+              <strong>500</strong>
+            </button>
+            <div class="skill-list">
+              <button type="button" data-skill="Words in Context"><span>Words in Context</span><strong>167</strong></button>
+              <button type="button" data-skill="Text Structure & Purpose"><span>Text Structure &amp; Purpose</span><strong>167</strong></button>
+              <button type="button" data-skill="Cross-Text Connections"><span>Cross-Text Connections</span><strong>166</strong></button>
+            </div>
+          </section>
+
+          <section class="domain-group is-open" data-domain-group>
+            <button class="domain-toggle" type="button" aria-expanded="true">
+              <span>Expression of Ideas</span>
+              <strong>500</strong>
+            </button>
+            <div class="skill-list">
+              <button type="button" data-skill="Rhetorical Synthesis"><span>Rhetorical Synthesis</span><strong>250</strong></button>
+              <button type="button" data-skill="Transitions"><span>Transitions</span><strong>250</strong></button>
+            </div>
+          </section>
+
+          <section class="domain-group is-open" data-domain-group>
+            <button class="domain-toggle" type="button" aria-expanded="true">
+              <span>Standard English Conventions</span>
+              <strong>500</strong>
+            </button>
+            <div class="skill-list">
+              <button type="button" data-skill="Boundaries"><span>Boundaries</span><strong>250</strong></button>
+              <button type="button" data-skill="Form, Structure & Sense"><span>Form, Structure &amp; Sense</span><strong>250</strong></button>
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <article class="subject-bank-card" data-subject-card="Math">
+        <div class="subject-card-head">
+          <div>
+            <span class="card-kicker">Math</span>
+            <h2>Math</h2>
+            <p>2,000 questions</p>
+          </div>
+          <button class="start-pill" type="button" data-start-subject="Math"><span class="play-dot" aria-hidden="true"></span>Start</button>
+        </div>
+
+        <div class="domain-list">
+          <section class="domain-group is-open" data-domain-group>
+            <button class="domain-toggle" type="button" aria-expanded="true">
+              <span>Algebra</span>
+              <strong>700</strong>
+            </button>
+            <div class="skill-list">
+              <button type="button" data-skill="Linear Equations in One Variable"><span>Linear Equations in One Variable</span><strong>140</strong></button>
+              <button type="button" data-skill="Linear Functions"><span>Linear Functions</span><strong>140</strong></button>
+              <button type="button" data-skill="Linear Equations in Two Variables"><span>Linear Equations in Two Variables</span><strong>140</strong></button>
+              <button type="button" data-skill="Systems of Two Linear Equations"><span>Systems of Two Linear Equations</span><strong>140</strong></button>
+              <button type="button" data-skill="Linear Inequalities"><span>Linear Inequalities</span><strong>140</strong></button>
+            </div>
+          </section>
+
+          <section class="domain-group is-open" data-domain-group>
+            <button class="domain-toggle" type="button" aria-expanded="true">
+              <span>Advanced Math</span>
+              <strong>700</strong>
+            </button>
+            <div class="skill-list">
+              <button type="button" data-skill="Nonlinear Functions"><span>Nonlinear Functions</span><strong>234</strong></button>
+              <button type="button" data-skill="Nonlinear Equations & Systems"><span>Nonlinear Equations &amp; Systems</span><strong>233</strong></button>
+              <button type="button" data-skill="Equivalent Expressions"><span>Equivalent Expressions</span><strong>233</strong></button>
+            </div>
+          </section>
+
+          <section class="domain-group is-open" data-domain-group>
+            <button class="domain-toggle" type="button" aria-expanded="true">
+              <span>Problem-Solving &amp; Data Analysis</span>
+              <strong>400</strong>
+            </button>
+            <div class="skill-list">
+              <button type="button" data-skill="Ratios, Rates & Proportions"><span>Ratios, Rates &amp; Proportions</span><strong>58</strong></button>
+              <button type="button" data-skill="Percentages"><span>Percentages</span><strong>57</strong></button>
+              <button type="button" data-skill="One-Variable Data"><span>One-Variable Data</span><strong>57</strong></button>
+              <button type="button" data-skill="Two-Variable Data"><span>Two-Variable Data</span><strong>57</strong></button>
+              <button type="button" data-skill="Probability"><span>Probability</span><strong>57</strong></button>
+              <button type="button" data-skill="Inference & Margin of Error"><span>Inference &amp; Margin of Error</span><strong>57</strong></button>
+              <button type="button" data-skill="Evaluating Statistical Claims"><span>Evaluating Statistical Claims</span><strong>57</strong></button>
+            </div>
+          </section>
+
+          <section class="domain-group is-open" data-domain-group>
+            <button class="domain-toggle" type="button" aria-expanded="true">
+              <span>Geometry &amp; Trigonometry</span>
+              <strong>200</strong>
+            </button>
+            <div class="skill-list">
+              <button type="button" data-skill="Area & Volume"><span>Area &amp; Volume</span><strong>50</strong></button>
+              <button type="button" data-skill="Lines, Angles & Triangles"><span>Lines, Angles &amp; Triangles</span><strong>50</strong></button>
+              <button type="button" data-skill="Right Triangles & Trigonometry"><span>Right Triangles &amp; Trigonometry</span><strong>50</strong></button>
+              <button type="button" data-skill="Circles"><span>Circles</span><strong>50</strong></button>
+            </div>
+          </section>
+        </div>
+      </article>
+    </section>
+  </div>
+</main>
+
+<div class="bank-modal" id="bank-modal" role="dialog" aria-modal="true" aria-labelledby="bank-modal-title" hidden>
+  <div class="bank-modal-panel">
+    <button class="bank-modal-close" type="button" aria-label="Close practice preview" data-close-modal>&times;</button>
+    <span class="card-kicker">Practice preview</span>
+    <h2 id="bank-modal-title">Start practice</h2>
+    <p id="bank-modal-copy">This will launch a focused practice set when question-bank logic is connected.</p>
+    <div class="modal-actions">
+      <button class="cyan-button" type="button" data-close-modal>Got it</button>
+      <a class="modal-secondary" href="peakpoint-climb.html">Try PeakPoint Climb</a>
+    </div>
+  </div>
+</div>
+
+<script src="vendor/supabase.js"></script>
+<script src="supabase-config.js"></script>
+<script src="auth.js"></script>
+<script src="sidebar.js"></script>
+<script src="question-bank.js"></script>
+</body>
+</html>
