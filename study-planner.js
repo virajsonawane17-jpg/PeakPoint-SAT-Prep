@@ -21,6 +21,7 @@
   const rwScore = $('rw-score');
   const mathScore = $('math-score');
   const dailyTime = $('daily-time');
+  const domainInputs = Array.from(document.querySelectorAll('[data-domain-score]'));
 
   function showPanel(view) {
     tabs.forEach((tab) => {
@@ -50,10 +51,25 @@
     const gapEl = $('score-gap');
     const weeklyEl = $('weekly-time');
     const splitEl = $('score-split');
+    const weakestEl = $('weakest-domain');
+    const averageEl = $('domain-average');
+    const domainScores = domainInputs.map((input) => ({
+      name: input.dataset.domainName || 'Domain',
+      score: Math.min(7, Math.max(0, Number(input.value) || 0))
+    }));
+    const weakest = domainScores.reduce((lowest, item) => (
+      item.score < lowest.score ? item : lowest
+    ), domainScores[0] || { name: 'Craft and Structure', score: 0 });
+    const average = domainScores.length
+      ? domainScores.reduce((sum, item) => sum + item.score, 0) / domainScores.length
+      : 0;
+
     if (daysEl) daysEl.textContent = `${diff} ${diff === 1 ? 'day' : 'days'}`;
     if (gapEl) gapEl.textContent = `${target - current >= 0 ? '+' : ''}${target - current}`;
     if (weeklyEl) weeklyEl.textContent = `${weeklyHours}h`;
     if (splitEl) splitEl.textContent = `${Number(rwScore && rwScore.value) || 660} / ${Number(mathScore && mathScore.value) || 680}`;
+    if (weakestEl) weakestEl.textContent = weakest.name;
+    if (averageEl) averageEl.textContent = `${average.toFixed(1)} / 7`;
   }
 
   tabs.forEach((tab) => {

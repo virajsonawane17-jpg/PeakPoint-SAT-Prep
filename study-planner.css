@@ -215,6 +215,104 @@
   margin-top: 2px;
 }
 
+.score-distribution {
+  grid-column: 1 / -1;
+  border-radius: 20px;
+  border: 1px solid var(--border-soft);
+  background: linear-gradient(180deg, #ffffff, var(--bg-primary));
+  padding: 20px;
+}
+
+.distribution-intro {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 16px;
+}
+
+.distribution-intro h3 {
+  margin-top: 6px;
+  font-size: 1.12rem;
+}
+
+.distribution-intro p {
+  max-width: 430px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.domain-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.domain-card {
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  background: #fff;
+  padding: 16px;
+}
+
+.domain-card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.domain-card-head h4 {
+  font-size: 1rem;
+}
+
+.domain-card-head span {
+  color: var(--accent-deep);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.domain-row {
+  min-height: 58px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 74px;
+  gap: 12px;
+  align-items: center;
+  border-top: 1px solid var(--border-soft);
+  padding: 10px 0;
+}
+
+.domain-row > span {
+  min-width: 0;
+}
+
+.domain-row strong {
+  display: block;
+  color: var(--text-heading);
+  font-size: 0.9rem;
+  line-height: 1.25;
+}
+
+.domain-row em {
+  display: block;
+  margin-top: 3px;
+  color: var(--text-muted);
+  font-style: normal;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.planner-form .domain-row input {
+  width: 74px;
+  min-height: 38px;
+  margin: 0;
+  text-align: center;
+  padding: 0 8px;
+  background: var(--surface-2);
+}
+
 .planner-side-stack {
   display: grid;
   gap: 22px;
@@ -498,8 +596,13 @@
   }
 
   .planner-form,
+  .domain-grid,
   .snapshot-grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .distribution-intro {
+    flex-direction: column;
   }
 
   .planner-preview-head {
@@ -534,6 +637,7 @@
   }
 
   .planner-form,
+  .domain-grid,
   .snapshot-grid {
     grid-template-columns: 1fr;
   }
