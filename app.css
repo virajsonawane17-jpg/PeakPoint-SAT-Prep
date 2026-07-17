@@ -162,7 +162,7 @@
   overflow-x: hidden;
 }
 
-.dashboard-screen:not(.resources-screen):not(.peakpal-screen):not(.vocab-screen):not(.analytics-screen):not(.study-planner-screen):not(.question-bank-screen):not(.peaklabs-screen):not(.saved-screen):not(.peakpoint-style-screen):not(.climb-screen) .prep-main button,
+.dashboard-screen:not(.resources-screen):not(.peakpal-screen):not(.vocab-screen):not(.analytics-screen):not(.study-planner-screen):not(.question-bank-screen):not(.peaklabs-screen):not(.saved-screen):not(.mistakes-screen):not(.peakpoint-style-screen):not(.climb-screen) .prep-main button,
 .dashboard-screen .prep-sidebar button {
   cursor: default;
 }
@@ -834,6 +834,7 @@
 .section-title-row a,
 .countdown-card button,
 .metric-card button,
+.metric-card a,
 .score-card button {
   border: 0;
   font-family: var(--font-display);
@@ -1219,7 +1220,8 @@
   line-height: 1;
 }
 
-.metric-card button {
+.metric-card button,
+.metric-card a {
   position: absolute;
   right: 19px;
   bottom: 21px;

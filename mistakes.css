@@ -1,0 +1,449 @@
+/* ============================================
+   PEAKPOINT SAT PREP - Mistakes Log
+   ============================================ */
+
+.mistakes-screen {
+  background:
+    radial-gradient(circle at 86% 5%, rgba(14, 165, 233, 0.14), transparent 34%),
+    linear-gradient(180deg, #ffffff 0, var(--bg-primary) 360px);
+}
+
+.mistakes-main {
+  background: transparent;
+}
+
+.mistakes-screen.sidebar-collapsed .mistakes-main {
+  margin-left: 58px;
+}
+
+.mistakes-inner {
+  width: min(1260px, calc(100% - 56px));
+  margin: 0 auto;
+  padding: 44px 0 84px;
+}
+
+.mistakes-hero {
+  margin-bottom: 22px;
+}
+
+.mistakes-hero h1 {
+  font-size: clamp(2.35rem, 5vw, 4rem);
+  letter-spacing: 0;
+  margin-top: 7px;
+}
+
+.mistakes-hero p {
+  max-width: 760px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-top: 10px;
+}
+
+.mistake-stats article,
+.mistakes-toolbar,
+.mistakes-list-panel,
+.pattern-card {
+  background: #fff;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--card-shadow);
+}
+
+.mistake-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.mistake-stats article {
+  min-height: 108px;
+  border-radius: 22px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: linear-gradient(135deg, #ffffff, var(--surface-2));
+}
+
+.mistake-stats span {
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+
+.mistake-stats strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 1.9rem;
+}
+
+.mistake-stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: var(--accent);
+  color: #fff;
+  box-shadow: inset 0 -5px 0 var(--accent-deep), 0 16px 28px -18px rgba(3, 105, 161, 0.65);
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.mistake-stat-icon::before,
+.mistake-stat-icon::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+}
+
+.error-mark::before {
+  inset: 11px;
+  border-radius: 50%;
+}
+
+.error-mark::after {
+  width: 6px;
+  height: 20px;
+  left: 21px;
+  top: 14px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 12px 0 var(--accent);
+}
+
+.repeat-mark::before {
+  width: 27px;
+  height: 17px;
+  left: 11px;
+  top: 15px;
+  border: 4px solid currentColor;
+  border-left-color: transparent;
+  border-radius: 999px;
+  background: transparent;
+}
+
+.repeat-mark::after {
+  width: 9px;
+  height: 9px;
+  right: 9px;
+  top: 10px;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.mastered-mark::before {
+  width: 25px;
+  height: 14px;
+  left: 12px;
+  top: 17px;
+  border-left: 5px solid currentColor;
+  border-bottom: 5px solid currentColor;
+  transform: rotate(-45deg);
+  background: transparent;
+}
+
+.mistakes-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 18px;
+  align-items: center;
+  border-radius: 24px;
+  padding: 18px;
+  margin-bottom: 20px;
+}
+
+.mistake-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mistake-tabs button,
+.mistakes-section-head button,
+.mistake-actions button,
+.pattern-card button {
+  font-family: var(--font-display);
+  font-weight: 800;
+  transition: transform 0.18s var(--easing), background 0.18s var(--easing), color 0.18s var(--easing), box-shadow 0.18s var(--easing);
+}
+
+.mistake-tabs button {
+  min-height: 40px;
+  border-radius: 999px;
+  border: 1px solid var(--border-default);
+  background: var(--surface-2);
+  color: var(--text-heading);
+  padding: 0 16px;
+}
+
+.mistake-tabs button.active {
+  background: var(--accent-deep);
+  color: #fff;
+  border-color: var(--accent-deep);
+  box-shadow: inset 0 -3px 0 #075985;
+}
+
+.mistakes-search input {
+  width: 100%;
+  min-height: 44px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border-default);
+  background: var(--bg-primary);
+  color: var(--text-heading);
+  font-family: var(--font-display);
+  font-weight: 700;
+  padding: 0 18px;
+}
+
+.mistakes-search input:focus {
+  outline: none;
+  background: #fff;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--glow-soft);
+}
+
+.mistakes-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 22px;
+  align-items: start;
+}
+
+.mistakes-list-panel {
+  border-radius: 24px;
+  padding: 24px;
+}
+
+.mistakes-section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.mistakes-section-head h2 {
+  margin-top: 6px;
+  font-size: 1.45rem;
+}
+
+.mistakes-section-head button {
+  min-height: 38px;
+  border-radius: 999px;
+  border: 1px solid var(--border-default);
+  background: var(--surface-2);
+  color: var(--text-heading);
+  padding: 0 14px;
+}
+
+.mistakes-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.mistake-card {
+  min-height: 286px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  border: 1px solid var(--border-soft);
+  background:
+    radial-gradient(circle at 90% 12%, rgba(14, 165, 233, 0.14), transparent 32%),
+    linear-gradient(135deg, #ffffff, var(--surface-2));
+  padding: 18px;
+  transition: transform 0.2s var(--easing), box-shadow 0.2s var(--easing), opacity 0.2s var(--easing);
+}
+
+.mistake-card.repeated {
+  border-color: #facc15;
+}
+
+.mistake-card.is-hidden {
+  display: none;
+}
+
+.mistake-card.is-resolved {
+  opacity: 0.45;
+}
+
+.mistake-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 42px -30px rgba(3, 105, 161, 0.44), var(--card-shadow);
+}
+
+.mistake-card-top,
+.mistake-detail-grid,
+.mistake-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.mistake-card-top {
+  justify-content: space-between;
+}
+
+.subject-pill,
+.repeat-pill,
+.date-pill,
+.mistake-detail-grid span {
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 0.76rem;
+  font-weight: 800;
+  padding: 0 10px;
+}
+
+.subject-pill.math {
+  background: #e0f2fe;
+  color: var(--accent-deep);
+}
+
+.subject-pill.rw {
+  background: #dcfce7;
+  color: #047857;
+}
+
+.repeat-pill {
+  background: #fef3c7;
+  color: #a16207;
+}
+
+.date-pill,
+.mistake-detail-grid span {
+  background: #fff;
+  color: var(--text-muted);
+  border: 1px solid var(--border-soft);
+}
+
+.mistake-card h3 {
+  font-size: 1.18rem;
+  margin-top: 18px;
+}
+
+.mistake-card p {
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-top: 8px;
+}
+
+.mistake-detail-grid {
+  margin-top: 16px;
+}
+
+.mistake-detail-grid strong {
+  margin-right: 5px;
+}
+
+.mistake-actions {
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.mistake-actions button,
+.pattern-card button {
+  min-height: 40px;
+  border-radius: 999px;
+  border: 0;
+  background: var(--accent);
+  color: #fff;
+  padding: 0 16px;
+  box-shadow: inset 0 -4px 0 var(--accent-deep), 0 12px 24px -20px rgba(3, 105, 161, 0.72);
+}
+
+.mistake-actions .ghost-action {
+  background: #fff;
+  color: var(--accent-deep);
+  border: 1px solid var(--border-default);
+  box-shadow: none;
+}
+
+.mistake-tabs button:hover,
+.mistakes-section-head button:hover,
+.mistake-actions button:hover,
+.pattern-card button:hover {
+  transform: translateY(-1px);
+}
+
+.mistake-patterns {
+  display: grid;
+  gap: 16px;
+  position: sticky;
+  top: 22px;
+}
+
+.pattern-card {
+  border-radius: 22px;
+  padding: 20px;
+  background:
+    radial-gradient(circle at 88% 12%, rgba(14, 165, 233, 0.15), transparent 35%),
+    #fff;
+}
+
+.pattern-card h2 {
+  font-size: 1.2rem;
+  margin-top: 8px;
+}
+
+.pattern-card p {
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 8px 0 18px;
+}
+
+.pattern-meter {
+  height: 11px;
+  border-radius: 999px;
+  background: rgba(186, 230, 253, 0.65);
+  overflow: hidden;
+}
+
+.pattern-meter span {
+  display: block;
+  width: var(--pattern);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent), var(--accent-deep));
+}
+
+@media (max-width: 1160px) {
+  .mistakes-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .mistake-patterns {
+    position: static;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 880px) {
+  .mistakes-inner {
+    width: min(100% - 28px, 680px);
+  }
+
+  .mistake-stats,
+  .mistakes-toolbar,
+  .mistakes-list,
+  .mistake-patterns {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .mistakes-screen.sidebar-collapsed .mistakes-main {
+    margin-left: 0;
+  }
+
+  .mistakes-inner {
+    width: min(100% - 22px, 560px);
+    padding-top: 30px;
+  }
+
+  .mistakes-section-head {
+    flex-direction: column;
+  }
+}

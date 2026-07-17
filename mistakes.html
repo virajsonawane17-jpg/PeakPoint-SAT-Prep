@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0ea5e9" />
+<meta name="description" content="Review missed PeakPoint SAT questions and mistake patterns." />
+<title>Mistakes Log - PeakPoint SAT Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&amp;family=Instrument+Sans:wght@400;500;600;700&amp;family=Open+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="app.css" />
+<link rel="stylesheet" href="mistakes.css" />
+<link rel="icon" href="logo.svg" />
+</head>
+<body class="dashboard-screen mistakes-screen">
+
+<aside class="prep-sidebar" id="app-sidebar" aria-label="PeakPoint sidebar">
+  <div>
+    <a class="side-brand" href="dashboard.html" aria-label="PeakPoint home">
+      <img src="logo.svg" alt="" width="36" height="36" />
+      <span>PeakPoint</span>
+    </a>
+
+    <nav class="side-nav" aria-label="Dashboard navigation">
+      <button class="side-item sidebar-toggle" id="sidebar-toggle" type="button" aria-controls="app-sidebar" aria-expanded="true" aria-label="Hide sidebar">
+        <span class="side-icon toggle-sidebar-icon" aria-hidden="true"></span>
+        <span data-sidebar-toggle-label>Hide sidebar</span>
+        <span class="toggle-arrow" data-sidebar-toggle-icon aria-hidden="true">&lsaquo;</span>
+      </button>
+      <a class="side-item" href="dashboard.html"><span class="side-icon home-icon"></span><span>Home</span></a>
+      <a class="side-item" href="resources.html"><span class="side-icon resources-icon"></span><span>Resources</span></a>
+      <a class="side-item" href="peakpal.html"><span class="side-icon ai-icon"></span><span>PeakPal</span></a>
+      <a class="side-item" href="study-planner.html"><span class="side-icon planner-icon"></span><span>Study Planner</span></a>
+      <a class="side-item" href="analytics.html"><span class="side-icon bars-icon"></span><span>Analytics</span></a>
+
+      <span class="side-heading">Practice</span>
+      <a class="side-item" href="question-bank.html"><span class="side-icon bank-icon"></span><span>Question Bank</span></a>
+      <a class="side-item" href="peakpoint-climb.html"><span class="side-icon climb-icon"></span><span>PeakPoint Climb</span></a>
+      <a class="side-item" href="peakpoint-style.html"><span class="side-icon challenge-icon"></span><span>PeakPoint Max</span></a>
+      <a class="side-item" href="peaklabs.html"><span class="side-icon tests-icon"></span><span>PeakLabs</span></a>
+      <a class="side-item" href="vocab.html"><span class="side-icon vocab-icon"></span><span>Vocab</span></a>
+
+      <span class="side-heading">Progress</span>
+      <a class="side-item" href="saved.html"><span class="side-icon saved-icon"></span><span>Saved</span></a>
+      <a class="side-item active" href="mistakes.html" aria-current="page"><span class="side-icon error-icon"></span><span>Mistakes Log</span></a>
+    </nav>
+  </div>
+
+  <div class="side-footer">
+    <div class="user-row">
+      <div class="user-avatar" aria-hidden="true"></div>
+      <strong id="side-user-name">Student</strong>
+      <button class="gear-button" type="button" aria-label="Settings"></button>
+    </div>
+  </div>
+</aside>
+
+<main class="prep-main mistakes-main">
+  <div class="mistakes-inner">
+    <header class="mistakes-hero">
+      <div>
+        <p class="eyebrow">Fix what costs points</p>
+        <h1>Mistakes Log</h1>
+        <p>Review missed questions, spot repeat patterns, and retry the exact skills that need attention.</p>
+      </div>
+    </header>
+
+    <section class="mistake-stats" aria-label="Mistake summary">
+      <article>
+        <span class="mistake-stat-icon error-mark" aria-hidden="true"></span>
+        <div><span>Recent errors</span><strong>27</strong></div>
+      </article>
+      <article>
+        <span class="mistake-stat-icon repeat-mark" aria-hidden="true"></span>
+        <div><span>Repeated patterns</span><strong>6</strong></div>
+      </article>
+      <article>
+        <span class="mistake-stat-icon mastered-mark" aria-hidden="true"></span>
+        <div><span>Resolved this week</span><strong>11</strong></div>
+      </article>
+    </section>
+
+    <section class="mistakes-toolbar" aria-label="Mistake filters">
+      <div class="mistake-tabs" role="tablist" aria-label="Mistake subject filters">
+        <button class="active" type="button" data-mistake-filter="all" aria-pressed="true">All</button>
+        <button type="button" data-mistake-filter="Math" aria-pressed="false">Math</button>
+        <button type="button" data-mistake-filter="Reading & Writing" aria-pressed="false">Reading &amp; Writing</button>
+        <button type="button" data-mistake-filter="Repeated" aria-pressed="false">Repeated</button>
+      </div>
+      <label class="mistakes-search">
+        <span class="sr-only">Search mistake log</span>
+        <input id="mistakes-search" type="search" placeholder="Search mistakes..." autocomplete="off" />
+      </label>
+    </section>
+
+    <section class="mistakes-layout" aria-label="Mistakes content">
+      <div class="mistakes-list-panel">
+        <div class="mistakes-section-head">
+          <div>
+            <span class="card-kicker">Review queue</span>
+            <h2>Missed questions</h2>
+          </div>
+          <button type="button" data-clear-mistakes>Clear filters</button>
+        </div>
+
+        <div class="mistakes-list" id="mistakes-list">
+          <article class="mistake-card repeated" data-subject="Math" data-tags="algebra linear equations repeated">
+            <div class="mistake-card-top">
+              <span class="subject-pill math">Math</span>
+              <span class="repeat-pill">Repeated</span>
+            </div>
+            <h3>Linear inequalities in two variables</h3>
+            <p>You selected a point that satisfied one inequality but missed the overlapping region.</p>
+            <div class="mistake-detail-grid">
+              <span><strong>Skill</strong> Algebra</span>
+              <span><strong>Missed</strong> 3 times</span>
+              <span><strong>Last try</strong> Jul 16</span>
+            </div>
+            <div class="mistake-actions">
+              <button type="button">Retry</button>
+              <button class="ghost-action" type="button" data-understood>Mark understood</button>
+            </div>
+          </article>
+
+          <article class="mistake-card" data-subject="Reading & Writing" data-tags="transitions expression ideas">
+            <div class="mistake-card-top">
+              <span class="subject-pill rw">Reading &amp; Writing</span>
+              <span class="date-pill">Jul 15</span>
+            </div>
+            <h3>Transitions</h3>
+            <p>The sentence needed a contrast transition, but the selected answer showed continuation.</p>
+            <div class="mistake-detail-grid">
+              <span><strong>Skill</strong> Expression of Ideas</span>
+              <span><strong>Missed</strong> 1 time</span>
+              <span><strong>Last try</strong> Jul 15</span>
+            </div>
+            <div class="mistake-actions">
+              <button type="button">Retry</button>
+              <button class="ghost-action" type="button" data-understood>Mark understood</button>
+            </div>
+          </article>
+
+          <article class="mistake-card repeated" data-subject="Math" data-tags="geometry right triangles repeated">
+            <div class="mistake-card-top">
+              <span class="subject-pill math">Math</span>
+              <span class="repeat-pill">Repeated</span>
+            </div>
+            <h3>Right triangles and trigonometry</h3>
+            <p>You used the hypotenuse correctly, but swapped opposite and adjacent sides.</p>
+            <div class="mistake-detail-grid">
+              <span><strong>Skill</strong> Geometry</span>
+              <span><strong>Missed</strong> 2 times</span>
+              <span><strong>Last try</strong> Jul 14</span>
+            </div>
+            <div class="mistake-actions">
+              <button type="button">Retry</button>
+              <button class="ghost-action" type="button" data-understood>Mark understood</button>
+            </div>
+          </article>
+
+          <article class="mistake-card" data-subject="Reading & Writing" data-tags="boundaries punctuation grammar">
+            <div class="mistake-card-top">
+              <span class="subject-pill rw">Reading &amp; Writing</span>
+              <span class="date-pill">Jul 13</span>
+            </div>
+            <h3>Boundaries</h3>
+            <p>The answer choice created a comma splice between two independent clauses.</p>
+            <div class="mistake-detail-grid">
+              <span><strong>Skill</strong> Standard English</span>
+              <span><strong>Missed</strong> 1 time</span>
+              <span><strong>Last try</strong> Jul 13</span>
+            </div>
+            <div class="mistake-actions">
+              <button type="button">Retry</button>
+              <button class="ghost-action" type="button" data-understood>Mark understood</button>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <aside class="mistake-patterns" aria-label="Mistake patterns">
+        <article class="pattern-card">
+          <span class="card-kicker">Top pattern</span>
+          <h2>Skipping condition checks</h2>
+          <p>Most missed Math questions came from solving the equation but not checking all stated restrictions.</p>
+          <div class="pattern-meter"><span style="--pattern: 68%;"></span></div>
+        </article>
+        <article class="pattern-card">
+          <span class="card-kicker">Fast fix</span>
+          <h2>Retry 8 focused questions</h2>
+          <p>Start with algebra and transitions before returning to mixed practice.</p>
+          <button type="button">Start Review</button>
+        </article>
+      </aside>
+    </section>
+  </div>
+</main>
+
+<script src="vendor/supabase.js"></script>
+<script src="supabase-config.js"></script>
+<script src="auth.js"></script>
+<script src="sidebar.js"></script>
+<script src="mistakes.js"></script>
+</body>
+</html>
