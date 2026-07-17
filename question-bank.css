@@ -23,10 +23,6 @@
 }
 
 .question-bank-hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 310px;
-  gap: 24px;
-  align-items: stretch;
   margin-bottom: 22px;
 }
 
@@ -44,7 +40,6 @@
   margin-top: 12px;
 }
 
-.bank-streak-card,
 .bank-toolbar,
 .bank-overview article,
 .subject-bank-card {
@@ -53,33 +48,11 @@
   box-shadow: var(--card-shadow);
 }
 
-.bank-streak-card {
-  border-radius: 24px;
-  padding: 24px;
-  align-self: end;
-  background:
-    radial-gradient(circle at 86% 20%, rgba(14, 165, 233, 0.2), transparent 36%),
-    linear-gradient(135deg, #ffffff, var(--surface-2));
-}
-
-.bank-streak-card span,
 .bank-overview span,
 .subject-card-head p {
   color: var(--text-secondary);
   font-family: var(--font-display);
   font-weight: 700;
-}
-
-.bank-streak-card strong {
-  display: block;
-  margin-top: 8px;
-  font-size: 2rem;
-}
-
-.bank-streak-card p {
-  margin-top: 7px;
-  color: var(--text-secondary);
-  line-height: 1.45;
 }
 
 .bank-toolbar {
@@ -216,21 +189,6 @@
   left: 22px;
   top: 12px;
   border-radius: 3px;
-}
-
-.target-mark::before {
-  inset: 10px;
-  border-radius: 50%;
-  background: none;
-  border: 4px solid currentColor;
-}
-
-.target-mark::after {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  left: 19px;
-  top: 19px;
 }
 
 .subject-grid {
@@ -469,13 +427,8 @@
 }
 
 @media (max-width: 1120px) {
-  .question-bank-hero,
   .subject-grid {
     grid-template-columns: 1fr;
-  }
-
-  .bank-streak-card {
-    align-self: stretch;
   }
 }
 
