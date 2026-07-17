@@ -139,7 +139,12 @@
                 <span class="card-kicker">Score distribution</span>
                 <h3 id="score-distribution-title">Domain strength by split</h3>
               </div>
-              <p>Use your score report domain bars or best estimate. The planner should prioritize lower domains first.</p>
+              <p>Use the progress bars from your College Board score report or your best estimate. Lower bars should be prioritized first.</p>
+            </div>
+            <div class="domain-legend" aria-label="Domain progress legend">
+              <span><i class="legend-building" aria-hidden="true"></i> Building</span>
+              <span><i class="legend-medium" aria-hidden="true"></i> Medium</span>
+              <span><i class="legend-strong" aria-hidden="true"></i> Strong</span>
             </div>
 
             <div class="domain-grid">
@@ -148,22 +153,34 @@
                   <h4>Reading &amp; Writing</h4>
                   <span>200-800 split</span>
                 </div>
-                <label class="domain-row">
+                <div class="domain-row">
                   <span><strong>Information and Ideas</strong><em>≈26% of RW</em></span>
-                  <input type="number" min="0" max="7" value="5" data-domain-score data-domain-name="Information and Ideas" />
-                </label>
-                <label class="domain-row">
+                  <div class="domain-control">
+                    <div class="domain-meter" data-domain-score data-domain-name="Information and Ideas" data-domain-level="5" role="group" aria-label="Information and Ideas progress bars"></div>
+                    <strong class="domain-band">Medium</strong>
+                  </div>
+                </div>
+                <div class="domain-row">
                   <span><strong>Craft and Structure</strong><em>≈28% of RW</em></span>
-                  <input type="number" min="0" max="7" value="4" data-domain-score data-domain-name="Craft and Structure" />
-                </label>
-                <label class="domain-row">
+                  <div class="domain-control">
+                    <div class="domain-meter" data-domain-score data-domain-name="Craft and Structure" data-domain-level="4" role="group" aria-label="Craft and Structure progress bars"></div>
+                    <strong class="domain-band">Medium</strong>
+                  </div>
+                </div>
+                <div class="domain-row">
                   <span><strong>Expression of Ideas</strong><em>≈20% of RW</em></span>
-                  <input type="number" min="0" max="7" value="5" data-domain-score data-domain-name="Expression of Ideas" />
-                </label>
-                <label class="domain-row">
+                  <div class="domain-control">
+                    <div class="domain-meter" data-domain-score data-domain-name="Expression of Ideas" data-domain-level="5" role="group" aria-label="Expression of Ideas progress bars"></div>
+                    <strong class="domain-band">Medium</strong>
+                  </div>
+                </div>
+                <div class="domain-row">
                   <span><strong>Standard English Conventions</strong><em>≈26% of RW</em></span>
-                  <input type="number" min="0" max="7" value="6" data-domain-score data-domain-name="Standard English Conventions" />
-                </label>
+                  <div class="domain-control">
+                    <div class="domain-meter" data-domain-score data-domain-name="Standard English Conventions" data-domain-level="6" role="group" aria-label="Standard English Conventions progress bars"></div>
+                    <strong class="domain-band">Strong</strong>
+                  </div>
+                </div>
               </article>
 
               <article class="domain-card">
@@ -171,22 +188,34 @@
                   <h4>Math</h4>
                   <span>200-800 split</span>
                 </div>
-                <label class="domain-row">
+                <div class="domain-row">
                   <span><strong>Algebra</strong><em>≈35% of Math</em></span>
-                  <input type="number" min="0" max="7" value="5" data-domain-score data-domain-name="Algebra" />
-                </label>
-                <label class="domain-row">
+                  <div class="domain-control">
+                    <div class="domain-meter" data-domain-score data-domain-name="Algebra" data-domain-level="5" role="group" aria-label="Algebra progress bars"></div>
+                    <strong class="domain-band">Medium</strong>
+                  </div>
+                </div>
+                <div class="domain-row">
                   <span><strong>Advanced Math</strong><em>≈35% of Math</em></span>
-                  <input type="number" min="0" max="7" value="4" data-domain-score data-domain-name="Advanced Math" />
-                </label>
-                <label class="domain-row">
+                  <div class="domain-control">
+                    <div class="domain-meter" data-domain-score data-domain-name="Advanced Math" data-domain-level="4" role="group" aria-label="Advanced Math progress bars"></div>
+                    <strong class="domain-band">Medium</strong>
+                  </div>
+                </div>
+                <div class="domain-row">
                   <span><strong>Problem-Solving and Data Analysis</strong><em>≈15% of Math</em></span>
-                  <input type="number" min="0" max="7" value="5" data-domain-score data-domain-name="Problem-Solving and Data Analysis" />
-                </label>
-                <label class="domain-row">
+                  <div class="domain-control">
+                    <div class="domain-meter" data-domain-score data-domain-name="Problem-Solving and Data Analysis" data-domain-level="5" role="group" aria-label="Problem-Solving and Data Analysis progress bars"></div>
+                    <strong class="domain-band">Medium</strong>
+                  </div>
+                </div>
+                <div class="domain-row">
                   <span><strong>Geometry and Trigonometry</strong><em>≈15% of Math</em></span>
-                  <input type="number" min="0" max="7" value="3" data-domain-score data-domain-name="Geometry and Trigonometry" />
-                </label>
+                  <div class="domain-control">
+                    <div class="domain-meter" data-domain-score data-domain-name="Geometry and Trigonometry" data-domain-level="3" role="group" aria-label="Geometry and Trigonometry progress bars"></div>
+                    <strong class="domain-band">Building</strong>
+                  </div>
+                </div>
               </article>
             </div>
           </section>
@@ -208,7 +237,7 @@
             <div><span>Weekly time</span><strong id="weekly-time">3.0h</strong></div>
             <div><span>RW / Math</span><strong id="score-split">660 / 680</strong></div>
             <div><span>Weakest domain</span><strong id="weakest-domain">Geometry and Trigonometry</strong></div>
-            <div><span>Domain average</span><strong id="domain-average">4.6 / 7</strong></div>
+            <div><span>Overall domain band</span><strong id="domain-average">Medium</strong></div>
             <div><span>Practice test</span><strong>Every 2 weeks</strong></div>
           </div>
         </article>

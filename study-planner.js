@@ -21,7 +21,7 @@
   const rwScore = $('rw-score');
   const mathScore = $('math-score');
   const dailyTime = $('daily-time');
-  const domainInputs = Array.from(document.querySelectorAll('[data-domain-score]'));
+  const domainMeters = Array.from(document.querySelectorAll('[data-domain-score]'));
   const toggleInputs = Array.from(document.querySelectorAll('.planner-days input, .focus-chips input'));
 
   function showPanel(view) {
@@ -46,6 +46,49 @@
     });
   }
 
+  function domainBand(level) {
+    if (level <= 3) return 'Building';
+    if (level <= 5) return 'Medium';
+    return 'Strong';
+  }
+
+  function syncDomainMeter(meter) {
+    const level = Math.min(7, Math.max(1, Number(meter.dataset.domainLevel) || 1));
+    meter.dataset.domainLevel = String(level);
+    meter.querySelectorAll('.domain-dot').forEach((dot) => {
+      const dotLevel = Number(dot.dataset.level);
+      dot.classList.toggle('is-building', dotLevel <= 3);
+      dot.classList.toggle('is-medium', dotLevel >= 4 && dotLevel <= 5);
+      dot.classList.toggle('is-strong', dotLevel >= 6);
+      dot.classList.toggle('is-filled', dotLevel <= level);
+      dot.classList.toggle('is-current', dotLevel === level);
+      dot.setAttribute('aria-pressed', String(dotLevel === level));
+    });
+    const band = meter.closest('.domain-control')?.querySelector('.domain-band');
+    if (band) band.textContent = domainBand(level);
+  }
+
+  function setupDomainMeters() {
+    domainMeters.forEach((meter) => {
+      const name = meter.dataset.domainName || 'domain';
+      meter.innerHTML = '';
+      for (let level = 1; level <= 7; level += 1) {
+        const dot = document.createElement('button');
+        dot.className = 'domain-dot';
+        dot.type = 'button';
+        dot.dataset.level = String(level);
+        dot.setAttribute('aria-label', `Set ${name} progress to ${domainBand(level)}`);
+        dot.addEventListener('click', () => {
+          meter.dataset.domainLevel = String(level);
+          syncDomainMeter(meter);
+          updateSnapshot();
+        });
+        meter.appendChild(dot);
+      }
+      syncDomainMeter(meter);
+    });
+  }
+
   function updateSnapshot() {
     const today = new Date();
     const selectedDate = testDate && testDate.value ? new Date(`${testDate.value}T12:00:00`) : today;
@@ -61,9 +104,9 @@
     const splitEl = $('score-split');
     const weakestEl = $('weakest-domain');
     const averageEl = $('domain-average');
-    const domainScores = domainInputs.map((input) => ({
-      name: input.dataset.domainName || 'Domain',
-      score: Math.min(7, Math.max(0, Number(input.value) || 0))
+    const domainScores = domainMeters.map((meter) => ({
+      name: meter.dataset.domainName || 'Domain',
+      score: Math.min(7, Math.max(1, Number(meter.dataset.domainLevel) || 1))
     }));
     const weakest = domainScores.reduce((lowest, item) => (
       item.score < lowest.score ? item : lowest
@@ -77,7 +120,7 @@
     if (weeklyEl) weeklyEl.textContent = `${weeklyHours}h`;
     if (splitEl) splitEl.textContent = `${Number(rwScore && rwScore.value) || 660} / ${Number(mathScore && mathScore.value) || 680}`;
     if (weakestEl) weakestEl.textContent = weakest.name;
-    if (averageEl) averageEl.textContent = `${average.toFixed(1)} / 7`;
+    if (averageEl) averageEl.textContent = domainBand(Math.round(average));
   }
 
   tabs.forEach((tab) => {
@@ -96,6 +139,7 @@
   const refresh = $('refresh-plan');
   if (refresh) refresh.addEventListener('click', updateSnapshot);
 
+  setupDomainMeters();
   syncTogglePills();
   updateSnapshot();
 })();
