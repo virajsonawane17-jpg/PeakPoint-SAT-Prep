@@ -1,0 +1,241 @@
+{
+ "generated": 1784319251,
+ "source": "College Board SAT Suite Question Bank",
+ "subjects": [
+  {
+   "name": "Reading & Writing",
+   "test": 1,
+   "domains": [
+    {
+     "code": "INI",
+     "name": "Information and Ideas",
+     "skills": [
+      {
+       "code": "INF",
+       "name": "Inferences",
+       "slug": "inf",
+       "count": 124
+      },
+      {
+       "code": "CID",
+       "name": "Central Ideas & Details",
+       "slug": "cid",
+       "count": 125
+      },
+      {
+       "code": "COE",
+       "name": "Command of Evidence",
+       "slug": "coe",
+       "count": 258
+      }
+     ]
+    },
+    {
+     "code": "CAS",
+     "name": "Craft and Structure",
+     "skills": [
+      {
+       "code": "WIC",
+       "name": "Words in Context",
+       "slug": "wic",
+       "count": 241
+      },
+      {
+       "code": "TSP",
+       "name": "Text Structure & Purpose",
+       "slug": "tsp",
+       "count": 138
+      },
+      {
+       "code": "CTC",
+       "name": "Cross-Text Connections",
+       "slug": "ctc",
+       "count": 58
+      }
+     ]
+    },
+    {
+     "code": "EOI",
+     "name": "Expression of Ideas",
+     "skills": [
+      {
+       "code": "TRA",
+       "name": "Transitions",
+       "slug": "tra",
+       "count": 173
+      },
+      {
+       "code": "SYN",
+       "name": "Rhetorical Synthesis",
+       "slug": "syn",
+       "count": 192
+      }
+     ]
+    },
+    {
+     "code": "SEC",
+     "name": "Standard English Conventions",
+     "skills": [
+      {
+       "code": "BOU",
+       "name": "Boundaries",
+       "slug": "bou",
+       "count": 190
+      },
+      {
+       "code": "FSS",
+       "name": "Form, Structure & Sense",
+       "slug": "fss",
+       "count": 189
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Math",
+   "test": 2,
+   "domains": [
+    {
+     "code": "H",
+     "name": "Algebra",
+     "skills": [
+      {
+       "code": "H.A.",
+       "name": "Linear Equations in One Variable",
+       "slug": "ha",
+       "count": 107
+      },
+      {
+       "code": "H.D.",
+       "name": "Systems of Two Linear Equations",
+       "slug": "hd",
+       "count": 116
+      },
+      {
+       "code": "H.B.",
+       "name": "Linear Functions",
+       "slug": "hb",
+       "count": 157
+      },
+      {
+       "code": "H.C.",
+       "name": "Linear Equations in Two Variables",
+       "slug": "hc",
+       "count": 128
+      },
+      {
+       "code": "H.E.",
+       "name": "Linear Inequalities in One or Two Variables",
+       "slug": "he",
+       "count": 74
+      }
+     ]
+    },
+    {
+     "code": "P",
+     "name": "Advanced Math",
+     "skills": [
+      {
+       "code": "P.C.",
+       "name": "Nonlinear Functions",
+       "slug": "pc",
+       "count": 240
+      },
+      {
+       "code": "P.B.",
+       "name": "Nonlinear Equations & Systems",
+       "slug": "pb",
+       "count": 154
+      },
+      {
+       "code": "P.A.",
+       "name": "Equivalent Expressions",
+       "slug": "pa",
+       "count": 107
+      }
+     ]
+    },
+    {
+     "code": "Q",
+     "name": "Problem-Solving and Data Analysis",
+     "skills": [
+      {
+       "code": "Q.F.",
+       "name": "Inference from Statistics & Margin of Error",
+       "slug": "qf",
+       "count": 24
+      },
+      {
+       "code": "Q.A.",
+       "name": "Ratios, Rates, Proportions & Units",
+       "slug": "qa",
+       "count": 87
+      },
+      {
+       "code": "Q.E.",
+       "name": "Probability & Conditional Probability",
+       "slug": "qe",
+       "count": 45
+      },
+      {
+       "code": "Q.B.",
+       "name": "Percentages",
+       "slug": "qb",
+       "count": 79
+      },
+      {
+       "code": "Q.C.",
+       "name": "One-Variable Data & Distributions",
+       "slug": "qc",
+       "count": 77
+      },
+      {
+       "code": "Q.D.",
+       "name": "Two-Variable Data & Scatterplots",
+       "slug": "qd",
+       "count": 66
+      },
+      {
+       "code": "Q.G.",
+       "name": "Evaluating Statistical Claims",
+       "slug": "qg",
+       "count": 11
+      }
+     ]
+    },
+    {
+     "code": "S",
+     "name": "Geometry and Trigonometry",
+     "skills": [
+      {
+       "code": "S.B.",
+       "name": "Lines, Angles & Triangles",
+       "slug": "sb",
+       "count": 84
+      },
+      {
+       "code": "S.A.",
+       "name": "Area & Volume",
+       "slug": "sa",
+       "count": 90
+      },
+      {
+       "code": "S.C.",
+       "name": "Right Triangles & Trigonometry",
+       "slug": "sc",
+       "count": 57
+      },
+      {
+       "code": "S.D.",
+       "name": "Circles",
+       "slug": "sd",
+       "count": 53
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "total": 3444
+}

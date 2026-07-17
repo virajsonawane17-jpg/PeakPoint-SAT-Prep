@@ -92,8 +92,36 @@
 
 .bank-tabs button:hover,
 .start-pill:hover,
-.skill-list button:hover {
+.skill-list button:hover,
+.skill-list .skill-link:hover {
   transform: translateY(-1px);
+}
+
+.bank-loading {
+  margin-top: 24px;
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.bank-mark::before {
+  width: 22px;
+  height: 16px;
+  left: 13px;
+  top: 16px;
+  border-radius: 3px;
+  background: none;
+  border: 3px solid currentColor;
+}
+
+.bank-mark::after {
+  width: 10px;
+  height: 3px;
+  left: 19px;
+  top: 22px;
+  box-shadow: 0 -5px 0 currentColor, 0 5px 0 currentColor;
 }
 
 .bank-search input {
@@ -326,7 +354,8 @@
   display: none;
 }
 
-.skill-list button {
+.skill-list button,
+.skill-list .skill-link {
   min-height: 34px;
   border: 0;
   border-radius: 12px;
@@ -340,11 +369,15 @@
   font-family: var(--font-display);
   font-weight: 700;
   text-align: left;
+  text-decoration: none;
+  cursor: pointer;
   transition: background 0.18s var(--easing), color 0.18s var(--easing), transform 0.18s var(--easing);
 }
 
 .skill-list button:hover,
-.skill-list button:focus-visible {
+.skill-list button:focus-visible,
+.skill-list .skill-link:hover,
+.skill-list .skill-link:focus-visible {
   background: var(--surface-2);
   color: var(--text-heading);
 }
@@ -352,6 +385,10 @@
 .skill-list strong {
   color: var(--text-muted);
   font-size: 0.82rem;
+}
+
+.start-pill {
+  text-decoration: none;
 }
 
 .bank-modal {

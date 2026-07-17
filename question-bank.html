@@ -79,46 +79,33 @@
       </label>
     </section>
 
-    <section class="bank-overview" aria-label="Question bank overview">
+    <section class="bank-overview" aria-label="Question bank overview" id="bank-overview">
+      <article>
+        <span class="overview-icon bank-mark" aria-hidden="true"></span>
+        <div>
+          <span>Total questions</span>
+          <strong id="ov-total">—</strong>
+        </div>
+      </article>
       <article>
         <span class="overview-icon rw-mark" aria-hidden="true"></span>
         <div>
           <span>Reading &amp; Writing</span>
-          <strong>Attempted Reading questions</strong>
+          <strong id="ov-rw">—</strong>
         </div>
       </article>
       <article>
         <span class="overview-icon math-mark" aria-hidden="true"></span>
         <div>
           <span>Math</span>
-          <strong>Attempted Math questions</strong>
+          <strong id="ov-math">—</strong>
         </div>
       </article>
     </section>
 
-    <section class="subject-grid" aria-label="Question subjects">
-      <article class="subject-bank-card" data-subject-card="Reading & Writing">
-        <div class="subject-card-head">
-          <div>
-            <span class="card-kicker">Reading &amp; Writing</span>
-            <h2>Reading &amp; Writing</h2>
-            <p>2,000 questions</p>
-          </div>
-          <button class="start-pill" type="button" data-start-subject="Reading & Writing"><span class="play-dot" aria-hidden="true"></span>Start</button>
-        </div>
+    <section class="subject-grid" id="subject-grid" aria-label="Question subjects" hidden></section>
 
-        <div class="domain-list">
-          <section class="domain-group is-open" data-domain-group>
-            <button class="domain-toggle" type="button" aria-expanded="true">
-              <span>Information &amp; Ideas</span>
-              <strong>500</strong>
-            </button>
-            <div class="skill-list">
-              <button type="button" data-skill="Central Ideas & Details"><span>Central Ideas &amp; Details</span><strong>167</strong></button>
-              <button type="button" data-skill="Inferences"><span>Inferences</span><strong>167</strong></button>
-              <button type="button" data-skill="Command of Evidence"><span>Command of Evidence</span><strong>166</strong></button>
-            </div>
-          </section>
+    <div class="bank-loading" id="bank-loading">Loading the College Board question bank…</div>
 
           <section class="domain-group is-open" data-domain-group>
             <button class="domain-toggle" type="button" aria-expanded="true">
@@ -226,19 +213,6 @@
     </section>
   </div>
 </main>
-
-<div class="bank-modal" id="bank-modal" role="dialog" aria-modal="true" aria-labelledby="bank-modal-title" hidden>
-  <div class="bank-modal-panel">
-    <button class="bank-modal-close" type="button" aria-label="Close practice preview" data-close-modal>&times;</button>
-    <span class="card-kicker">Practice preview</span>
-    <h2 id="bank-modal-title">Start practice</h2>
-    <p id="bank-modal-copy">This will launch a focused practice set when question-bank logic is connected.</p>
-    <div class="modal-actions">
-      <button class="cyan-button" type="button" data-close-modal>Got it</button>
-      <a class="modal-secondary" href="peakpoint-climb.html">Try PeakPoint Climb</a>
-    </div>
-  </div>
-</div>
 
 <script src="vendor/supabase.js"></script>
 <script src="supabase-config.js"></script>

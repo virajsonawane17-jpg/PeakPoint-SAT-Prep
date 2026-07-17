@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0ea5e9" />
+<meta name="description" content="Browse and practice PeakPoint SAT-style questions for a chosen skill, with sorting and filtering." />
+<title>Questions - PeakPoint SAT Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&amp;family=Instrument+Sans:wght@400;500;600;700&amp;family=Open+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="app.css" />
+<link rel="stylesheet" href="question-bank.css" />
+<link rel="stylesheet" href="question-list.css" />
+<link rel="icon" href="logo.svg" />
+</head>
+<body class="dashboard-screen question-list-screen">
+
+<aside class="prep-sidebar" id="app-sidebar" aria-label="PeakPoint sidebar">
+  <div>
+    <a class="side-brand" href="dashboard.html" aria-label="PeakPoint home">
+      <img src="logo.svg" alt="" width="36" height="36" />
+      <span>PeakPoint</span>
+    </a>
+
+    <nav class="side-nav" aria-label="Dashboard navigation">
+      <button class="side-item sidebar-toggle" id="sidebar-toggle" type="button" aria-controls="app-sidebar" aria-expanded="true" aria-label="Hide sidebar">
+        <span class="side-icon toggle-sidebar-icon" aria-hidden="true"></span>
+        <span data-sidebar-toggle-label>Hide sidebar</span>
+        <span class="toggle-arrow" data-sidebar-toggle-icon aria-hidden="true">&lsaquo;</span>
+      </button>
+      <a class="side-item" href="dashboard.html"><span class="side-icon home-icon"></span><span>Home</span></a>
+      <a class="side-item" href="resources.html"><span class="side-icon resources-icon"></span><span>Resources</span></a>
+      <a class="side-item" href="peakpal.html"><span class="side-icon ai-icon"></span><span>PeakPal</span></a>
+      <a class="side-item" href="study-planner.html"><span class="side-icon planner-icon"></span><span>Study Planner</span></a>
+      <a class="side-item" href="analytics.html"><span class="side-icon bars-icon"></span><span>Analytics</span></a>
+
+      <span class="side-heading">Practice</span>
+      <a class="side-item active" href="question-bank.html" aria-current="page"><span class="side-icon bank-icon"></span><span>Question Bank</span></a>
+      <a class="side-item" href="peakpoint-climb.html"><span class="side-icon climb-icon"></span><span>PeakPoint Climb</span></a>
+      <a class="side-item" href="peakpoint-style.html"><span class="side-icon challenge-icon"></span><span>PeakPoint Max</span></a>
+      <a class="side-item" href="peaklabs.html"><span class="side-icon tests-icon"></span><span>PeakLabs</span></a>
+      <a class="side-item" href="vocab.html"><span class="side-icon vocab-icon"></span><span>Vocab</span></a>
+
+      <span class="side-heading">Progress</span>
+      <a class="side-item" href="saved.html"><span class="side-icon saved-icon"></span><span>Saved</span></a>
+      <a class="side-item" href="mistakes.html"><span class="side-icon error-icon"></span><span>Mistakes Log</span></a>
+    </nav>
+  </div>
+
+  <div class="side-footer">
+    <div class="user-row">
+      <div class="user-avatar" aria-hidden="true"></div>
+      <strong id="side-user-name">Student</strong>
+      <a class="gear-button" href="settings.html" aria-label="Settings"></a>
+    </div>
+  </div>
+</aside>
+
+<main class="prep-main question-list-main">
+  <div class="question-list-inner">
+    <nav class="qlist-breadcrumb" aria-label="Breadcrumb">
+      <a href="question-bank.html">Question Bank</a>
+      <span aria-hidden="true">/</span>
+      <span id="crumb-subject">Reading &amp; Writing</span>
+      <span aria-hidden="true">/</span>
+      <span id="crumb-skill" class="is-current">Skill</span>
+    </nav>
+
+    <header class="qlist-hero">
+      <div>
+        <p class="eyebrow" id="qlist-eyebrow">SAT-style practice</p>
+        <h1 id="qlist-title">Questions</h1>
+        <p id="qlist-sub">Work through a focused set of questions. Filter by difficulty or status, sort your view, and open any question to practice.</p>
+      </div>
+      <div class="qlist-progress-card" aria-label="Your progress on this set">
+        <div class="qlist-ring" id="qlist-ring" role="img" aria-label="Progress">
+          <strong id="qlist-ring-pct">0%</strong>
+        </div>
+        <div class="qlist-progress-meta">
+          <span><b id="stat-correct">0</b> correct</span>
+          <span><b id="stat-incorrect">0</b> incorrect</span>
+          <span><b id="stat-remaining">0</b> remaining</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="qlist-toolbar" aria-label="Sort and filter">
+      <div class="qlist-filter-groups">
+        <div class="qlist-filter-group" role="group" aria-label="Filter by difficulty">
+          <span class="qlist-filter-label">Difficulty</span>
+          <div class="qlist-chips" data-filter-set="difficulty">
+            <button type="button" class="active" data-value="all" aria-pressed="true">All</button>
+            <button type="button" data-value="Easy" aria-pressed="false">Easy</button>
+            <button type="button" data-value="Medium" aria-pressed="false">Medium</button>
+            <button type="button" data-value="Hard" aria-pressed="false">Hard</button>
+          </div>
+        </div>
+
+        <div class="qlist-filter-group" role="group" aria-label="Filter by status">
+          <span class="qlist-filter-label">Status</span>
+          <div class="qlist-chips" data-filter-set="status">
+            <button type="button" class="active" data-value="all" aria-pressed="true">All</button>
+            <button type="button" data-value="unattempted" aria-pressed="false">Not started</button>
+            <button type="button" data-value="correct" aria-pressed="false">Correct</button>
+            <button type="button" data-value="incorrect" aria-pressed="false">Incorrect</button>
+            <button type="button" data-value="marked" aria-pressed="false">Marked</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="qlist-toolbar-controls">
+        <label class="qlist-search">
+          <span class="sr-only">Search questions</span>
+          <input id="qlist-search" type="search" placeholder="Search questions..." autocomplete="off" />
+        </label>
+        <label class="qlist-sort">
+          <span class="sr-only">Sort questions</span>
+          <select id="qlist-sort">
+            <option value="default">Sort: Default order</option>
+            <option value="diff-asc">Difficulty: Easy → Hard</option>
+            <option value="diff-desc">Difficulty: Hard → Easy</option>
+            <option value="status">Status: Not started first</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <p class="qlist-count" id="qlist-count" aria-live="polite">0 questions</p>
+
+    <ol class="qlist" id="qlist" aria-label="Question list"></ol>
+
+    <div class="qlist-empty" id="qlist-empty" hidden>
+      <p>No questions match your filters.</p>
+      <button class="cyan-button" type="button" id="qlist-reset">Clear filters</button>
+    </div>
+  </div>
+</main>
+
+<!-- Practice modal -->
+<div class="practice-modal" id="practice-modal" role="dialog" aria-modal="true" aria-labelledby="practice-heading" hidden>
+  <div class="practice-panel">
+    <header class="practice-head">
+      <div class="practice-head-meta">
+        <span class="q-badge" id="practice-difficulty">Medium</span>
+        <span class="practice-skill" id="practice-skill">Skill</span>
+        <span class="practice-id" id="practice-id">ID</span>
+      </div>
+      <div class="practice-head-actions">
+        <button type="button" class="icon-toggle" id="practice-mark" aria-pressed="false" title="Mark for review">
+          <span class="mark-flag" aria-hidden="true"></span><span>Mark</span>
+        </button>
+        <button type="button" class="icon-toggle" id="practice-save" aria-pressed="false" title="Save question">
+          <span class="save-bookmark" aria-hidden="true"></span><span>Save</span>
+        </button>
+        <button type="button" class="practice-close" id="practice-close" aria-label="Close question">&times;</button>
+      </div>
+    </header>
+
+    <div class="practice-body">
+      <div class="practice-passage" id="practice-passage" hidden></div>
+      <div class="practice-question">
+        <h2 id="practice-heading" class="practice-prompt">Question prompt</h2>
+        <form id="practice-choices" class="practice-choices"></form>
+        <div class="practice-explanation" id="practice-explanation" hidden>
+          <p class="explain-result" id="explain-result"></p>
+          <p class="explain-label">Explanation</p>
+          <p id="explain-text"></p>
+        </div>
+      </div>
+    </div>
+
+    <footer class="practice-foot">
+      <button type="button" class="ghost-nav" id="practice-prev">&lsaquo; Previous</button>
+      <div class="practice-foot-center">
+        <span id="practice-position">1 of 1</span>
+      </div>
+      <div class="practice-foot-right">
+        <button type="button" class="cyan-button" id="practice-check" disabled>Check answer</button>
+        <button type="button" class="ghost-nav" id="practice-next">Next &rsaquo;</button>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<div class="qlist-toast" id="qlist-toast" role="status" aria-live="polite"></div>
+
+<script src="vendor/supabase.js"></script>
+<script src="supabase-config.js"></script>
+<script src="auth.js"></script>
+<script src="sidebar.js"></script>
+<script src="question-list.js"></script>
+</body>
+</html>
