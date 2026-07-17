@@ -162,7 +162,7 @@
   overflow-x: hidden;
 }
 
-.dashboard-screen:not(.resources-screen):not(.peakpal-screen):not(.vocab-screen):not(.analytics-screen):not(.study-planner-screen):not(.peakpoint-style-screen) .prep-main button,
+.dashboard-screen:not(.resources-screen):not(.peakpal-screen):not(.vocab-screen):not(.analytics-screen):not(.study-planner-screen):not(.peakpoint-style-screen):not(.climb-screen) .prep-main button,
 .dashboard-screen .prep-sidebar button {
   cursor: default;
 }
@@ -476,6 +476,23 @@
   left: 4px;
   top: 1px;
   clip-path: polygon(48% 0, 100% 0, 65% 42%, 100% 42%, 31% 100%, 45% 55%, 10% 55%);
+}
+
+.climb-icon::before {
+  width: 20px;
+  height: 17px;
+  left: 1px;
+  top: 3px;
+  clip-path: polygon(0 100%, 34% 42%, 49% 64%, 67% 26%, 100% 100%);
+}
+
+.climb-icon::after {
+  width: 5px;
+  height: 5px;
+  right: 2px;
+  top: 1px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.12);
 }
 
 .challenge-icon::before {

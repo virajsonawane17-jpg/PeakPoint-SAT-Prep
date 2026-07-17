@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0ea5e9" />
+<meta name="description" content="PeakPoint Climb turns SAT practice into a journey from Base Camp to the Summit." />
+<title>PeakPoint Climb - PeakPoint SAT Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&amp;family=Instrument+Sans:wght@400;500;600;700&amp;family=Open+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="app.css" />
+<link rel="stylesheet" href="peakpoint-climb.css" />
+<link rel="icon" href="logo.svg" />
+</head>
+<body class="dashboard-screen climb-screen">
+
+<aside class="prep-sidebar" id="app-sidebar" aria-label="PeakPoint sidebar">
+  <div>
+    <a class="side-brand" href="dashboard.html" aria-label="PeakPoint home">
+      <img src="logo.svg" alt="" width="36" height="36" />
+      <span>PeakPoint</span>
+    </a>
+
+    <nav class="side-nav" aria-label="Dashboard navigation">
+      <button class="side-item sidebar-toggle" id="sidebar-toggle" type="button" aria-controls="app-sidebar" aria-expanded="true" aria-label="Hide sidebar">
+        <span class="side-icon toggle-sidebar-icon" aria-hidden="true"></span>
+        <span data-sidebar-toggle-label>Hide sidebar</span>
+        <span class="toggle-arrow" data-sidebar-toggle-icon aria-hidden="true">&lsaquo;</span>
+      </button>
+      <a class="side-item" href="dashboard.html"><span class="side-icon home-icon"></span><span>Home</span></a>
+      <a class="side-item" href="resources.html"><span class="side-icon resources-icon"></span><span>Resources</span></a>
+      <a class="side-item" href="peakpal.html"><span class="side-icon ai-icon"></span><span>PeakPal</span></a>
+      <a class="side-item" href="study-planner.html"><span class="side-icon planner-icon"></span><span>Study Planner</span></a>
+      <a class="side-item" href="analytics.html"><span class="side-icon bars-icon"></span><span>Analytics</span></a>
+
+      <span class="side-heading">Practice</span>
+      <button class="side-item" type="button"><span class="side-icon bank-icon"></span><span>Question Bank</span></button>
+      <a class="side-item active" href="peakpoint-climb.html" aria-current="page"><span class="side-icon climb-icon"></span><span>PeakPoint Climb</span></a>
+      <a class="side-item" href="peakpoint-style.html"><span class="side-icon challenge-icon"></span><span>PeakPoint Max</span></a>
+      <button class="side-item" type="button"><span class="side-icon tests-icon"></span><span>Predicted Tests</span></button>
+      <a class="side-item" href="vocab.html"><span class="side-icon vocab-icon"></span><span>Vocab</span></a>
+
+      <span class="side-heading">Progress</span>
+      <button class="side-item" type="button"><span class="side-icon saved-icon"></span><span>Saved</span></button>
+      <button class="side-item" type="button"><span class="side-icon error-icon"></span><span>Mistakes Log</span></button>
+    </nav>
+  </div>
+
+  <div class="side-footer">
+    <div class="user-row">
+      <div class="user-avatar" aria-hidden="true"></div>
+      <strong id="side-user-name">Student</strong>
+      <button class="gear-button" type="button" aria-label="Settings"></button>
+    </div>
+  </div>
+</aside>
+
+<main class="prep-main climb-main">
+  <header class="climb-hero">
+    <div class="climb-hero-copy">
+      <p class="eyebrow">Your SAT adventure</p>
+      <h1>PeakPoint Climb</h1>
+      <p>Master every region, build your streak, and keep moving toward the summit.</p>
+    </div>
+    <div class="hero-actions">
+      <span class="current-stage-pill"><i aria-hidden="true"></i> Forest - 64%</span>
+      <button class="climb-primary" type="button" data-scroll-current>
+        Continue Climbing <span aria-hidden="true">&darr;</span>
+      </button>
+    </div>
+  </header>
+
+  <section class="climb-hud" aria-label="Climb progress">
+    <div class="summit-progress">
+      <div class="hud-label-row">
+        <span>Distance to summit</span>
+        <strong>5.4 km</strong>
+      </div>
+      <div class="summit-progress-track" aria-label="42 percent of the climb complete" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="42">
+        <span></span>
+        <i class="progress-flag" aria-hidden="true"></i>
+      </div>
+    </div>
+    <div class="hud-stat">
+      <span class="hud-icon level-icon" aria-hidden="true">12</span>
+      <div><span>Current level</span><strong>Trailblazer</strong></div>
+    </div>
+    <div class="hud-stat">
+      <span class="hud-icon streak-icon" aria-hidden="true"></span>
+      <div><span>Study streak</span><strong>8 days</strong></div>
+    </div>
+    <div class="hud-stat">
+      <span class="hud-icon xp-icon" aria-hidden="true">XP</span>
+      <div><span>Total earned</span><strong>2,840 XP</strong></div>
+    </div>
+  </section>
+
+  <section class="achievement-row" aria-labelledby="achievement-title">
+    <div class="achievement-heading">
+      <span class="achievement-medal" aria-hidden="true"></span>
+      <div><span>Recently unlocked</span><h2 id="achievement-title">Trail achievements</h2></div>
+    </div>
+    <div class="achievement-list">
+      <button class="achievement-chip" type="button" data-achievement="First Ascent"><span class="badge-camp" aria-hidden="true"></span><strong>First Ascent</strong><small>Base Camp cleared</small></button>
+      <button class="achievement-chip" type="button" data-achievement="Streak Spark"><span class="badge-fire" aria-hidden="true"></span><strong>Streak Spark</strong><small>7 days in a row</small></button>
+      <button class="achievement-chip" type="button" data-achievement="Accuracy Ace"><span class="badge-target" aria-hidden="true"></span><strong>Accuracy Ace</strong><small>90% in a lesson</small></button>
+    </div>
+  </section>
+
+  <section class="mountain-journey" id="mountain-journey" aria-label="PeakPoint Climb mountain journey">
+    <div class="mountain-sky" aria-hidden="true"></div>
+    <div class="summit-glow" aria-hidden="true"></div>
+    <div class="cloud cloud-one" aria-hidden="true"></div>
+    <div class="cloud cloud-two" aria-hidden="true"></div>
+    <div class="cloud cloud-three" aria-hidden="true"></div>
+    <div class="bird-flock flock-one" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="bird-flock flock-two" aria-hidden="true"><i></i><i></i></div>
+    <div class="snowfall" aria-hidden="true">
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+    <div class="mountain-spine" aria-hidden="true"></div>
+    <div class="mountain-facet facet-left" aria-hidden="true"></div>
+    <div class="mountain-facet facet-right" aria-hidden="true"></div>
+
+    <div class="altitude-ruler" aria-hidden="true">
+      <span style="--altitude-y: 8%;">1,000 m</span>
+      <span style="--altitude-y: 42%;">2,000 m</span>
+      <span style="--altitude-y: 74%;">3,000 m</span>
+      <span style="--altitude-y: 94%;">4,000 m</span>
+    </div>
+
+    <svg class="climb-trail" viewBox="0 0 1000 3120" preserveAspectRatio="none" aria-hidden="true">
+      <path class="trail-shadow" d="M500 260 C680 400 680 640 500 780 C300 940 300 1160 500 1300 C720 1460 720 1660 500 1820 C300 1980 300 2200 500 2340 C720 2500 710 2720 500 2860" />
+      <path class="trail-line" pathLength="100" d="M500 260 C680 400 680 640 500 780 C300 940 300 1160 500 1300 C720 1460 720 1660 500 1820 C300 1980 300 2200 500 2340 C720 2500 710 2720 500 2860" />
+      <path class="trail-complete" pathLength="100" d="M500 260 C680 400 680 640 500 780 C300 940 300 1160 500 1300 C720 1460 720 1660 500 1820 C300 1980 300 2200 500 2340 C720 2500 710 2720 500 2860" />
+    </svg>
+
+    <article class="checkpoint checkpoint-left region-camp is-complete" data-checkpoint="Base Camp" data-state="complete">
+      <div class="checkpoint-card">
+        <div class="checkpoint-illustration camp-illustration" aria-hidden="true">
+          <svg viewBox="0 0 220 116" role="presentation">
+            <path d="M0 88 C42 66 67 80 105 70 C151 58 175 66 220 45 V116 H0 Z" fill="#b8eaa1"/>
+            <circle cx="184" cy="24" r="14" fill="#ffe37a"/>
+            <path d="M58 91 L93 43 L127 91 Z" fill="#0ea5e9"/>
+            <path d="M93 43 L107 91 H80 Z" fill="#e9f7ff"/>
+            <path d="M151 93 C143 81 151 75 158 83 C166 73 174 83 166 93 Z" fill="#ff9a45"/>
+            <path d="M159 91 C155 84 160 80 164 87" fill="none" stroke="#ffd05c" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="checkpoint-topline"><span>Stage 1</span><span class="state-pill complete-pill">Completed</span></div>
+        <h2>Base Camp</h2>
+        <p>Set your baseline and warm up with essential SAT foundations.</p>
+        <div class="checkpoint-progress-label"><span>Stage progress</span><strong>100%</strong></div>
+        <div class="checkpoint-progress" style="--stage-progress: 100%;"><span></span></div>
+        <div class="checkpoint-footer"><span class="xp-reward">+250 XP</span><button type="button" data-lesson="Base Camp">Climb Again <span aria-hidden="true">&rarr;</span></button></div>
+      </div>
+      <div class="trail-stop complete-stop" aria-label="Base Camp completed"><span aria-hidden="true">&#10003;</span></div>
+    </article>
+
+    <article class="checkpoint checkpoint-right region-meadow is-complete" data-checkpoint="Meadows" data-state="complete">
+      <div class="checkpoint-card">
+        <div class="checkpoint-illustration meadow-illustration" aria-hidden="true">
+          <svg viewBox="0 0 220 116" role="presentation">
+            <path d="M0 73 C36 39 69 57 102 65 C147 77 172 46 220 55 V116 H0 Z" fill="#7fd69f"/>
+            <path d="M0 88 C48 65 85 86 122 82 C165 76 190 68 220 72 V116 H0 Z" fill="#b9ef9a"/>
+            <g fill="#ff76b7"><circle cx="48" cy="79" r="5"/><circle cx="132" cy="89" r="5"/><circle cx="184" cy="71" r="5"/></g>
+            <g stroke="#ffffff" stroke-width="3" stroke-linecap="round"><path d="M48 78v22"/><path d="M132 88v17"/><path d="M184 70v25"/></g>
+            <path d="M25 28 Q35 18 45 28 Q55 18 65 28" fill="none" stroke="#0c3c61" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="checkpoint-topline"><span>Stage 2</span><span class="state-pill complete-pill">Completed</span></div>
+        <h2>Meadows</h2>
+        <p>Build momentum through algebra fluency and clear reading habits.</p>
+        <div class="checkpoint-progress-label"><span>Stage progress</span><strong>100%</strong></div>
+        <div class="checkpoint-progress" style="--stage-progress: 100%;"><span></span></div>
+        <div class="checkpoint-footer"><span class="xp-reward">+350 XP</span><button type="button" data-lesson="Meadows">Climb Again <span aria-hidden="true">&rarr;</span></button></div>
+      </div>
+      <div class="trail-stop complete-stop" aria-label="Meadows completed"><span aria-hidden="true">&#10003;</span></div>
+    </article>
+
+    <article class="checkpoint checkpoint-left region-forest is-current" id="current-checkpoint" data-checkpoint="Forest" data-state="current">
+      <div class="checkpoint-card">
+        <div class="checkpoint-illustration forest-illustration" aria-hidden="true">
+          <svg viewBox="0 0 220 116" role="presentation">
+            <path d="M0 88 C52 70 101 86 146 66 C176 53 198 56 220 61 V116 H0 Z" fill="#83d6aa"/>
+            <g>
+              <path d="M48 22 L17 83 H79 Z" fill="#167f73"/><rect x="44" y="78" width="8" height="28" rx="3" fill="#7b5b45"/>
+              <path d="M107 8 L67 90 H147 Z" fill="#0f766e"/><rect x="103" y="84" width="9" height="27" rx="3" fill="#72503a"/>
+              <path d="M177 27 L148 86 H206 Z" fill="#24947e"/><rect x="173" y="80" width="8" height="28" rx="3" fill="#7b5b45"/>
+            </g>
+            <path d="M26 29 Q35 20 44 29 M165 17 Q173 10 181 17" fill="none" stroke="#0c3c61" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="checkpoint-topline"><span>Stage 3</span><span class="state-pill current-pill">Current climb</span></div>
+        <h2>Forest</h2>
+        <p>Navigate transitions, word problems, and evidence with sharper timing.</p>
+        <div class="checkpoint-progress-label"><span>Stage progress</span><strong>64%</strong></div>
+        <div class="checkpoint-progress" style="--stage-progress: 64%;"><span></span></div>
+        <div class="checkpoint-footer"><span class="xp-reward">+500 XP</span><button class="continue-button" type="button" data-lesson="Forest">Continue Climbing <span aria-hidden="true">&rarr;</span></button></div>
+      </div>
+      <div class="trail-stop current-stop" aria-label="Current position at Forest">
+        <span aria-hidden="true">3</span>
+        <div class="climber-avatar" aria-hidden="true"><i class="climber-head"></i><i class="climber-body"></i><i class="climber-pack"></i></div>
+      </div>
+    </article>
+
+    <article class="checkpoint checkpoint-right region-snow is-locked" data-checkpoint="Snowline" data-state="locked">
+      <div class="checkpoint-card">
+        <div class="checkpoint-illustration snow-illustration" aria-hidden="true">
+          <svg viewBox="0 0 220 116" role="presentation">
+            <path d="M0 100 L56 33 L95 76 L139 16 L220 100 Z" fill="#91c6df"/>
+            <path d="M56 33 L41 51 L55 49 L64 59 L72 51 Z M139 16 L113 47 L132 43 L144 55 L154 43 L169 52 Z" fill="#ffffff"/>
+            <path d="M0 96 C55 82 87 105 135 88 C169 76 192 83 220 75 V116 H0 Z" fill="#e7f7ff"/>
+            <g fill="#ffffff"><circle cx="30" cy="22" r="3"/><circle cx="88" cy="18" r="2.5"/><circle cx="188" cy="25" r="3"/></g>
+          </svg>
+        </div>
+        <div class="checkpoint-topline"><span>Stage 4</span><span class="state-pill locked-pill"><i aria-hidden="true"></i> Locked</span></div>
+        <h2>Snowline</h2>
+        <p>Take on adaptive mixed practice where accuracy matters under pressure.</p>
+        <div class="checkpoint-progress-label"><span>Stage progress</span><strong>0%</strong></div>
+        <div class="checkpoint-progress" style="--stage-progress: 0%;"><span></span></div>
+        <div class="checkpoint-footer"><span class="xp-reward">+650 XP</span><button type="button" disabled>Finish Forest <span aria-hidden="true">&#128274;</span></button></div>
+      </div>
+      <div class="trail-stop locked-stop" aria-label="Snowline locked"><span class="mini-lock" aria-hidden="true"></span></div>
+    </article>
+
+    <article class="checkpoint checkpoint-left region-cliff is-locked" data-checkpoint="Cliffside" data-state="locked">
+      <div class="checkpoint-card">
+        <div class="checkpoint-illustration cliff-illustration" aria-hidden="true">
+          <svg viewBox="0 0 220 116" role="presentation">
+            <path d="M0 94 L45 29 L79 57 L110 20 L150 66 L186 36 L220 68 V116 H0 Z" fill="#7fa9bd"/>
+            <path d="M0 103 L57 61 L95 80 L132 45 L167 76 L220 50 V116 H0 Z" fill="#5f889d"/>
+            <path d="M111 18 C106 48 133 63 122 99" fill="none" stroke="#ffcf58" stroke-width="4" stroke-linecap="round" stroke-dasharray="6 6"/>
+            <circle cx="111" cy="18" r="7" fill="#0c3c61"/><circle cx="122" cy="99" r="7" fill="#0c3c61"/>
+          </svg>
+        </div>
+        <div class="checkpoint-topline"><span>Stage 5</span><span class="state-pill locked-pill"><i aria-hidden="true"></i> Locked</span></div>
+        <h2>Cliffside</h2>
+        <p>Conquer the hardest SAT-style sets with advanced strategy and pacing.</p>
+        <div class="checkpoint-progress-label"><span>Stage progress</span><strong>0%</strong></div>
+        <div class="checkpoint-progress" style="--stage-progress: 0%;"><span></span></div>
+        <div class="checkpoint-footer"><span class="xp-reward">+850 XP</span><button type="button" disabled>Reach Snowline <span aria-hidden="true">&#128274;</span></button></div>
+      </div>
+      <div class="trail-stop locked-stop" aria-label="Cliffside locked"><span class="mini-lock" aria-hidden="true"></span></div>
+    </article>
+
+    <article class="checkpoint checkpoint-right region-summit is-locked" data-checkpoint="Summit" data-state="locked">
+      <div class="checkpoint-card summit-card">
+        <div class="checkpoint-illustration summit-illustration" aria-hidden="true">
+          <svg viewBox="0 0 220 116" role="presentation">
+            <circle cx="175" cy="26" r="22" fill="#ffe481"/>
+            <circle cx="175" cy="26" r="31" fill="none" stroke="#fff3b3" stroke-width="10" opacity=".62"/>
+            <path d="M0 107 L58 55 L91 82 L139 20 L220 107 Z" fill="#74aeca"/>
+            <path d="M139 20 L118 45 L135 41 L145 51 L153 42 L170 50 Z" fill="#ffffff"/>
+            <path d="M139 17 V73" stroke="#0c3c61" stroke-width="5" stroke-linecap="round"/>
+            <path d="M143 20 H187 L174 35 L187 50 H143 Z" fill="#0ea5e9"/>
+          </svg>
+        </div>
+        <div class="checkpoint-topline"><span>Stage 6</span><span class="state-pill summit-pill">Final peak</span></div>
+        <h2>Summit</h2>
+        <p>Complete the capstone challenge and prove your full-test readiness.</p>
+        <div class="checkpoint-progress-label"><span>Stage progress</span><strong>0%</strong></div>
+        <div class="checkpoint-progress" style="--stage-progress: 0%;"><span></span></div>
+        <div class="checkpoint-footer"><span class="xp-reward">+1,200 XP</span><button type="button" disabled>Complete Cliffside <span aria-hidden="true">&#128274;</span></button></div>
+      </div>
+      <div class="trail-stop summit-stop" aria-label="Summit locked"><span class="summit-flag" aria-hidden="true"></span></div>
+    </article>
+  </section>
+
+  <footer class="climb-finish">
+    <span class="finish-mark" aria-hidden="true"></span>
+    <p>Every lesson moves you closer. Keep climbing.</p>
+    <button type="button" data-scroll-current>Return to current stage <span aria-hidden="true">&uarr;</span></button>
+  </footer>
+</main>
+
+<dialog class="climb-dialog" id="lesson-modal" aria-labelledby="lesson-modal-title">
+  <form method="dialog">
+    <button class="dialog-close" value="close" aria-label="Close lesson preview">&times;</button>
+  </form>
+  <div class="dialog-icon" aria-hidden="true"><span></span><i></i></div>
+  <p class="eyebrow">Next trail lesson</p>
+  <h2 id="lesson-modal-title">Forest: Trail Markers</h2>
+  <p class="dialog-copy">A focused SAT-style climb through transitions, nonlinear word problems, and command of evidence.</p>
+  <div class="lesson-details">
+    <span><strong>12</strong> questions</span>
+    <span><strong>18</strong> minutes</span>
+    <span><strong>+120</strong> XP</span>
+  </div>
+  <div class="lesson-focus"><span>Transitions</span><span>Word Problems</span><span>Evidence</span></div>
+  <div class="dialog-actions">
+    <form method="dialog"><button class="dialog-secondary" value="close">Not now</button></form>
+    <button class="climb-primary" type="button" data-demo-start>Start Trail <span aria-hidden="true">&rarr;</span></button>
+  </div>
+</dialog>
+
+<div class="climb-toast" id="climb-toast" role="status" aria-live="polite"></div>
+
+<script src="vendor/supabase.js"></script>
+<script src="supabase-config.js"></script>
+<script src="auth.js"></script>
+<script src="sidebar.js"></script>
+<script src="peakpoint-climb.js"></script>
+</body>
+</html>
