@@ -85,8 +85,7 @@
 
 .planner-setup-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(330px, 0.75fr);
-  gap: 22px;
+  grid-template-columns: 1fr;
   margin-bottom: 28px;
 }
 
@@ -126,7 +125,7 @@
 
 .planner-form {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 16px;
 }
 
@@ -420,63 +419,6 @@
   line-height: 1;
 }
 
-.planner-side-stack {
-  display: grid;
-  gap: 22px;
-  align-content: start;
-}
-
-.snapshot-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.snapshot-grid div {
-  border-radius: 16px;
-  background: var(--surface-2);
-  padding: 15px;
-}
-
-.snapshot-grid span {
-  display: block;
-  color: var(--text-secondary);
-  font-size: 0.82rem;
-  font-weight: 700;
-}
-
-.snapshot-grid strong {
-  display: block;
-  margin-top: 7px;
-  color: var(--text-heading);
-  font-size: 1.3rem;
-  line-height: 1.1;
-}
-
-.logic-list {
-  list-style: none;
-  display: grid;
-  gap: 13px;
-}
-
-.logic-list li {
-  display: flex;
-  gap: 10px;
-  color: var(--text-secondary);
-  font-weight: 700;
-  line-height: 1.45;
-}
-
-.logic-dot {
-  width: 11px;
-  height: 11px;
-  margin-top: 5px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 5px var(--surface-2);
-  flex: 0 0 11px;
-}
-
 .planner-preview-card {
   padding: 26px;
 }
@@ -678,12 +620,8 @@
 }
 
 @media (max-width: 1180px) {
-  .planner-setup-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .planner-side-stack {
-    grid-template-columns: 1fr 1fr;
+  .planner-form {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -697,14 +635,12 @@
     padding-top: 34px;
   }
 
-  .planner-hero,
-  .planner-side-stack {
+  .planner-hero {
     grid-template-columns: 1fr;
   }
 
   .planner-form,
-  .domain-grid,
-  .snapshot-grid {
+  .domain-grid {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -752,8 +688,7 @@
   }
 
   .planner-form,
-  .domain-grid,
-  .snapshot-grid {
+  .domain-grid {
     grid-template-columns: 1fr;
   }
 
