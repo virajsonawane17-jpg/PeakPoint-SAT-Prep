@@ -41,8 +41,7 @@
 
 .saved-stats article,
 .saved-toolbar,
-.saved-list-panel,
-.collection-card {
+.saved-list-panel {
   background: #fff;
   border: 1px solid var(--border-soft);
   box-shadow: var(--card-shadow);
@@ -77,8 +76,7 @@
   font-size: 1.9rem;
 }
 
-.saved-stat-icon,
-.collection-icon {
+.saved-stat-icon {
   width: 48px;
   height: 48px;
   border-radius: 16px;
@@ -90,16 +88,13 @@
 }
 
 .saved-stat-icon::before,
-.saved-stat-icon::after,
-.collection-icon::before,
-.collection-icon::after {
+.saved-stat-icon::after {
   content: "";
   position: absolute;
   background: currentColor;
 }
 
-.bookmark-mark::before,
-.collection-icon::before {
+.bookmark-mark::before {
   width: 20px;
   height: 26px;
   left: 14px;
@@ -126,7 +121,6 @@
 
 .saved-tabs button,
 .saved-section-head button,
-.collection-card button,
 .saved-card-actions button {
   font-family: var(--font-display);
   font-weight: 800;
@@ -169,10 +163,7 @@
 }
 
 .saved-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 310px;
-  gap: 22px;
-  align-items: start;
+  display: block;
 }
 
 .saved-list-panel {
@@ -304,8 +295,7 @@
   padding-top: 18px;
 }
 
-.saved-card-actions button,
-.collection-card button {
+.saved-card-actions button {
   min-height: 40px;
   border-radius: 999px;
   border: 0;
@@ -324,57 +314,8 @@
 
 .saved-tabs button:hover,
 .saved-section-head button:hover,
-.collection-card button:hover,
 .saved-card-actions button:hover {
   transform: translateY(-1px);
-}
-
-.saved-collections {
-  display: grid;
-  gap: 16px;
-  position: sticky;
-  top: 22px;
-}
-
-.collection-card {
-  border-radius: 22px;
-  padding: 20px;
-}
-
-.collection-card.featured {
-  background:
-    radial-gradient(circle at 88% 12%, rgba(14, 165, 233, 0.18), transparent 35%),
-    linear-gradient(135deg, #ffffff, var(--surface-2));
-}
-
-.collection-card h2 {
-  font-size: 1.18rem;
-  margin-top: 15px;
-}
-
-.collection-card p {
-  color: var(--text-secondary);
-  margin: 6px 0 18px;
-}
-
-.rw-collection {
-  background: #22c55e;
-  box-shadow: inset 0 -5px 0 #047857, 0 16px 28px -18px rgba(4, 120, 87, 0.55);
-}
-
-.mixed-collection {
-  background: #38bdf8;
-}
-
-@media (max-width: 1160px) {
-  .saved-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .saved-collections {
-    position: static;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
 }
 
 @media (max-width: 880px) {
@@ -384,8 +325,7 @@
 
   .saved-stats,
   .saved-toolbar,
-  .saved-list,
-  .saved-collections {
+  .saved-list {
     grid-template-columns: 1fr;
   }
 }
