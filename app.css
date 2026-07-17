@@ -162,7 +162,7 @@
   overflow-x: hidden;
 }
 
-.dashboard-screen:not(.resources-screen):not(.peakpal-screen):not(.vocab-screen):not(.analytics-screen):not(.study-planner-screen):not(.question-bank-screen):not(.peaklabs-screen):not(.saved-screen):not(.mistakes-screen):not(.peakpoint-style-screen):not(.climb-screen) .prep-main button,
+.dashboard-screen:not(.resources-screen):not(.peakpal-screen):not(.vocab-screen):not(.analytics-screen):not(.study-planner-screen):not(.question-bank-screen):not(.peaklabs-screen):not(.saved-screen):not(.mistakes-screen):not(.settings-screen):not(.peakpoint-style-screen):not(.climb-screen) .prep-main button,
 .dashboard-screen .prep-sidebar button {
   cursor: default;
 }
@@ -693,6 +693,14 @@
   border-radius: 50%;
   position: relative;
   color: var(--dash-muted);
+  flex: 0 0 24px;
+  transition: color 0.18s var(--easing), transform 0.18s var(--easing);
+}
+
+.gear-button:hover,
+.gear-button.active {
+  color: var(--accent-deep);
+  transform: translateY(-1px);
 }
 
 .gear-button::before {
