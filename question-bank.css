@@ -1,8 +1,22 @@
 /* ============================================
    PEAKPOINT SAT PREP — Question Bank
-   Reading & Writing (left) + Math (right) with a
-   dropdown filter-pill bar. Light PeakPoint theme.
+   Reading & Writing + Math with a dropdown
+   filter-pill bar. Light PeakPoint theme.
    ============================================ */
+
+/* Visually-hidden label (shared by the question bank + list pages, which
+   don't load the stylesheets where .sr-only is otherwise defined). */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 .question-bank-screen {
   background:
