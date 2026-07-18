@@ -158,7 +158,7 @@
     document.title = `${skillName} — PeakPoint SAT Prep`;
     if (total != null) {
       $('qlist-sub').textContent =
-        `Work through ${total} official College Board question${total === 1 ? '' : 's'} for ${skillName}. Filter, sort, and open any question to practice.`;
+        `Work through ${total} official College Board question${total === 1 ? '' : 's'} for ${skillName}. Sort your view and open any question to practice.`;
     }
   };
 
@@ -266,24 +266,8 @@
   const escapeHtml = (s) => s.replace(/[&<>"]/g, (c) =>
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
-  const updateStats = () => {
-    let correct = 0, incorrect = 0;
-    questions.forEach((q) => {
-      const s = stateOf(q.id).status;
-      if (s === 'correct') correct++;
-      else if (s === 'incorrect') incorrect++;
-    });
-    const attempted = correct + incorrect;
-    const total = questions.length || 1;
-    const pct = Math.round((attempted / total) * 100);
-    $('stat-correct').textContent = correct;
-    $('stat-incorrect').textContent = incorrect;
-    $('stat-remaining').textContent = total - attempted;
-    $('qlist-ring-pct').textContent = pct + '%';
-    const ring = $('qlist-ring');
-    if (ring) ring.style.background =
-      `conic-gradient(var(--accent) ${pct * 3.6}deg, var(--surface-2) 0)`;
-  };
+  // Progress summary card was removed from the topic page; nothing to update.
+  const updateStats = () => {};
 
   // Reflect the current filter state in the chip UI (used on load for
   // filters seeded from the Question Bank page).

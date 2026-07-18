@@ -72,60 +72,11 @@
       <div>
         <p class="eyebrow" id="qlist-eyebrow">SAT-style practice</p>
         <h1 id="qlist-title">Questions</h1>
-        <p id="qlist-sub">Work through a focused set of questions. Filter by difficulty or status, sort your view, and open any question to practice.</p>
-      </div>
-      <div class="qlist-progress-card" aria-label="Your progress on this set">
-        <div class="qlist-ring" id="qlist-ring" role="img" aria-label="Progress">
-          <strong id="qlist-ring-pct">0%</strong>
-        </div>
-        <div class="qlist-progress-meta">
-          <span><b id="stat-correct">0</b> correct</span>
-          <span><b id="stat-incorrect">0</b> incorrect</span>
-          <span><b id="stat-remaining">0</b> remaining</span>
-        </div>
+        <p id="qlist-sub">Work through a focused set of questions. Sort your view and open any question to practice.</p>
       </div>
     </header>
 
-    <section class="qlist-toolbar" aria-label="Sort and filter">
-      <div class="qlist-filter-groups">
-        <div class="qlist-filter-group" role="group" aria-label="Filter by difficulty">
-          <span class="qlist-filter-label">Difficulty</span>
-          <div class="qlist-chips" data-filter-set="difficulty">
-            <button type="button" class="active" data-value="all" aria-pressed="true">All</button>
-            <button type="button" data-value="Easy" aria-pressed="false">Easy</button>
-            <button type="button" data-value="Medium" aria-pressed="false">Medium</button>
-            <button type="button" data-value="Hard" aria-pressed="false">Hard</button>
-          </div>
-        </div>
-
-        <div class="qlist-filter-group" role="group" aria-label="Filter by result">
-          <span class="qlist-filter-label">Result</span>
-          <div class="qlist-chips" data-filter-set="result">
-            <button type="button" class="active" data-value="all" aria-pressed="true">All</button>
-            <button type="button" data-value="correct" aria-pressed="false">Correct</button>
-            <button type="button" data-value="incorrect" aria-pressed="false">Incorrect</button>
-          </div>
-        </div>
-
-        <div class="qlist-filter-group" role="group" aria-label="Filter by completion">
-          <span class="qlist-filter-label">Completed</span>
-          <div class="qlist-chips" data-filter-set="completed">
-            <button type="button" class="active" data-value="all" aria-pressed="true">All</button>
-            <button type="button" data-value="completed" aria-pressed="false">Completed</button>
-            <button type="button" data-value="notstarted" aria-pressed="false">Not started</button>
-          </div>
-        </div>
-
-        <div class="qlist-filter-group" role="group" aria-label="Filter by saved and marked">
-          <span class="qlist-filter-label">Flags</span>
-          <div class="qlist-chips" data-filter-set="flag">
-            <button type="button" class="active" data-value="all" aria-pressed="true">All</button>
-            <button type="button" data-value="saved" aria-pressed="false">Saved</button>
-            <button type="button" data-value="marked" aria-pressed="false">Marked</button>
-          </div>
-        </div>
-      </div>
-
+    <section class="qlist-toolbar" aria-label="Search and sort">
       <div class="qlist-toolbar-controls">
         <label class="qlist-search">
           <span class="sr-only">Search questions</span>
@@ -206,6 +157,6 @@
 <script src="supabase-config.js"></script>
 <script src="auth.js"></script>
 <script src="sidebar.js"></script>
-<script src="question-list.js?v=2"></script>
+<script src="question-list.js?v=3"></script>
 </body>
 </html>
