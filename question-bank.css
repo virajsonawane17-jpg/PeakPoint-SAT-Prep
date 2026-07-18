@@ -252,9 +252,11 @@
 .col-head strong { font-family: var(--font-display); font-size: 1.15rem; color: var(--text-heading); }
 .col-head span { font-family: var(--font-display); font-weight: 600; font-size: 0.82rem; color: var(--text-muted); }
 
-/* reuse the RW / Math glyphs from the original overview icons */
+/* RW / Math glyphs */
 .col-head-icon.rw-mark::before, .col-head-icon.rw-mark::after,
-.col-head-icon.math-mark::before, .col-head-icon.math-mark::after { content: ""; position: absolute; background: currentColor; }
+.col-head-icon.math-mark::before, .col-head-icon.math-mark::after,
+.subject-mark.rw-mark::before, .subject-mark.rw-mark::after,
+.subject-mark.math-mark::before, .subject-mark.math-mark::after { content: ""; position: absolute; background: currentColor; }
 .rw-mark::before { width: 22px; height: 15px; left: 10px; top: 13px; border: 3px solid currentColor; background: none; border-radius: 3px; }
 .rw-mark::after { width: 15px; height: 3px; left: 13px; top: 19px; box-shadow: 0 6px 0 currentColor; }
 .math-mark::before { width: 22px; height: 4px; left: 10px; top: 19px; border-radius: 3px; box-shadow: 0 -8px 0 currentColor, 0 8px 0 currentColor; }
@@ -263,8 +265,8 @@
 /* ---------- subject grid ---------- */
 .subject-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+  grid-template-columns: 1fr;
+  gap: 22px;
   align-items: start;
 }
 .subject-bank-card {
@@ -281,14 +283,26 @@
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  padding: 18px 22px;
+  padding: 18px 24px;
+  background: linear-gradient(135deg, #ffffff, var(--surface-2));
   border-bottom: 1px solid var(--border-soft);
 }
-.subject-bank-card.is-rw .subject-card-head {
-  background: linear-gradient(135deg, #ffffff, var(--surface-2));
+.subject-card-title { display: flex; align-items: center; gap: 14px; }
+.subject-mark {
+  width: 46px; height: 46px;
+  border-radius: 14px;
+  color: #fff;
+  background: var(--accent);
+  box-shadow: inset 0 -4px 0 var(--accent-deep), 0 12px 24px -16px rgba(3, 105, 161, 0.6);
+  position: relative;
+  flex: 0 0 auto;
 }
-.subject-bank-card.is-math .subject-card-head {
-  background: linear-gradient(135deg, #ffffff, #e6efff);
+.subject-card-name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--text-heading);
+  font-size: 1.5rem;
+  line-height: 1.1;
 }
 .card-kicker {
   font-family: var(--font-display);
@@ -300,13 +314,13 @@
 }
 .subject-card-count {
   font-family: var(--font-display);
-  font-weight: 800;
-  color: var(--text-heading);
-  font-size: 1.2rem;
-  margin-top: 2px;
+  font-weight: 700;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin-top: 3px;
 }
 .start-pill {
-  min-height: 40px;
+  min-height: 42px;
   border-radius: 999px;
   border: 0;
   color: #fff;
@@ -315,12 +329,12 @@
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  padding: 0 16px;
+  padding: 0 18px;
   text-decoration: none;
+  background: var(--accent);
+  box-shadow: inset 0 -4px 0 var(--accent-deep), 0 14px 28px -18px rgba(3, 105, 161, 0.7);
   transition: transform 0.18s var(--easing);
 }
-.is-rw .start-pill { background: var(--accent); box-shadow: inset 0 -4px 0 var(--accent-deep), 0 14px 28px -18px rgba(3, 105, 161, 0.7); }
-.is-math .start-pill { background: var(--cosmic-blue); box-shadow: inset 0 -4px 0 #1b4fbf, 0 14px 28px -18px rgba(44, 116, 251, 0.7); }
 .start-pill:hover { transform: translateY(-1px); }
 .play-dot { width: 20px; height: 20px; border-radius: 50%; background: rgba(255, 255, 255, 0.24); position: relative; }
 .play-dot::before {
@@ -331,7 +345,6 @@
 
 .domain-list { padding: 8px 20px 18px; }
 .domain-group { padding: 12px 0; border-bottom: 1px solid rgba(186, 230, 253, 0.7); }
-.is-math .domain-group { border-bottom-color: rgba(191, 214, 255, 0.7); }
 .domain-group:last-child { border-bottom: 0; }
 .domain-empty { color: var(--text-muted); font-family: var(--font-display); font-weight: 600; padding: 10px 4px; }
 
@@ -362,7 +375,6 @@
   box-shadow: 0 0 0 5px rgba(14, 165, 233, 0.12);
   flex: 0 0 auto;
 }
-.is-math .domain-name::before { background: var(--cosmic-blue); box-shadow: 0 0 0 5px rgba(44, 116, 251, 0.12); }
 .domain-count {
   font-family: var(--font-display);
   font-weight: 700;
@@ -372,7 +384,6 @@
   border-radius: 999px;
   padding: 3px 10px;
 }
-.is-math .domain-count { background: #e6efff; }
 .domain-caret {
   width: 9px; height: 9px; flex: 0 0 auto;
   border-right: 2px solid var(--text-muted);
@@ -401,7 +412,6 @@
   transition: background 0.16s var(--easing), color 0.16s var(--easing), transform 0.16s var(--easing);
 }
 .skill-link:hover { background: var(--surface-2); color: var(--text-heading); transform: translateX(2px); }
-.is-math .skill-link:hover { background: #e6efff; }
 .skill-name { min-width: 0; }
 .skill-count {
   flex: 0 0 auto;
@@ -412,7 +422,6 @@
   border-radius: 999px;
   padding: 2px 9px;
 }
-.is-math .skill-count { color: #1b4fbf; background: rgba(44, 116, 251, 0.1); }
 .skill-link.is-empty {
   opacity: 0.42;
   pointer-events: none;

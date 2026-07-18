@@ -86,7 +86,6 @@
     }
     buildPills();
     if (loading) loading.remove();
-    document.getElementById('bank-columns-head').hidden = false;
     document.getElementById('bank-hero-stat').hidden = false;
     grid.hidden = false;
     render();
@@ -203,14 +202,18 @@
         : '#';
       const accent = subj.name === 'Math' ? 'is-math' : 'is-rw';
 
+      const glyph = subj.name === 'Math' ? 'math-mark' : 'rw-mark';
       const card = document.createElement('article');
       card.className = `subject-bank-card ${accent}` + (hidden ? ' is-hidden' : '');
       card.dataset.subjectCard = subj.name;
       card.innerHTML = `
         <div class="subject-card-head">
-          <div>
-            <span class="card-kicker">${esc(subj.name)}</span>
-            <p class="subject-card-count">${fmt(subjTotal)} question${subjTotal === 1 ? '' : 's'}${anyFilterActive() ? ' match' : ''}</p>
+          <div class="subject-card-title">
+            <span class="subject-mark ${glyph}" aria-hidden="true"></span>
+            <div>
+              <h2 class="subject-card-name">${esc(subj.name)}</h2>
+              <p class="subject-card-count">${fmt(subjTotal)} question${subjTotal === 1 ? '' : 's'}${anyFilterActive() ? ' match' : ''}</p>
+            </div>
           </div>
           <a class="start-pill" href="${startUrl}"><span class="play-dot" aria-hidden="true"></span>Start</a>
         </div>

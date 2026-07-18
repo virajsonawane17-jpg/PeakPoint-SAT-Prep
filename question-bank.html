@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&amp;family=Instrument+Sans:wght@400;500;600;700&amp;family=Open+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="style.css" />
 <link rel="stylesheet" href="app.css" />
-<link rel="stylesheet" href="question-bank.css" />
+<link rel="stylesheet" href="question-bank.css?v=2" />
 <link rel="icon" href="logo.svg" />
 </head>
 <body class="dashboard-screen question-bank-screen">
@@ -83,17 +83,6 @@
       <button type="button" class="filter-reset" id="filter-reset" hidden>Clear filters</button>
     </section>
 
-    <div class="bank-columns-head" id="bank-columns-head" hidden>
-      <div class="col-head col-head-rw">
-        <span class="col-head-icon rw-mark" aria-hidden="true"></span>
-        <div><strong>Reading &amp; Writing</strong><span id="ov-rw">—</span></div>
-      </div>
-      <div class="col-head col-head-math">
-        <span class="col-head-icon math-mark" aria-hidden="true"></span>
-        <div><strong>Math</strong><span id="ov-math">—</span></div>
-      </div>
-    </div>
-
     <section class="subject-grid" id="subject-grid" aria-label="Question subjects" hidden></section>
 
     <div class="bank-empty" id="bank-empty" hidden>
@@ -109,6 +98,6 @@
 <script src="supabase-config.js"></script>
 <script src="auth.js"></script>
 <script src="sidebar.js"></script>
-<script src="question-bank.js"></script>
+<script src="question-bank.js?v=2"></script>
 </body>
 </html>
