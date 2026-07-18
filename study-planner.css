@@ -619,6 +619,128 @@
   opacity: 0.55;
 }
 
+/* ============================================
+   Dynamic plan preview
+   ============================================ */
+.plan-summary {
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.92rem;
+  margin: -6px 0 18px;
+}
+.plan-summary:empty { display: none; }
+
+.plan-more {
+  margin-top: 14px;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-align: center;
+}
+.plan-empty {
+  text-align: center;
+  padding: 42px 20px;
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+/* action link matches the previous Start button */
+.plan-day-action {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  padding: 0 16px;
+  text-decoration: none;
+  box-shadow: inset 0 -4px 0 var(--accent-deep);
+  white-space: nowrap;
+  transition: transform 0.16s var(--easing);
+}
+.plan-day-action:hover { transform: translateY(-1px); }
+.plan-day-flag { font-size: 1.5rem; align-self: center; }
+
+/* per-type accents */
+.plan-day-card.type-checkpoint,
+.plan-day-card.type-fulltest {
+  border-color: var(--accent-soft);
+  background: linear-gradient(135deg, #eef7ff, #ffffff);
+}
+.plan-day-card.type-fulltest .plan-day-action { background: #16a34a; box-shadow: inset 0 -4px 0 #128a3e; }
+.plan-day-card.type-light { background: #f8fafc; }
+.plan-day-card.type-test {
+  background: linear-gradient(135deg, #ecfdf5, #ffffff);
+  border-color: #bbf7d0;
+}
+.plan-day-card.type-test .plan-day-date span { color: #047857; }
+.plan-day-card.today { box-shadow: 0 0 0 2px var(--accent-soft); }
+
+/* calendar legend */
+.calendar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.calendar-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.76rem;
+}
+.calendar-legend i { width: 11px; height: 11px; border-radius: 4px; display: inline-block; }
+.calendar-legend .dot-today { background: #fff; border: 2px solid var(--accent-deep); }
+.calendar-legend .dot-session { background: var(--surface-2); border: 1px solid var(--accent-soft); }
+.calendar-legend .dot-check { background: #dbeafe; border: 1px solid #93c5fd; }
+.calendar-legend .dot-exam { background: #dcfce7; border: 1px solid #86efac; }
+
+/* calendar cell states */
+.calendar-cell em.cell-today {
+  display: inline-block;
+  margin-top: 4px;
+  font-style: normal;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.64rem;
+  color: #fff;
+  background: var(--accent-deep);
+  border-radius: 999px;
+  padding: 1px 8px;
+}
+.calendar-cell.today {
+  border-color: var(--accent-deep);
+  box-shadow: 0 0 0 2px var(--accent-deep) inset;
+  background: #fff;
+}
+.calendar-cell.today strong { color: var(--accent-deep); }
+.calendar-cell.checkpoint {
+  background: #dbeafe;
+  border-color: #bfdbfe;
+}
+.calendar-cell.checkpoint span { color: #1d4ed8; border-color: #bfdbfe; }
+.calendar-cell.rest { background: #f8fafc; }
+.calendar-cell.rest span { color: var(--text-muted); background: #fff; }
+.calendar-cell.exam {
+  background: #dcfce7;
+  border-color: #86efac;
+}
+.calendar-cell.exam strong { color: #047857; }
+.calendar-cell.exam span { color: #047857; border-color: #86efac; background: #fff; }
+
+@media (max-width: 900px) {
+  .plan-day-action { width: fit-content; }
+}
+
 @media (max-width: 1180px) {
   .planner-form {
     grid-template-columns: repeat(3, minmax(0, 1fr));

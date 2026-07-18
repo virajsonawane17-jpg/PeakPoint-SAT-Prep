@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="style.css" />
 <link rel="stylesheet" href="app.css" />
-<link rel="stylesheet" href="study-planner.css" />
+<link rel="stylesheet" href="study-planner.css?v=2" />
 <link rel="icon" href="logo.svg" />
 </head>
 <body class="dashboard-screen study-planner-screen">
@@ -79,7 +79,7 @@
             <span class="card-kicker">Plan inputs</span>
             <h2>Your SAT profile</h2>
           </div>
-          <span class="preview-pill">Preview only</span>
+          <span class="preview-pill">Auto-updates</span>
         </div>
 
         <form class="planner-form" id="planner-form">
@@ -220,8 +220,8 @@
     <section class="planner-card planner-preview-card" aria-label="Study plan preview">
       <div class="planner-preview-head">
         <div>
-          <span class="card-kicker">Plan preview</span>
-          <h2>This week at a glance</h2>
+          <span class="card-kicker">Your plan</span>
+          <h2>Your study schedule</h2>
         </div>
         <div class="planner-tabs" role="tablist" aria-label="Study planner views">
           <button class="active" type="button" role="tab" aria-selected="true" data-plan-view="list">List view</button>
@@ -229,57 +229,29 @@
         </div>
       </div>
 
+      <p class="plan-summary" id="plan-summary" aria-live="polite"></p>
+
       <section class="plan-panel active" id="plan-list" data-plan-panel="list">
-        <div class="plan-list">
-          <article class="plan-day-card today">
-            <div class="plan-day-date"><span>Today</span><strong>Jul 17</strong></div>
-            <div class="plan-day-work">
-              <h3>Algebra repair set</h3>
-              <p>Timed linear equations, then quick notes on missed patterns.</p>
-              <div class="plan-tags"><span>45 min</span><span>Math</span><span>Mistakes</span></div>
-            </div>
-            <button type="button">Start</button>
-          </article>
-
-          <article class="plan-day-card">
-            <div class="plan-day-date"><span>Sat</span><strong>Jul 18</strong></div>
-            <div class="plan-day-work">
-              <h3>Reading pace block</h3>
-              <p>Two short passage sets with evidence and transition review.</p>
-              <div class="plan-tags"><span>45 min</span><span>RW</span><span>Pacing</span></div>
-            </div>
-            <button type="button">Preview</button>
-          </article>
-
-          <article class="plan-day-card">
-            <div class="plan-day-date"><span>Mon</span><strong>Jul 20</strong></div>
-            <div class="plan-day-work">
-              <h3>Vocabulary in context</h3>
-              <p>Review shaky words, then answer context-clue questions.</p>
-              <div class="plan-tags"><span>30 min</span><span>Vocab</span><span>Review</span></div>
-            </div>
-            <button type="button">Preview</button>
-          </article>
-
-          <article class="plan-day-card">
-            <div class="plan-day-date"><span>Thu</span><strong>Jul 23</strong></div>
-            <div class="plan-day-work">
-              <h3>Mixed timed practice</h3>
-              <p>Short adaptive set across current weakest skills.</p>
-              <div class="plan-tags"><span>60 min</span><span>Mixed</span><span>Timed</span></div>
-            </div>
-            <button type="button">Preview</button>
-          </article>
+        <div class="plan-list" id="plan-list-body"></div>
+        <p class="plan-more" id="plan-more" hidden></p>
+        <div class="plan-empty" id="plan-empty" hidden>
+          <p id="plan-empty-text">Set a future test date and pick at least one study day to build your plan.</p>
         </div>
       </section>
 
       <section class="plan-panel" id="plan-calendar" data-plan-panel="calendar">
         <div class="calendar-head">
-          <button type="button" aria-label="Previous month">‹</button>
-          <strong>July 2026</strong>
-          <button type="button" aria-label="Next month">›</button>
+          <button type="button" id="cal-prev" aria-label="Previous month">‹</button>
+          <strong id="calendar-title">Month</strong>
+          <button type="button" id="cal-next" aria-label="Next month">›</button>
         </div>
-        <div class="calendar-grid" aria-label="July 2026 study plan calendar">
+        <div class="calendar-legend" aria-hidden="true">
+          <span><i class="dot-today"></i> Today</span>
+          <span><i class="dot-session"></i> Study</span>
+          <span><i class="dot-check"></i> Review / test</span>
+          <span><i class="dot-exam"></i> Test day</span>
+        </div>
+        <div class="calendar-grid" id="calendar-grid" aria-label="Study plan calendar">
           <span class="calendar-label">Mon</span>
           <span class="calendar-label">Tue</span>
           <span class="calendar-label">Wed</span>
@@ -287,21 +259,6 @@
           <span class="calendar-label">Fri</span>
           <span class="calendar-label">Sat</span>
           <span class="calendar-label">Sun</span>
-
-          <div class="calendar-cell muted"><strong>13</strong></div>
-          <div class="calendar-cell muted"><strong>14</strong></div>
-          <div class="calendar-cell muted"><strong>15</strong></div>
-          <div class="calendar-cell muted"><strong>16</strong></div>
-          <div class="calendar-cell active"><strong>17</strong><span>Algebra repair</span></div>
-          <div class="calendar-cell active"><strong>18</strong><span>Reading pace</span></div>
-          <div class="calendar-cell"><strong>19</strong></div>
-          <div class="calendar-cell active"><strong>20</strong><span>Vocab context</span></div>
-          <div class="calendar-cell active"><strong>21</strong><span>Grammar rules</span></div>
-          <div class="calendar-cell"><strong>22</strong></div>
-          <div class="calendar-cell active"><strong>23</strong><span>Mixed timed</span></div>
-          <div class="calendar-cell"><strong>24</strong></div>
-          <div class="calendar-cell checkpoint"><strong>25</strong><span>Practice test</span></div>
-          <div class="calendar-cell"><strong>26</strong></div>
         </div>
       </section>
     </section>
@@ -312,6 +269,6 @@
 <script src="supabase-config.js"></script>
 <script src="auth.js"></script>
 <script src="sidebar.js"></script>
-<script src="study-planner.js"></script>
+<script src="study-planner.js?v=2"></script>
 </body>
 </html>
