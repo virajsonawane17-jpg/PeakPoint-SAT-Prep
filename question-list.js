@@ -53,6 +53,7 @@
   let view = [];           // filtered + sorted
   const filters = { difficulty: 'all', result: 'all', completed: 'all', flag: 'all', search: '' };
   let sortMode = 'default';
+  let shuffleOrder = {};   // question id -> random key, used when sortMode is 'shuffle'
   let modalIndex = -1;     // index into `view` currently open in modal
 
   // Pre-select filters passed in from the Question Bank page.
@@ -74,6 +75,7 @@
   const countEl = $('qlist-count');
   const searchEl = $('qlist-search');
   const sortEl = $('qlist-sort');
+  const shuffleBtn = $('qlist-shuffle');
   const toastEl = $('qlist-toast');
 
   const modal = $('practice-modal');
@@ -199,6 +201,7 @@
 
     view.sort((a, b) => {
       switch (sortMode) {
+        case 'shuffle': return (shuffleOrder[a.id] ?? 0) - (shuffleOrder[b.id] ?? 0);
         case 'diff-asc': return DIFF_ORDER[a.difficulty] - DIFF_ORDER[b.difficulty] || a._i - b._i;
         case 'diff-desc': return DIFF_ORDER[b.difficulty] - DIFF_ORDER[a.difficulty] || a._i - b._i;
         case 'status': {
@@ -307,7 +310,21 @@
     });
     if (sortEl) sortEl.addEventListener('change', () => {
       sortMode = sortEl.value;
+      if (shuffleBtn) shuffleBtn.setAttribute('aria-pressed', 'false');
+      if (shuffleBtn) shuffleBtn.classList.remove('is-on');
       render();
+    });
+
+    if (shuffleBtn) shuffleBtn.addEventListener('click', () => {
+      // Assign every question a fresh random key and sort by it.
+      shuffleOrder = {};
+      questions.forEach((q) => { shuffleOrder[q.id] = Math.random(); });
+      sortMode = 'shuffle';
+      shuffleBtn.setAttribute('aria-pressed', 'true');
+      shuffleBtn.classList.add('is-on');
+      if (sortEl) sortEl.value = 'default';
+      render();
+      toast('Questions shuffled');
     });
 
     const resetBtn = $('qlist-reset');
@@ -317,6 +334,7 @@
       sortMode = 'default';
       if (searchEl) searchEl.value = '';
       if (sortEl) sortEl.value = 'default';
+      if (shuffleBtn) { shuffleBtn.setAttribute('aria-pressed', 'false'); shuffleBtn.classList.remove('is-on'); }
       syncChips();
       render();
     });

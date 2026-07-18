@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="style.css" />
 <link rel="stylesheet" href="app.css" />
 <link rel="stylesheet" href="question-bank.css?v=2" />
-<link rel="stylesheet" href="question-list.css?v=2" />
+<link rel="stylesheet" href="question-list.css?v=3" />
 <link rel="icon" href="logo.svg" />
 </head>
 <body class="dashboard-screen question-list-screen">
@@ -91,6 +91,10 @@
             <option value="status">Status: Not started first</option>
           </select>
         </label>
+        <button type="button" class="qlist-shuffle" id="qlist-shuffle" aria-pressed="false" title="Shuffle question order">
+          <span class="shuffle-icon" aria-hidden="true"></span>
+          <span>Shuffle</span>
+        </button>
       </div>
     </section>
 
@@ -157,6 +161,6 @@
 <script src="supabase-config.js"></script>
 <script src="auth.js"></script>
 <script src="sidebar.js"></script>
-<script src="question-list.js?v=3"></script>
+<script src="question-list.js?v=4"></script>
 </body>
 </html>
