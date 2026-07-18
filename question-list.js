@@ -36,12 +36,37 @@
   };
   const stateOf = (id) => progress[id] || {};
 
+  // Merge a change into a question's progress record, tagging it with the
+  // skill slug + difficulty + type so the Question Bank page can compute
+  // live filtered counts without loading question data.
+  const writeProgress = (q, patch) => {
+    progress[q.id] = Object.assign(
+      { slug: SLUG, difficulty: q.difficulty, type: q.type },
+      progress[q.id],
+      patch,
+    );
+    saveProgress();
+  };
+
   /* ---------- state ---------- */
   let questions = [];      // all questions for this skill
   let view = [];           // filtered + sorted
-  const filters = { difficulty: 'all', status: 'all', search: '' };
+  const filters = { difficulty: 'all', result: 'all', completed: 'all', flag: 'all', search: '' };
   let sortMode = 'default';
   let modalIndex = -1;     // index into `view` currently open in modal
+
+  // Pre-select filters passed in from the Question Bank page.
+  const seedFiltersFromUrl = () => {
+    const d = params.get('difficulty');
+    if (d && ['Easy', 'Medium', 'Hard'].includes(d)) filters.difficulty = d;
+    const r = params.get('result');
+    if (r === 'correct' || r === 'incorrect') filters.result = r;
+    const c = params.get('completed');
+    if (c === 'completed' || c === 'notstarted') filters.completed = c;
+    const s = params.get('saved');
+    if (s === 'saved') filters.flag = 'saved';
+  };
+  seedFiltersFromUrl();
 
   /* ---------- DOM ---------- */
   const listEl = $('qlist');
@@ -150,22 +175,21 @@
   };
 
   /* ---------- filtering / sorting ---------- */
-  const matchesStatus = (q) => {
+  const matchesFilters = (q) => {
     const st = stateOf(q.id);
-    switch (filters.status) {
-      case 'unattempted': return !st.status;
-      case 'correct': return st.status === 'correct';
-      case 'incorrect': return st.status === 'incorrect';
-      case 'marked': return !!st.marked;
-      default: return true;
-    }
+    if (filters.result !== 'all' && st.status !== filters.result) return false;
+    if (filters.completed === 'completed' && !st.status) return false;
+    if (filters.completed === 'notstarted' && st.status) return false;
+    if (filters.flag === 'saved' && !st.saved) return false;
+    if (filters.flag === 'marked' && !st.marked) return false;
+    return true;
   };
 
   const computeView = () => {
     const query = filters.search.toLowerCase();
     view = questions.filter((q) => {
       if (filters.difficulty !== 'all' && q.difficulty !== filters.difficulty) return false;
-      if (!matchesStatus(q)) return false;
+      if (!matchesFilters(q)) return false;
       if (query) {
         const hay = (q._text || (q._text = stripHtml(q.passage) + ' ' + stripHtml(q.prompt))).toLowerCase();
         if (!hay.includes(query)) return false;
@@ -221,6 +245,7 @@
               <span class="qcard-type">${q.type === 'spr' ? 'Student response' : 'Multiple choice'}</span>
               <span class="qcard-status status-${st.status || 'none'}">${statusLabel}</span>
               ${st.marked ? '<span class="qcard-flag">Marked</span>' : ''}
+              ${st.saved ? '<span class="qcard-flag is-saved">Saved</span>' : ''}
             </span>
           </span>
           <span class="qcard-go" aria-hidden="true">›</span>
@@ -260,6 +285,20 @@
       `conic-gradient(var(--accent) ${pct * 3.6}deg, var(--surface-2) 0)`;
   };
 
+  // Reflect the current filter state in the chip UI (used on load for
+  // filters seeded from the Question Bank page).
+  const syncChips = () => {
+    document.querySelectorAll('[data-filter-set]').forEach((group) => {
+      const key = group.dataset.filterSet;
+      const current = filters[key];
+      group.querySelectorAll('button').forEach((b) => {
+        const on = b.dataset.value === current;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-pressed', String(on));
+      });
+    });
+  };
+
   /* ---------- controls ---------- */
   const wireControls = () => {
     document.querySelectorAll('[data-filter-set]').forEach((group) => {
@@ -276,6 +315,7 @@
         });
       });
     });
+    syncChips();
 
     if (searchEl) searchEl.addEventListener('input', () => {
       filters.search = searchEl.value.trim();
@@ -288,15 +328,12 @@
 
     const resetBtn = $('qlist-reset');
     if (resetBtn) resetBtn.addEventListener('click', () => {
-      filters.difficulty = 'all'; filters.status = 'all'; filters.search = '';
+      filters.difficulty = 'all'; filters.result = 'all';
+      filters.completed = 'all'; filters.flag = 'all'; filters.search = '';
       sortMode = 'default';
       if (searchEl) searchEl.value = '';
       if (sortEl) sortEl.value = 'default';
-      document.querySelectorAll('[data-filter-set] button').forEach((b) => {
-        const on = b.dataset.value === 'all';
-        b.classList.toggle('active', on);
-        b.setAttribute('aria-pressed', String(on));
-      });
+      syncChips();
       render();
     });
 
@@ -445,8 +482,7 @@
       if (!selectedLetter) return;
       isCorrect = selectedLetter === q.answer;
     }
-    progress[q.id] = Object.assign({}, progress[q.id], { status: isCorrect ? 'correct' : 'incorrect' });
-    saveProgress();
+    writeProgress(q, { status: isCorrect ? 'correct' : 'incorrect' });
     updateStats();
     revealAnswer(q, isCorrect, false);
   };
@@ -495,23 +531,19 @@
   const toggleMark = () => {
     const q = view[modalIndex];
     if (!q) return;
-    const st = Object.assign({}, progress[q.id]);
-    st.marked = !st.marked;
-    progress[q.id] = st;
-    saveProgress();
-    setToggle(mMark, st.marked);
-    toast(st.marked ? 'Marked for review' : 'Unmarked');
+    const next = !stateOf(q.id).marked;
+    writeProgress(q, { marked: next });
+    setToggle(mMark, next);
+    toast(next ? 'Marked for review' : 'Unmarked');
   };
 
   const toggleSave = () => {
     const q = view[modalIndex];
     if (!q) return;
-    const st = Object.assign({}, progress[q.id]);
-    st.saved = !st.saved;
-    progress[q.id] = st;
-    saveProgress();
-    setToggle(mSave, st.saved);
-    toast(st.saved ? 'Saved' : 'Removed from saved');
+    const next = !stateOf(q.id).saved;
+    writeProgress(q, { saved: next });
+    setToggle(mSave, next);
+    toast(next ? 'Saved' : 'Removed from saved');
   };
 
   boot();

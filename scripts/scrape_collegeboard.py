@@ -288,8 +288,12 @@ def main():
                 with open(os.path.join(OUT_DIR, slug + ".json"), "w") as fh:
                     json.dump(results, fh, ensure_ascii=False)
                 grand_total += len(results)
+                by_diff = {"Easy": 0, "Medium": 0, "Hard": 0}
+                for r in results:
+                    by_diff[r["difficulty"]] = by_diff.get(r["difficulty"], 0) + 1
                 dom_entry["skills"].append({
-                    "code": skill_cd, "name": skill_name, "slug": slug, "count": len(results),
+                    "code": skill_cd, "name": skill_name, "slug": slug,
+                    "count": len(results), "byDifficulty": by_diff,
                 })
             subj_entry["domains"].append(dom_entry)
         manifest["subjects"].append(subj_entry)

@@ -14,21 +14,42 @@
        "code": "INF",
        "name": "Inferences",
        "slug": "inf",
-       "count": 124
+       "count": 124,
+       "byDifficulty": {
+        "Easy": 22,
+        "Medium": 41,
+        "Hard": 61
+       }
       },
       {
        "code": "CID",
        "name": "Central Ideas & Details",
        "slug": "cid",
-       "count": 125
+       "count": 125,
+       "byDifficulty": {
+        "Easy": 37,
+        "Medium": 47,
+        "Hard": 41
+       }
       },
       {
        "code": "COE",
        "name": "Command of Evidence",
        "slug": "coe",
-       "count": 258
+       "count": 258,
+       "byDifficulty": {
+        "Easy": 77,
+        "Medium": 79,
+        "Hard": 102
+       }
       }
-     ]
+     ],
+     "byDifficulty": {
+      "Easy": 136,
+      "Medium": 167,
+      "Hard": 204
+     },
+     "count": 507
     },
     {
      "code": "CAS",
@@ -38,21 +59,42 @@
        "code": "WIC",
        "name": "Words in Context",
        "slug": "wic",
-       "count": 241
+       "count": 241,
+       "byDifficulty": {
+        "Easy": 131,
+        "Medium": 56,
+        "Hard": 54
+       }
       },
       {
        "code": "TSP",
        "name": "Text Structure & Purpose",
        "slug": "tsp",
-       "count": 138
+       "count": 138,
+       "byDifficulty": {
+        "Easy": 46,
+        "Medium": 53,
+        "Hard": 39
+       }
       },
       {
        "code": "CTC",
        "name": "Cross-Text Connections",
        "slug": "ctc",
-       "count": 58
+       "count": 58,
+       "byDifficulty": {
+        "Easy": 16,
+        "Medium": 20,
+        "Hard": 22
+       }
       }
-     ]
+     ],
+     "byDifficulty": {
+      "Easy": 193,
+      "Medium": 129,
+      "Hard": 115
+     },
+     "count": 437
     },
     {
      "code": "EOI",
@@ -62,15 +104,31 @@
        "code": "TRA",
        "name": "Transitions",
        "slug": "tra",
-       "count": 173
+       "count": 173,
+       "byDifficulty": {
+        "Easy": 73,
+        "Medium": 61,
+        "Hard": 39
+       }
       },
       {
        "code": "SYN",
        "name": "Rhetorical Synthesis",
        "slug": "syn",
-       "count": 192
+       "count": 192,
+       "byDifficulty": {
+        "Easy": 42,
+        "Medium": 106,
+        "Hard": 44
+       }
       }
-     ]
+     ],
+     "byDifficulty": {
+      "Easy": 115,
+      "Medium": 167,
+      "Hard": 83
+     },
+     "count": 365
     },
     {
      "code": "SEC",
@@ -80,17 +138,39 @@
        "code": "BOU",
        "name": "Boundaries",
        "slug": "bou",
-       "count": 190
+       "count": 190,
+       "byDifficulty": {
+        "Easy": 59,
+        "Medium": 53,
+        "Hard": 78
+       }
       },
       {
        "code": "FSS",
        "name": "Form, Structure & Sense",
        "slug": "fss",
-       "count": 189
+       "count": 189,
+       "byDifficulty": {
+        "Easy": 90,
+        "Medium": 46,
+        "Hard": 53
+       }
       }
-     ]
+     ],
+     "byDifficulty": {
+      "Easy": 149,
+      "Medium": 99,
+      "Hard": 131
+     },
+     "count": 379
     }
-   ]
+   ],
+   "byDifficulty": {
+    "Easy": 593,
+    "Medium": 562,
+    "Hard": 533
+   },
+   "count": 1688
   },
   {
    "name": "Math",
@@ -104,33 +184,64 @@
        "code": "H.A.",
        "name": "Linear Equations in One Variable",
        "slug": "ha",
-       "count": 107
+       "count": 107,
+       "byDifficulty": {
+        "Easy": 61,
+        "Medium": 27,
+        "Hard": 19
+       }
       },
       {
        "code": "H.D.",
        "name": "Systems of Two Linear Equations",
        "slug": "hd",
-       "count": 116
+       "count": 116,
+       "byDifficulty": {
+        "Easy": 36,
+        "Medium": 41,
+        "Hard": 39
+       }
       },
       {
        "code": "H.B.",
        "name": "Linear Functions",
        "slug": "hb",
-       "count": 157
+       "count": 157,
+       "byDifficulty": {
+        "Easy": 78,
+        "Medium": 53,
+        "Hard": 26
+       }
       },
       {
        "code": "H.C.",
        "name": "Linear Equations in Two Variables",
        "slug": "hc",
-       "count": 128
+       "count": 128,
+       "byDifficulty": {
+        "Easy": 56,
+        "Medium": 40,
+        "Hard": 32
+       }
       },
       {
        "code": "H.E.",
        "name": "Linear Inequalities in One or Two Variables",
        "slug": "he",
-       "count": 74
+       "count": 74,
+       "byDifficulty": {
+        "Easy": 27,
+        "Medium": 27,
+        "Hard": 20
+       }
       }
-     ]
+     ],
+     "byDifficulty": {
+      "Easy": 258,
+      "Medium": 188,
+      "Hard": 136
+     },
+     "count": 582
     },
     {
      "code": "P",
@@ -140,21 +251,42 @@
        "code": "P.C.",
        "name": "Nonlinear Functions",
        "slug": "pc",
-       "count": 240
+       "count": 240,
+       "byDifficulty": {
+        "Easy": 60,
+        "Medium": 88,
+        "Hard": 92
+       }
       },
       {
        "code": "P.B.",
        "name": "Nonlinear Equations & Systems",
        "slug": "pb",
-       "count": 154
+       "count": 154,
+       "byDifficulty": {
+        "Easy": 42,
+        "Medium": 56,
+        "Hard": 56
+       }
       },
       {
        "code": "P.A.",
        "name": "Equivalent Expressions",
        "slug": "pa",
-       "count": 107
+       "count": 107,
+       "byDifficulty": {
+        "Easy": 41,
+        "Medium": 37,
+        "Hard": 29
+       }
       }
-     ]
+     ],
+     "byDifficulty": {
+      "Easy": 143,
+      "Medium": 181,
+      "Hard": 177
+     },
+     "count": 501
     },
     {
      "code": "Q",
@@ -164,45 +296,86 @@
        "code": "Q.F.",
        "name": "Inference from Statistics & Margin of Error",
        "slug": "qf",
-       "count": 24
+       "count": 24,
+       "byDifficulty": {
+        "Easy": 9,
+        "Medium": 11,
+        "Hard": 4
+       }
       },
       {
        "code": "Q.A.",
        "name": "Ratios, Rates, Proportions & Units",
        "slug": "qa",
-       "count": 87
+       "count": 87,
+       "byDifficulty": {
+        "Easy": 40,
+        "Medium": 30,
+        "Hard": 17
+       }
       },
       {
        "code": "Q.E.",
        "name": "Probability & Conditional Probability",
        "slug": "qe",
-       "count": 45
+       "count": 45,
+       "byDifficulty": {
+        "Easy": 23,
+        "Medium": 14,
+        "Hard": 8
+       }
       },
       {
        "code": "Q.B.",
        "name": "Percentages",
        "slug": "qb",
-       "count": 79
+       "count": 79,
+       "byDifficulty": {
+        "Easy": 28,
+        "Medium": 22,
+        "Hard": 29
+       }
       },
       {
        "code": "Q.C.",
        "name": "One-Variable Data & Distributions",
        "slug": "qc",
-       "count": 77
+       "count": 77,
+       "byDifficulty": {
+        "Easy": 35,
+        "Medium": 19,
+        "Hard": 23
+       }
       },
       {
        "code": "Q.D.",
        "name": "Two-Variable Data & Scatterplots",
        "slug": "qd",
-       "count": 66
+       "count": 66,
+       "byDifficulty": {
+        "Easy": 32,
+        "Medium": 23,
+        "Hard": 11
+       }
       },
       {
        "code": "Q.G.",
        "name": "Evaluating Statistical Claims",
        "slug": "qg",
-       "count": 11
+       "count": 11,
+       "byDifficulty": {
+        "Easy": 2,
+        "Medium": 3,
+        "Hard": 6
+       }
       }
-     ]
+     ],
+     "byDifficulty": {
+      "Easy": 169,
+      "Medium": 122,
+      "Hard": 98
+     },
+     "count": 389
     },
     {
      "code": "S",
@@ -212,29 +385,61 @@
        "code": "S.B.",
        "name": "Lines, Angles & Triangles",
        "slug": "sb",
-       "count": 84
+       "count": 84,
+       "byDifficulty": {
+        "Easy": 35,
+        "Medium": 22,
+        "Hard": 27
+       }
       },
       {
        "code": "S.A.",
        "name": "Area & Volume",
        "slug": "sa",
-       "count": 90
+       "count": 90,
+       "byDifficulty": {
+        "Easy": 29,
+        "Medium": 32,
+        "Hard": 29
+       }
       },
       {
        "code": "S.C.",
        "name": "Right Triangles & Trigonometry",
        "slug": "sc",
-       "count": 57
+       "count": 57,
+       "byDifficulty": {
+        "Easy": 10,
+        "Medium": 14,
+        "Hard": 33
+       }
       },
       {
        "code": "S.D.",
        "name": "Circles",
        "slug": "sd",
-       "count": 53
+       "count": 53,
+       "byDifficulty": {
+        "Easy": 3,
+        "Medium": 15,
+        "Hard": 35
+       }
       }
-     ]
+     ],
+     "byDifficulty": {
+      "Easy": 77,
+      "Medium": 83,
+      "Hard": 124
+     },
+     "count": 284
     }
-   ]
+   ],
+   "byDifficulty": {
+    "Easy": 647,
+    "Medium": 574,
+    "Hard": 535
+   },
+   "count": 1756
   }
  ],
  "total": 3444

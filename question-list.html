@@ -98,13 +98,29 @@
           </div>
         </div>
 
-        <div class="qlist-filter-group" role="group" aria-label="Filter by status">
-          <span class="qlist-filter-label">Status</span>
-          <div class="qlist-chips" data-filter-set="status">
+        <div class="qlist-filter-group" role="group" aria-label="Filter by result">
+          <span class="qlist-filter-label">Result</span>
+          <div class="qlist-chips" data-filter-set="result">
             <button type="button" class="active" data-value="all" aria-pressed="true">All</button>
-            <button type="button" data-value="unattempted" aria-pressed="false">Not started</button>
             <button type="button" data-value="correct" aria-pressed="false">Correct</button>
             <button type="button" data-value="incorrect" aria-pressed="false">Incorrect</button>
+          </div>
+        </div>
+
+        <div class="qlist-filter-group" role="group" aria-label="Filter by completion">
+          <span class="qlist-filter-label">Completed</span>
+          <div class="qlist-chips" data-filter-set="completed">
+            <button type="button" class="active" data-value="all" aria-pressed="true">All</button>
+            <button type="button" data-value="completed" aria-pressed="false">Completed</button>
+            <button type="button" data-value="notstarted" aria-pressed="false">Not started</button>
+          </div>
+        </div>
+
+        <div class="qlist-filter-group" role="group" aria-label="Filter by saved and marked">
+          <span class="qlist-filter-label">Flags</span>
+          <div class="qlist-chips" data-filter-set="flag">
+            <button type="button" class="active" data-value="all" aria-pressed="true">All</button>
+            <button type="button" data-value="saved" aria-pressed="false">Saved</button>
             <button type="button" data-value="marked" aria-pressed="false">Marked</button>
           </div>
         </div>
