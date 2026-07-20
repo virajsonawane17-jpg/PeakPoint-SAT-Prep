@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="style.css" />
 <link rel="stylesheet" href="app.css" />
-<link rel="stylesheet" href="study-planner.css?v=2" />
+<link rel="stylesheet" href="study-planner.css?v=3" />
 <link rel="icon" href="logo.svg" />
 </head>
 <body class="dashboard-screen study-planner-screen">
@@ -211,7 +211,10 @@
             </div>
           </section>
 
-          <button class="cyan-button" type="button" id="refresh-plan">Refresh preview</button>
+          <button class="cyan-button planner-generate" type="button" id="generate-plan">
+            <span class="generate-spark" aria-hidden="true"></span>
+            Make my Target Score Plan
+          </button>
         </form>
       </article>
 
@@ -223,12 +226,27 @@
           <span class="card-kicker">Your plan</span>
           <h2>Your study schedule</h2>
         </div>
-        <div class="planner-tabs" role="tablist" aria-label="Study planner views">
+        <div class="planner-tabs" id="planner-tabs" role="tablist" aria-label="Study planner views" hidden>
           <button class="active" type="button" role="tab" aria-selected="true" data-plan-view="list">List view</button>
           <button type="button" role="tab" aria-selected="false" data-plan-view="calendar">Calendar view</button>
         </div>
       </div>
 
+      <!-- initial call to action -->
+      <div class="plan-placeholder" id="plan-placeholder">
+        <span class="placeholder-mark" aria-hidden="true"></span>
+        <h3>Ready when you are</h3>
+        <p>Fill in your SAT profile above, then press <strong>Make my Target Score Plan</strong> to build a schedule around your target score.</p>
+      </div>
+
+      <!-- premium loading moment -->
+      <div class="plan-loading" id="plan-loading" hidden>
+        <div class="plan-loader" aria-hidden="true"><span></span><span></span><span></span></div>
+        <strong id="plan-loading-text">Building your plan…</strong>
+        <div class="plan-loading-bar"><i></i></div>
+      </div>
+
+      <div class="plan-content" id="plan-content" hidden>
       <p class="plan-summary" id="plan-summary" aria-live="polite"></p>
 
       <section class="plan-panel active" id="plan-list" data-plan-panel="list">
@@ -261,6 +279,7 @@
           <span class="calendar-label">Sun</span>
         </div>
       </section>
+      </div>
     </section>
   </div>
 </main>
@@ -269,6 +288,6 @@
 <script src="supabase-config.js"></script>
 <script src="auth.js"></script>
 <script src="sidebar.js"></script>
-<script src="study-planner.js?v=2"></script>
+<script src="study-planner.js?v=3"></script>
 </body>
 </html>

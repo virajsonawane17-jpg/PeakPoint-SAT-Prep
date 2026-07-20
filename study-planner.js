@@ -398,7 +398,7 @@
         dot.addEventListener('click', () => {
           meter.dataset.domainLevel = String(level);
           syncDomainMeter(meter);
-          regenerate();
+          markStale();
         });
         meter.appendChild(dot);
       }
@@ -452,18 +452,75 @@
     }
   }
 
+  /* ---------- generate flow (button + premium loading) ---------- */
+  const genBtn = $('generate-plan');
+  const placeholderEl = $('plan-placeholder');
+  const loadingEl = $('plan-loading');
+  const contentEl = $('plan-content');
+  const tabsEl = $('planner-tabs');
+  const loadingText = $('plan-loading-text');
+  let hasPlan = false;
+
+  const LOADING_MSGS = [
+    'Reading your score profile…',
+    'Prioritizing your weak spots…',
+    'Spacing sessions to test day…',
+    'Finalizing your calendar…',
+  ];
+
+  function setGenLabel() {
+    genBtn.innerHTML =
+      `<span class="generate-spark" aria-hidden="true"></span>${hasPlan ? 'Update my plan' : 'Make my Target Score Plan'}`;
+  }
+
+  // A change after a plan exists doesn't rebuild automatically — it just
+  // nudges the button so the student re-generates when ready.
+  function markStale() {
+    saveInputs();
+    renderHero(readConfig());
+    if (hasPlan && genBtn) genBtn.classList.add('is-stale');
+  }
+
+  function generateWithLoading() {
+    if (!genBtn) return;
+    saveInputs();
+    placeholderEl.hidden = true;
+    contentEl.hidden = true;
+    loadingEl.hidden = false;
+    genBtn.disabled = true;
+    genBtn.classList.remove('is-stale');
+
+    let i = 0;
+    loadingText.textContent = LOADING_MSGS[0];
+    const rot = setInterval(() => {
+      i = (i + 1) % LOADING_MSGS.length;
+      loadingText.textContent = LOADING_MSGS[i];
+    }, 340);
+
+    setTimeout(() => {
+      clearInterval(rot);
+      const cfg = regenerate();
+      loadingEl.hidden = true;
+      contentEl.hidden = false;
+      tabsEl.hidden = !(plan && plan.sessions && plan.sessions.length);
+      hasPlan = true;
+      genBtn.disabled = false;
+      setGenLabel();
+      const card = document.querySelector('.planner-preview-card');
+      if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 1350);
+  }
+
   /* ---------- wire up ---------- */
   tabs.forEach((tab) => tab.addEventListener('click', () => showPanel(tab.dataset.planView)));
 
   document.querySelectorAll('#planner-form input, #planner-form select').forEach((input) => {
     const ev = input.type === 'number' || input.type === 'date' ? 'input' : 'change';
-    input.addEventListener(ev, regenerate);
-    if (input.type === 'number') input.addEventListener('change', regenerate);
+    input.addEventListener(ev, markStale);
   });
-  toggleInputs.forEach((input) => input.addEventListener('change', () => { syncTogglePills(); regenerate(); }));
+  toggleInputs.forEach((input) => input.addEventListener('change', () => { syncTogglePills(); markStale(); }));
 
-  const refresh = $('refresh-plan');
-  if (refresh) refresh.addEventListener('click', regenerate);
+  if (genBtn) genBtn.addEventListener('click', generateWithLoading);
 
   const calPrev = $('cal-prev');
   const calNext = $('cal-next');
@@ -483,5 +540,5 @@
   const now = new Date();
   calState.y = now.getFullYear();
   calState.m = now.getMonth();
-  regenerate();
+  renderHero(readConfig());   // show the countdown; hold the plan until requested
 })();
