@@ -81,7 +81,7 @@
             <h2>Practice</h2>
             <p>Work through 10 SAT-style vocab questions with words you have not mastered yet.</p>
           </div>
-          <button type="button">Start <span aria-hidden="true">›</span></button>
+          <button type="button" data-vocab-mode="practice">Start <span aria-hidden="true">›</span></button>
           <span class="mode-art learn-art" aria-hidden="true"></span>
         </article>
 
@@ -90,7 +90,7 @@
             <h2>Speed Match</h2>
             <p>Play a quick matching game. Pair words with definitions against the clock.</p>
           </div>
-          <button type="button">Start <span aria-hidden="true">›</span></button>
+          <button type="button" data-vocab-mode="match">Start <span aria-hidden="true">›</span></button>
           <span class="mode-art match-art" aria-hidden="true"></span>
         </article>
 
@@ -99,9 +99,54 @@
             <h2>Review Deck</h2>
             <p>Review definitions, sentence context, roots, and common traps for SAT vocabulary.</p>
           </div>
-          <button type="button">Start <span aria-hidden="true">›</span></button>
+          <button type="button" data-vocab-mode="deck">Start <span aria-hidden="true">›</span></button>
           <span class="mode-art card-art" aria-hidden="true"></span>
         </article>
+      </div>
+
+      <div class="vocab-explore-board">
+        <section class="vocab-progress-card" aria-label="Vocabulary progress">
+          <div class="vocab-progress-main">
+            <p class="eyebrow">Current climb</p>
+            <h2 id="vocab-explore-title">Build your word power</h2>
+            <p id="vocab-explore-summary">Start a quick round to learn new SAT words, strengthen shaky ones, and move cards into mastery.</p>
+            <div class="vocab-progress-track" aria-label="Vocabulary mastery progress">
+              <span id="vocab-progress-bar"></span>
+            </div>
+          </div>
+          <div class="vocab-score-grid">
+            <span><strong id="explore-mastered">0</strong> mastered</span>
+            <span><strong id="explore-learning">0</strong> learning</span>
+            <span><strong id="explore-shaky">0</strong> shaky</span>
+            <span><strong id="explore-xp">0</strong> XP</span>
+          </div>
+        </section>
+
+        <section class="vocab-game-card" id="vocab-game-card" aria-live="polite">
+          <div class="vocab-game-empty" id="vocab-game-empty">
+            <span class="game-empty-icon" aria-hidden="true"></span>
+            <p class="eyebrow">Choose a mode</p>
+            <h2>Warm up with a fast vocab challenge.</h2>
+            <p>Practice builds accuracy, Speed Match builds recall, and Review Deck helps lock words into memory.</p>
+          </div>
+
+          <div class="vocab-game-shell" id="vocab-game-shell" hidden>
+            <div class="vocab-game-head">
+              <div>
+                <p class="eyebrow" id="game-mode-label">Practice</p>
+                <h2 id="game-title">Question 1 of 10</h2>
+              </div>
+              <div class="game-metrics">
+                <span><strong id="game-score">0</strong> score</span>
+                <span><strong id="game-streak">0</strong> streak</span>
+                <span><strong id="game-timer">Ready</strong></span>
+              </div>
+            </div>
+            <div class="vocab-game-body" id="vocab-game-body"></div>
+            <div class="vocab-game-feedback" id="vocab-game-feedback" hidden></div>
+            <div class="vocab-game-actions" id="vocab-game-actions"></div>
+          </div>
+        </section>
       </div>
 
     </section>
