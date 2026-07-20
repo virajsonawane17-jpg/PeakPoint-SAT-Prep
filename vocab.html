@@ -107,19 +107,93 @@
     </section>
 
     <section class="vocab-panel" id="vocab-library" data-vocab-panel="library">
+      <div class="vocab-library-head">
+        <div>
+          <p class="eyebrow">Word library</p>
+          <h2><span id="vocab-total">5,995</span> SAT vocabulary words</h2>
+          <p>Search, filter, and mark words as you build a personal review deck.</p>
+        </div>
+        <div class="vocab-library-stats" aria-label="Vocabulary library summary">
+          <span><strong id="vocab-visible">0</strong> showing</span>
+          <span><strong id="vocab-mastered">0</strong> mastered</span>
+        </div>
+      </div>
+
       <div class="vocab-toolbar">
         <label class="vocab-search">
           <span class="sr-only">Search vocabulary words</span>
           <input id="vocab-search" type="search" placeholder="Search words..." autocomplete="off" />
         </label>
-        <button class="vocab-filter" type="button"><span class="filter-bars" aria-hidden="true"></span> Difficulty <span aria-hidden="true">⌄</span></button>
-        <button class="vocab-filter" type="button"><span class="filter-progress" aria-hidden="true"></span> Progress <span aria-hidden="true">⌄</span></button>
-        <button class="vocab-filter" type="button"><span class="filter-grid" aria-hidden="true"></span> View <span aria-hidden="true">⌄</span></button>
-        <button class="start-practice" type="button"><span aria-hidden="true">▶</span> Start Practice</button>
+
+        <label class="vocab-select">
+          <span>Difficulty</span>
+          <select id="vocab-difficulty">
+            <option value="all">All</option>
+            <option value="Core">Core</option>
+            <option value="Medium">Medium</option>
+            <option value="Advanced">Advanced</option>
+          </select>
+        </label>
+
+        <label class="vocab-select">
+          <span>Part of speech</span>
+          <select id="vocab-pos">
+            <option value="all">All</option>
+          </select>
+        </label>
+
+        <label class="vocab-select">
+          <span>Status</span>
+          <select id="vocab-status">
+            <option value="all">All</option>
+            <option value="new">New</option>
+            <option value="learning">Learning</option>
+            <option value="shaky">Shaky</option>
+            <option value="mastered">Mastered</option>
+          </select>
+        </label>
+
+        <label class="vocab-select">
+          <span>Alphabet</span>
+          <select id="vocab-alpha">
+            <option value="all">All</option>
+            <option value="A-E">A-E</option>
+            <option value="F-J">F-J</option>
+            <option value="K-O">K-O</option>
+            <option value="P-T">P-T</option>
+            <option value="U-Z">U-Z</option>
+          </select>
+        </label>
+
+        <label class="vocab-select">
+          <span>Length</span>
+          <select id="vocab-length">
+            <option value="all">All</option>
+            <option value="Short">Short</option>
+            <option value="Medium">Medium</option>
+            <option value="Long">Long</option>
+          </select>
+        </label>
+
+        <label class="vocab-select">
+          <span>Sort</span>
+          <select id="vocab-sort">
+            <option value="az">A-Z</option>
+            <option value="za">Z-A</option>
+            <option value="difficulty">Difficulty</option>
+            <option value="status">Status</option>
+          </select>
+        </label>
+
+        <button class="vocab-reset" id="vocab-reset" type="button">Reset</button>
       </div>
 
       <div class="word-grid" id="word-grid" aria-live="polite"></div>
       <p class="word-empty" id="word-empty">No words match that search.</p>
+      <div class="word-results-footer">
+        <p id="vocab-results-count"></p>
+        <button class="start-practice" id="vocab-load-more" type="button">Load more</button>
+      </div>
     </section>
   </div>
 </main>
@@ -128,6 +202,7 @@
 <script src="supabase-config.js"></script>
 <script src="auth.js"></script>
 <script src="sidebar.js"></script>
+<script src="vocab-data.js"></script>
 <script src="vocab.js"></script>
 </body>
 </html>
