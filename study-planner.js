@@ -17,6 +17,7 @@
 
   const $ = (id) => document.getElementById(id);
   const STORE_KEY = 'pp_planner_inputs';
+  const GEN_KEY = 'pp_planner_generated';
 
   /* ---------- domain reference ----------
      weight = share of the section on the real SAT; slug/subject/domain feed the
@@ -560,6 +561,7 @@
       hasPlan = true;
       genBtn.disabled = false;
       setGenLabel();
+      try { localStorage.setItem(GEN_KEY, '1'); } catch (_) { /* ignore */ }
       const card = document.querySelector('.planner-preview-card');
       if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 1350);
@@ -615,5 +617,18 @@
   const now = new Date();
   calState.y = now.getFullYear();
   calState.m = now.getMonth();
-  renderHero(readConfig());   // show the countdown; hold the plan until requested
+  renderHero(readConfig());   // show the countdown
+
+  // Restore a previously built plan so it survives closing/reopening the site.
+  let restored = false;
+  try { restored = localStorage.getItem(GEN_KEY) === '1'; } catch (_) { restored = false; }
+  if (restored) {
+    regenerate();
+    if (placeholderEl) placeholderEl.hidden = true;
+    if (loadingEl) loadingEl.hidden = true;
+    if (contentEl) contentEl.hidden = false;
+    if (tabsEl) tabsEl.hidden = !(plan && plan.sessions && plan.sessions.length);
+    hasPlan = true;
+    setGenLabel();
+  }
 })();
