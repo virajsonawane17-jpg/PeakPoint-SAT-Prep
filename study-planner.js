@@ -482,6 +482,15 @@
     else delete el.dataset.tone;
   }
 
+  function setRemoteSaveFallback(error) {
+    const message = String((error && error.message) || '');
+    if ((error && error.code === 'PGRST205') || message.includes('learning_state')) {
+      setSaveStatus('Supabase setup needed', 'local');
+      return;
+    }
+    setSaveStatus('Saved on this device', 'local');
+  }
+
   function readLocalPlannerPayload() {
     let inputs = null;
     let generated = false;
@@ -549,9 +558,9 @@
         }
       }
       remoteReady = true;
-    } catch (_) {
+    } catch (error) {
       remoteReady = false;
-      setSaveStatus('Saved on this device', 'local');
+      setRemoteSaveFallback(error);
     }
   }
 
@@ -563,8 +572,8 @@
       try {
         await saveRemotePlanner(readLocalPlannerPayload());
         setSaveStatus('Saved to account', 'saved');
-      } catch (_) {
-        setSaveStatus('Saved on this device', 'local');
+      } catch (error) {
+        setRemoteSaveFallback(error);
       }
     }, 450);
   }
