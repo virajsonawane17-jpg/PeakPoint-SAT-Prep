@@ -23,17 +23,18 @@
      "Start" link straight into the matching Question Bank list. */
   const DOMAIN_INFO = {
     'Information and Ideas': { section: 'RW', weight: 0.26, slug: 'cid', short: 'Info & Ideas', skills: 'central ideas, inferences, and command of evidence' },
-    'Craft and Structure': { section: 'RW', weight: 0.28, slug: 'wic', short: 'Craft', skills: 'words in context, text structure, and cross-text links' },
-    'Expression of Ideas': { section: 'RW', weight: 0.20, slug: 'syn', short: 'Expression', skills: 'rhetorical synthesis and transitions' },
-    'Standard English Conventions': { section: 'RW', weight: 0.26, slug: 'bou', short: 'Conventions', skills: 'boundaries and form, structure & sense' },
+    'Craft and Structure': { section: 'RW', weight: 0.28, slug: 'wic', short: 'Craft & Structure', skills: 'words in context, text structure, and cross-text links' },
+    'Expression of Ideas': { section: 'RW', weight: 0.20, slug: 'syn', short: 'Expression of Ideas', skills: 'rhetorical synthesis and transitions' },
+    'Standard English Conventions': { section: 'RW', weight: 0.26, slug: 'bou', short: 'Grammar & Conventions', skills: 'boundaries and form, structure & sense' },
     'Algebra': { section: 'Math', weight: 0.35, slug: 'ha', short: 'Algebra', skills: 'linear equations, systems, and inequalities' },
-    'Advanced Math': { section: 'Math', weight: 0.35, slug: 'pc', short: 'Adv Math', skills: 'nonlinear functions and equivalent expressions' },
-    'Problem-Solving and Data Analysis': { section: 'Math', weight: 0.15, slug: 'qa', short: 'Data', skills: 'ratios, percentages, data, and probability' },
-    'Geometry and Trigonometry': { section: 'Math', weight: 0.15, slug: 'sa', short: 'Geo & Trig', skills: 'area & volume, triangles, circles, and trig' },
+    'Advanced Math': { section: 'Math', weight: 0.35, slug: 'pc', short: 'Advanced Math', skills: 'nonlinear functions and equivalent expressions' },
+    'Problem-Solving and Data Analysis': { section: 'Math', weight: 0.15, slug: 'qa', short: 'Data Analysis', skills: 'ratios, percentages, data, and probability' },
+    'Geometry and Trigonometry': { section: 'Math', weight: 0.15, slug: 'sa', short: 'Geometry & Trig', skills: 'area & volume, triangles, circles, and trig' },
   };
   const SUBJECT_OF = { RW: 'Reading & Writing', Math: 'Math' };
   const WD_INDEX = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
   const WD_SHORT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const WD_LONG = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
     'August', 'September', 'October', 'November', 'December'];
 
@@ -307,13 +308,15 @@
     for (let i = 0; i < 42; i += 1) {
       const date = addDays(gridStart, i);
       const inMonth = date.getMonth() === calState.m;
+      const key = dayKey(date);
+      const session = sessionByKey[key];
+      const isToday = sameDate(date, today);
+
       const cell = document.createElement('div');
       cell.className = 'calendar-cell';
       if (!inMonth) cell.classList.add('muted');
-      if (sameDate(date, today)) cell.classList.add('today');
+      if (isToday) cell.classList.add('today');
       if (sameDate(date, cfg.test)) cell.classList.add('exam');
-
-      const session = sessionByKey[dayKey(date)];
       if (session) {
         if (session.type === 'checkpoint' || session.type === 'fulltest') cell.classList.add('checkpoint');
         else if (session.type === 'test') cell.classList.add('exam');
@@ -321,23 +324,74 @@
         else cell.classList.add('active');
       }
 
+      const top = document.createElement('div');
+      top.className = 'cell-top';
       const num = document.createElement('strong');
       num.textContent = String(date.getDate());
-      cell.appendChild(num);
-      if (sameDate(date, today)) {
+      top.appendChild(num);
+      if (isToday) {
         const pill = document.createElement('em');
         pill.className = 'cell-today';
         pill.textContent = 'Today';
-        cell.appendChild(pill);
+        top.appendChild(pill);
       }
+      cell.appendChild(top);
+
       if (session && inMonth) {
         const tag = document.createElement('span');
+        tag.className = 'cell-tag';
         tag.textContent = session.short;
         cell.appendChild(tag);
+        cell.classList.add('is-clickable');
+        cell.dataset.dayKey = key;
+        cell.setAttribute('role', 'button');
+        cell.setAttribute('tabindex', '0');
+        cell.setAttribute('aria-label', `${session.title} — ${MONTHS[date.getMonth()]} ${date.getDate()}. View details.`);
       }
       frag.appendChild(cell);
     }
     grid.appendChild(frag);
+  }
+
+  /* ---------- day detail modal ---------- */
+  const TYPE_LABEL = {
+    focus: 'Focused practice',
+    checkpoint: 'Mixed review',
+    fulltest: 'Full practice test',
+    light: 'Light review & rest',
+    test: 'Test day',
+  };
+
+  function openDayModal(key) {
+    const s = sessionByKey[key];
+    if (!s) return;
+    const modal = $('day-modal');
+    if (!modal) return;
+    const d = s.date;
+    $('day-modal-date').textContent = `${WD_LONG[d.getDay()]}, ${MONTHS[d.getMonth()]} ${d.getDate()}`;
+    const badge = $('day-modal-badge');
+    badge.textContent = TYPE_LABEL[s.type] || 'Study session';
+    badge.className = `day-modal-badge type-${s.type}`;
+    $('day-modal-title').textContent = s.title;
+    $('day-modal-desc').textContent = s.desc;
+    $('day-modal-tags').innerHTML = s.tags.map((t) => `<span>${t}</span>`).join('');
+    const action = $('day-modal-action');
+    if (s.link && s.cta) {
+      action.href = s.link;
+      action.textContent = s.type === 'test' ? s.cta : `${s.cta} →`;
+      action.hidden = false;
+    } else {
+      action.hidden = true;
+    }
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    $('day-modal-close').focus();
+  }
+
+  function closeDayModal() {
+    const modal = $('day-modal');
+    if (modal) modal.hidden = true;
+    document.body.style.overflow = '';
   }
 
   /* ---------- orchestration ---------- */
@@ -532,6 +586,27 @@
   };
   if (calPrev) calPrev.addEventListener('click', () => stepMonth(-1));
   if (calNext) calNext.addEventListener('click', () => stepMonth(1));
+
+  // calendar cell -> day detail modal (event delegation, bound once)
+  const gridEl = $('calendar-grid');
+  if (gridEl) {
+    gridEl.addEventListener('click', (e) => {
+      const cell = e.target.closest('.calendar-cell.is-clickable');
+      if (cell) openDayModal(cell.dataset.dayKey);
+    });
+    gridEl.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      const cell = e.target.closest('.calendar-cell.is-clickable');
+      if (cell) { e.preventDefault(); openDayModal(cell.dataset.dayKey); }
+    });
+  }
+  const dayModal = $('day-modal');
+  const dayClose = $('day-modal-close');
+  if (dayClose) dayClose.addEventListener('click', closeDayModal);
+  if (dayModal) dayModal.addEventListener('click', (e) => { if (e.target === dayModal) closeDayModal(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && dayModal && !dayModal.hidden) closeDayModal();
+  });
 
   /* ---------- init ---------- */
   loadInputs();

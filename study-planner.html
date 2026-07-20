@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="style.css" />
 <link rel="stylesheet" href="app.css" />
-<link rel="stylesheet" href="study-planner.css?v=3" />
+<link rel="stylesheet" href="study-planner.css?v=4" />
 <link rel="icon" href="logo.svg" />
 </head>
 <body class="dashboard-screen study-planner-screen">
@@ -284,10 +284,22 @@
   </div>
 </main>
 
+<div class="day-modal" id="day-modal" role="dialog" aria-modal="true" aria-labelledby="day-modal-title" hidden>
+  <div class="day-modal-panel">
+    <button class="day-modal-close" id="day-modal-close" type="button" aria-label="Close">&times;</button>
+    <span class="day-modal-date" id="day-modal-date"></span>
+    <span class="day-modal-badge" id="day-modal-badge"></span>
+    <h3 id="day-modal-title"></h3>
+    <p id="day-modal-desc"></p>
+    <div class="day-modal-tags" id="day-modal-tags"></div>
+    <a class="day-modal-action" id="day-modal-action" href="#"></a>
+  </div>
+</div>
+
 <script src="vendor/supabase.js"></script>
 <script src="supabase-config.js"></script>
 <script src="auth.js"></script>
 <script src="sidebar.js"></script>
-<script src="study-planner.js?v=3"></script>
+<script src="study-planner.js?v=4"></script>
 </body>
 </html>
