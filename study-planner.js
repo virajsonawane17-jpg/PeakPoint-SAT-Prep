@@ -7,9 +7,11 @@
    ============================================ */
 
 (async () => {
+  let currentUser = null;
   if (window.PP && PP.auth) {
     const user = await PP.auth.requireAuth();
     if (!user) return;
+    currentUser = user;
     const firstName = (user.name || user.email || 'Student').split(' ')[0];
     const sideName = document.getElementById('side-user-name');
     if (sideName) sideName.textContent = user.name || firstName;
@@ -56,6 +58,9 @@
   let plan = null;                 // latest generated plan
   let sessionByKey = {};           // dayKey -> session
   const calState = { y: 0, m: 0 }; // month shown in calendar view
+  let remoteLearningState = {};
+  let remoteReady = false;
+  let remoteSaveTimer = null;
 
   /* ---------- read the form ---------- */
   const num = (id, fallback) => {
@@ -469,6 +474,101 @@
   }
 
   /* ---------- persistence ---------- */
+  function setSaveStatus(text, tone) {
+    const el = $('planner-save-status');
+    if (!el) return;
+    el.textContent = text;
+    if (tone) el.dataset.tone = tone;
+    else delete el.dataset.tone;
+  }
+
+  function readLocalPlannerPayload() {
+    let inputs = null;
+    let generated = false;
+    try { inputs = JSON.parse(localStorage.getItem(STORE_KEY) || 'null'); } catch (_) { inputs = null; }
+    try { generated = localStorage.getItem(GEN_KEY) === '1'; } catch (_) { generated = false; }
+    return {
+      version: 1,
+      inputs,
+      generated,
+      updatedAt: new Date().toISOString(),
+    };
+  }
+
+  function applyPlannerPayload(payload) {
+    if (!payload || !payload.inputs) return false;
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify(payload.inputs));
+      if (payload.generated) localStorage.setItem(GEN_KEY, '1');
+      else localStorage.removeItem(GEN_KEY);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  async function loadRemotePlanner() {
+    if (!currentUser || !window.PP || !PP.sb) return null;
+    const { data, error } = await PP.sb
+      .from('learning_state')
+      .select('state')
+      .eq('user_id', currentUser.id)
+      .maybeSingle();
+    if (error) throw error;
+    remoteLearningState = (data && data.state) || {};
+    return remoteLearningState.studyPlanner || null;
+  }
+
+  async function saveRemotePlanner(payload) {
+    if (!currentUser || !window.PP || !PP.sb) return;
+    remoteLearningState = {
+      ...(remoteLearningState || {}),
+      studyPlanner: payload,
+    };
+    const { error } = await PP.sb.from('learning_state').upsert({
+      user_id: currentUser.id,
+      state: remoteLearningState,
+    }, { onConflict: 'user_id' });
+    if (error) throw error;
+  }
+
+  async function hydrateRemotePlanner() {
+    setSaveStatus('Loading saved plan…');
+    try {
+      const remotePlanner = await loadRemotePlanner();
+      if (remotePlanner && remotePlanner.inputs) {
+        applyPlannerPayload(remotePlanner);
+        setSaveStatus('Saved to account', 'saved');
+      } else {
+        const localPayload = readLocalPlannerPayload();
+        if (localPayload.inputs) {
+          await saveRemotePlanner(localPayload);
+          setSaveStatus('Saved to account', 'saved');
+        } else {
+          setSaveStatus('Ready to save');
+        }
+      }
+      remoteReady = true;
+    } catch (_) {
+      remoteReady = false;
+      setSaveStatus('Saved on this device', 'local');
+    }
+  }
+
+  function queueRemoteSave() {
+    if (!remoteReady) return;
+    setSaveStatus('Saving…');
+    clearTimeout(remoteSaveTimer);
+    remoteSaveTimer = setTimeout(async () => {
+      try {
+        await saveRemotePlanner(readLocalPlannerPayload());
+        setSaveStatus('Saved to account', 'saved');
+      } catch (_) {
+        setSaveStatus('Saved on this device', 'local');
+      }
+    }, 450);
+  }
+
   function saveInputs() {
     try {
       const data = {
@@ -482,6 +582,7 @@
         levels: domainMeters.map((m) => [m.dataset.domainName, m.dataset.domainLevel]),
       };
       localStorage.setItem(STORE_KEY, JSON.stringify(data));
+      queueRemoteSave();
     } catch (_) { /* ignore */ }
   }
   function loadInputs() {
@@ -562,6 +663,7 @@
       genBtn.disabled = false;
       setGenLabel();
       try { localStorage.setItem(GEN_KEY, '1'); } catch (_) { /* ignore */ }
+      queueRemoteSave();
       const card = document.querySelector('.planner-preview-card');
       if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 1350);
@@ -611,6 +713,7 @@
   });
 
   /* ---------- init ---------- */
+  await hydrateRemotePlanner();
   loadInputs();
   setupDomainMeters();
   syncTogglePills();

@@ -123,6 +123,16 @@
   white-space: nowrap;
 }
 
+.preview-pill[data-tone="saved"] {
+  background: #dcfce7;
+  color: #047857;
+}
+
+.preview-pill[data-tone="local"] {
+  background: #fef3c7;
+  color: #a16207;
+}
+
 .planner-form {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
