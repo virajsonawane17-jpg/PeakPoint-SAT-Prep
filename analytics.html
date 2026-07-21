@@ -104,6 +104,44 @@
       </div>
     </section>
 
+    <section class="analytics-momentum-grid" aria-label="Momentum and achievements">
+      <article class="analytics-card momentum-card">
+        <div>
+          <span class="card-kicker">Today&apos;s best move</span>
+          <h2 id="momentum-title">Condition with PeakLabs</h2>
+          <p id="momentum-detail">Turn recent misses into a focused practice set.</p>
+        </div>
+        <a class="cyan-button" id="momentum-cta" href="peaklabs.html">Open PeakLabs</a>
+      </article>
+
+      <article class="analytics-card momentum-stats-card">
+        <div>
+          <span>Active days</span>
+          <strong id="momentum-streak">0 days</strong>
+        </div>
+        <div>
+          <span>Vocab XP</span>
+          <strong id="momentum-xp">0</strong>
+        </div>
+        <div>
+          <span>Words mastered</span>
+          <strong id="momentum-vocab">0 / 5,995</strong>
+        </div>
+      </article>
+
+      <article class="analytics-card achievement-card">
+        <div class="analytics-card-head">
+          <div>
+            <span class="card-kicker">Unlocked progress</span>
+            <h2>Achievements</h2>
+          </div>
+        </div>
+        <ul id="achievement-list" class="achievement-list">
+          <li><span aria-hidden="true"></span><div><strong>First climb started</strong><small>Attempt your first question</small></div></li>
+        </ul>
+      </article>
+    </section>
+
     <section class="analytics-layout" aria-label="Detailed analytics">
       <article class="analytics-card score-snapshot">
         <div class="analytics-card-head">
@@ -251,7 +289,7 @@
           </div>
         </div>
         <div class="action-stack">
-          <button id="review-action" type="button">Review 27 recent errors</button>
+          <a id="review-action" href="peaklabs.html">Open PeakLabs</a>
           <button type="button">Practice weakest skill set</button>
           <button type="button">Spend 8 minutes on vocab</button>
         </div>
@@ -264,6 +302,7 @@
 <script src="supabase-config.js"></script>
 <script src="auth.js"></script>
 <script src="sidebar.js"></script>
+<script src="analytics-data.js"></script>
 <script src="analytics.js"></script>
 </body>
 </html>

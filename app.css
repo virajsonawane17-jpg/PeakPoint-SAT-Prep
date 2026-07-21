@@ -1095,6 +1095,75 @@
   box-shadow: var(--card-shadow);
 }
 
+.home-quest-card {
+  display: grid;
+  grid-template-columns: 62px minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: center;
+  border: 1px solid var(--dash-border-strong);
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 90% 20%, rgba(14, 165, 233, 0.14), transparent 34%),
+    linear-gradient(135deg, #fff 0%, var(--surface-2) 100%);
+  box-shadow: var(--card-shadow);
+  padding: 22px 26px;
+  margin: -18px 0 42px;
+}
+
+.home-quest-card span {
+  display: block;
+  color: var(--dash-muted);
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.home-quest-card h3 {
+  margin-top: 4px;
+  font-size: 1.45rem;
+}
+
+.home-quest-card p {
+  color: var(--dash-muted);
+  line-height: 1.45;
+  margin-top: 5px;
+}
+
+.home-quest-card .cyan-button {
+  min-width: 138px;
+}
+
+.quest-orb {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  background: var(--dash-cyan);
+  box-shadow: inset 0 -7px 0 var(--dash-cyan-deep), 0 12px 28px -18px var(--glow);
+  position: relative;
+}
+
+.quest-orb::before {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  left: 18px;
+  top: 14px;
+  border-radius: 50%;
+  border: 7px solid var(--dash-muted);
+}
+
+.quest-orb::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 5px;
+  left: 19px;
+  bottom: 15px;
+  border-radius: 999px;
+  background: var(--dash-muted);
+}
+
 .study-time-card {
   border: 1px solid var(--dash-border-strong);
   border-radius: 22px;
@@ -1595,6 +1664,15 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .home-quest-card {
+    grid-template-columns: 58px minmax(0, 1fr);
+  }
+
+  .home-quest-card .cyan-button {
+    grid-column: 1 / -1;
+    width: fit-content;
+  }
+
   .study-time-card {
     padding: 24px 22px 26px;
   }
@@ -1639,6 +1717,11 @@
 
   .analytics-grid {
     grid-template-columns: 1fr;
+  }
+
+  .home-quest-card {
+    grid-template-columns: 1fr;
+    margin-top: -22px;
   }
 
   .study-time-heading {

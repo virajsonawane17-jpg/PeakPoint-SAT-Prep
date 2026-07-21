@@ -16,159 +16,121 @@
     }
   }
 
+  const analytics = window.PeakPointAnalytics.build(user, data);
   const $ = (id) => document.getElementById(id);
   const setText = (id, value) => {
     const el = $(id);
     if (el) el.textContent = value;
   };
-  const escapeHTML = (value) => String(value || '').replace(/[&<>"']/g, (char) => (
-    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]
-  ));
-  const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
-  const pct = (value) => `${Math.round(clamp(value, 0, 100))}%`;
-  const attempts = data && Array.isArray(data.attempts) ? data.attempts : [];
-  const sessions = data && Array.isArray(data.sessions) ? data.sessions : [];
-  const snapshots = data && Array.isArray(data.snapshots) ? data.snapshots : [];
+  const setHref = (id, value) => {
+    const el = $(id);
+    if (el) el.setAttribute('href', value);
+  };
+  const { escapeHTML, pctText, clamp } = window.PeakPointAnalytics;
 
   if (user) {
     const firstName = (user.name || user.email || 'Student').split(' ')[0];
     setText('side-user-name', user.name || firstName);
   }
 
-  const correct = attempts.filter((attempt) => attempt.correct).length;
-  const total = attempts.length || 782;
-  const accuracy = attempts.length ? (correct / attempts.length) * 100 : 92;
-  const errors = attempts.length ? attempts.length - correct : 27;
-  const latestSnapshot = snapshots[snapshots.length - 1] || null;
-  const fallbackMath = 680;
-  const fallbackRw = 660;
-  const mathScore = latestSnapshot && Number(latestSnapshot.math) ? Number(latestSnapshot.math) : fallbackMath;
-  const rwScore = latestSnapshot && Number(latestSnapshot.rw) ? Number(latestSnapshot.rw) : fallbackRw;
-  const totalScore = mathScore + rwScore;
-  const targetScore = data && data.profile && data.profile.targetScore ? data.profile.targetScore : 1540;
+  setText('metric-attempted', analytics.totalQuestions.toLocaleString());
+  setText('metric-accuracy', analytics.totalQuestions ? pctText(analytics.accuracy) : '0%');
+  setText('metric-saved', String(analytics.savedQuestions));
+  setText('metric-errors', String(analytics.recentErrors));
+  setText('score-total', String(analytics.scores.total));
+  setText('score-rw', String(analytics.scores.rw));
+  setText('score-math', String(analytics.scores.math));
+  setText('score-goal', String(analytics.scores.target));
+  setText('math-accuracy', pctText(analytics.sections.math.accuracy));
+  setText('rw-accuracy', pctText(analytics.sections.rw.accuracy));
+  setText('vocab-accuracy', analytics.vocab.attempted ? pctText(analytics.sections.vocab.accuracy) : `${analytics.vocab.mastered} mastered`);
+  setText('mix-math', pctText(analytics.mix.math));
+  setText('mix-rw', pctText(analytics.mix.rw));
+  setText('mix-vocab', pctText(analytics.mix.vocab));
+  setText('analytics-readiness', analytics.readiness);
+  setText('analytics-updated', new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric' }));
 
-  setText('metric-attempted', String(total));
-  setText('metric-accuracy', pct(accuracy));
-  setText('metric-errors', String(errors));
-  setText('review-action', `Review ${errors} recent ${errors === 1 ? 'error' : 'errors'}`);
-  setText('score-total', String(totalScore));
-  setText('score-rw', String(rwScore));
-  setText('score-math', String(mathScore));
-  setText('score-goal', String(targetScore));
-
-  const today = new Date();
-  setText('analytics-updated', today.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }));
-  const readiness = accuracy >= 90 ? 'Readiness level: Strong' : accuracy >= 75 ? 'Readiness level: Building' : 'Readiness level: Needs focus';
-  setText('analytics-readiness', readiness);
-
-  const bySection = attempts.reduce((map, attempt) => {
-    const key = /math/i.test(attempt.section || attempt.skill || '') ? 'math' : 'rw';
-    map[key].total += 1;
-    if (attempt.correct) map[key].correct += 1;
-    return map;
-  }, { math: { total: 0, correct: 0 }, rw: { total: 0, correct: 0 } });
-
-  const mathAccuracy = bySection.math.total ? (bySection.math.correct / bySection.math.total) * 100 : 94;
-  const rwAccuracy = bySection.rw.total ? (bySection.rw.correct / bySection.rw.total) * 100 : 90;
-  setText('math-accuracy', pct(mathAccuracy));
-  setText('rw-accuracy', pct(rwAccuracy));
+  const delta = analytics.scores.delta;
+  const trend = document.querySelector('.trend-pill');
+  if (trend) trend.textContent = `${delta >= 0 ? '+' : ''}${delta} score momentum`;
 
   document.querySelectorAll('.bar-row i').forEach((bar, index) => {
-    const values = [mathAccuracy, rwAccuracy, 88];
-    bar.style.setProperty('--bar-width', pct(values[index] || 88));
+    const values = [analytics.sections.math.accuracy, analytics.sections.rw.accuracy, analytics.sections.vocab.accuracy];
+    bar.style.setProperty('--bar-width', pctText(values[index] || 0));
   });
 
-  function renderStudyTime() {
-    const plot = $('study-time-plot');
-    const axis = $('study-time-xaxis');
-    if (!plot || !axis) return;
-
-    const days = [];
-    for (let i = 6; i >= 0; i -= 1) {
-      const day = new Date();
-      day.setDate(today.getDate() - i);
-      const key = day.toISOString().slice(0, 10);
-      days.push({ key, label: day.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }), minutes: 0 });
-    }
-
-    attempts.forEach((attempt) => {
-      const key = new Date(attempt.t || Date.now()).toISOString().slice(0, 10);
-      const found = days.find((day) => day.key === key);
-      if (found) found.minutes += 1;
-    });
-
-    if (!attempts.length) days[days.length - 1].minutes = 7;
-    const maxMinutes = Math.max(8, ...days.map((day) => day.minutes));
-    plot.querySelectorAll('.study-bar').forEach((bar) => bar.remove());
-    days.forEach((day, index) => {
-      const bar = document.createElement('span');
-      bar.className = 'study-bar';
-      bar.dataset.index = String(index);
-      bar.style.setProperty('--study-height', `${Math.max(4, (day.minutes / maxMinutes) * 100)}%`);
-      bar.style.setProperty('--bar-left', `${(index / Math.max(1, days.length - 1)) * 94}%`);
-      plot.appendChild(bar);
-    });
-    axis.innerHTML = days.map((day) => `<span>${day.label}</span>`).join('');
+  const mixRing = document.querySelector('.mix-ring');
+  if (mixRing) {
+    const mathEnd = clamp(analytics.mix.math, 0, 100);
+    const rwEnd = clamp(mathEnd + analytics.mix.rw, 0, 100);
+    mixRing.style.background = `conic-gradient(var(--accent) 0 ${mathEnd}%, #22c55e ${mathEnd}% ${rwEnd}%, #f59e0b ${rwEnd}% 100%)`;
   }
+
+  window.PeakPointAnalytics.renderStudyTime($('study-time-plot'), $('study-time-xaxis'), analytics);
 
   function renderSkillGrid() {
     const grid = $('skill-grid');
     if (!grid) return;
-    const mastery = data && data.mastery && Object.keys(data.mastery).length ? data.mastery : null;
-    if (!mastery) return;
+    const items = analytics.skills.length ? analytics.skills : [
+      { name: 'Question Bank', value: 0, detail: 'Start a set', tone: 'focus' },
+      { name: 'Vocabulary Mastery', value: 0, detail: 'Practice words', tone: 'focus' },
+      { name: 'Study Streak', value: 0, detail: 'Log activity', tone: 'focus' },
+    ];
 
-    const items = Object.entries(mastery)
-      .map(([name, value]) => ({ name, value: Math.round(Number(value) || 0) }))
-      .sort((a, b) => b.value - a.value)
-      .slice(0, 4);
-
-    if (!items.length) return;
-    grid.innerHTML = items.map((item) => {
-      const tone = item.value >= 90 ? 'strong' : item.value >= 80 ? 'steady' : 'focus';
-      return `<div class="skill-tile ${tone}">
+    grid.innerHTML = items.map((item) => (
+      `<div class="skill-tile ${item.tone}">
         <span>${escapeHTML(item.name)}</span>
-        <strong>${item.value}%</strong>
-        <i style="--skill-width: ${clamp(item.value, 12, 100)}%;"></i>
-      </div>`;
-    }).join('');
-  }
-
-  function renderPracticeMix() {
-    const counts = attempts.reduce((map, attempt) => {
-      const section = /math/i.test(attempt.section || attempt.skill || '') ? 'math' : /vocab/i.test(attempt.skill || '') ? 'vocab' : 'rw';
-      map[section] += 1;
-      return map;
-    }, { math: 0, rw: 0, vocab: 0 });
-    const sum = counts.math + counts.rw + counts.vocab;
-    if (!sum) return;
-    setText('mix-math', pct((counts.math / sum) * 100));
-    setText('mix-rw', pct((counts.rw / sum) * 100));
-    setText('mix-vocab', pct((counts.vocab / sum) * 100));
+        <strong>${Math.round(item.value)}%</strong>
+        <small>${escapeHTML(item.detail)}</small>
+        <i style="--skill-width: ${clamp(item.value, 8, 100)}%;"></i>
+      </div>`
+    )).join('');
   }
 
   function renderMistakes() {
     const list = $('review-list');
-    if (!list || !attempts.length) return;
-    const misses = attempts.filter((attempt) => !attempt.correct);
-    const grouped = misses.reduce((map, attempt) => {
-      const key = attempt.skill || attempt.section || 'Mixed practice';
-      map[key] = (map[key] || 0) + 1;
-      return map;
-    }, {});
-    const items = Object.entries(grouped).sort((a, b) => b[1] - a[1]).slice(0, 3);
-    if (!items.length) return;
-    list.innerHTML = items.map(([skill, count]) => (
-      `<div><strong>${escapeHTML(skill)}</strong><span>${count} recent ${count === 1 ? 'miss' : 'misses'}</span></div>`
+    if (!list) return;
+    const items = analytics.mistakes.length ? analytics.mistakes : [
+      { name: 'No mistake pattern yet', count: 0 },
+      { name: 'Start practice to unlock trends', count: 0 },
+    ];
+
+    list.innerHTML = items.map((item) => (
+      `<div>
+        <strong>${escapeHTML(item.name)}</strong>
+        <span>${item.count ? `${item.count} recent ${item.count === 1 ? 'miss' : 'misses'}` : 'Ready when you are'}</span>
+      </div>`
     )).join('');
   }
 
-  renderStudyTime();
-  renderSkillGrid();
-  renderPracticeMix();
-  renderMistakes();
-
-  if (sessions.length) {
-    const rush = sessions.filter((session) => /rush/i.test(session.type || ''));
-    if (rush.length) setText('vocab-accuracy', pct(88));
+  function renderMomentum() {
+    setText('momentum-title', analytics.nextAction.title);
+    setText('momentum-detail', analytics.nextAction.detail);
+    setText('momentum-cta', analytics.nextAction.cta);
+    setHref('momentum-cta', analytics.nextAction.href);
+    setText('momentum-streak', `${analytics.activeDays} day${analytics.activeDays === 1 ? '' : 's'}`);
+    setText('momentum-xp', analytics.vocab.xp.toLocaleString());
+    setText('momentum-vocab', `${analytics.vocab.mastered} / ${analytics.vocab.total.toLocaleString()}`);
+    setText('review-action', analytics.nextAction.cta);
+    setHref('review-action', analytics.nextAction.href);
   }
+
+  function renderAchievements() {
+    const list = $('achievement-list');
+    if (!list) return;
+    list.innerHTML = analytics.achievements.map((achievement) => (
+      `<li class="${achievement.unlocked ? 'unlocked' : ''}">
+        <span aria-hidden="true"></span>
+        <div>
+          <strong>${escapeHTML(achievement.title)}</strong>
+          <small>${escapeHTML(achievement.detail)}</small>
+        </div>
+      </li>`
+    )).join('');
+  }
+
+  renderSkillGrid();
+  renderMistakes();
+  renderMomentum();
+  renderAchievements();
 })();

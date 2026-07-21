@@ -16,6 +16,7 @@
   const words = Array.isArray(window.PP_VOCAB_WORDS) ? window.PP_VOCAB_WORDS : [];
   const $ = (id) => document.getElementById(id);
   const STORE_KEY = `pp_vocab_progress:${userId}`;
+  const ACTIVITY_KEY = `peakpoint-activity-log:${userId}`;
   const PAGE_SIZE = 96;
   const PRACTICE_SIZE = 10;
   const MATCH_SIZE = 6;
@@ -108,6 +109,16 @@
     }
   }
 
+  function recordVocabActivity(xp) {
+    try {
+      const log = JSON.parse(localStorage.getItem(ACTIVITY_KEY) || '[]');
+      log.push({ type: 'vocab', xp, t: Date.now() });
+      localStorage.setItem(ACTIVITY_KEY, JSON.stringify(log.slice(-300)));
+    } catch (_) {
+      // Analytics activity is best effort.
+    }
+  }
+
   function meta() {
     progress._meta = progress._meta && typeof progress._meta === 'object' ? progress._meta : {};
     progress._meta.xp = Number(progress._meta.xp || 0);
@@ -117,6 +128,7 @@
 
   function addXp(amount) {
     meta().xp += amount;
+    recordVocabActivity(amount);
     saveProgress();
     updateExploreStats();
   }

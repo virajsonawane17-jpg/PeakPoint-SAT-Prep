@@ -82,27 +82,37 @@
       <div class="analytics-grid">
         <article class="metric-card check-card">
           <span>Questions Attempted</span>
-          <strong>782</strong>
+          <strong id="home-metric-attempted">0</strong>
           <i aria-hidden="true"></i>
         </article>
         <article class="metric-card chart-card-mini">
           <span>Current Accuracy</span>
-          <strong>92%</strong>
+          <strong id="home-metric-accuracy">0%</strong>
           <i aria-hidden="true"></i>
         </article>
         <article class="metric-card saved-card-mini">
           <span>Saved Questions</span>
-          <strong>14</strong>
+          <strong id="home-metric-saved">0</strong>
           <a href="saved.html">View Saved</a>
           <i aria-hidden="true"></i>
         </article>
         <article class="metric-card error-card-mini">
           <span>Recent Errors</span>
-          <strong>27</strong>
+          <strong id="home-metric-errors">0</strong>
           <a href="mistakes.html">Start Review</a>
           <i aria-hidden="true"></i>
         </article>
       </div>
+
+      <article class="home-quest-card">
+        <div class="quest-orb" aria-hidden="true"></div>
+        <div>
+          <span>Recommended next</span>
+          <h3 id="home-quest-title">Start your first climb</h3>
+          <p id="home-quest-detail">Practice a few questions so PeakPoint can begin building your analytics.</p>
+        </div>
+        <a class="cyan-button" id="home-quest-link" href="question-bank.html">Start Practice</a>
+      </article>
 
       <div class="study-time-card" aria-labelledby="study-time-title">
         <div class="study-time-heading">
@@ -110,7 +120,7 @@
           <h3 id="study-time-title">Recent study time</h3>
         </div>
 
-        <div class="study-time-chart" aria-label="Recent study time chart showing seven minutes on Jul 16">
+        <div class="study-time-chart" aria-label="Recent study time chart">
           <div class="study-time-yaxis" aria-hidden="true">
             <span>8 mins</span>
             <span>6 mins</span>
@@ -118,7 +128,7 @@
             <span>2 mins</span>
             <span>0 mins</span>
           </div>
-          <div class="study-time-plot" aria-hidden="true">
+          <div class="study-time-plot" id="home-study-time-plot" aria-hidden="true">
             <span class="grid-line line-8"></span>
             <span class="grid-line line-6"></span>
             <span class="grid-line line-4"></span>
@@ -126,7 +136,7 @@
             <span class="grid-line line-0"></span>
             <span class="study-bar" style="--study-height: 72%;"></span>
           </div>
-          <div class="study-time-xaxis" aria-hidden="true">
+          <div class="study-time-xaxis" id="home-study-time-xaxis" aria-hidden="true">
             <span>Jul 10</span>
             <span>Jul 11</span>
             <span>Jul 12</span>
@@ -184,6 +194,7 @@
 <script src="supabase-config.js"></script>
 <script src="auth.js"></script>
 <script src="sidebar.js"></script>
+<script src="analytics-data.js"></script>
 <script src="dashboard.js"></script>
 </body>
 </html>
