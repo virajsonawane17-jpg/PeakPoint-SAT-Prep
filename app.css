@@ -841,9 +841,11 @@
 .section-title-row button,
 .section-title-row a,
 .countdown-card button,
+.countdown-card a,
 .metric-card button,
 .metric-card a,
-.score-card button {
+.score-card button,
+.score-card a {
   border: 0;
   font-family: var(--font-display);
   font-weight: 700;
@@ -889,8 +891,18 @@
   font-size: 0.98rem;
 }
 
-.countdown-card button {
+.countdown-card p {
+  color: var(--dash-muted);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.countdown-card button,
+.countdown-card a {
   min-height: 42px;
+  display: inline-flex;
+  align-items: center;
   border-radius: 13px;
   padding: 0 13px;
   background: var(--surface-2);
@@ -1401,6 +1413,77 @@
   padding: 32px;
 }
 
+.study-plan-card.has-plan {
+  align-items: stretch;
+  text-align: left;
+  justify-content: flex-start;
+  padding: 28px;
+}
+
+.schedule-pill {
+  width: fit-content;
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0 12px;
+  background: var(--surface-2);
+  color: var(--accent-deep);
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+
+.study-plan-card:not(.has-plan) .schedule-pill {
+  display: none;
+}
+
+.schedule-today-list {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 20px;
+}
+
+.schedule-task {
+  border: 1px solid var(--dash-border-strong);
+  border-radius: 16px;
+  background: linear-gradient(135deg, #fff 0%, var(--surface-2) 100%);
+  padding: 14px 16px;
+  color: var(--dash-heading);
+  box-shadow: 0 12px 26px -24px rgba(3, 105, 161, 0.45);
+  transition: transform 0.2s var(--easing), box-shadow 0.2s var(--easing);
+}
+
+.schedule-task:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px -26px rgba(3, 105, 161, 0.52);
+}
+
+.schedule-task span,
+.schedule-task small {
+  display: block;
+  color: var(--dash-muted);
+  font-weight: 800;
+}
+
+.schedule-task span {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+}
+
+.schedule-task strong {
+  display: block;
+  color: var(--dash-heading);
+  font-size: 1rem;
+  margin: 4px 0;
+}
+
+.schedule-task small {
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
 .mascot-cluster {
   position: relative;
   width: 190px;
@@ -1505,6 +1588,15 @@
   margin-bottom: 22px;
 }
 
+.study-plan-card.has-plan p {
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.study-plan-card.has-plan .cyan-button {
+  width: fit-content;
+}
+
 .score-stack {
   display: grid;
   gap: 15px;
@@ -1526,10 +1618,13 @@
   font-weight: 400;
 }
 
-.score-card button {
+.score-card button,
+.score-card a {
   color: var(--accent-deep);
   background: var(--surface-2);
   min-height: 38px;
+  display: inline-flex;
+  align-items: center;
   border-radius: 999px;
   padding: 0 14px;
   font-size: 0.9rem;

@@ -120,6 +120,24 @@
     return keys.flatMap((key) => safeJSON(store.getItem(key), [])).filter((event) => event && event.t);
   }
 
+  function readPlannerPayload(user, data) {
+    const remotePlanner = data && data.learning && data.learning.studyPlanner;
+    const store = storage();
+    const inputs = store ? safeJSON(store.getItem('pp_planner_inputs'), null) : null;
+    const localPlanner = inputs ? {
+      version: 1,
+      inputs,
+      generated: store.getItem('pp_planner_generated') === '1',
+      updatedAt: null,
+    } : null;
+
+    if (remotePlanner && remotePlanner.inputs) {
+      if (localPlanner && localPlanner.generated && !remotePlanner.generated) return localPlanner;
+      return remotePlanner;
+    }
+    return localPlanner;
+  }
+
   function recordActivity(user, event) {
     const store = storage();
     if (!store || !event) return;
@@ -179,6 +197,7 @@
     const questionBank = readQuestionBankProgress();
     const vocab = readVocabProgress(user);
     const activityLog = readActivityLog(user);
+    const planner = readPlannerPayload(user, data);
 
     const attemptCorrect = attempts.filter((attempt) => attempt.correct).length;
     const attemptWrong = attempts.filter((attempt) => attempt.correct === false).length;
@@ -207,7 +226,7 @@
     const mathScore = Number(latestSnapshot.math) || estimateScore(mathAccuracy, 640);
     const rwScore = Number(latestSnapshot.rw) || estimateScore(Math.max(rwAccuracy, vocabAccuracy), 640);
     const totalScore = mathScore + rwScore;
-    const targetScore = Number(profile.targetScore || profile.target_score || 1540);
+    const targetScore = Number(profile.targetScore || profile.target_score || (planner && planner.inputs && planner.inputs.target) || 1540);
     const lastScore = snapshots.length > 1
       ? Number(snapshots[snapshots.length - 2].math || 0) + Number(snapshots[snapshots.length - 2].rw || 0)
       : null;
@@ -383,6 +402,7 @@
       achievements,
       nextAction,
       readiness,
+      planner,
       hasActivity: Boolean(totalQuestions || vocab.attempted || activityLog.length),
     };
   }
@@ -408,6 +428,7 @@
     clamp,
     escapeHTML,
     pctText,
+    readPlannerPayload,
     recordActivity,
     renderStudyTime,
   };

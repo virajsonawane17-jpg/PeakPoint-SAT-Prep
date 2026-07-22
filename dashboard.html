@@ -67,9 +67,10 @@
       </div>
 
       <div class="countdown-card">
-        <span>SAT exam countdown</span>
-        <strong>Your SAT date passed. Pick your next test.</strong>
-        <button type="button">Choose next SAT date</button>
+        <span id="dashboard-test-label">SAT test date</span>
+        <strong id="dashboard-test-date">Create a study plan to set your test date.</strong>
+        <p id="dashboard-test-meta">Your countdown will appear here after your plan is saved.</p>
+        <a id="dashboard-test-action" href="study-planner.html">Open Study Planner</a>
       </div>
     </section>
 
@@ -152,23 +153,25 @@
     <section class="study-section">
       <h2><span class="list-mark" aria-hidden="true"></span> Your Schedule</h2>
       <div class="study-grid">
-        <article class="study-plan-card">
-          <div class="mascot-cluster" aria-hidden="true">
+        <article class="study-plan-card" id="dashboard-schedule-card">
+          <div class="mascot-cluster" id="dashboard-schedule-mascot" aria-hidden="true">
             <span class="mascot mascot-green"></span>
             <span class="mascot mascot-cyan"></span>
             <span class="mascot mascot-small mascot-pink"></span>
             <span class="mascot mascot-small mascot-peach"></span>
           </div>
-          <h3>Create a study plan</h3>
-          <p>Get a personalized study plan based on your test date and skill level.</p>
-          <a class="cyan-button" href="study-planner.html">Create my study plan</a>
+          <span class="schedule-pill" id="dashboard-schedule-status">No plan yet</span>
+          <h3 id="dashboard-schedule-title">Create a study plan</h3>
+          <p id="dashboard-schedule-desc">Get a personalized study plan based on your test date and skill level.</p>
+          <div class="schedule-today-list" id="dashboard-schedule-list" hidden></div>
+          <a class="cyan-button" id="dashboard-schedule-action" href="study-planner.html">Create my study plan</a>
         </article>
 
         <div class="score-stack">
           <article class="score-card target-card">
             <div>
               <span>Current Score</span>
-              <strong>1340</strong>
+              <strong id="home-current-score">1340</strong>
             </div>
             <div class="target-art" aria-hidden="true">
               <span class="hill"></span>
@@ -180,9 +183,9 @@
           <article class="score-card">
             <div>
               <span>Goal Score</span>
-              <strong>1540</strong>
+              <strong id="home-target-score">1540</strong>
             </div>
-            <button type="button">Change</button>
+            <a class="score-action" href="study-planner.html">Change</a>
           </article>
         </div>
       </div>
