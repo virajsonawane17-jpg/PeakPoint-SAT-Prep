@@ -1,8 +1,7 @@
 /* ============================================
    PEAKPOINT SAT PREP — Auth (Supabase)
-   Identity is handled by Supabase Auth. Per-user study data
-   is still kept in this browser for now (keyed by the Supabase
-   user id); a later step moves it into the database tables.
+   Identity and server records use Supabase. Some practice data remains
+   in account-specific browser storage.
 
    All PP.auth identity methods are ASYNC — callers must await.
    ============================================ */
@@ -21,7 +20,7 @@ PP.auth = (() => {
     email = normalizeEmail(email);
     if (!name) return { ok: false, error: 'Please enter your name.' };
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { ok: false, error: 'Please enter a valid email address.' };
-    if (!password || password.length < 6) return { ok: false, error: 'Password must be at least 6 characters.' };
+    if (!password || password.length < 8) return { ok: false, error: 'Password must be at least 8 characters.' };
 
     const { data, error } = await sb().auth.signUp({
       email,
@@ -54,7 +53,8 @@ PP.auth = (() => {
   }
 
   async function logout() {
-    await sb().auth.signOut();
+    const { error } = await sb().auth.signOut();
+    if (error) throw new Error('Could not sign out. Please retry.');
   }
 
   // Resolves to { id, email, name } or null.
@@ -70,11 +70,20 @@ PP.auth = (() => {
   }
 
   // Redirects to login if there is no active session; otherwise resolves to the user.
+  let watchedUserId = null;
+  let authWatcher = null;
   async function requireAuth() {
     const user = await currentUser();
     if (!user) {
       window.location.href = 'login.html';
       return null;
+    }
+    watchedUserId = user.id;
+    if (!authWatcher) {
+      authWatcher = sb().auth.onAuthStateChange((event, session) => {
+        if (event === 'SIGNED_OUT') window.location.replace('login.html');
+        if (event === 'SIGNED_IN' && session?.user?.id && session.user.id !== watchedUserId) window.location.reload();
+      });
     }
     return user;
   }
@@ -138,6 +147,12 @@ PP.auth = (() => {
       sb.from('learning_state').select('*').eq('user_id', userId).maybeSingle()
     ]);
 
+    const failed = [prof, att, ses, snap].some((result) => result.error);
+    if (failed) {
+      showDataNotice('Some server records could not be loaded. Displayed local progress may be incomplete. Reload to retry.');
+      throw new Error('Learning records unavailable');
+    }
+    if (learn.error) showDataNotice('Study-plan sync is unavailable. Local records are still available in this browser.');
     const data = emptyData();
     const p = prof && prof.data;
     if (p) {
@@ -173,7 +188,7 @@ PP.auth = (() => {
     saveLocalLearning(userId, data.learning);
 
     // 1. Profile aggregates (insert if missing, update otherwise).
-    await sb.from('profiles').upsert({
+    const profileResult = await sb.from('profiles').upsert({
       id: userId,
       target_score: data.profile ? (data.profile.targetScore ?? null) : null,
       test_date: data.profile ? (data.profile.testDate ?? null) : null,
@@ -186,14 +201,18 @@ PP.auth = (() => {
 
     // Advanced learning state is deliberately stored as one user-owned JSON
     // document to keep the current static app fast while preserving history.
-    await sb.from('learning_state').upsert({
+    if (profileResult.error) throw new Error('Profile save failed');
+    const learningResult = await sb.from('learning_state').upsert({
       user_id: userId,
       state: data.learning || {}
     }, { onConflict: 'user_id' });
 
+    if (learningResult.error) showDataNotice('Your study plan is saved in this browser, but server sync is unavailable.');
+
     // 2. New event rows only (append-only; advance counters on success).
     const p = data._persisted || { attempts: 0, sessions: 0, snapshots: 0 };
 
+    data._persisted = p;
     const newAttempts = data.attempts.slice(p.attempts);
     if (newAttempts.length) {
       const { error } = await sb.from('attempts').insert(newAttempts.map((a) => ({
@@ -201,7 +220,8 @@ PP.auth = (() => {
         difficulty: a.difficulty == null ? null : String(a.difficulty),
         correct: !!a.correct, created_at: new Date(a.t).toISOString()
       })));
-      if (!error) p.attempts = data.attempts.length;
+      if (error) throw new Error('Study record save failed');
+      p.attempts += newAttempts.length;
     }
 
     const newSessions = data.sessions.slice(p.sessions);
@@ -210,7 +230,8 @@ PP.auth = (() => {
         user_id: userId, type: s.type, skill: s.skill ?? null,
         total: s.total ?? 0, correct: s.correct ?? 0, created_at: new Date(s.t).toISOString()
       })));
-      if (!error) p.sessions = data.sessions.length;
+      if (error) throw new Error('Study record save failed');
+      p.sessions += newSessions.length;
     }
 
     const newSnaps = data.snapshots.slice(p.snapshots);
@@ -218,7 +239,8 @@ PP.auth = (() => {
       const { error } = await sb.from('snapshots').insert(newSnaps.map((s) => ({
         user_id: userId, math: s.math, rw: s.rw, created_at: new Date(s.t).toISOString()
       })));
-      if (!error) p.snapshots = data.snapshots.length;
+      if (error) throw new Error('Study record save failed');
+      p.snapshots += newSnaps.length;
     }
   }
 
@@ -226,9 +248,24 @@ PP.auth = (() => {
   function saveData(userId, data) {
     data._chain = (data._chain || Promise.resolve())
       .then(() => persist(userId, data))
-      .catch((e) => console.error('[PeakPoint] save failed', e));
+      .catch(() => { showDataNotice('Your latest changes could not be saved to the server. Keep this page open and retry your change.'); });
     return data._chain;
   }
 
-  return { signup, login, logout, currentUser, requireAuth, loadData, saveData };
+  function showDataNotice(message) {
+    let notice = document.getElementById('sync-notice');
+    if (!notice) {
+      notice = document.createElement('p'); notice.id = 'sync-notice';
+      notice.className = 'data-notice'; notice.setAttribute('role', 'status');
+      (document.querySelector('main') || document.body).prepend(notice);
+    }
+    notice.textContent = message;
+  }
+
+  function clearLocalData(userId) {
+    const keys = ['pp_qbank_progress:', 'pp_vocab_progress:', 'peakpoint-activity-log:', 'pp_planner_inputs:', 'pp_planner_generated:', 'peakpoint-learning:', 'peakpoint-mistake-notebook:'];
+    keys.forEach((prefix) => localStorage.removeItem(prefix + userId));
+  }
+
+  return { clearLocalData, signup, login, logout, currentUser, requireAuth, loadData, saveData };
 })();

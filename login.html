@@ -37,11 +37,11 @@
 
 <main class="auth-wrap">
   <div class="auth-card">
-    <h1 id="auth-title">Welcome back, cadet.</h1>
-    <p class="auth-sub" id="auth-sub">Log in to continue your mission to a peak score.</p>
+    <h1 id="auth-title">Welcome back.</h1>
+    <p class="auth-sub" id="auth-sub">Log in to continue your SAT practice.</p>
 
-    <div class="auth-tabs" role="tablist">
-      <button class="auth-tab active" id="tab-login" role="tab">Log In</button>
+    <div class="auth-tabs" aria-label="Account options">
+      <button class="auth-tab active" id="tab-login" type="button">Log In</button>
       <button class="auth-tab" id="tab-signup" role="tab">Sign Up</button>
     </div>
 
@@ -49,8 +49,8 @@
 
     <form id="auth-form" novalidate>
       <div class="field" id="field-name" style="display:none;">
-        <label for="in-name">Full Name</label>
-        <input type="text" id="in-name" autocomplete="name" placeholder="Jane Doe" />
+        <label for="in-name">Display name</label>
+        <input type="text" id="in-name" autocomplete="nickname" maxlength="80" placeholder="Your display name" />
       </div>
       <div class="field">
         <label for="in-email">Email</label>
@@ -60,13 +60,16 @@
         <label for="in-password">Password</label>
         <input type="password" id="in-password" autocomplete="current-password" placeholder="••••••••" />
       </div>
+      <p id="signup-info" class="auth-foot" hidden>Use at least 8 characters. Read our <a href="privacy.html">privacy draft</a> and <a href="terms.html">terms draft</a>. Use a display name rather than sensitive personal information. A parental consent process is not implemented; contact us if you need one.</p>
       <button type="submit" class="btn btn-primary btn-large btn-block" id="auth-submit">Log In</button>
     </form>
 
-    <p class="auth-foot" id="auth-foot">New here? <a href="login.html?mode=signup">Create a free account</a> — it takes 30 seconds.</p>
+    <p class="auth-foot"><a href="reset-password.html">Forgot your password?</a></p>
+    <p class="auth-foot" id="auth-foot">New here? <a href="login.html?mode=signup">Create a free account</a></p>
   </div>
 </main>
 
+<footer class="footer"><div class="container"><div class="footer-grid"><div><a class="logo" href="index.html">PeakPoint Prep</a><p>Free SAT preparation tools designed to make personalized learning more accessible.</p></div><div><h2>Explore</h2><ul><li><a href="about.html">About</a></li><li><a href="question-bank.html">Practice</a></li><li><a href="resources.html">Resources</a></li><li><a href="contact.html">Contact</a></li></ul></div><div><h2>Information</h2><ul><li><a href="privacy.html">Privacy Policy (draft)</a></li><li><a href="terms.html">Terms of Service (draft)</a></li><li><a href="account-deletion.html">Account Deletion</a></li><li><a href="accessibility.html">Accessibility</a></li></ul></div></div><p class="legal-note">SAT is a registered trademark of College Board. PeakPoint Prep is an independent service and is not affiliated with or endorsed by College Board.</p><p>© 2026 PeakPoint Prep</p></div></footer>
 <script src="vendor/supabase.js"></script>
 <script src="supabase-config.js"></script>
 <script src="auth.js"></script>
@@ -97,9 +100,13 @@
     tabLogin.classList.toggle('active', !signup);
     tabSignup.classList.toggle('active', signup);
     fieldName.style.display = signup ? '' : 'none';
-    title.textContent = signup ? 'Begin your ascent.' : 'Welcome back, cadet.';
+    document.getElementById('signup-info').hidden = !signup;
+    document.getElementById('in-password').autocomplete = signup ? 'new-password' : 'current-password';
+    tabLogin.setAttribute('aria-pressed', String(!signup));
+    tabSignup.setAttribute('aria-pressed', String(signup));
+    title.textContent = signup ? 'Start Your SAT Prep Journey' : 'Welcome back, cadet.';
     sub.textContent = signup
-      ? 'Create your free account and get a personalized SAT study plan in minutes.'
+      ? 'Create a free account to access SAT practice tools, track your progress, and explore learning resources.'
       : 'Log in to continue your mission to a peak score.';
     submit.textContent = signup ? 'Create Free Account' : 'Log In';
     foot.innerHTML = signup
@@ -111,6 +118,7 @@
   tabLogin.addEventListener('click', () => setMode('login'));
   tabSignup.addEventListener('click', () => setMode('signup'));
 
+  setMode('login');
   if (new URLSearchParams(window.location.search).get('mode') === 'signup') {
     setMode('signup');
   }
@@ -125,9 +133,14 @@
     const prevLabel = submit.textContent;
     submit.textContent = mode === 'signup' ? 'Creating account…' : 'Logging in…';
 
-    const result = mode === 'signup'
+    let result;
+    try {
+      result = mode === 'signup'
       ? await PP.auth.signup(name, email, password)
       : await PP.auth.login(email, password);
+    } catch {
+      result = { ok: false, error: 'Unable to connect. Check your connection and try again.' };
+    }
 
     if (!result.ok) {
       errBox.textContent = result.error;

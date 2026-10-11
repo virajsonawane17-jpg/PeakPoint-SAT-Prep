@@ -18,8 +18,8 @@
   }
 
   const $ = (id) => document.getElementById(id);
-  const STORE_KEY = 'pp_planner_inputs';
-  const GEN_KEY = 'pp_planner_generated';
+  const STORE_KEY = `pp_planner_inputs:${currentUser.id}`;
+  const GEN_KEY = `pp_planner_generated:${currentUser.id}`;
 
   /* ---------- domain reference ----------
      weight = share of the section on the real SAT; slug/subject/domain feed the

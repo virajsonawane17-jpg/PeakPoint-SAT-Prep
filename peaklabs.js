@@ -28,12 +28,7 @@
         indicator.classList.add('is-crafting');
       }
 
-      window.setTimeout(() => {
-        if (indicator) {
-          indicator.textContent = `${kind} set ready`;
-          indicator.classList.remove('is-crafting');
-        }
-      }, 520);
+      if (indicator) { indicator.textContent = 'Generation is not available yet. Use the question bank for practice.'; indicator.classList.remove('is-crafting'); }
     });
   });
 })();

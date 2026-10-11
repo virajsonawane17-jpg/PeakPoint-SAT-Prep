@@ -3,10 +3,9 @@
    Frontend-only interactions.
    ============================================ */
 
-(() => {
-  if (window.PP && PP.auth && typeof PP.auth.requireAuth === 'function') {
-    PP.auth.requireAuth();
-  }
+(async () => {
+  const user = await PP.auth.requireAuth();
+  if (!user) return;
 
   const filterButtons = Array.from(document.querySelectorAll('[data-mistake-filter]'));
   const cards = Array.from(document.querySelectorAll('.mistake-card'));
@@ -16,7 +15,7 @@
   const notebookTitle = document.getElementById('notebook-title');
   const notebookQuestion = document.getElementById('notebook-question');
   const notebookText = document.getElementById('notebook-text');
-  const notebookStorageKey = 'peakpoint-mistake-notebook';
+  const notebookStorageKey = `peakpoint-mistake-notebook:${user.id}`;
   const notebookNotes = new Map();
   let activeNotebookCard = null;
   let activeFilter = 'all';

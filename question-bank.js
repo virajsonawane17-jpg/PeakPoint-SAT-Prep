@@ -7,14 +7,13 @@
    carried through to the question list.
    ============================================ */
 
-(() => {
+(async () => {
   'use strict';
 
-  if (window.PP && PP.auth && typeof PP.auth.requireAuth === 'function') {
-    PP.auth.requireAuth();
-  }
+  const user = await PP.auth.requireAuth();
+  if (!user) return;
 
-  const STORE_KEY = 'pp_qbank_progress';
+  const STORE_KEY = `pp_qbank_progress:${user.id}`;
 
   const grid = document.getElementById('subject-grid');
   const loading = document.getElementById('bank-loading');

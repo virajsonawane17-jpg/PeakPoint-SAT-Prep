@@ -318,8 +318,8 @@
   const currentScore = cfg ? cfg.current : analytics.scores.total;
   const targetScore = cfg ? cfg.target : analytics.scores.target;
 
-  setText('home-current-score', String(currentScore));
-  setText('home-target-score', String(targetScore));
+  setText('home-current-score', currentScore == null ? 'Not set' : String(currentScore));
+  setText('home-target-score', targetScore == null ? 'Not set' : String(targetScore));
   renderTestDate(cfg);
   renderSchedule(cfg, dashboardPlan);
 

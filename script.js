@@ -7,7 +7,7 @@
 
   /* ---------- Space Canvas ---------- */
   const canvas = document.getElementById('space-canvas');
-  if (canvas) {
+  if (canvas && !prefersReducedMotion) {
     const ctx = canvas.getContext('2d');
     let width = 0;
     let height = 0;
@@ -216,52 +216,6 @@
     init();
   }
 
-  /* ---------- University Logos ----------
-     Real PNG logos from Wikimedia Commons (publicly hot-linkable, CC-licensed).
-     Each renders as a white silhouette via CSS filter. */
-  const marqueeEl = document.getElementById('uni-marquee');
-  if (marqueeEl) {
-    const unis = [
-      { name: 'Harvard',       png: 'logos/harvard.svg' },
-      { name: 'Stanford',      png: 'logos/stanford.svg' },
-      { name: 'MIT',           png: 'logos/mit.svg' },
-      { name: 'Yale',          png: 'logos/yale.svg' },
-      { name: 'Princeton',     png: 'logos/princeton.svg' },
-      { name: 'Duke',          png: 'logos/duke.svg' },
-      { name: 'Penn',          png: 'logos/penn.svg' },
-      { name: 'Georgia Tech',  png: 'logos/georgia-tech.svg' },
-      { name: 'Caltech',       png: 'logos/caltech.svg' },
-      { name: 'Columbia',      png: 'logos/columbia.svg' },
-      { name: 'Cornell',       png: 'logos/cornell.svg' }
-    ];
-
-    // Text fallback rendered in distinctive typography if the image fails to load
-    const buildLogo = (uni) => {
-      const wrap = document.createElement('div');
-      wrap.className = 'uni-logo';
-      wrap.setAttribute('title', uni.name);
-
-      const img = document.createElement('img');
-      img.alt = uni.name;
-      img.loading = 'lazy';
-      img.src = uni.png;
-      img.onerror = () => { wrap.classList.add('fallback'); };
-      wrap.appendChild(img);
-
-      const txt = document.createElement('span');
-      txt.className = 'uni-fallback';
-      txt.textContent = uni.name;
-      wrap.appendChild(txt);
-
-      return wrap;
-    };
-
-    // Duplicate the set so the marquee loops seamlessly
-    for (let pass = 0; pass < 2; pass++) {
-      unis.forEach((u) => marqueeEl.appendChild(buildLogo(u)));
-    }
-  }
-
   /* ---------- Logged-in nav swap ---------- */
   // On marketing pages, point the CTA at the dashboard when a session exists.
   if (window.PP && PP.auth && PP.auth.currentUser) {
@@ -293,7 +247,8 @@
   const navLinks = document.querySelector('.nav-links');
   if (mobileToggle && navLinks) {
     mobileToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
+      const open = navLinks.classList.toggle('open');
+      mobileToggle.setAttribute('aria-expanded', String(open));
     });
   }
 
@@ -402,72 +357,6 @@
 
     window.addEventListener('scroll', updateTimeline, { passive: true });
     updateTimeline();
-  }
-
-  /* ---------- Testimonials carousel ---------- */
-  const tstTrack = document.getElementById('tst-track');
-  const tstDots = document.getElementById('tst-dots');
-  if (tstTrack && tstDots) {
-    const cards = Array.from(tstTrack.children);
-
-    const baseOffset = () => cards[0].offsetLeft;
-
-    const currentIndex = () => {
-      const base = baseOffset();
-      let best = 0, bestDist = Infinity;
-      cards.forEach((c, i) => {
-        const d = Math.abs((c.offsetLeft - base) - tstTrack.scrollLeft);
-        if (d < bestDist) { bestDist = d; best = i; }
-      });
-      return best;
-    };
-
-    const goTo = (i) => {
-      const idx = Math.max(0, Math.min(cards.length - 1, i));
-      tstTrack.scrollTo({ left: cards[idx].offsetLeft - baseOffset(), behavior: 'smooth' });
-    };
-
-    // Build dots
-    cards.forEach((_, i) => {
-      const dot = document.createElement('button');
-      dot.className = 'tst-dot' + (i === 0 ? ' active' : '');
-      dot.type = 'button';
-      dot.setAttribute('role', 'tab');
-      dot.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
-      dot.addEventListener('click', () => { stopAuto(); goTo(i); });
-      tstDots.appendChild(dot);
-    });
-    const dots = Array.from(tstDots.children);
-
-    const setActive = (i) => dots.forEach((d, j) => d.classList.toggle('active', j === i));
-
-    let scrollRaf;
-    tstTrack.addEventListener('scroll', () => {
-      if (scrollRaf) return;
-      scrollRaf = requestAnimationFrame(() => {
-        setActive(currentIndex());
-        scrollRaf = null;
-      });
-    }, { passive: true });
-
-    // Autoplay (skipped when the user prefers reduced motion)
-    let autoTimer = null;
-    const startAuto = () => {
-      if (prefersReducedMotion || autoTimer) return;
-      autoTimer = setInterval(() => {
-        const next = (currentIndex() + 1) % cards.length;
-        goTo(next);
-      }, 4500);
-    };
-    const stopAuto = () => { clearInterval(autoTimer); autoTimer = null; };
-
-    const carousel = document.getElementById('tst-carousel');
-    carousel.addEventListener('mouseenter', stopAuto);
-    carousel.addEventListener('mouseleave', startAuto);
-    carousel.addEventListener('touchstart', stopAuto, { passive: true });
-    carousel.addEventListener('focusin', stopAuto);
-
-    startAuto();
   }
 
   /* ---------- Hero parallax ---------- */

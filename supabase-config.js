@@ -1,7 +1,7 @@
 /* ============================================
    PEAKPOINT SAT PREP — Supabase client
    The URL and publishable key are safe to ship in the browser;
-   all data access is guarded by Row-Level Security in Postgres.
+   deployed Row-Level Security must be verified for every data table.
    ============================================ */
 
 window.PP = window.PP || {};

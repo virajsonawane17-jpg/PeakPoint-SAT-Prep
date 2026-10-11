@@ -68,7 +68,7 @@
       button.classList.remove('is-celebrating');
       window.requestAnimationFrame(() => button.classList.add('is-celebrating'));
       window.setTimeout(() => button.classList.remove('is-celebrating'), 900);
-      showToast(`${button.dataset.achievement} unlocked and added to your trail.`);
+      showToast(`${button.dataset.achievement} is a sample achievement; no account progress was changed.`);
     });
   });
 

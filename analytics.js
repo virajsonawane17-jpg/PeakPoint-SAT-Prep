@@ -37,10 +37,10 @@
   setText('metric-accuracy', analytics.totalQuestions ? pctText(analytics.accuracy) : '0%');
   setText('metric-saved', String(analytics.savedQuestions));
   setText('metric-errors', String(analytics.recentErrors));
-  setText('score-total', String(analytics.scores.total));
-  setText('score-rw', String(analytics.scores.rw));
-  setText('score-math', String(analytics.scores.math));
-  setText('score-goal', String(analytics.scores.target));
+  setText('score-total', analytics.scores.total == null ? 'Not set' : String(analytics.scores.total));
+  setText('score-rw', analytics.scores.rw == null ? 'Not set' : String(analytics.scores.rw));
+  setText('score-math', analytics.scores.math == null ? 'Not set' : String(analytics.scores.math));
+  setText('score-goal', analytics.scores.target == null ? 'Not set' : String(analytics.scores.target));
   setText('math-accuracy', pctText(analytics.sections.math.accuracy));
   setText('rw-accuracy', pctText(analytics.sections.rw.accuracy));
   setText('vocab-accuracy', analytics.vocab.attempted ? pctText(analytics.sections.vocab.accuracy) : `${analytics.vocab.mastered} mastered`);
@@ -52,7 +52,7 @@
 
   const delta = analytics.scores.delta;
   const trend = document.querySelector('.trend-pill');
-  if (trend) trend.textContent = `${delta >= 0 ? '+' : ''}${delta} score momentum`;
+  if (trend) trend.textContent = 'Self-reported scores; no prediction';
 
   document.querySelectorAll('.bar-row i').forEach((bar, index) => {
     const values = [analytics.sections.math.accuracy, analytics.sections.rw.accuracy, analytics.sections.vocab.accuracy];
@@ -63,7 +63,7 @@
   if (mixRing) {
     const mathEnd = clamp(analytics.mix.math, 0, 100);
     const rwEnd = clamp(mathEnd + analytics.mix.rw, 0, 100);
-    mixRing.style.background = `conic-gradient(var(--accent) 0 ${mathEnd}%, #22c55e ${mathEnd}% ${rwEnd}%, #f59e0b ${rwEnd}% 100%)`;
+    mixRing.style.background = analytics.hasActivity ? `conic-gradient(var(--accent) 0 ${mathEnd}%, #22c55e ${mathEnd}% ${rwEnd}%, #f59e0b ${rwEnd}% 100%)` : '#e2e8f0';
   }
 
   window.PeakPointAnalytics.renderStudyTime($('study-time-plot'), $('study-time-xaxis'), analytics);

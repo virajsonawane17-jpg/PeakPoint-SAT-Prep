@@ -1551,3 +1551,19 @@ h1, h2, h3, h4, h5, h6 {
   .sub-hero h1 .word { opacity: 1; transform: none; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* Shared accessibility and truthful state notices. */
+:focus-visible { outline: 3px solid #0369a1; outline-offset: 4px; }
+.data-notice { margin: 20px; padding: 16px 20px; border: 1px solid #bae0fd; border-radius: 12px; background: #f0f9ff; color: #0c3c61; line-height: 1.6; }
+.data-notice a { color: #075985; text-decoration: underline; }
+.btn-primary { background: #0369a1; }
+.btn-primary:hover { background: #075985; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .word, .reveal { opacity: 1 !important; transform: none !important; }
+}
+.footer { background: #0c3c61; color: #fff; }
+.footer::before { display: none; }
+.footer a, .footer h2 { color: #e0f2fe; }
+.footer h2 { font-size: 1rem; margin-bottom: 16px; }
+.legal-note { font-size: .85rem; line-height: 1.7; margin: 24px 0 16px; }

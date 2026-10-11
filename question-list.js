@@ -6,18 +6,17 @@
    locally (no backend).
    ============================================ */
 
-(() => {
+(async () => {
   'use strict';
 
-  if (window.PP && PP.auth && typeof PP.auth.requireAuth === 'function') {
-    PP.auth.requireAuth();
-  }
+  const user = await PP.auth.requireAuth();
+  if (!user) return;
 
   /* ---------- helpers ---------- */
   const $ = (id) => document.getElementById(id);
   const params = new URLSearchParams(location.search);
   const SLUG = (params.get('skill') || params.get('slug') || '').toLowerCase();
-  const STORE_KEY = 'pp_qbank_progress';
+  const STORE_KEY = `pp_qbank_progress:${user.id}`;
   const DIFF_ORDER = { Easy: 0, Medium: 1, Hard: 2 };
 
   const stripHtml = (html) => {
@@ -44,6 +43,7 @@
       { slug: SLUG, difficulty: q.difficulty, type: q.type },
       progress[q.id],
       patch,
+      { updatedAt: Date.now() },
     );
     saveProgress();
   };
@@ -361,6 +361,13 @@
   };
 
   /* ---------- practice modal ---------- */
+  document.addEventListener('keydown', (event) => {
+    if (modal.hidden || event.key !== 'Tab') return;
+    const focusable = Array.from(modal.querySelectorAll('button:not(:disabled), input:not(:disabled), a[href]')).filter((element) => element.getClientRects().length);
+    const first = focusable[0], last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+  });
   let selectedLetter = null;
   let checked = false;
 
@@ -375,6 +382,8 @@
     modal.hidden = true;
     document.body.style.overflow = '';
     render(); // reflect any status changes
+    const trigger = listEl.querySelector(`[data-open="${modalIndex}"]`);
+    if (trigger) trigger.focus();
   };
   const step = (dir) => {
     const next = modalIndex + dir;

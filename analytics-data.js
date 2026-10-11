@@ -8,7 +8,6 @@
   const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
   const pctValue = (part, whole) => (whole ? (part / whole) * 100 : 0);
   const pctText = (value) => `${Math.round(clamp(Number(value) || 0, 0, 100))}%`;
-  const roundScore = (value) => Math.round(value / 10) * 10;
 
   function safeJSON(value, fallback) {
     try {
@@ -36,25 +35,23 @@
     return user && (user.id || user.email || user.name) ? String(user.id || user.email || user.name) : 'student';
   }
 
-  function unique(values) {
-    return [...new Set(values.filter(Boolean))];
-  }
 
-  function readQuestionBankProgress() {
+  function readQuestionBankProgress(user) {
     const store = storage();
     if (!store) return { completed: 0, correct: 0, saved: 0, errors: 0, averageSeconds: 0 };
 
-    const raw = safeJSON(store.getItem('peakpoint-question-bank-progress'), {});
+    const raw = safeJSON(store.getItem(`pp_qbank_progress:${identity(user)}`), {});
     const entries = Object.values(raw).filter((entry) => entry && typeof entry === 'object');
-    const completed = entries.filter((entry) => entry.completed).length;
-    const correct = entries.filter((entry) => entry.correct === true).length;
+    const completed = entries.filter((entry) => entry.status).length;
+    const correct = entries.filter((entry) => entry.status === 'correct').length;
     const saved = entries.filter((entry) => entry.saved).length;
-    const errors = entries.filter((entry) => entry.completed && entry.correct === false).length;
+    const errors = entries.filter((entry) => entry.status && entry.status === 'incorrect').length;
     const timed = entries
       .map((entry) => Number(entry.timeSpent || entry.seconds || entry.elapsedSeconds || 0))
       .filter((seconds) => seconds > 0);
 
     return {
+      records: raw,
       completed,
       correct,
       saved,
@@ -69,12 +66,7 @@
       return { total: VOCAB_TOTAL, attempted: 0, mastered: 0, learning: 0, shaky: 0, newCount: VOCAB_TOTAL, xp: 0, bestStreak: 0, masteryPct: 0 };
     }
 
-    const keys = unique([
-      `pp_vocab_progress:${identity(user)}`,
-      user && user.email ? `pp_vocab_progress:${user.email}` : '',
-      'pp_vocab_progress:student',
-      'pp_vocab_progress:guest',
-    ]);
+    const keys = [`pp_vocab_progress:${identity(user)}`];
 
     let progress = {};
     for (const key of keys) {
@@ -110,12 +102,7 @@
   function readActivityLog(user) {
     const store = storage();
     if (!store) return [];
-    const keys = unique([
-      `peakpoint-activity-log:${identity(user)}`,
-      user && user.email ? `peakpoint-activity-log:${user.email}` : '',
-      'peakpoint-activity-log:student',
-      'peakpoint-activity-log:guest',
-    ]);
+    const keys = [`peakpoint-activity-log:${identity(user)}`];
 
     return keys.flatMap((key) => safeJSON(store.getItem(key), [])).filter((event) => event && event.t);
   }
@@ -123,11 +110,11 @@
   function readPlannerPayload(user, data) {
     const remotePlanner = data && data.learning && data.learning.studyPlanner;
     const store = storage();
-    const inputs = store ? safeJSON(store.getItem('pp_planner_inputs'), null) : null;
+    const inputs = store ? safeJSON(store.getItem(`pp_planner_inputs:${identity(user)}`), null) : null;
     const localPlanner = inputs ? {
       version: 1,
       inputs,
-      generated: store.getItem('pp_planner_generated') === '1',
+      generated: store.getItem(`pp_planner_generated:${identity(user)}`) === '1',
       updatedAt: null,
     } : null;
 
@@ -148,7 +135,7 @@
   }
 
   function getDayKey(date) {
-    return date.toISOString().slice(0, 10);
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
   }
 
   function getSevenDays() {
@@ -170,7 +157,7 @@
     const date = timestamp ? new Date(timestamp) : null;
     if (!date || Number.isNaN(date.getTime())) return;
     const found = days.find((day) => day.key === getDayKey(date));
-    if (found) found.minutes += minutes;
+    if (found && Number.isFinite(minutes) && minutes > 0) found.minutes += minutes;
   }
 
   function getAttemptSection(attempt) {
@@ -184,17 +171,11 @@
     return attempt.skill || attempt.domain || attempt.section || 'Mixed practice';
   }
 
-  function estimateScore(accuracy, fallback) {
-    if (!accuracy) return fallback;
-    return roundScore(clamp(410 + accuracy * 3.7, 400, 800));
-  }
 
   function build(user, data) {
     const attempts = data && Array.isArray(data.attempts) ? data.attempts : [];
-    const sessions = data && Array.isArray(data.sessions) ? data.sessions : [];
-    const snapshots = data && Array.isArray(data.snapshots) ? data.snapshots : [];
     const profile = data && data.profile ? data.profile : {};
-    const questionBank = readQuestionBankProgress();
+    const questionBank = readQuestionBankProgress(user);
     const vocab = readVocabProgress(user);
     const activityLog = readActivityLog(user);
     const planner = readPlannerPayload(user, data);
@@ -218,27 +199,32 @@
       vocab: { total: 0, correct: 0 },
     });
 
-    const mathAccuracy = sections.math.total ? pctValue(sections.math.correct, sections.math.total) : accuracy;
-    const rwAccuracy = sections.rw.total ? pctValue(sections.rw.correct, sections.rw.total) : accuracy;
-    const vocabAccuracy = vocab.attempted ? pctValue(vocab.mastered + vocab.learning * 0.55, vocab.attempted) : 0;
+    Object.values(questionBank.records || {}).forEach((record) => {
+      if (!record.status) return;
+      const section = /^(?:h[a-e]|p[a-c]|q[a-g]|s[a-d])$/.test(record.slug || '') ? 'math' : 'rw';
+      sections[section].total += 1;
+      if (record.status === 'correct') sections[section].correct += 1;
+    });
+    const mathAccuracy = sections.math.total ? pctValue(sections.math.correct, sections.math.total) : 0;
+    const rwAccuracy = sections.rw.total ? pctValue(sections.rw.correct, sections.rw.total) : 0;
+    const vocabAccuracy = vocab.attempted ? pctValue(vocab.mastered, vocab.attempted) : 0;
 
-    const latestSnapshot = snapshots[snapshots.length - 1] || {};
-    const mathScore = Number(latestSnapshot.math) || estimateScore(mathAccuracy, 640);
-    const rwScore = Number(latestSnapshot.rw) || estimateScore(Math.max(rwAccuracy, vocabAccuracy), 640);
-    const totalScore = mathScore + rwScore;
-    const targetScore = Number(profile.targetScore || profile.target_score || (planner && planner.inputs && planner.inputs.target) || 1540);
-    const lastScore = snapshots.length > 1
-      ? Number(snapshots[snapshots.length - 2].math || 0) + Number(snapshots[snapshots.length - 2].rw || 0)
-      : null;
-    const scoreDelta = lastScore ? totalScore - lastScore : Math.round((accuracy - 72) / 2) * 10;
+    const mathScore = Number(planner?.inputs?.math) || null;
+    const rwScore = Number(planner?.inputs?.rw) || null;
+    const totalScore = Number(planner?.inputs?.current) || (mathScore && rwScore ? mathScore + rwScore : null);
+    const targetScore = Number(profile.targetScore || profile.target_score || (planner && planner.inputs && planner.inputs.target) || 0) || null;
+    const scoreDelta = 0;
 
     const studyDays = getSevenDays();
-    attempts.forEach((attempt) => addMinutes(studyDays, attempt.t || attempt.created_at, Math.max(1, Math.ceil(Number(attempt.timeSpent || 60) / 60))));
-    sessions.forEach((session) => addMinutes(studyDays, session.t || session.created_at, Math.max(2, Math.ceil(Number(session.total || session.count || 8) / 2))));
-    activityLog.forEach((event) => addMinutes(studyDays, event.t, Math.max(1, Math.ceil(Number(event.minutes || event.xp || 4) / 8))));
-    if (!studyDays.some((day) => day.minutes) && (totalQuestions || vocab.attempted)) studyDays[studyDays.length - 1].minutes = Math.max(4, Math.min(12, totalQuestions + vocab.attempted));
+    attempts.forEach((attempt) => addMinutes(studyDays, attempt.t || attempt.created_at, Number(attempt.timeSpent || 0) / 60));
+    activityLog.forEach((event) => addMinutes(studyDays, event.t, Number(event.minutes || 0)));
 
-    const activeDays = studyDays.filter((day) => day.minutes > 0).length;
+    const activityDates = new Set([
+      ...attempts.map((a) => a.t || a.created_at),
+      ...activityLog.map((e) => e.t),
+      ...Object.values(questionBank.records || {}).map((r) => r.updatedAt),
+    ].filter(Boolean).map((timestamp) => getDayKey(new Date(timestamp))));
+    const activeDays = studyDays.filter((day) => activityDates.has(day.key)).length;
     const todayMinutes = studyDays[studyDays.length - 1].minutes;
 
     const groupedSkills = attempts.reduce((map, attempt) => {
@@ -299,10 +285,10 @@
     const mathCount = sections.math.total;
     const rwCount = sections.rw.total;
     const vocabCount = vocab.attempted;
-    const mixTotal = mathCount + rwCount + vocabCount + (attempts.length ? 0 : questionBank.completed);
+    const mixTotal = mathCount + rwCount + vocabCount;
     const mix = {
       math: pctValue(mathCount, mixTotal),
-      rw: pctValue(rwCount || (attempts.length ? 0 : questionBank.completed), mixTotal),
+      rw: pctValue(rwCount, mixTotal),
       vocab: pctValue(vocabCount, mixTotal),
     };
 
@@ -337,10 +323,10 @@
     const nextAction = (() => {
       if (recentErrors > 0) {
         return {
-          title: 'Condition with PeakLabs',
+          title: 'Review incorrect answers',
           detail: `${recentErrors} missed ${recentErrors === 1 ? 'question is' : 'questions are'} ready to turn into focused practice.`,
-          href: 'peaklabs.html',
-          cta: 'Open PeakLabs',
+          href: 'question-bank.html',
+          cta: 'Open Question Bank',
         };
       }
       if (vocab.shaky > 0) {
@@ -362,16 +348,16 @@
       return {
         title: 'Keep building mastery',
         detail: 'Your next best move is another focused set in your strongest active routine.',
-        href: 'peakpoint-climb.html',
-        cta: 'Continue Climbing',
+        href: 'question-bank.html',
+        cta: 'Continue Practicing',
       };
     })();
 
     const readiness = accuracy >= 88 && activeDays >= 3
-      ? 'Readiness level: Strong momentum'
+      ? 'Study activity: Strong momentum'
       : accuracy >= 75 || activeDays >= 2
-        ? 'Readiness level: Building momentum'
-        : 'Readiness level: Ready to start';
+        ? 'Study activity: Building momentum'
+        : 'Study activity: Ready to start';
 
     return {
       totalQuestions,
@@ -411,12 +397,18 @@
     if (!plot || !axis || !analytics) return;
     const days = analytics.studyDays || getSevenDays();
     const maxMinutes = Math.max(8, ...days.map((day) => day.minutes));
+    const chart = plot.closest('.study-time-chart');
+    if (chart) {
+      const labels = chart.querySelectorAll('.study-time-yaxis span');
+      labels.forEach((label, index) => { label.textContent = `${Math.round(maxMinutes * (1 - index / Math.max(1, labels.length - 1)))} mins`; });
+      chart.setAttribute('aria-label', days.map((day) => `${day.label}: ` + Math.round(day.minutes) + ' recorded minutes').join('; '));
+    }
     plot.querySelectorAll('.study-bar').forEach((bar) => bar.remove());
     days.forEach((day, index) => {
       const bar = document.createElement('span');
       bar.className = 'study-bar';
       bar.dataset.index = String(index);
-      bar.style.setProperty('--study-height', `${Math.max(day.minutes ? 6 : 0, (day.minutes / maxMinutes) * 100)}%`);
+      bar.style.setProperty('--study-height', `${(day.minutes / maxMinutes) * 100}%`);
       bar.style.setProperty('--bar-left', `${(index / Math.max(1, days.length - 1)) * 94}%`);
       plot.appendChild(bar);
     });

@@ -1,470 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="theme-color" content="#0ea5e9" />
-<meta name="description" content="PeakPoint SAT Prep. A comprehensive SAT preparation platform helping students achieve their target scores." />
-<title>PeakPoint SAT Prep. Reach Your Peak Score</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="style.css" />
-<link rel="icon" href="logo.svg" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0369a1">
+<meta name="description" content="Free SAT questions, vocabulary practice, study planning and progress insights. Student-founded and independently developed.">
+<title>Free SAT practice and study tools | PeakPoint Prep</title>
+<link rel="icon" href="logo.svg">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="public.css">
 </head>
-<body>
-
-<canvas id="space-canvas" aria-hidden="true"></canvas>
-
-<!-- Navbar -->
-<nav class="navbar">
-  <div class="nav-inner">
-    <a href="index.html" class="logo">
-      <img src="logo.svg" alt="PeakPoint" class="logo-mark" width="28" height="28" />
-      <span>PEAKPOINT SAT</span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="resources.html">Resources</a></li>
-      <li><a href="login.html?mode=signup" class="btn btn-primary nav-cta">Join Now</a></li>
-    </ul>
-    <button class="mobile-toggle" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
+<body class="public-page">
+<a class="skip-link" href="#main">Skip to content</a>
+<nav class="navbar" aria-label="Main navigation">
+<div class="nav-inner">
+<a class="logo" href="index.html">
+<img src="logo.svg" alt="" width="28" height="28"> <span>PEAKPOINT SAT</span>
+</a>
+<ul class="nav-links" id="public-nav">
+<li>
+<a href="question-bank.html">Practice</a>
+</li>
+<li>
+<a href="resources.html">Resources</a>
+</li>
+<li>
+<a href="about.html">About</a>
+</li>
+<li>
+<a href="peakpal.html">AI Preview</a>
+</li>
+<li>
+<a class="btn btn-primary nav-cta" href="login.html?mode=signup">Create account</a>
+</li>
+</ul>
+<button class="mobile-toggle" aria-label="Open menu" aria-controls="public-nav" aria-expanded="false">
+<span>
+</span>
+<span>
+</span>
+<span>
+</span>
+</button>
+</div>
 </nav>
-
-<!-- Hero -->
-<header class="hero">
-  <div class="cosmic-orb"></div>
-  <div class="cosmic-orb cosmic-orb-2"></div>
-
-  <div class="hero-content">
-    <span class="eyebrow">A free SAT tutoring platform</span>
-    <h1>
-      <span class="word">Aim</span>
-      <span class="word">for</span>
-      <span class="word">the</span>
-      <span class="word accent-text">Stars.</span>
-      <br/>
-      <span class="word">Start</span>
-      <span class="word">Studying</span>
-      <span class="word">Now.</span>
-    </h1>
-    <p class="hero-subtitle">
-      PeakPoint SAT Prep helps students worldwide achieve their dream SAT scores. Expert guidance. Proven results.
-    </p>
-    <p class="hero-credit">Developed by Viraj @ Middleton High School, Tampa</p>
-    <p class="hero-grind-note">Built for students working hard, studying day and night, and chasing their peak score.</p>
-    <div class="hero-cta">
-      <a href="login.html?mode=signup" class="btn btn-primary btn-large">Start Practicing Free</a>
-      <a href="about.html" class="btn btn-secondary btn-large">Learn More →</a>
-    </div>
-  </div>
+<main id="main">
+<header class="public-hero container">
+<p class="eyebrow">Free • Student-founded • Built around practice</p>
+<h1>Your SAT Prep.<br>
+<span class="accent-text">Smarter, Simpler, Personalized.</span>
+</h1>
+<p class="lead">Build your study routine with targeted SAT questions, answer explanations, vocabulary practice, study planning and progress insights, all in one free platform.</p>
+<div class="actions">
+<a class="btn btn-primary btn-large" href="question-bank.html">Start Practicing</a>
+<a class="btn btn-secondary btn-large" href="#features">Explore Features</a>
+</div>
+<p class="quiet">AI tutoring is in development. Current practice explanations come from the question content.</p>
 </header>
-
-<!-- Universities -->
-<section class="universities">
-  <p class="universities-label">A Simple Gateway Into</p>
-  <div class="marquee">
-    <div class="marquee-track" id="uni-marquee">
-      <!-- Logos are rendered by JS for resilient fallbacks -->
-    </div>
-  </div>
+<section class="container public-section" aria-labelledby="preview-title">
+<div class="section-intro">
+<p class="eyebrow">Try a question</p>
+<h2 id="preview-title">A small step into your study session</h2>
+<p>This interactive preview loads a question from the same bank used in practice. It does not save answers to your account.</p>
+</div>
+<div class="preview-card">
+<p class="eyebrow" id="preview-skill">Loading practice question…</p>
+<div id="preview-question">
+</div>
+<form id="preview-form">
+<fieldset id="preview-choices">
+<legend>Choose your answer</legend>
+</fieldset>
+<button class="btn btn-primary" id="preview-check" disabled>Check answer</button>
+</form>
+<div id="preview-feedback" role="status" aria-live="polite">
+</div>
+<a href="question-bank.html">Open the full question bank →</a>
+</div>
 </section>
-
-<!-- Stats -->
-<section class="stats container">
-  <div class="section-header reveal">
-    <span class="eyebrow">Crunch the Numbers</span>
-    <h2>A growing constellation of <span class="accent-text">curious minds</span></h2>
-    <p>PeakPoint SAT Prep is becoming the leading SAT preparation platform for high school students worldwide.</p>
-  </div>
-  <div class="stats-grid">
-    <div class="stat-item reveal">
-      <div class="stat-number" data-count="1000" data-suffix="+">0</div>
-      <div class="stat-label">Students</div>
-    </div>
-    <div class="stat-item reveal" data-delay="120">
-      <div class="stat-number" data-count="50" data-suffix="+">0</div>
-      <div class="stat-label">Countries</div>
-    </div>
-    <div class="stat-item reveal" data-delay="240">
-      <div class="stat-number" data-count="100" data-suffix="+">0</div>
-      <div class="stat-label">Opportunities</div>
-    </div>
-    <div class="stat-item reveal" data-delay="360">
-      <div class="stat-number">Free</div>
-      <div class="stat-label">Forever</div>
-    </div>
-  </div>
+<section class="container public-section" id="features">
+<div class="section-intro">
+<p class="eyebrow">Built for Students. Designed Around Learning.</p>
+<h2>A Complete SAT Learning Experience</h2>
+<p>PeakPoint Prep brings targeted practice, answer explanations, study tools and progress tracking together. Choose what to work on and learn from each attempt.</p>
+</div>
+<div class="product-grid">
+<article class="product-card">
+<h3>Targeted SAT Questions</h3>
+<p>Choose a subject, skill and difficulty. Answer questions and review their explanations.</p>
+<a href="question-bank.html">Explore targeted sat questions →</a>
+</article>
+<article class="product-card">
+<h3>Vocabulary Practice</h3>
+<p>Practice words through recall, matching and flashcards, with a review cycle.</p>
+<a href="vocab.html">Explore vocabulary practice →</a>
+</article>
+<article class="product-card">
+<h3>Study Planning</h3>
+<p>Turn your goals, test date and available time into a schedule you can adjust.</p>
+<a href="study-planner.html">Explore study planning →</a>
+</article>
+<article class="product-card">
+<h3>Performance Analytics</h3>
+<p>Review recorded practice accuracy, activity and vocabulary progress.</p>
+<a href="analytics.html">Explore performance analytics →</a>
+</article>
+<article class="product-card">
+<h3>Question Review</h3>
+<p>Filter the question bank to revisit incorrect answers or saved questions.</p>
+<a href="question-bank.html">Explore question review →</a>
+</article>
+<article class="product-card">
+<h3>Educational Resources</h3>
+<p>Browse organized study materials and practice resources.</p>
+<a href="resources.html">Explore educational resources →</a>
+</article>
+</div>
 </section>
-
-<!-- Score Gains -->
-<section class="score-gains container">
-  <div class="section-header reveal">
-    <span class="eyebrow">Proven Results</span>
-    <h2>Maximize score gains with <span class="accent-text">PeakPoint</span></h2>
-    <p>Students who train with our adaptive engine climb faster from every starting point. Here's the average score reached — with and without PeakPoint.</p>
-  </div>
-
-  <div class="sg-card reveal">
-    <div class="sg-chart">
-      <div class="sg-yaxis" aria-hidden="true">
-        <span>1600</span><span>1400</span><span>1200</span><span>1000</span><span>800</span><span>600</span>
-      </div>
-
-      <div class="sg-plot">
-        <div class="sg-grid" aria-hidden="true">
-          <span style="bottom:100%"></span>
-          <span style="bottom:80%"></span>
-          <span style="bottom:60%"></span>
-          <span style="bottom:40%"></span>
-          <span style="bottom:20%"></span>
-          <span style="bottom:0%"></span>
-        </div>
-
-        <div class="sg-bands">
-          <div class="sg-band" style="--lo:6;--hi:52;">
-            <div class="sg-track"></div>
-            <div class="sg-line"></div>
-            <div class="sg-dot without" title="Without PeakPoint"></div>
-            <div class="sg-dot with" title="With PeakPoint"></div>
-            <div class="sg-badge">+360 pts</div>
-          </div>
-          <div class="sg-band" style="--lo:23;--hi:59;">
-            <div class="sg-track"></div>
-            <div class="sg-line"></div>
-            <div class="sg-dot without" title="Without PeakPoint"></div>
-            <div class="sg-dot with" title="With PeakPoint"></div>
-            <div class="sg-badge">+290 pts</div>
-          </div>
-          <div class="sg-band" style="--lo:40;--hi:76;">
-            <div class="sg-track"></div>
-            <div class="sg-line"></div>
-            <div class="sg-dot without" title="Without PeakPoint"></div>
-            <div class="sg-dot with" title="With PeakPoint"></div>
-            <div class="sg-badge">+260 pts</div>
-          </div>
-          <div class="sg-band" style="--lo:58;--hi:79;">
-            <div class="sg-track"></div>
-            <div class="sg-line"></div>
-            <div class="sg-dot without" title="Without PeakPoint"></div>
-            <div class="sg-dot with" title="With PeakPoint"></div>
-            <div class="sg-badge">+190 pts</div>
-          </div>
-          <div class="sg-band" style="--lo:75;--hi:83;">
-            <div class="sg-track"></div>
-            <div class="sg-line"></div>
-            <div class="sg-dot without" title="Without PeakPoint"></div>
-            <div class="sg-dot with" title="With PeakPoint"></div>
-            <div class="sg-badge">+90 pts</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="sg-xaxis">
-        <span>600–800</span>
-        <span>800–1000</span>
-        <span>1000–1200</span>
-        <span>1200–1400</span>
-        <span>1400–1600</span>
-      </div>
-    </div>
-
-    <div class="sg-legend">
-      <span class="sg-legend-item"><i class="sg-swatch with"></i> With PeakPoint</span>
-      <span class="sg-legend-item"><i class="sg-swatch without"></i> Without PeakPoint</span>
-    </div>
-  </div>
+<section class="container public-section">
+<div class="section-intro">
+<p class="eyebrow">How PeakPoint Works</p>
+<h2>A routine you can return to</h2>
+</div>
+<div class="product-grid">
+<article class="product-card">
+<h3>01 · Create your account</h3>
+<p>Use your account to keep your learning tools organized. Confirm your email if prompted.</p>
+</article>
+<article class="product-card">
+<h3>02 · Choose a skill</h3>
+<p>Select a topic and difficulty in the question bank.</p>
+</article>
+<article class="product-card">
+<h3>03 · Practice and review</h3>
+<p>Read the explanation and revisit incorrect answers.</p>
+</article>
+<article class="product-card">
+<h3>04 · Plan your next session</h3>
+<p>Use your records and study schedule to decide what to work on next.</p>
+</article>
+</div>
 </section>
-
-<!-- How it works -->
-<section class="how-it-works container">
-  <div class="section-header reveal">
-    <span class="eyebrow">How it works</span>
-    <h2>Four steps to your <span class="accent-text">peak score</span></h2>
-    <p>Every PeakPoint SAT Prep resource is crafted by experts and available to our members. Joining is the first step to success.</p>
-  </div>
-
-  <div class="steps">
-    <div class="step reveal reveal-left">
-      <div class="step-number">01</div>
-      <div class="step-content">
-        <h3>Create your free account</h3>
-        <p>This is the gateway. Your account unlocks unlimited practice questions, your personal dashboard, and every strategy we teach — free forever.</p>
-      </div>
-      <div class="step-line"></div>
-    </div>
-
-    <div class="step reveal reveal-right">
-      <div class="step-number">02</div>
-      <div class="step-content">
-        <h3>Take the diagnostic</h3>
-        <p>A quick 15-question diagnostic maps your strengths and weaknesses across every SAT skill and calibrates your personalized score estimate.</p>
-      </div>
-      <div class="step-line"></div>
-    </div>
-
-    <div class="step reveal reveal-left">
-      <div class="step-number">03</div>
-      <div class="step-content">
-        <h3>Grind unlimited practice</h3>
-        <p>Our adaptive engine generates a never-ending stream of SAT questions tuned to your weakest skills. Earn XP, build streaks, and level up as you go.</p>
-      </div>
-      <div class="step-line"></div>
-    </div>
-
-    <div class="step reveal reveal-right">
-      <div class="step-number">04</div>
-      <div class="step-content">
-        <h3>Watch the numbers rise</h3>
-        <p>Your dashboard tracks skill mastery, daily goals, and a live estimated SAT score that climbs as you practice.</p>
-      </div>
-      <div class="step-line"></div>
-    </div>
-  </div>
+<section class="container public-section">
+<div class="section-intro">
+<p class="eyebrow">Learning resources</p>
+<h2>More ways to work through a concept</h2>
+<p>Browse the resource library for organized math and reading and writing materials. Use vocabulary practice to reinforce words you encounter.</p>
+</div>
+<div class="actions">
+<a class="btn btn-primary" href="resources.html">Browse Resources</a>
+<a class="btn btn-secondary" href="vocab.html">Practice Vocabulary</a>
+</div>
 </section>
-
-<!-- Comparison -->
-<section class="comparison container">
-  <div class="section-header reveal">
-    <span class="eyebrow">Why PeakPoint SAT Prep</span>
-    <h2>Real access. <span class="accent-text">Zero gatekeeping.</span></h2>
-    <p>Most SAT prep programs are expensive, generic, and offer little personalized attention. PeakPoint SAT Prep was built to flip that model entirely.</p>
-  </div>
-
-  <div class="compare-grid">
-    <div class="compare-card bad reveal reveal-left">
-      <span class="compare-tag">Other Programs</span>
-      <h3>Pay-to-play test prep</h3>
-      <ul class="compare-list">
-        <li><span class="icon">✕</span> Costs thousands of dollars per course</li>
-        <li><span class="icon">✕</span> Fixed question banks that run out</li>
-        <li><span class="icon">✕</span> One-size-fits-all lesson plans</li>
-        <li><span class="icon">✕</span> No feedback on what to study next</li>
-        <li><span class="icon">✕</span> Boring drills students quickly abandon</li>
-      </ul>
-    </div>
-
-    <div class="compare-card good reveal reveal-right">
-      <span class="compare-tag">PeakPoint SAT Prep</span>
-      <h3>Free, unlimited, personalized</h3>
-      <ul class="compare-list">
-        <li><span class="icon">✓</span> Zero cost. Free forever, no upsells.</li>
-        <li><span class="icon">✓</span> Unlimited generated questions — never run out</li>
-        <li><span class="icon">✓</span> Adaptive engine that targets your weak skills</li>
-        <li><span class="icon">✓</span> Instant explanations on every question</li>
-        <li><span class="icon">✓</span> XP, streaks, and badges that keep you going</li>
-      </ul>
-    </div>
-  </div>
+<section class="container public-section">
+<div class="section-intro">
+<p class="eyebrow">Understand Your Progress</p>
+<h2>Make your next session more focused</h2>
+<p>Your account views show recorded activity. This example illustrates how practice accuracy is calculated; it is not a student outcome or an SAT score prediction.</p>
+</div>
+<div class="preview-card">
+<strong class="sample-label">Sample Data for Demonstration</strong>
+<div class="sample-grid">
+<div>
+<span>Algebra practice</span>
+<strong>6 / 8 correct</strong>
+<progress value="6" max="8" aria-label="Sample algebra accuracy: 75 percent">
+</progress>
+<span>75% topic accuracy</span>
+</div>
+<div>
+<span>Practice completed</span>
+<strong>8 questions</strong>
+<span>2 incorrect answers to review</span>
+</div>
+<div>
+<span>Next study focus</span>
+<strong>Review explanations</strong>
+<span>Use incorrect-answer filters in practice</span>
+</div>
+</div>
+<a href="analytics.html">View your progress →</a>
+</div>
 </section>
-
-<!-- Testimonials -->
-<section class="testimonials">
-  <div class="tst-inner reveal">
-    <div class="section-header">
-      <h2>Join <span class="tst-accent">40K+</span> students</h2>
-      <p>Families trust PeakPoint with precious study time because we reliably deliver life-changing score gains.</p>
-    </div>
-  </div>
-
-  <div class="tst-carousel" id="tst-carousel" aria-roledescription="carousel" aria-label="Student testimonials">
-    <div class="tst-track" id="tst-track">
-      <article class="tst-card">
-        <div class="tst-pill">1180 → 1400</div>
-        <p class="tst-quote">I ran PeakPoint alongside my school work and it plugged every gap my teacher missed. The adaptive practice felt like a tutor available 24/7.</p>
-        <div class="tst-person">
-          <span class="tst-name">Marcus L.</span>
-          <span class="tst-school">Cornell Student</span>
-        </div>
-      </article>
-
-      <article class="tst-card">
-        <div class="tst-pill">1260 → 1450</div>
-        <p class="tst-quote">The study plan feature alone was worth it. It kept me accountable every single day and I could see my weak areas shrinking week by week.</p>
-        <div class="tst-person">
-          <span class="tst-name">David C.</span>
-          <span class="tst-school">Penn Student</span>
-        </div>
-      </article>
-
-      <article class="tst-card">
-        <div class="tst-pill">1300 → 1510</div>
-        <p class="tst-quote">I tried three other SAT apps before PeakPoint. None of them adapted to my level the way this one does. My reading score went from 620 to 740.</p>
-        <div class="tst-person">
-          <span class="tst-name">Aisha T.</span>
-          <span class="tst-school">Yale Freshman</span>
-        </div>
-      </article>
-
-      <article class="tst-card">
-        <div class="tst-pill">1370 → 1560</div>
-        <p class="tst-quote">My parents were skeptical about an online tutor, but after seeing my mock test scores climb every week they became bigger fans than me.</p>
-        <div class="tst-person">
-          <span class="tst-name">Ryan Z.</span>
-          <span class="tst-school">MIT Student</span>
-        </div>
-      </article>
-
-      <article class="tst-card">
-        <div class="tst-pill">1340 → 1540</div>
-        <p class="tst-quote">PeakPoint turned my weakest section into my strongest. The targeted drills and spaced repetition made everything stick. Can't recommend it enough.</p>
-        <div class="tst-person">
-          <span class="tst-name">Olivia H.</span>
-          <span class="tst-school">Harvard Freshman</span>
-        </div>
-      </article>
-
-      <article class="tst-card">
-        <div class="tst-pill">1220 → 1480</div>
-        <p class="tst-quote">The instant explanation after every question is what changed it for me. I finally understood <em>why</em> I was getting things wrong.</p>
-        <div class="tst-person">
-          <span class="tst-name">Priya N.</span>
-          <span class="tst-school">Duke Student</span>
-        </div>
-      </article>
-
-      <article class="tst-card">
-        <div class="tst-pill">1150 → 1420</div>
-        <p class="tst-quote">Free, unlimited, and genuinely better than the paid course my friend took. The daily streaks kept me coming back every single night.</p>
-        <div class="tst-person">
-          <span class="tst-name">Jordan M.</span>
-          <span class="tst-school">Georgia Tech Student</span>
-        </div>
-      </article>
-
-      <article class="tst-card">
-        <div class="tst-pill">1290 → 1500</div>
-        <p class="tst-quote">I went from dreading math to actually enjoying the grind. Watching my estimated score climb after every session was addictive.</p>
-        <div class="tst-person">
-          <span class="tst-name">Sofia R.</span>
-          <span class="tst-school">Stanford Freshman</span>
-        </div>
-      </article>
-    </div>
-
-    <div class="tst-dots" id="tst-dots" role="tablist" aria-label="Choose testimonial"></div>
-  </div>
+<section class="container public-section">
+<div class="section-intro">
+<p class="eyebrow">Built by a Student, for Students</p>
+<h2>An independent educational technology project</h2>
+<p>Founded by Viraj, PeakPoint Prep brings together software development, educational content and a commitment to making SAT preparation more accessible.</p>
+<a href="about.html">Read about the project →</a>
+</div>
 </section>
-
-<!-- Community CTA -->
-<section class="discord-cta container">
-  <div class="discord-cta-inner reveal">
-    <div class="discord-cta-content">
-      <span class="eyebrow">Members Only</span>
-      <h2>The real prep lives <span class="accent-text">inside your dashboard.</span></h2>
-      <p>This isn't a content site. Unlimited adaptive practice, your live score estimate, skill mastery tracking, and daily streaks all live inside your free PeakPoint account.</p>
-      <a href="login.html?mode=signup" class="btn btn-primary btn-large">Create Your Free Account</a>
-    </div>
-  </div>
+<section class="container public-section">
+<div class="section-intro">
+<h2>Questions, answered</h2>
+</div>
+<div class="public-faq">
+<details>
+<summary>Is PeakPoint Prep free?</summary>
+<p>The current tools are free to use. You do not need to enter payment details.</p>
+</details>
+<details>
+<summary>Does PeakPoint predict or guarantee my SAT score?</summary>
+<p>No. Practice accuracy describes the questions you have answered. Use official practice tests for standardized score information.</p>
+</details>
+<details>
+<summary>Is AI tutoring available?</summary>
+<p>PeakPal is a clearly labeled interface preview. It does not currently provide AI responses. PeakLabs generation is also in development.</p>
+</details>
+<details>
+<summary>Where is my progress stored?</summary>
+<p>Authentication and some learning records use Supabase. Question-bank and vocabulary progress are stored in this browser under your account. Clearing browser storage can remove those records. See the privacy draft for details.</p>
+</details>
+<details>
+<summary>Is this affiliated with College Board?</summary>
+<p>No. PeakPoint Prep is independent. Question-bank content is attributed to College Board; no endorsement is implied.</p>
+</details>
+</div>
 </section>
-
-<!-- FAQ -->
-<section class="faq container">
-  <div class="section-header reveal">
-    <span class="eyebrow">FAQ</span>
-    <h2>Questions, <span class="accent-text">answered.</span></h2>
-    <p>Everything you need to know before stepping into the PeakPoint SAT Prep community.</p>
-  </div>
-
-  <div class="faq-list">
-    <div class="faq-item reveal">
-      <button class="faq-question">
-        What is PeakPoint SAT Prep?
-        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="faq-answer">
-        <div class="faq-answer-inner">
-          PeakPoint SAT Prep is a comprehensive platform that provides expert SAT preparation with personalized study plans, practice tests, and proven strategies. We make top-tier SAT prep accessible to every high school student in the world. Everything happens inside our member community.
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item reveal">
-      <button class="faq-question">
-        How much does it cost?
-        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="faq-answer">
-        <div class="faq-answer-inner">
-          Nothing. Zero. PeakPoint SAT Prep is and always will be 100% free. We're a nonprofit, run by educators, for students. There are no premium tiers, no upsells, no hidden fees.
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item reveal">
-      <button class="faq-question">
-        How do I join?
-        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="faq-answer">
-        <div class="faq-answer-inner">
-          Click <strong>Join Now</strong> in the top right of any page. Creating an account is free, takes about 30 seconds, and unlocks your personalized dashboard, the diagnostic, and unlimited adaptive practice.
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item reveal">
-      <button class="faq-question">
-        How does "unlimited practice" work?
-        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-      <div class="faq-answer">
-        <div class="faq-answer-inner">
-          Instead of a fixed question bank, PeakPoint generates fresh SAT-style questions on demand — every math problem uses new numbers, and every question comes with an instant explanation. The adaptive engine watches your accuracy per skill and serves more of what you need to improve, at the right difficulty.
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Footer -->
+</main>
 <footer class="footer">
-  <div class="container">
-    <div class="footer-grid footer-grid-simple">
-      <div class="footer-brand">
-        <a href="index.html" class="logo">
-          <img src="logo.svg" alt="PeakPoint" class="logo-mark" width="28" height="28" />
-          <span>PEAKPOINT SAT</span>
-        </a>
-        <p>The comprehensive SAT preparation platform. Built for every student, designed for success.</p>
-      </div>
-      <div>
-        <h4>Explore</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="resources.html">Resources</a></li>
-          <li><a href="join.html">Join Now</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="mailto:peakpointprep@gmail.com">peakpointprep@gmail.com</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer-wordmark" aria-hidden="true">peakpoint</div>
-
-    <div class="footer-bottom">
-      <p>© 2026 PeakPoint SAT Prep. All rights reserved.</p>
-      <div class="social">
-        <a href="peakpointprep@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
-        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M19 0h-14C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5V8h3v11zM6.5 6.7c-.97 0-1.75-.78-1.75-1.75S5.53 3.2 6.5 3.2s1.75.78 1.75 1.75S7.47 6.7 6.5 6.7zM20 19h-3v-5.6c0-3.37-4-3.12-4 0V19h-3V8h3v1.77c1.4-2.59 7-2.78 7 2.48V19z"/></svg></a>
-        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.71 3.71 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07c-1.28.06-2.15.26-2.91.55-.79.31-1.46.72-2.13 1.39A5.9 5.9 0 0 0 .62 4.14c-.3.76-.5 1.63-.55 2.91C0 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.28.26 2.15.55 2.91.31.79.72 1.46 1.39 2.13a5.9 5.9 0 0 0 2.13 1.39c.76.3 1.63.5 2.91.55C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.28-.06 2.15-.26 2.91-.55a5.9 5.9 0 0 0 2.13-1.39 5.9 5.9 0 0 0 1.39-2.13c.3-.76.5-1.63.55-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.28-.26-2.15-.55-2.91a5.9 5.9 0 0 0-1.39-2.13A5.9 5.9 0 0 0 19.86.62c-.76-.3-1.63-.5-2.91-.55C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 4-4 4 4 0 0 1-4 4zm6.4-11.85a1.44 1.44 0 1 0 1.44 1.44 1.44 1.44 0 0 0-1.44-1.44z"/></svg></a>
-      </div>
-    </div>
-  </div>
+<div class="container">
+<div class="footer-grid">
+<div>
+<a class="logo" href="index.html">PeakPoint Prep</a>
+<p>Free SAT preparation tools designed to make personalized learning more accessible.</p>
+</div>
+<div>
+<h2>Explore</h2>
+<ul>
+<li>
+<a href="about.html">About</a>
+</li>
+<li>
+<a href="question-bank.html">Practice</a>
+</li>
+<li>
+<a href="resources.html">Resources</a>
+</li>
+<li>
+<a href="contact.html">Contact</a>
+</li>
+</ul>
+</div>
+<div>
+<h2>Information</h2>
+<ul>
+<li>
+<a href="privacy.html">Privacy Policy (draft)</a>
+</li>
+<li>
+<a href="terms.html">Terms of Service (draft)</a>
+</li>
+<li>
+<a href="account-deletion.html">Account Deletion</a>
+</li>
+<li>
+<a href="accessibility.html">Accessibility</a>
+</li>
+</ul>
+</div>
+</div>
+<p class="legal-note">SAT is a registered trademark of College Board. PeakPoint Prep is an independent service and is not affiliated with or endorsed by College Board.</p>
+<p>© 2026 PeakPoint Prep</p>
+</div>
 </footer>
-
-<script src="vendor/supabase.js"></script>
-<script src="supabase-config.js"></script>
-<script src="auth.js"></script>
-<script src="script.js"></script>
+<script src="public.js" defer>
+</script>
+<script src="practice-preview.js" defer>
+</script>
 </body>
 </html>

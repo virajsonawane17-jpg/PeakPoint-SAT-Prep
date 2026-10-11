@@ -57,7 +57,7 @@
   </div>
 </aside>
 
-<main class="prep-main analytics-main">
+<main class="prep-main analytics-main"><p role="note" class="data-notice">Progress reflects recorded activity. Scores are self-reported planner inputs, not SAT predictions. Study time includes only recorded durations. Local practice records stay in this browser.</p>
   <div class="analytics-inner">
     <header class="analytics-hero">
       <div>
@@ -81,23 +81,23 @@
       <div class="analytics-grid">
         <article class="metric-card check-card">
           <span>Questions Attempted</span>
-          <strong id="metric-attempted">782</strong>
+          <strong id="metric-attempted">Loading…</strong>
           <i aria-hidden="true"></i>
         </article>
         <article class="metric-card chart-card-mini">
           <span>Current Accuracy</span>
-          <strong id="metric-accuracy">92%</strong>
+          <strong id="metric-accuracy">Loading…</strong>
           <i aria-hidden="true"></i>
         </article>
         <article class="metric-card saved-card-mini">
           <span>Saved Questions</span>
-          <strong id="metric-saved">14</strong>
+          <strong id="metric-saved">Loading…</strong>
           <a href="saved.html">View Saved</a>
           <i aria-hidden="true"></i>
         </article>
         <article class="metric-card error-card-mini">
           <span>Recent Errors</span>
-          <strong id="metric-errors">27</strong>
+          <strong id="metric-errors">Loading…</strong>
           <a href="mistakes.html">Start Review</a>
           <i aria-hidden="true"></i>
         </article>
@@ -108,10 +108,10 @@
       <article class="analytics-card momentum-card">
         <div>
           <span class="card-kicker">Today&apos;s best move</span>
-          <h2 id="momentum-title">Condition with PeakLabs</h2>
+          <h2 id="momentum-title">Choose a practice skill</h2>
           <p id="momentum-detail">Turn recent misses into a focused practice set.</p>
         </div>
-        <a class="cyan-button" id="momentum-cta" href="peaklabs.html">Open PeakLabs</a>
+        <a class="cyan-button" id="momentum-cta" href="question-bank.html">Open Question Bank</a>
       </article>
 
       <article class="analytics-card momentum-stats-card">
@@ -146,32 +146,26 @@
       <article class="analytics-card score-snapshot">
         <div class="analytics-card-head">
           <div>
-            <span class="card-kicker">Predicted score</span>
-            <h2 id="score-total">1340</h2>
+            <span class="card-kicker">Self-reported score</span>
+            <h2 id="score-total">Not set</h2>
           </div>
-          <span class="trend-pill">+40 this month</span>
+          <span class="trend-pill">No score prediction</span>
         </div>
         <div class="score-split">
           <div>
             <span>Reading &amp; Writing</span>
-            <strong id="score-rw">660</strong>
+            <strong id="score-rw">Not set</strong>
           </div>
           <div>
             <span>Math</span>
-            <strong id="score-math">680</strong>
+            <strong id="score-math">Not set</strong>
           </div>
           <div>
             <span>Goal</span>
-            <strong id="score-goal">1540</strong>
+            <strong id="score-goal">Not set</strong>
           </div>
         </div>
-        <div class="score-path" aria-hidden="true">
-          <span style="--point-y: 68%;"></span>
-          <span style="--point-y: 55%;"></span>
-          <span style="--point-y: 46%;"></span>
-          <span style="--point-y: 39%;"></span>
-          <span style="--point-y: 31%;"></span>
-        </div>
+        <p>Enter your practice-test scores in the study planner. These are not predictions.</p>
       </article>
 
       <article class="analytics-card">
@@ -183,16 +177,16 @@
         </div>
         <div class="bar-list">
           <div class="bar-row">
-            <div><span>Math</span><strong id="math-accuracy">94%</strong></div>
-            <i style="--bar-width: 94%;"></i>
+            <div><span>Math</span><strong id="math-accuracy">Loading…</strong></div>
+            <i style="--bar-width: 0%;"></i>
           </div>
           <div class="bar-row">
-            <div><span>Reading &amp; Writing</span><strong id="rw-accuracy">90%</strong></div>
-            <i style="--bar-width: 90%;"></i>
+            <div><span>Reading &amp; Writing</span><strong id="rw-accuracy">Loading…</strong></div>
+            <i style="--bar-width: 0%;"></i>
           </div>
           <div class="bar-row">
-            <div><span>Vocabulary</span><strong id="vocab-accuracy">88%</strong></div>
-            <i style="--bar-width: 88%;"></i>
+            <div><span>Vocabulary</span><strong id="vocab-accuracy">Loading…</strong></div>
+            <i style="--bar-width: 0%;"></i>
           </div>
         </div>
       </article>
@@ -218,17 +212,8 @@
           <span class="grid-line line-4"></span>
           <span class="grid-line line-2"></span>
           <span class="grid-line line-0"></span>
-          <span class="study-bar" style="--study-height: 72%;"></span>
         </div>
-        <div class="study-time-xaxis" id="study-time-xaxis" aria-hidden="true">
-          <span>Jul 10</span>
-          <span>Jul 11</span>
-          <span>Jul 12</span>
-          <span>Jul 13</span>
-          <span>Jul 14</span>
-          <span>Jul 15</span>
-          <span>Jul 16</span>
-        </div>
+        <div class="study-time-xaxis" id="study-time-xaxis" aria-hidden="true"><span>Loading dates…</span></div>
       </div>
     </section>
 
@@ -240,13 +225,7 @@
             <h2>Skill Performance</h2>
           </div>
         </div>
-        <div class="skill-grid" id="skill-grid">
-          <div class="skill-tile strong"><span>Algebra</span><strong>96%</strong><i></i></div>
-          <div class="skill-tile strong"><span>Grammar Rules</span><strong>91%</strong><i></i></div>
-          <div class="skill-tile steady"><span>Reading Evidence</span><strong>84%</strong><i></i></div>
-          <div class="skill-tile focus"><span>Vocab in Context</span><strong>78%</strong><i></i></div>
-        </div>
-      </article>
+        <div class="skill-grid" id="skill-grid"><p>Loading recorded skills…</p></div></article>
 
       <article class="analytics-card practice-mix-card">
         <div class="analytics-card-head">
@@ -258,9 +237,9 @@
         <div class="practice-mix">
           <div class="mix-ring" aria-hidden="true"></div>
           <ul>
-            <li><span class="mix-dot math"></span> Math practice <strong id="mix-math">42%</strong></li>
-            <li><span class="mix-dot rw"></span> Reading &amp; Writing <strong id="mix-rw">38%</strong></li>
-            <li><span class="mix-dot vocab"></span> Vocabulary <strong id="mix-vocab">20%</strong></li>
+            <li><span class="mix-dot math"></span> Math practice <strong id="mix-math">Loading…</strong></li>
+            <li><span class="mix-dot rw"></span> Reading &amp; Writing <strong id="mix-rw">Loading…</strong></li>
+            <li><span class="mix-dot vocab"></span> Vocabulary <strong id="mix-vocab">Loading…</strong></li>
           </ul>
         </div>
       </article>
@@ -274,12 +253,7 @@
             <h2>Errors To Clean Up</h2>
           </div>
         </div>
-        <div class="review-list" id="review-list">
-          <div><strong>Linear equations</strong><span>9 recent misses</span></div>
-          <div><strong>Transitions</strong><span>7 recent misses</span></div>
-          <div><strong>Vocab precision</strong><span>5 recent misses</span></div>
-        </div>
-      </article>
+        <div class="review-list" id="review-list"><p>Loading review records…</p></div></article>
 
       <article class="analytics-card">
         <div class="analytics-card-head">
@@ -289,9 +263,9 @@
           </div>
         </div>
         <div class="action-stack">
-          <a id="review-action" href="peaklabs.html">Open PeakLabs</a>
-          <button type="button">Practice weakest skill set</button>
-          <button type="button">Spend 8 minutes on vocab</button>
+          <a id="review-action" href="question-bank.html">Open Question Bank</a>
+          <a href="question-bank.html">Choose a skill to practice</a>
+          <a href="vocab.html">Practice vocabulary</a>
         </div>
       </article>
     </section>
