@@ -2,6 +2,10 @@
 
 Reviewed October 11, 2026. Static HTML/CSS/JavaScript architecture and Supabase integration preserved. Live homepage reviewed before changes; implementation validated against a local checkout. No production accounts were created and no production records were modified.
 
+## Visual restoration requested by the owner
+
+The original blue gradient/ray hero, headline, typography, pill buttons, rounded cards and oversized footer wordmark were restored after the initial correction pass. Corrected claims, policy drafts, working practice preview and account/progress fixes remain. Desktop and mobile previews were inspected; the browser integration suite and local-link/syntax checks passed. No fabricated statistics or testimonials were restored.
+
 ## Confirmed defects and implemented changes
 
 | Files | Issue | Implementation | Validation |
@@ -24,7 +28,7 @@ Reviewed October 11, 2026. Static HTML/CSS/JavaScript architecture and Supabase 
 - Browser storage: account-specific question progress, vocabulary mastery/XP, activity events, study-planner inputs and learning fallback. Some learning state is server-backed, but question and vocabulary progress remain local.
 - Analytics: application-calculated learning summaries. No third-party advertising/behavioral analytics SDK identified in source.
 - AI: no connected AI provider or backend found. PeakPal messages are local DOM content; generation is a prototype.
-- Other services: Google Fonts on existing authenticated pages; linked external educational resources. New public pages use system font fallback without remote font requests.
+- Other services: Google Fonts on existing authenticated pages; linked external educational resources. Public pages now use the original Google Fonts configuration, restored at the owner’s request, with system fallbacks.
 - Cookies: no application tracking cookies found; provider/hosting behavior unverified.
 - Retention: no automatic retention job found. Operational account deletion, backup expiry, log retention, regions and international transfers remain unknown.
 - Content: question bank is imported College Board content, not founder-authored questions. Availability does not verify redistribution permission. Operator must review question and linked resource rights.

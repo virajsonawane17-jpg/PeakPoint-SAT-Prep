@@ -225,3 +225,109 @@ button:disabled {
 .public-page .skip-link {
   transform:none}
 
+
+/* Restore the original PeakPoint visual identity around corrected content. */
+.public-page {
+  background: var(--bg-primary);
+}
+.public-page .container {
+  max-width: var(--max-width);
+}
+.public-page .hero .eyebrow,
+.public-page .sub-hero .eyebrow {
+  color: #fff;
+}
+.public-page .hero h1,
+.public-page .sub-hero h1 {
+  color: #fff;
+}
+.public-page .hero .accent-text,
+.public-page .sub-hero .accent-text {
+  color: #ffd76a;
+}
+.public-page .hero-subtitle {
+  color: rgba(255, 255, 255, .95);
+}
+.public-page .hero-credit {
+  color: #fff;
+}
+.hero-status {
+  max-width: 640px;
+  margin: 24px auto 0;
+  font-size: .9rem;
+  color: #0c3c61;
+}
+.public-page .btn {
+  border-radius: 999px;
+  box-shadow: inset 0 -4px 0 #dde9f3;
+}
+.public-page .btn-primary {
+  box-shadow: inset 0 -4px 0 #075985;
+}
+.public-page .hero .btn-primary,
+.public-page .sub-hero .btn-primary {
+  background: #fff;
+  color: #0369a1;
+  box-shadow: inset 0 -4px 0 #dde9f3;
+}
+.public-page .hero .btn-secondary,
+.public-page .sub-hero .btn-secondary {
+  background: #0369a1;
+  color: #fff;
+  border-color: #075985;
+  box-shadow: inset 0 -4px 0 #075985;
+}
+.public-section {
+  padding-top: 72px;
+  padding-bottom: 72px;
+}
+.section-intro {
+  margin: 0 auto 48px;
+  text-align: center;
+}
+.public-page .public-section h2 {
+  font-size: clamp(1.9rem, 3.4vw, 2.8rem);
+  letter-spacing: -.025em;
+}
+.product-card,
+.preview-card {
+  border-radius: var(--card-radius);
+  border-color: var(--border-default);
+  box-shadow: var(--card-shadow);
+}
+.preview-card {
+  margin: 0 auto;
+}
+.product-card {
+  padding: 34px;
+  border-bottom: 4px solid var(--accent-soft);
+}
+.public-section > .actions {
+  justify-content: center;
+}
+.public-page .footer {
+  background: linear-gradient(180deg, #0284c7, #0369a1);
+}
+.public-page .footer::before {
+  display: block;
+}
+.public-page .footer-wordmark {
+  color: rgba(255, 255, 255, .17);
+}
+@media (max-width: 600px) {
+  .public-page .hero,
+  .public-page .sub-hero {
+    padding: 140px 20px 90px;
+  }
+  .public-page .hero h1,
+  .public-page .sub-hero h1 {
+    font-size: clamp(2.4rem, 10vw, 3.2rem);
+  }
+  .public-section {
+    padding-top: 42px;
+    padding-bottom: 42px;
+  }
+  .hero-cta {
+    gap: 12px;
+  }
+}
